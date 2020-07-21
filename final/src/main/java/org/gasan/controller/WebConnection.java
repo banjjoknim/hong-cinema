@@ -23,7 +23,7 @@ class WebConnection{
 		br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
 
-		json = br.readLine();
+		json = br.readLine(); //읽어옴
 	}
 
 	public static void main(String[] args) throws Exception {

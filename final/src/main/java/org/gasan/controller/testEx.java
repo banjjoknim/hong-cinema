@@ -40,11 +40,10 @@ public class testEx {
 
 //        System.out.println(responseBody);
         
-        JSONObject obj = new JSONObject();
-        JSONParser parser = new JSONParser();
-        obj = (JSONObject) parser.parse(responseBody);
+        JSONObject obj = new JSONObject(); 
+        JSONParser parser = new JSONParser(); 
+        obj = (JSONObject) parser.parse(responseBody); // .txt => .json
         System.out.println(obj);
-        System.out.println(obj.get("items"));
         JSONArray array = new JSONArray();
         array = (JSONArray) obj.get("items");
         for(int i = 0; i<array.size(); i++) {
