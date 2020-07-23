@@ -18,11 +18,21 @@
             width: 25px;
             height: 25px;
         }
+        button{
+            cursor: pointer;
+        }
 
         div.seatRow button.represent {
             background-color: lightgray;
         }
-
+        li.theaterInfo {
+            margin-bottom: 10px;
+        }
+        button.selectedSeat{
+            margin: 5px;
+            float: left;
+            width: 50px; height: 50px;
+        }
         /* row button start */
         button.row-A {
             top: 120px;
@@ -149,14 +159,21 @@
 <body>
     <header>
 
-        <h1 style="text-align: center;">header</h1>
+        <h1 style="text-align: center;">좌석선택</h1>
 
     </header>
 
     <!-- reservationBox -->
     <div class="reservationBox" style="margin: 0 auto; width: 900px; height: 490px; border: 5px solid black;">
+        
+            
+        
+
         <div class="seatRow"
             style="padding: 0 100px; border: 1px solid black; width: 400px; height: 490px; background-color: rgb(80, 80, 80); float: left;">
+
+            <h3 style="margin-left: 150px; color: white;">SCREEN</h3>
+            <hr style="margin-left: 20px;">
 
             <!-- row A start -->
 
@@ -416,16 +433,47 @@
         <div class="infoBox"
             style="border: 1px solid black; background-color: rgb(51, 51, 51); width: 236px; height: 450px; float: left; padding: 20px 30px;">
             <div class="movieInfo">
-                <h3>영화제목</h3>
+                <h3 style="margin: 5px;">영화제목</h3>
+                <hr>
                 <div style="float: left; width: 236px;">
                     <ul style="list-style: none; float: left; margin-right: 15px; margin-left: 10px; padding: 0px;">
                         <li class="theaterInfo">영화관위치</li>
                         <li class="theaterInfo">상영관</li>
                         <li class="theaterInfo">날짜</li>
-                        <li class="theaterInfo">시간</li>
+                        <li class="theaterInfo">시작시간</li>
                     </ul>
                     <img src="https://via.placeholder.com/90x120.png" width="90px" height="120px"
                         style="margin: 20px; float: left;">
+                </div>
+                <hr>
+                <div>
+                    <h3 style="margin: 5px;">선택좌석</h3>
+                    <ul style="list-style: none; margin-right: 15px; margin-left: 17px; margin-top: 0px; margin-bottom: 0px; padding: 0px;">
+                        <li><button class="selectedSeat" style="width: 40px; height: 40px;">A13</button></li>
+                        <li><button class="selectedSeat" style="width: 40px; height: 40px;">A7</button></li>
+                        <li><button class="selectedSeat" style="width: 40px; height: 40px;">B10</button></li>
+                        <li><button class="selectedSeat" style="width: 40px; height: 40px;">B8</button></li>
+                        <li><button class="selectedSeat" style="width: 40px; height: 40px;">F8</button></li>
+                        <li><button class="selectedSeat" style="width: 40px; height: 40px;">F12</button></li>                    
+                        <li><button class="selectedSeat" style="width: 40px; height: 40px;">F8</button></li>
+                        <li><button class="selectedSeat" style="width: 40px; height: 40px;">F12</button></li>                    
+                        <!-- <li class="selectedSeat">좌석1</li>
+                        <li class="selectedSeat">좌석2</li>
+                        <li class="selectedSeat">좌석3</li>
+                        <li class="selectedSeat">좌석4</li> -->
+                    </ul>
+                    
+                </div>
+                <hr style="clear: both;">
+                <h5 style="float: left; margin: 0px;">성인 n명 청소년 n명</h5>
+                <h4 style="clear: both;">최종 결제금액 <span style="float: right;">원</span>
+                    <span style="float: right; color: cadetblue; font-size: 150%;">50000</span>
+                    </h4>
+                <div class="buttonBox" style="text-align: center; clear: both;">
+                    <button type="button"
+                    style="width: 118px; height: 40px; float: left; z-index: 999; background-color: rgb(24, 156, 189); outline: none; border: none;">결제</button>
+                    <button type="button" 
+                    style="width: 118px; height: 40px; float: left; z-index: 999; background-color: rgb(120, 120, 120); outline: none; border: none;">취소</button>
                 </div>
             </div>
 

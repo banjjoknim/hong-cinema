@@ -11,7 +11,7 @@ import org.json.simple.parser.JSONParser;
 class WebConnection{
 	String json;
 	WebConnection() throws Exception{
-		String address = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=09a9ba7f2b8c18c566fb30f6ee83ae4f&targetDt=20120101";
+		String address = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=09a9ba7f2b8c18c566fb30f6ee83ae4f&targetDt=20200722";
 		BufferedReader br;
 		URL url;
 		HttpURLConnection conn;
