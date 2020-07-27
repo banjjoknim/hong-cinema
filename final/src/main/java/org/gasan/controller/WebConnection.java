@@ -39,7 +39,8 @@ class WebConnection{
 		
 		for(int i = 0; i< array.size(); i++) {
 			JSONObject movie = (JSONObject) array.get(i);
-			System.out.println(i+1+"번째 영화 : "+movie.get("movieNm"));
+			System.out.println(i+1+"번째 영화 제목 : "+movie.get("movieNm"));
+			System.out.println(i+1+"번째 영화 개봉일 : "+movie.get("openDt"));
 		}
 		
 		
