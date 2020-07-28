@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="simplex.css">
 </head>
 <style>
     body {
-        margin: 30px;
         box-sizing: border-box;
 
     }
@@ -27,6 +27,8 @@
 
     li:hover {
         cursor: pointer;
+        color: #212529;
+  background-color: rgba(0, 0, 0, 0.3);
     }
 
     li.region {
@@ -62,9 +64,38 @@
 </style>
 
 <body>
-    <header>
+    <!-- navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+      <!-- navbar end -->
+      <header>
 
-        <h1 style="text-align: center;">영화관 및 영화 선택</h1>
+        <h1 style="text-align: center; margin: 40px;">좌석선택</h1>
 
     </header>
     <!-- reservationBox -->
@@ -72,12 +103,12 @@
 
         <!-- regionBox -->
         <div id="regionBox" style="float: left; width: 220px;">
-            <div style="border: 1px solid black; width: 218px;">
+            <div style="border: 1px solid black; width: 220px;">
                 <h1 style="text-align: center;">지역별</h1>
             </div>
             <div class="regionList">
                 <div
-                    style="border: 1px solid black; overflow: hidden; height: 400px; float: left; width: 98px; overflow-y: scroll; -ms-overflow-style: none;">
+                    style="border: 1px solid black; overflow: hidden; height: 432px; float: left; width: 98px; overflow-y: scroll; -ms-overflow-style: none;">
                     <ul style="margin: 0px; padding: 0px;">
                         <li class="region"><b>서울</b></li>
                         <li class="region"><b>경기</b></li>
@@ -94,7 +125,7 @@
                     </ul>
                 </div>
                 <div
-                    style="border: 1px solid black; overflow: hidden; width: 118px; height: 400px; float: left; overflow-y: scroll;">
+                    style="border: 1px solid black; overflow: hidden; width: 122px; height: 432px; float: left; overflow-y: scroll;">
                     <ul style="margin: 0px; padding: 0px;">
                         <li class="theater"><b>1호점</b></li>
                         <li class="theater"><b>2호점</b></li>
@@ -122,7 +153,7 @@
             </div>
             <div class="movieList">
                 <div
-                    style="border: 1px solid black; overflow: hidden; width: 218px; height: 400px; float: left; overflow-y: scroll;">
+                    style="border: 1px solid black; overflow: hidden; width: 218px; height: 432px; float: left; overflow-y: scroll;">
                     <ul style="margin: 0px; padding: 0px;">
                         <li class="movieTitle">영화</li>
                         <li class="movieTitle">영화</li>
@@ -152,7 +183,7 @@
                 <h1 style="text-align: center;">날짜</h1>
             </div>
             <div
-                style="border: 1px solid black; overflow: hidden; width: 96px; height: 400px; float: left; overflow-y: scroll;">
+                style="border: 1px solid black; overflow: hidden; width: 96px; height: 432px; float: left; overflow-y: scroll;">
                 <ul style="margin: 0px; padding: 0px;">
                     <li class="date">날짜</li>
                     <li class="date">날짜</li>
@@ -180,11 +211,11 @@
 
         <!-- timeTableBox -->
         <div id="timeTableBox" style="float: left;">
-            <div style="border: 1px solid black; width: 358px;">
+            <div style="border: 1px solid black; width: 356px;">
                 <h1 style="text-align: center;">상영시간표</h1>
             </div>
             <div
-                style="border: 1px solid black; overflow: hidden; width: 358px; height: 400px; float: left; overflow-y: scroll;">
+                style="border: 1px solid black; overflow: hidden; width: 356px; height: 432px; float: left; overflow-y: scroll;">
                 <ul style="margin: 0px; padding: 0px;">
                     <li class="movieSchedule">시간대</li>
                     <li class="movieSchedule">시간대</li>
