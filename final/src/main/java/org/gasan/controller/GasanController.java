@@ -30,4 +30,12 @@ public class GasanController {
 		
 		return "seatList";
 	}
+	
+	@GetMapping("/payment")
+	public String getPayment() {
+		
+		log.info("payment");
+		
+		return "payment";
+	}
 }
