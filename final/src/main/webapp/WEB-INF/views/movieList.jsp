@@ -159,22 +159,9 @@
                 <div
                     style="border-right: 1px solid black; overflow: hidden; width: 218px; height: 432px; float: left; overflow-y: scroll;">
                     <ul style="margin: 0px; padding: 0px;">
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
-                        <li class="movieTitle">영화</li>
+                    <c:forEach items="${movieList}" var="movie">
+                        <li class="movieTitle">${movie.movieName }</li>
+                    </c:forEach>
                     </ul>
                 </div>
             </div>
