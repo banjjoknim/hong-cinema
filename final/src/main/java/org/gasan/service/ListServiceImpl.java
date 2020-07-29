@@ -57,7 +57,7 @@ public class ListServiceImpl implements ListService {
 	@Override
 	public List<MovieVO> getMovieList() {
 		ArrayList<MovieVO> movieList = new ArrayList<MovieVO>();
-		MovieVO movieVO = new MovieVO();
+		MovieVO movieVO = null;
 		try {
 			
 			WebConnection wc = new WebConnection();
@@ -69,6 +69,7 @@ public class ListServiceImpl implements ListService {
 			JSONArray array = (JSONArray) boxOfficeResult.get("dailyBoxOfficeList");
 			
 			for(int i = 0; i< array.size(); i++) {
+				movieVO = new MovieVO();
 				JSONObject movie = (JSONObject) array.get(i);
 				movieVO.setMovieName((String)movie.get("movieNm"));
 				movieVO.setOpenDate((String)movie.get("openDt"));

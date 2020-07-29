@@ -23,7 +23,7 @@ public class ListServiceTests {
 	@Test
 	public void getMoiveListTest() {
 		ArrayList<MovieVO> movieList = new ArrayList<MovieVO>();
-		MovieVO movieVO = new MovieVO();
+		MovieVO movieVO = null;
 		try {
 			
 			WebConnection wc = new WebConnection();
@@ -35,13 +35,16 @@ public class ListServiceTests {
 			JSONArray array = (JSONArray) boxOfficeResult.get("dailyBoxOfficeList");
 			
 			for(int i = 0; i< array.size(); i++) {
+				movieVO = new MovieVO();
 				JSONObject movie = (JSONObject) array.get(i);
+				System.out.println(movieVO.getMovieName()); //null 
 				movieVO.setMovieName((String)movie.get("movieNm"));
 				movieVO.setOpenDate((String)movie.get("openDt"));
 				movieList.add(movieVO);
-				System.out.println(movieList.get(i).getMovieName());
+				System.out.println(movieList.get(i).getMovieName()); //정상회담
 			}
-			
+			System.out.println(movieVO);
+			System.out.println(movieList.get(5).getMovieName());
 			log.info("getMovieListTest..............");
 		} catch (Exception e) {
 			log.info("WebConnection error");
