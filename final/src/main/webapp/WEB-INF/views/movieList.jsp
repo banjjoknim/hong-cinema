@@ -176,24 +176,9 @@
             <div
                 style="border-right: 1px solid black; overflow: hidden; width: 96px; height: 432px; float: left; overflow-y: scroll;">
                 <ul style="margin: 0px; padding: 0px;">
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
-                    <li class="date">날짜</li>
+                <c:forEach var="date" items="${dateList }">
+                    <li class="date">${date.month }/${date.day } (${date.dayOfWeek })</li>
+                    </c:forEach>
                 </ul>
 
             </div>
@@ -208,10 +193,7 @@
             <div
                 style="border-right: 1px solid black; overflow: hidden; width: 356px; height: 432px; float: left; overflow-y: scroll;">
                 <ul style="margin: 0px; padding: 0px;">
-                    <li class="movieSchedule">시간대</li>
-                    <li class="movieSchedule">시간대</li>
-                    <li class="movieSchedule">시간대</li>
-                    <li class="movieSchedule">시간대</li>
+                    <!-- <li class="movieSchedule">시간대</li> -->
                 </ul>
             </div>
         </div>

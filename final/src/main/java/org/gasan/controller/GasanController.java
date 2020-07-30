@@ -3,6 +3,7 @@ package org.gasan.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gasan.domain.DateVO;
 import org.gasan.domain.MovieVO;
 import org.gasan.service.ListService;
 import org.springframework.stereotype.Controller;
@@ -22,17 +23,24 @@ public class GasanController {
 
 	private ListService listService;
 	
-	@GetMapping("/movieList")
-	public String getMovieList(Model model) {
+	@GetMapping("/movieList") 
+	public String getMovieList(Model model) throws Exception { //영화리스트를 얻어온다.
 		
-		List<MovieVO> movieList = new ArrayList<MovieVO>(); 
+		List<MovieVO> movieList = new ArrayList<MovieVO>(); //영화리스트
         movieList = listService.getMovieList();
 		model.addAttribute("movieList", movieList);
 		
 		log.info("get ..... movieList");
 		
+		List<DateVO> dateList = new ArrayList<DateVO>(); //날짜리스트
+		dateList = listService.getDateList();
+		model.addAttribute("dateList", dateList);
+		
+		log.info("get ....... dateList");
+		
 		return "movieList";
 	}
+	
 	
 	@GetMapping("/seatList")
 	public String getSeatList() {

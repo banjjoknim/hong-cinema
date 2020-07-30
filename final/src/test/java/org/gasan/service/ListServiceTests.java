@@ -1,13 +1,13 @@
 package org.gasan.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.gasan.controller.WebConnection;
+import org.gasan.domain.DateVO;
 import org.gasan.domain.MovieVO;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,37 +19,45 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class ListServiceTests {
+	
 
 	@Test
-	public void getMoiveListTest() {
+	public void getMoiveListTest() throws Exception {
+		
+		log.info("getMovieListTest..............");
+		
 		ArrayList<MovieVO> movieList = new ArrayList<MovieVO>();
-		MovieVO movieVO = null;
-		try {
-			
+
 			WebConnection wc = new WebConnection();
-			JSONParser parser = new JSONParser();
-			JSONObject obj = new JSONObject();
-			obj = (JSONObject) parser.parse(wc.json);
-//			System.out.println(obj.get("boxOfficeResult"));
-			JSONObject boxOfficeResult = (JSONObject) obj.get("boxOfficeResult");
-			JSONArray array = (JSONArray) boxOfficeResult.get("dailyBoxOfficeList");
+			movieList = (ArrayList<MovieVO>) wc.parseBoxOffice();
 			
-			for(int i = 0; i< array.size(); i++) {
-				movieVO = new MovieVO();
-				JSONObject movie = (JSONObject) array.get(i);
-				System.out.println(movieVO.getMovieName()); //null 
-				movieVO.setMovieName((String)movie.get("movieNm"));
-				movieVO.setOpenDate((String)movie.get("openDt"));
-				movieList.add(movieVO);
-				System.out.println(movieList.get(i).getMovieName()); //정상회담
+			for(int i = 0; i< movieList.size(); i++) {
+				System.out.println(movieList.get(i).getMovieName());
 			}
-			System.out.println(movieVO);
-			System.out.println(movieList.get(5).getMovieName());
-			log.info("getMovieListTest..............");
-		} catch (Exception e) {
-			log.info("WebConnection error");
-		}
-		
-		
+
 	}
+
+	@Test
+	public void getDateListTest() { //예매가능 날짜 얻어오기.
+		List<DateVO> dateList = new ArrayList<DateVO>();
+		DateVO dateVO = null;
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String[] dayOfWeek = new String[] {"일", "월", "화", "수", "목", "금", "토"};
+		for(int i = 0; i<15; i++) {
+			dateVO = new DateVO();
+			cal.set(2020, 03, 25); //2020.03.25로 날짜 세팅
+			cal.add(Calendar.DATE, +i);
+			dateVO.setYear(cal.get(Calendar.YEAR)); //몇년도인지
+			dateVO.setMonth(cal.get(Calendar.MONTH)+1); //몇월인지
+			dateVO.setDay(cal.get(Calendar.DATE)); //몇일인지 세팅
+			dateVO.setDayOfWeek(dayOfWeek[cal.get(Calendar.DAY_OF_WEEK)-1]); //무슨 요일인지
+			dateList.add(dateVO); //리스트에 추가
+						System.out.println(dateList.get(i));
+		}
+
+	}
+	
+
+
 }

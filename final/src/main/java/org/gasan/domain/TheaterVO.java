@@ -5,10 +5,9 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class TheaterVO {
+public class TheaterVO { //상영관 하나가 갖고 있는 정보.
 
-	private String theaterName; //영화관 이름
-	private List<String> movieList; //상영 영화 리스트
-	private List<String> timeTable; //상영시간 리스트
-	private String location; //위치?
+	private int theaterNumber; //상영관 번호
+	private int currentSeat; //현재 좌석 현황
+	private List<ScheduleVO> timeTable; //상영관에 해당하는 상영시간표 => 영화, 시작시간, 마치는시간, 날짜
 }

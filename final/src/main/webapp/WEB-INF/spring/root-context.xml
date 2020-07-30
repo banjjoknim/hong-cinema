@@ -39,8 +39,8 @@
 	
 	<tx:annotation-driven/>
 
-	<!-- <mybatis-spring:scan
-		base-package="org.zerock.mapper" /> -->
+	<mybatis-spring:scan
+		base-package="org.gasan.mapper" />
 
 	
 	<context:component-scan
