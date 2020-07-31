@@ -6,7 +6,7 @@
 <mapper namespace="org.gasan.mapper.ListMapper">
 
 
-	<select id="getScheduleList"
+	<select id="getScheduleListByMovie"
 		resultType="org.gasan.domain.ScheduleVO">
   <![CDATA[
 select * from schedule

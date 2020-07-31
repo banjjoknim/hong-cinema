@@ -10,23 +10,26 @@ import org.gasan.domain.DateVO;
 import org.gasan.domain.MovieVO;
 import org.gasan.domain.ScheduleVO;
 import org.gasan.mapper.ListMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
 @AllArgsConstructor
 public class ListServiceImpl implements ListService {
-	
-	ListMapper listMapper;
+
+	@Setter(onMethod_ = @Autowired)
+	private ListMapper listMapper;
 
 	@Override
 	public List<MovieVO> getMovieList() throws Exception { //아무것도 선택하지 않은상태의 영화 리스트
-			
-	    log.info("getMovieList..............");
-			
+
+		log.info("getMovieList..............");
+
 		ArrayList<MovieVO> movieList = new ArrayList<MovieVO>();
 
 		Calendar cal = Calendar.getInstance();
@@ -34,7 +37,7 @@ public class ListServiceImpl implements ListService {
 		cal.set(2020, 03, 25);
 		WebConnection wc = new WebConnection();
 		movieList = (ArrayList<MovieVO>) wc.parseBoxOffice(/* cal.getTime() */);
-		
+
 		return movieList;
 	}
 
@@ -55,7 +58,7 @@ public class ListServiceImpl implements ListService {
 			dateVO.setDayOfWeek(dayOfWeek[cal.get(Calendar.DAY_OF_WEEK)-1]);
 			dateList.add(dateVO);
 		}
-		
+
 		return dateList;
 	}
 
@@ -65,22 +68,30 @@ public class ListServiceImpl implements ListService {
 	}
 
 	@Override
-	public List<ScheduleVO> getScheduleByMovie(String movieName, String date) { //특정날짜에 영화제목 선택시 상영시간표 얻어옴.
+	public List<ScheduleVO> getScheduleByMovie(String movieName) { //특정날짜에 영화제목 선택시 상영시간표 얻어옴.
 		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>(); //scheduleList는 이미 저장되어 있어야한다.
-//		scheduleList = listMapper.getScheduleList();
-//		MovieVO movieVO = new MovieVO();
-//		movieVO.setMovieName(movieName);
-		for(int i = 0; i< scheduleList.size(); i++) {
-			if(movieName.equals(scheduleList.get(i).getMovieName())) {
-				ScheduleVO scheduleVO = new ScheduleVO();
-				scheduleVO.setMovieName(movieName);
-				scheduleVO.setStartTime("17:10");
-				scheduleVO.setEndTime("19:12");
-				scheduleVO.setDate(date);
-				scheduleList.add(scheduleVO);
+		List<ScheduleVO> listFromDB = listMapper.getScheduleListByMovie();
+		for(int i = 0; i< listFromDB.size(); i++) {
+
+				if(movieName.equals(listFromDB.get(i).getMovieName())) {
+					ScheduleVO scheduleVO = new ScheduleVO();
+					scheduleVO.setMovieName(movieName);
+					scheduleVO.setStartTime(listFromDB.get(i).getStartTime());
+					scheduleVO.setEndTime(listFromDB.get(i).getEndTime());
+					scheduleVO.setTheaterNumber(listFromDB.get(i).getTheaterNumber());
+					scheduleList.add(scheduleVO);
+				}
 			}
-		}
-		return null;
+		return scheduleList;
+	}
+
+	@Override
+	public List<ScheduleVO> getScheduleByDate(String date) { //날짜만 선택한 상태에서 상영중인 영화리스트 얻어옴.
+		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
+		List<ScheduleVO> listFromDB = listMapper.getScheduleListByDate();
+		
+		
+		return scheduleList;
 	}
 
 
