@@ -5,11 +5,10 @@
 
 <mapper namespace="org.gasan.mapper.ListMapper">
 
-
-	<select id="getScheduleListByMovie"
+	<select id="getScheduleListDB"
 		resultType="org.gasan.domain.ScheduleVO">
   <![CDATA[
-select * from schedule
+select * from schedule order by playdate
 ]]>
 	</select>
 

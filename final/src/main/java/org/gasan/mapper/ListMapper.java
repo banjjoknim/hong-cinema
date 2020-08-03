@@ -8,8 +8,7 @@ import lombok.AllArgsConstructor;
 
 public interface ListMapper {
 	
-	public List<ScheduleVO> getScheduleListByMovie();
+	public List<ScheduleVO> getScheduleListDB();
 	
-	public List<ScheduleVO> getScheduleListByDate();
 
 }

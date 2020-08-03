@@ -23,22 +23,7 @@ public class ListMapperTests {
 
 
 	@Test
-	public void getScheduleByMovieTest() {
-		List<ScheduleVO> scheduleList = listMapper.getScheduleList(); //scheduleList는 이미 저장되어 있어야한다.
-		scheduleList.forEach(schedule -> log.info(schedule));
-		//		MovieVO movieVO = new MovieVO();
-		//		movieVO.setMovieName(movieName);
-		//		for(int i = 0; i< scheduleList.size(); i++) {
-		//			if("베테랑".equals(scheduleList.get(i).getMovieName())) {
-		//				ScheduleVO scheduleVO = new ScheduleVO();
-		//				scheduleVO.setMovieName("베테랑");
-		//				scheduleVO.setStartTime("17:10");
-		//				scheduleVO.setEndTime("19:12");
-		//				scheduleVO.setDate("20200720");
-		//				scheduleList.add(scheduleVO);
-		//			}
-		//		}
-
+	public void getScheduleByMovieTest() {//scheduleList는 이미 저장되어 있어야한다.
 
 	}
 }

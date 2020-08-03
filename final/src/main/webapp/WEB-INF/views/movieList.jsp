@@ -97,10 +97,18 @@ li.date {
 
 	</header>
 	<!-- reservationBox -->
-	<div class="reservationBox"
-		style="margin: 0 auto; width: 900px; height: 490px; border: 5px solid black;">
+	<form name="reservationFrm" action="/seatList" method="GET">
+		<input type="hidden" name="selectedMovie" value="" id="selectedMovie">
+		<input type="hidden" name="selectedDate" value="${today }" id="selectedDate">
+		<input type="hidden" name="selectedTheaterNumber" value=""
+			id="selectedTheaterNumber">
+			<input type="hidden" name="selectedStartTime" value="" id="selectedStartTime">
+			<input type="hidden" name="selectedEndTime" value="" id="selectedEndTime">
 
-		
+		<div class="reservationBox"
+			style="margin: 0 auto; width: 900px; height: 490px; border: 5px solid black;">
+
+
 			<!-- regionBox -->
 			<div id="regionBox" style="float: left; width: 220px;">
 				<div style="border: 1px solid black; width: 220px;">
@@ -147,9 +155,7 @@ li.date {
 			<!-- regionBox end -->
 
 			<!-- movieBox -->
-			<form name="movieTitleFrm" action="/scheduleListByTitle" method="GET">
-			<input type="hidden" name="movieTitle" value="" id="movieTitle">
-			</form>
+
 			<div id="movieBox" style="float: left;">
 				<div style="border: 1px solid black; width: 218px;">
 					<h1 style="text-align: center;">영화목록</h1>
@@ -165,7 +171,7 @@ li.date {
 					</div>
 				</div>
 			</div>
-			
+
 			<!-- movieBox end -->
 
 			<!-- dateBox -->
@@ -177,8 +183,11 @@ li.date {
 					style="border-right: 1px solid black; overflow: hidden; width: 96px; height: 432px; float: left; overflow-y: scroll;">
 					<ul style="margin: 0px; padding: 0px;">
 						<c:forEach var="date" items="${dateList }">
-							<li class="date">${date.month }/${date.day }
-								(${date.dayOfWeek })</li>
+							<li class="date">
+							<span class="year" style="visibility : hidden; font-size: 0%;">${date.year }</span>
+							<span class="month">${date.month }</span>/
+							<span class="day">${date.day }</span> (${date.dayOfWeek })
+							</li>
 						</c:forEach>
 					</ul>
 
@@ -195,36 +204,73 @@ li.date {
 					style="border-right: 1px solid black; overflow: hidden; width: 356px; height: 432px; float: left; overflow-y: scroll;">
 					<ul style="margin: 0px; padding: 0px;">
 						<c:forEach items="${scheduleList }" var="schedule">
-							<li class="movieSchedule">${schedule.theaterNumber }관
-								${schedule.movieName }/${schedule.startTime } ~
-								${schedule.endTime }/</li>
+							<li class="movieSchedule"><span
+							style="font-weight: bold; font-size: 160%">${schedule.movieName }</span>
+							<span style="float: right; font-size: 110%"><span class="startTime">${schedule.startTime }</span> ~
+								<span class="endTime">${schedule.endTime }</span></span> <span
+							style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span class="theaterNumber">${schedule.theaterNumber }</span>관</span>
+						</li>
 						</c:forEach>
 					</ul>
 				</div>
 			</div>
 			<!-- timeTableBox end -->
-	</div>
-	<!-- reservationBox end -->
-	
+		</div>
+		<!-- reservationBox end -->
+	</form>
+
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
 		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 		crossorigin="anonymous"></script>
 	<script>
-	//2020.07.31 작업
-    $(document).ready(function(){
-    	
-    	$(".movieTitle").on("click", function(e){ //영화 제목 누르면 그에 맞는 DB상의 상영시간표 나오게 함.
-    	var movieTitleFrm = $("form[name=movieTitleFrm]");
-    		alert('영화제목 클릭함');
-    		$("#movieTitle").val($(this).html());
-    		console.log("넘길 값 : "+$(this).html());
-    		console.log("영화제목: "+$("#movieTitle").val());
-    		movieTitleFrm.submit();
-    	});
-    	
-    }); //end $(document).ready
-    //2020.07.31 작업끝
-    </script>
+		//2020.07.31 작업
+		$(document).ready(function() {
+
+			var reservationFrm = $("form[name=reservationFrm]");
+
+			$(".movieTitle").on("click", function(e) { //영화 제목 누르면 그에 맞는 DB상의 상영시간표 나오게 함.
+				alert('영화제목 클릭함');
+				$("#selectedMovie").val($(this).html());
+				//console.log($("#selectedMovie").val());
+				console.log("선택 영화: " + $("#selectedMovie").val());
+			});
+
+			$(".date").on("click", function(e) {
+				alert('날짜 클릭함');
+				var year = $(this).children(".year").html();
+				var month = $(this).children(".month").html();
+				var day = $(this).children(".day").html();
+				//console.log(year);
+				//console.log(month);
+				//console.log(day);
+				if (month < 10) {
+					$("#selectedDate").val(year + "0" + month + day);
+				} else {
+					$("#selectedDate").val(year + month + day);
+				}
+				console.log("선택 날짜: " + $("#selectedDate").val());
+			});
+
+			$(".movieSchedule").on("click", function(e) {
+				alert('스케쥴 클릭함');
+				var theaterNumber = $(this).find(".theaterNumber").html();
+				var startTime = $(this).find(".startTime").html();
+				var endTime = $(this).find(".endTime").html();
+				$("#selectedTheaterNumber").val(theaterNumber);
+				$("#selectedStartTime").val(startTime);
+				$("#selectedEndTime").val(endTime);
+				
+				console.log("선택 상영관: " + $("#selectedTheaterNumber").val());
+				console.log("선택 상영시작시간: " + $("#selectedStartTime").val());
+				console.log("선택 상영끝시간: " + $("#selectedEndTime").val());
+				if(confirm('선택하신 영화와 시간으로 예매를 진행하시겠습니까?')){
+				//reservationFrm.submit();
+				} 
+			});
+
+		}); //end $(document).ready
+		//2020.07.31 작업끝
+	</script>
 
 
 

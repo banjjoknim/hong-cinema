@@ -50,7 +50,7 @@ public class ListServiceImpl implements ListService {
 		String[] dayOfWeek = new String[] {"일", "월", "화", "수", "목", "금", "토"};
 		for(int i = 0; i<15; i++) {
 			dateVO = new DateVO();
-			cal.set(2020, 03, 25);
+			cal.set(2020, 03, 25); //today
 			cal.add(Calendar.DATE, +i);
 			dateVO.setYear(cal.get(Calendar.YEAR));
 			dateVO.setMonth(cal.get(Calendar.MONTH)+1);
@@ -63,36 +63,20 @@ public class ListServiceImpl implements ListService {
 	}
 
 	@Override
-	public List<MovieVO> getMovieListByDate(String date) {
-		return null;
-	}
-
-	@Override
-	public List<ScheduleVO> getScheduleByMovie(String movieName) { //특정날짜에 영화제목 선택시 상영시간표 얻어옴.
-		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>(); //scheduleList는 이미 저장되어 있어야한다.
-		List<ScheduleVO> listFromDB = listMapper.getScheduleListByMovie();
-		for(int i = 0; i< listFromDB.size(); i++) {
-
-				if(movieName.equals(listFromDB.get(i).getMovieName())) {
-					ScheduleVO scheduleVO = new ScheduleVO();
-					scheduleVO.setMovieName(movieName);
-					scheduleVO.setStartTime(listFromDB.get(i).getStartTime());
-					scheduleVO.setEndTime(listFromDB.get(i).getEndTime());
-					scheduleVO.setTheaterNumber(listFromDB.get(i).getTheaterNumber());
-					scheduleList.add(scheduleVO);
+	public List<ScheduleVO> getScheduleList(String date) {
+			List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
+			List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListDB();
+			for(int i = 0; i<scheduleFromDB.size(); i++) {
+				if(scheduleFromDB.get(i).getPlayDate().equals(date)) {
+					scheduleList.add(scheduleFromDB.get(i));
 				}
 			}
+		
 		return scheduleList;
 	}
 
-	@Override
-	public List<ScheduleVO> getScheduleByDate(String date) { //날짜만 선택한 상태에서 상영중인 영화리스트 얻어옴.
-		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
-		List<ScheduleVO> listFromDB = listMapper.getScheduleListByDate();
-		
-		
-		return scheduleList;
-	}
+
+
 
 
 }
