@@ -1,13 +1,9 @@
 package org.gasan.service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import org.gasan.controller.WebConnection;
-import org.gasan.domain.DateVO;
-import org.gasan.domain.MovieVO;
+import org.apache.ibatis.annotations.Param;
 import org.gasan.domain.ScheduleVO;
 import org.gasan.mapper.ListMapper;
 import org.junit.Test;
@@ -65,18 +61,29 @@ public class ListServiceTests {
 //
 //	}
 	
+//	@Test
+//	public void getScheduleListTest() {
+//		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
+//		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListAll();
+//		for(int i = 0; i<scheduleFromDB.size(); i++) {
+//			if(scheduleFromDB.get(i).getPlayDate().equals("20200425")) {
+//				scheduleList.add(scheduleFromDB.get(i));
+//			}
+//		}
+//		for(int i = 0; i<scheduleList.size(); i++) {
+//		System.out.println(scheduleList.get(i));
+//		}
+//	}
+	
 	@Test
-	public void getScheduleListTest() {
+	public void getScheduleListByMovieNameTest() {
 		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
-		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListDB();
+		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListByName("20200703", "베테랑");
 		for(int i = 0; i<scheduleFromDB.size(); i++) {
-			if(scheduleFromDB.get(i).getPlayDate().equals("20200425")) {
-				scheduleList.add(scheduleFromDB.get(i));
-			}
+			scheduleList.add(scheduleFromDB.get(i));
+			System.out.println(scheduleList.get(i));
 		}
-		for(int i = 0; i<scheduleList.size(); i++) {
-		System.out.println(scheduleList.get(i));
-		}
+		
 	}
 	
 

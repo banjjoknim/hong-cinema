@@ -48,7 +48,7 @@ public class GasanController {
 
 		//		--------------------------------------------------------------------
 
-		log.info("get ....... scheduleList");
+		log.info("getAllList ....... scheduleList");
 
 		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>(); //현재날짜 기준 상영시간표 리스트
 		scheduleList = listService.getScheduleList(date);
@@ -56,6 +56,39 @@ public class GasanController {
 
 		return "movieList";
 	}
+	
+	@GetMapping(value= "/movieList/{date}/{movieName}")
+	public String getScheduleListBySelected(@PathVariable("date") String date, @PathVariable("movieName") String movieName, Model model) throws Exception {
+		
+		log.info("get ....... movieList");
+		
+		List<MovieVO> movieList = new ArrayList<MovieVO>(); //영화 리스트(미선택)
+		movieList = listService.getMovieList();
+		model.addAttribute("movieList", movieList);
+		
+		//---------------------------------------------------
+		
+		log.info("get ....... dateList");
+		
+		List<DateVO> dateList = new ArrayList<DateVO>(); //날짜 리스트(현재날짜기준)
+		dateList = listService.getDateList();
+		model.addAttribute("today", Integer.toString(dateList.get(0).getYear())+
+				Integer.toString(dateList.get(0).getMonth())+Integer.toString(dateList.get(0).getDay()));
+		model.addAttribute("dateList", dateList);
+
+		//		--------------------------------------------------------------------
+		
+		log.info("get ....... scheduleList");
+
+		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>(); //현재날짜 기준 상영시간표 리스트
+		scheduleList = listService.getScheduleListByMovieName(date, movieName);
+		model.addAttribute("scheduleList", scheduleList);
+		
+		
+		return "movieList";
+		
+	}
+	
 
 
 	@GetMapping("/seatList")

@@ -64,14 +64,25 @@ public class ListServiceImpl implements ListService {
 
 	@Override
 	public List<ScheduleVO> getScheduleList(String date) {
-			List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
-			List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListDB();
-			for(int i = 0; i<scheduleFromDB.size(); i++) {
-				if(scheduleFromDB.get(i).getPlayDate().equals(date)) {
-					scheduleList.add(scheduleFromDB.get(i));
-				}
+		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
+		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListAll();
+		for(int i = 0; i<scheduleFromDB.size(); i++) {
+			if(scheduleFromDB.get(i).getPlayDate().equals(date)) {
+				scheduleList.add(scheduleFromDB.get(i));
 			}
-		
+		}
+
+		return scheduleList;
+	}
+
+	@Override
+	public List<ScheduleVO> getScheduleListByMovieName(String date, String movieName) {
+		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
+		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListByName(date, movieName);
+		for(int i = 0; i<scheduleFromDB.size(); i++) {
+			scheduleList.add(scheduleFromDB.get(i));
+		}
+
 		return scheduleList;
 	}
 
