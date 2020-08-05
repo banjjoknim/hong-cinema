@@ -13,10 +13,14 @@ public interface ListService {
 
 	public List<DateVO> getDateList(); //현재 4월 25일로 설정해둔 상태 추후 매개변수 추가할 것, +15일까지 표시.
 	
-	public List<ScheduleVO> getScheduleList(String date); //날짜 기준으로 스케쥴표 얻어옴.
+	public List<ScheduleVO> getScheduleListByDate(String date); 
+	//날짜 기준으로 스케쥴표 얻어옴.
 	
-	public List<ScheduleVO> getScheduleListByMovieName(String date, String movieName); //상영날짜 + 영화제목 으로 스케쥴표 얻어옴
+	public List<ScheduleVO> getScheduleListByName(String movieName); 
 	
+	
+	public List<ScheduleVO> getScheduleListByAll(String date, String movieName);
+	//상영날짜 + 영화제목 으로 스케쥴표 얻어옴
 
 	
 }

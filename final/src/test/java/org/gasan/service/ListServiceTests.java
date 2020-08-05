@@ -78,7 +78,7 @@ public class ListServiceTests {
 	@Test
 	public void getScheduleListByMovieNameTest() {
 		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
-		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListByName("20200703", "베테랑");
+		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListByAll("20200703", "베테랑");
 		for(int i = 0; i<scheduleFromDB.size(); i++) {
 			scheduleList.add(scheduleFromDB.get(i));
 			System.out.println(scheduleList.get(i));

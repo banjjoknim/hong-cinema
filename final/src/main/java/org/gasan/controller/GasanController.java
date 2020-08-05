@@ -28,7 +28,7 @@ public class GasanController {
 	private ListService listService;
 
 	@GetMapping(value = "/movieList/{date}") 
-	public String getAllList(@PathVariable("date") String date, Model model) throws Exception { //영화리스트를 얻어온다.
+	public String getAllListSelectedDate(@PathVariable("date") String date, Model model) throws Exception { //영화리스트를 얻어온다.
 
 		log.info("getAllList ..... movieList");
 
@@ -51,14 +51,14 @@ public class GasanController {
 		log.info("getAllList ....... scheduleList");
 
 		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>(); //현재날짜 기준 상영시간표 리스트
-		scheduleList = listService.getScheduleList(date);
+		scheduleList = listService.getScheduleListByDate(date);
 		model.addAttribute("scheduleList", scheduleList);
 
 		return "movieList";
 	}
 	
 	@GetMapping(value= "/movieList/{date}/{movieName}")
-	public String getScheduleListBySelected(@PathVariable("date") String date, @PathVariable("movieName") String movieName, Model model) throws Exception {
+	public String getScheduleListBySelectedAll(@PathVariable("date") String date, @PathVariable("movieName") String movieName, Model model) throws Exception {
 		
 		log.info("get ....... movieList");
 		
@@ -81,7 +81,7 @@ public class GasanController {
 		log.info("get ....... scheduleList");
 
 		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>(); //현재날짜 기준 상영시간표 리스트
-		scheduleList = listService.getScheduleListByMovieName(date, movieName);
+		scheduleList = listService.getScheduleListByAll(date, movieName);
 		model.addAttribute("scheduleList", scheduleList);
 		
 		

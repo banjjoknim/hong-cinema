@@ -63,9 +63,9 @@ public class ListServiceImpl implements ListService {
 	}
 
 	@Override
-	public List<ScheduleVO> getScheduleList(String date) {
+	public List<ScheduleVO> getScheduleListByDate(String date) {
 		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
-		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListAll();
+		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListByDate(date);
 		for(int i = 0; i<scheduleFromDB.size(); i++) {
 			if(scheduleFromDB.get(i).getPlayDate().equals(date)) {
 				scheduleList.add(scheduleFromDB.get(i));
@@ -76,9 +76,20 @@ public class ListServiceImpl implements ListService {
 	}
 
 	@Override
-	public List<ScheduleVO> getScheduleListByMovieName(String date, String movieName) {
+	public List<ScheduleVO> getScheduleListByName(String movieName) {
 		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
-		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListByName(date, movieName);
+		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListByName(movieName);
+		for(int i = 0; i<scheduleFromDB.size(); i++) {
+			scheduleList.add(scheduleFromDB.get(i));
+		}
+
+		return scheduleList;
+	}
+
+	@Override
+	public List<ScheduleVO> getScheduleListByAll(String date, String movieName) {
+		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
+		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListByAll(date, movieName);
 		for(int i = 0; i<scheduleFromDB.size(); i++) {
 			scheduleList.add(scheduleFromDB.get(i));
 		}
