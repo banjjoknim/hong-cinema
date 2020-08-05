@@ -207,7 +207,7 @@ li.date {
 				</div>
 				<div
 					style="border-right: 1px solid black; overflow: hidden; width: 356px; height: 432px; float: left; overflow-y: scroll;">
-					<ul style="margin: 0px; padding: 0px;">
+					<ul id="scheduleUL" style="margin: 0px; padding: 0px;">
 						<c:forEach items="${scheduleList }" var="schedule">
 							<li class="movieSchedule"><span
 								style="font-weight: bold; font-size: 160%">${schedule.movieName }</span>
@@ -241,18 +241,39 @@ li.date {
 			}
 
 			$(".movieTitle").on("click", function(e) { //영화 제목 누르면 그에 맞는 DB상의 상영시간표 나오게 함.
-				alert('영화제목 클릭함');
+				//alert('영화제목 클릭함');
 				$("#selectedMovie").val($(this).html());
 				$(".movieTitle").removeClass("selected");
 				$(this).addClass("selected");
 				
 				//console.log($("#selectedMovie").val());
 				console.log("선택 영화: " + $("#selectedMovie").val());
+				
+				console.log("loading...");
+				
+				getScheduleByName(function(list){
+					
+					var str = "";
+					
+					for(var i = 0, len = list.length||0; i<len; i++){
+						console.log(list[i]);//콘솔에 리스트 출력.
+						
+						str += '<li class="movieSchedule"><span';
+						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
+						str += '<span style="float: right; font-size: 110%"><span';
+						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span';	
+						str += 'class="endTime">'+list[i].endTime+'</span></span> <span';		
+						str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span';		
+						str += 'class="theaterNumber">'+list[i].theaterNumber+'</span>관</span></li>';	
+					}
+								
+						$("#scheduleUL").html(str);
+				});
 
 			});
 
 			$(".date").on("click", function(e) {
-				alert('날짜 클릭함');
+				//alert('날짜 클릭함');
 				var year = $(this).children(".year").html();
 				var month = $(this).children(".month").html();
 				var day = $(this).children(".day").html();
@@ -267,10 +288,31 @@ li.date {
 					$("#selectedDate").val(year + month + day);
 				}
 				console.log("선택 날짜: " + $("#selectedDate").val());
+				
+				console.log("loading...");
+				
+				getScheduleByDate(function(list){
+					
+					var str = "";
+					
+					for(var i = 0, len = list.length||0; i<len; i++){
+						console.log(list[i]);//콘솔에 리스트 출력.
+						
+						str += '<li class="movieSchedule"><span';
+						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
+						str += '<span style="float: right; font-size: 110%"><span';
+						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span';	
+						str += 'class="endTime">'+list[i].endTime+'</span></span> <span';		
+						str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span';		
+						str += 'class="theaterNumber">'+list[i].theaterNumber+'</span>관</span></li>';	
+					}
+								
+						$("#scheduleUL").html(str);
+				});
 			});
 
 			$(".movieSchedule").on("click", function(e) {
-				alert('스케쥴 클릭함');
+				//alert('스케쥴 클릭함');
 				var theaterNumber = $(this).find(".theaterNumber").html();
 				var startTime = $(this).find(".startTime").html();
 				var endTime = $(this).find(".endTime").html();
@@ -292,6 +334,114 @@ li.date {
 
 		}); //end $(document).ready
 	</script>
+	<script>
+	//날짜 클릭시 스케쥴 얻어오기.
+	//https://bin-repository.tistory.com/110?category=879445 참조.
+			
+	$(".date").on("click", function() {
+		/* console.log("loading...");
+		
+		getScheduleByDate(function(list){
+			
+			var str = "";
+			
+			for(var i = 0, len = list.length||0; i<len; i++){
+				console.log(list[i]);//콘솔에 리스트 출력.
+				
+				str += '<li class="movieSchedule"><span';
+				str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
+				str += '<span style="float: right; font-size: 110%"><span';
+				str += 'class="startTime">'+list[i].startTime+'</span> ~ <span';	
+				str += 'class="endTime">'+list[i].endTime+'</span></span> <span';		
+				str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span';		
+				str += 'class="theaterNumber">'+list[i].theaterNumber+'</span>관</span></li>';	
+			}
+						
+				$("#scheduleUL").html(str);
+		}); */
+	});
+	
+	$(".movieTitle").on("click", function() {
+		/* console.log("loading...");
+		
+		getScheduleByName(function(list){
+			
+			var str = "";
+			
+			for(var i = 0, len = list.length||0; i<len; i++){
+				console.log(list[i]);//콘솔에 리스트 출력.
+				
+				str += '<li class="movieSchedule"><span';
+				str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
+				str += '<span style="float: right; font-size: 110%"><span';
+				str += 'class="startTime">'+list[i].startTime+'</span> ~ <span';	
+				str += 'class="endTime">'+list[i].endTime+'</span></span> <span';		
+				str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span';		
+				str += 'class="theaterNumber">'+list[i].theaterNumber+'</span>관</span></li>';	
+			}
+						
+				$("#scheduleUL").html(str);
+		}); */
+	});
+	
+	function getScheduleByDate(callback, error) {
+		
+		var date = $("#selectedDate").val();
+		console.log(date);
+
+		$.getJSON("/getScheduleByDate/"+date+".json", //json을 얻어온다. AjaxController mapping
+				function(data) {
+					if (callback) {
+						callback(data);
+					}
+				}).fail(function(xhr, status, err) {
+			if (error) {
+				error();
+			}
+		});
+	};
+	
+	
+	
+	
+	
+	function getScheduleByName(callback, error) {
+		
+		var movieName = $("#selectedMovie").val();
+		console.log(movieName);
+
+		$.getJSON("/getScheduleByName/"+movieName+".json", //json을 얻어온다. AjaxController mapping
+				function(data) {
+					if (callback) {
+						callback(data);
+					}
+				}).fail(function(xhr, status, err) {
+			if (error) {
+				error();
+			}
+		});
+	};
+	
+	function getScheduleByAll(callback, error) {
+		
+		var date = $("#selectedDate").val();
+		var movieName = $("#selectedMovie").val();
+		console.log(date);
+		console.log(movieName);
+
+		$.getJSON("/getScheduleByAll/"+date+"/"+movieName+".json", //json을 얻어온다. AjaxController mapping
+				function(data) {
+					if (callback) {
+						callback(data);
+					}
+				}).fail(function(xhr, status, err) {
+			if (error) {
+				error();
+			}
+		});
+	};
+	
+</script>
 
 
 

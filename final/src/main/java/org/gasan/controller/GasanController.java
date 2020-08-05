@@ -28,7 +28,7 @@ public class GasanController {
 	private ListService listService;
 
 	@GetMapping(value = "/movieList/{date}") 
-	public String getAllListSelectedDate(@PathVariable("date") String date, Model model) throws Exception { //영화리스트를 얻어온다.
+	public String getAllListBySelectedDate(@PathVariable("date") String date, Model model) throws Exception { //영화리스트를 얻어온다.
 
 		log.info("getAllList ..... movieList");
 
@@ -105,6 +105,14 @@ public class GasanController {
 		log.info("payment");
 
 		return "payment";
+	}
+	
+	@GetMapping("/ajax")
+	public String getAjax() {
+		
+		log.info("ajax");
+		
+		return "ajax";
 	}
 
 }

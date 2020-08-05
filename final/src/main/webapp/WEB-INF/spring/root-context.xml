@@ -20,8 +20,8 @@
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl"
 			value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
-		<property name="username" value="hr"></property>
-		<property name="password" value="hr"></property>
+		<property name="username" value="C##Tester"></property>
+		<property name="password" value="Tester"></property>
 	</bean>
 
 	<!-- HikariCP configuration -->
