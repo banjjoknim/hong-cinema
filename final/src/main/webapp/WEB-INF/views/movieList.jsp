@@ -258,12 +258,12 @@ li.date {
 					for(var i = 0, len = list.length||0; i<len; i++){
 						console.log(list[i]);//콘솔에 리스트 출력.
 						
-						str += '<li class="movieSchedule"><span';
+						str += '<li class="movieSchedule"><span ';
 						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
-						str += '<span style="float: right; font-size: 110%"><span';
-						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span';	
-						str += 'class="endTime">'+list[i].endTime+'</span></span> <span';		
-						str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span';		
+						str += '<span style="float: right; font-size: 110%"><span ';
+						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
+						str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
+						str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span ';		
 						str += 'class="theaterNumber">'+list[i].theaterNumber+'</span>관</span></li>';	
 					}
 								
@@ -298,12 +298,12 @@ li.date {
 					for(var i = 0, len = list.length||0; i<len; i++){
 						console.log(list[i]);//콘솔에 리스트 출력.
 						
-						str += '<li class="movieSchedule"><span';
+						str += '<li class="movieSchedule"><span ';
 						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
-						str += '<span style="float: right; font-size: 110%"><span';
-						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span';	
-						str += 'class="endTime">'+list[i].endTime+'</span></span> <span';		
-						str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span';		
+						str += '<span style="float: right; font-size: 110%"><span ';
+						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
+						str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
+						str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span ';		
 						str += 'class="theaterNumber">'+list[i].theaterNumber+'</span>관</span></li>';	
 					}
 								
@@ -311,7 +311,7 @@ li.date {
 				});
 			});
 
-			$(".movieSchedule").on("click", function(e) {
+			$(document).on("click",".movieSchedule", function(e) {
 				//alert('스케쥴 클릭함');
 				var theaterNumber = $(this).find(".theaterNumber").html();
 				var startTime = $(this).find(".startTime").html();
