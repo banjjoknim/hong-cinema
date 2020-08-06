@@ -208,7 +208,7 @@ li.date {
 				<div
 					style="border-right: 1px solid black; overflow: hidden; width: 356px; height: 432px; float: left; overflow-y: scroll;">
 					<ul id="scheduleUL" style="margin: 0px; padding: 0px;">
-						<c:forEach items="${scheduleList }" var="schedule">
+						<%-- <c:forEach items="${scheduleList }" var="schedule">
 							<li class="movieSchedule"><span
 								style="font-weight: bold; font-size: 160%">${schedule.movieName }</span>
 								<span style="float: right; font-size: 110%"><span
@@ -216,7 +216,7 @@ li.date {
 									class="endTime">${schedule.endTime }</span></span> <span
 								style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span
 									class="theaterNumber">${schedule.theaterNumber }</span>관</span></li>
-						</c:forEach>
+						</c:forEach> --%>
 					</ul>
 				</div>
 			</div>
