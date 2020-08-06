@@ -264,7 +264,7 @@ li.date {
 						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 						str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
 						str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span ';		
-						str += 'class="theaterNumber">'+list[i].theaterNumber+'</span>관</span></li>';	
+						str += 'class="theaterNumber">'+list[i].theaterCode+'</span>관</span></li>';	
 					}
 								
 						$("#scheduleUL").html(str);
@@ -304,7 +304,7 @@ li.date {
 						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 						str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
 						str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span ';		
-						str += 'class="theaterNumber">'+list[i].theaterNumber+'</span>관</span></li>';	
+						str += 'class="theaterNumber">'+list[i].theaterCode+'</span>관</span></li>';	
 					}
 								
 						$("#scheduleUL").html(str);
