@@ -41,7 +41,8 @@
     select schedule.theatercode, movie.moviename, playdate, starttime, endtime
 from schedule inner join theater on schedule.theatercode= theater.theatercode 
 inner join movie on schedule.moviecode = movie.moviecode
-where playdate = #{date}
+where playdate = #{date} 
+order by starttime
 ]]>
 	</select>
 
@@ -59,7 +60,10 @@ where playdate = #{date}
 	<select id="getScheduleListByAll"
 		resultType="org.gasan.domain.ScheduleVO">
   <![CDATA[
-select * from schedule where playdate = #{date} and movieName = #{movieName} order by startTime
+select schedule.theatercode, movie.moviename, playdate, starttime, endtime
+from schedule inner join theater on schedule.theatercode= theater.theatercode 
+inner join movie on schedule.moviecode = movie.moviecode
+where playdate = #{date} and movieName = #{movieName} order by starttime
 ]]>
 	</select>
 
