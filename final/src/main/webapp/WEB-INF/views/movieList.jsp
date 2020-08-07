@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -102,15 +103,19 @@ li.date {
 
 	</header>
 	<!-- reservationBox -->
-	<form name="reservationFrm" action="/seatList" method="GET">
+	<!-- SelectedScheduleVO 클래스 객체에 reservationFrm 안의 값들을 넣고 전송.. -->
+	<form:form modelAttribute="SelectedScheduleVO" name="reservationFrm" action="/seatList" method="post">
+	<%-- <form name="reservationFrm" action="/seatList" method="GET"> --%>
 		<input type="hidden" name="selectedMovie" value="" id="selectedMovie">
-		<input type="hidden" name="selectedDate" value=""
+		<input type="hidden" name="selectedDate" value="${today }"
 			id="selectedDate"> <input type="hidden"
 			name="selectedTheaterNumber" value="" id="selectedTheaterNumber">
 		<input type="hidden" name="selectedStartTime" value=""
 			id="selectedStartTime"> <input type="hidden"
 			name="selectedEndTime" value="" id="selectedEndTime">
 			<input type="hidden" name="selectedScheduleCode" value="" id="selectedScheduleCode">
+	<%-- </form> --%>
+	</form:form>
 
 		<div class="reservationBox"
 			style="margin: 0 auto; width: 900px; height: 490px; border: 5px solid black;">
@@ -224,7 +229,7 @@ li.date {
 			<!-- timeTableBox end -->
 		</div>
 		<!-- reservationBox end -->
-	</form>
+	
 
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
 		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
@@ -239,6 +244,23 @@ li.date {
 			console.log("movieCheck: "+movieCheck);
 			console.log("dateCheck: "+dateCheck);
 			console.log("allCheck: "+allCheck);
+			console.log($("#selectedDate").val());
+			
+			//-----------------------------------------------------
+			getMovieByDate(function(list){
+					
+					var str = ""; 
+					
+					for(var i = 0, len = list.length||0; i<len; i++){
+						console.log(list[i]);//콘솔에 리스트 출력.
+						
+						str += '<li class="movieTitle">'+list[i].movieName+'</li>'
+						
+					}
+					
+					$("#movieListUL").html(str);
+					
+					});
 
 			//-----------------------------------------------------
 

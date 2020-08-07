@@ -2,18 +2,21 @@ package org.gasan.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.gasan.domain.DateVO;
 import org.gasan.domain.MovieVO;
 import org.gasan.domain.ScheduleVO;
+import org.gasan.domain.SelectedScheduleVO;
+import org.gasan.service.InfoService;
 import org.gasan.service.ListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -44,11 +47,23 @@ public class GasanController {
 		//		--------------------------------------------------------------------
 
 		log.info("getAllList ....... dateList");
-
+		String month = null;
+		String day = null;
 		List<DateVO> dateList = new ArrayList<DateVO>(); //날짜 리스트(현재날짜)
 		dateList = listService.getDateList(sdf.parse(date));
+		if(dateList.get(0).getMonth()<10) {
+			 month = "0"+dateList.get(0).getMonth();
+		} else {
+			month = Integer.toString(dateList.get(0).getMonth());
+		}
+		if(dateList.get(0).getDay()<10) {
+			day = "0"+dateList.get(0).getDay();
+		} else {
+			day = Integer.toString(dateList.get(0).getDay());
+		}
+		
 		model.addAttribute("today", Integer.toString(dateList.get(0).getYear())+
-				Integer.toString(dateList.get(0).getMonth())+Integer.toString(dateList.get(0).getDay()));
+				month+day);
 		model.addAttribute("dateList", dateList);
 
 		//		--------------------------------------------------------------------
@@ -65,10 +80,15 @@ public class GasanController {
 	
 
 
-	@GetMapping("/seatList")
-	public String getSeatList() {
+	@PostMapping("/seatList")
+	public String getSeatList(SelectedScheduleVO selectedScheduleVO, Model model) {
 
-		log.info("seatList");
+//		ModelAndView view = new ModelAndView();
+//		view.addObject("SelectedScheduleVO", selectedScheduleVO);
+//		view.setViewName("/seatList");
+		model.addAttribute("schedule", selectedScheduleVO);
+
+		log.info("getList .............. seatList");
 
 		return "seatList";
 	}
@@ -81,7 +101,7 @@ public class GasanController {
 		return "payment";
 	}
 	
-	@GetMapping("/ajax")
+	@GetMapping("/ajax") //ajax 연습용
 	public String getAjax() {
 		
 		log.info("ajax");
@@ -89,7 +109,7 @@ public class GasanController {
 		return "ajax";
 	}
 	
-	@GetMapping("/index")
+	@GetMapping("/index") //페이지 기능 동작 확인용
 	public String index() {
 		
 		return "index";

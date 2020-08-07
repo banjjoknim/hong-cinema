@@ -524,7 +524,7 @@
 
                 <div style="margin: 5px; padding: 0 30px; margin-bottom: 10px;">
                     <div style="width: 250px; border-bottom: 1px solid darkgrey;">
-                    <h3>영화제목</h3>
+                    <h3>${schedule.selectedMovie }</h3>
                 </div>
                 </div>
 
@@ -532,10 +532,10 @@
                     <div style="width: 250px; height: 140px; border-bottom: 1px solid darkgrey; margin-left: 6px;">
                     <ul
                         style="list-style: none; float: left; margin-right: 15px; margin-left: 10px; padding: 10px 20px;">
-                        <li class="theaterInfo">영화관위치</li>
-                        <li class="theaterInfo">상영관</li>
-                        <li class="theaterInfo">날짜</li>
-                        <li class="theaterInfo">시작시간</li>
+                        <li class="theaterInfo">가산시네마</li>
+                        <li class="theaterInfo">${schedule.selectedTheaterNumber } 관</li>
+                        <li class="theaterInfo">${schedule.selectedDate }</li>
+                        <li class="theaterInfo">상영시간</li>
                     </ul>
                     <img src="https://via.placeholder.com/90x120.png" width="90px" height="120px"
                         style="margin-bottom: 0px; float: left;">
@@ -580,9 +580,9 @@
                 </div>
                 <div class="buttonBox" style="text-align: center; clear: both; margin-top: 25px;">
                     <button type="button" class="decisionBtn"
-                        style="width: 164px; height: 51px; float: left; z-index: 999; background-color: #029ACF; outline: none; border: none; color: white; font-size: 150%;">결제</button>
+                        style="width: 164px; height: 55px; float: left; z-index: 999; background-color: #029ACF; outline: none; border: none; color: white; font-size: 150%;">결제</button>
                     <button type="button"
-                        style="width: 164px; height: 51px; float: left; z-index: 999; background-color: rgb(120, 120, 120); outline: none; border: none; color: white; font-size: 150%;">취소</button>
+                        style="width: 164px; height: 55px; float: left; z-index: 999; background-color: rgb(120, 120, 120); outline: none; border: none; color: white; font-size: 150%;">취소</button>
                 </div>
             </div>
 
@@ -590,6 +590,19 @@
 
     </div>
     <!-- reservationBox end -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+		crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function(){
+    console.log(1);
+    	
+    })
+    </script>
+    
+    
+    
+    
 </body>
 
 </html>
