@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +22,9 @@ public class GasanControllerTests {
 	private ListService listService;
 	
 	@Test
-	public void getDateListTest() {
+	public void getDateListTest() throws ParseException {
 		List<DateVO> dateList = new ArrayList<DateVO>(); //날짜 리스트(현재날짜)
-		dateList = listService.getDateList();
+		dateList = listService.getDateList(null);
 		String year = Integer.toString(dateList.get(0).getYear()); 
 		String month = Integer.toString(dateList.get(0).getMonth());
 		String day = Integer.toString(dateList.get(0).getDay());

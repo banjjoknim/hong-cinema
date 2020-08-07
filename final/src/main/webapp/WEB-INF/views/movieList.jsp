@@ -170,10 +170,10 @@ li.date {
 				<div class="movieList">
 					<div
 						style="border-right: 1px solid black; overflow: hidden; width: 218px; height: 432px; float: left; overflow-y: scroll;">
-						<ul style="margin: 0px; padding: 0px;">
-							<c:forEach items="${movieList}" var="movie" varStatus="stat">
+						<ul id="movieListUL" style="margin: 0px; padding: 0px;">
+							<%-- <c:forEach items="${movieList}" var="movie" varStatus="stat">
 								<li class="movieTitle">${movie.movieName}</li>
-							</c:forEach>
+							</c:forEach> --%>
 						</ul>
 					</div>
 				</div>
@@ -395,15 +395,21 @@ li.date {
 						$(".date").removeClass("selected");
 						$(this).addClass("selected");
 						var year = $(this).children(".year").html();
-						var month = $(this).children(".month").html();
-						var day = $(this).children(".day").html();
-						if (month < 10) {
-							$("#selectedDate").val(year + "0" + month + day);
-							//console.log("date: "+date);
+						
+						if($(this).children(".month").html()<10){
+						var month = "0"+$(this).children(".month").html();
 						} else {
-							$("#selectedDate").val(year + month + day);
-							//console.log("date: "+date);
+							var month = $(this).children(".month").html();
 						}
+						
+						if($(this).children(".day").html()<10){
+							var day = "0"+$(this).children(".day").html();
+						} else {
+							var day = $(this).children(".day").html();
+						};
+						
+							$("#selectedDate").val(year + month + day);
+							
 						dateCheck = true;
 						if(movieCheck === true){
 							allCheck = true;
@@ -443,6 +449,25 @@ li.date {
 						$("#scheduleUL").html(str);
 				});
 				//------------getScheduleByDate-------------------------
+				
+				//------------getMovieByDate-------------------------
+				getMovieByDate(function(list){
+					
+					var str = ""; 
+					
+					for(var i = 0, len = list.length||0; i<len; i++){
+						console.log(list[i]);//콘솔에 리스트 출력.
+						
+						str += '<li class="movieTitle">'+list[i].movieName+'</li>'
+						
+					}
+					
+					$("#movieListUL").html(str);
+					
+					});
+				//------------getMovieByDate-------------------------
+				
+				
 				} else if (allCheck === true){
 					//------------getScheduleByAll-------------------------
 					getScheduleByAll(function(list){
@@ -571,6 +596,22 @@ li.date {
 	//------------------------------------------------------
 	function removeSchedule(){
 		$("#scheduleUL").html("");
+	}
+	
+	function getMovieByDate(callback, error){
+		
+		var selectedDate = $("#selectedDate").val();
+		
+		$.getJSON("/getMovieByDate/"+selectedDate+".json", //json을 얻어온다. AjaxController mapping
+				function(data) {
+					if (callback) {
+						callback(data);
+					}
+				}).fail(function(xhr, status, err) {
+			if (error) {
+				error();
+			}
+		});
 	}
 </script>
 

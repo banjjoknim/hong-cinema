@@ -23,11 +23,39 @@
 				$("#result").append(list[i].movieName);
 			}
 		});
+		
+		
+		
+		$("button").on("click", function(){
+			
+			getMovieByDate(function(list){
+				for(var i = 0, len = list.length||0; i<len; i++){
+			$("#result").append(list[i].movieNm);
+				}
+			
+			
+			});
+		});
+		
 	});
 	
 	function getList(callback, error) {
 
 		$.getJSON("/getScheduleByDate.json",
+				function(data) {
+					if (callback) {
+						callback(data);
+					}
+				}).fail(function(xhr, status, err) {
+			if (error) {
+				error();
+			}
+		});
+	};
+	
+function getMovieByDate(callback, error) {
+		
+		$.getJSON("http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=09a9ba7f2b8c18c566fb30f6ee83ae4f&targetDt=20200705", //json을 얻어온다. AjaxController mapping
 				function(data) {
 					if (callback) {
 						callback(data);

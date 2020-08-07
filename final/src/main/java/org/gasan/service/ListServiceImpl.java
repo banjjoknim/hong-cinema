@@ -3,9 +3,10 @@ package org.gasan.service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-import org.gasan.controller.WebConnection;
+import org.gasan.controller.ParseByDate;
 import org.gasan.domain.DateVO;
 import org.gasan.domain.MovieVO;
 import org.gasan.domain.ScheduleVO;
@@ -24,33 +25,33 @@ public class ListServiceImpl implements ListService {
 
 	@Setter(onMethod_ = @Autowired)
 	private ListMapper listMapper;
+	
+	
 
 	@Override
-	public List<MovieVO> getMovieList() throws Exception { //아무것도 선택하지 않은상태의 영화 리스트
+	public List<MovieVO> getMovieList(Date date) throws Exception { //아무것도 선택하지 않은상태의 영화 리스트
 
 		log.info("getMovieList..............");
 
 		ArrayList<MovieVO> movieList = new ArrayList<MovieVO>();
-
-		Calendar cal = Calendar.getInstance();
-		//시스템상의 날짜는 2020.04.25로 설정.
-		cal.set(2020, 03, 25);
-		WebConnection wc = new WebConnection();
-		movieList = (ArrayList<MovieVO>) wc.parseBoxOffice(/* cal.getTime() */);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		ParseByDate parseByDate = new ParseByDate();
+		movieList = (ArrayList<MovieVO>) parseByDate.getMovieByDate(sdf.format(date));
+		;
 
 		return movieList;
 	}
 
 	@Override
-	public List<DateVO> getDateList() { //예매가능 날짜 얻어오기.
+	public List<DateVO> getDateList(Date date) { //예매가능 날짜 얻어오기.
 		List<DateVO> dateList = new ArrayList<DateVO>();
 		DateVO dateVO = null;
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		//SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String[] dayOfWeek = new String[] {"일", "월", "화", "수", "목", "금", "토"};
 		for(int i = 0; i<15; i++) {
 			dateVO = new DateVO();
-			cal.set(2020, 03, 25); //today
+			cal.setTime(date); //today
 			cal.add(Calendar.DATE, +i);
 			dateVO.setYear(cal.get(Calendar.YEAR));
 			dateVO.setMonth(cal.get(Calendar.MONTH)+1);
@@ -63,11 +64,12 @@ public class ListServiceImpl implements ListService {
 	}
 
 	@Override
-	public List<ScheduleVO> getScheduleListByDate(String date) {
+	public List<ScheduleVO> getScheduleListByDate(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
-		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListByDate(date);
+		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListByDate(sdf.format(date));
 		for(int i = 0; i<scheduleFromDB.size(); i++) {
-			if(scheduleFromDB.get(i).getPlayDate().equals(date)) {
+			if(scheduleFromDB.get(i).getPlayDate().equals(sdf.format(date))) {
 				scheduleList.add(scheduleFromDB.get(i));
 			}
 		}
@@ -87,9 +89,10 @@ public class ListServiceImpl implements ListService {
 	}
 
 	@Override
-	public List<ScheduleVO> getScheduleListByAll(String date, String movieName) {
+	public List<ScheduleVO> getScheduleListByAll(Date date, String movieName) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>();
-		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListByAll(date, movieName);
+		List<ScheduleVO> scheduleFromDB = listMapper.getScheduleListByAll(sdf.format(date), movieName);
 		for(int i = 0; i<scheduleFromDB.size(); i++) {
 			scheduleList.add(scheduleFromDB.get(i));
 		}

@@ -3,7 +3,8 @@ package org.gasan.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
+import org.gasan.controller.WebConnection;
+import org.gasan.domain.MovieVO;
 import org.gasan.domain.ScheduleVO;
 import org.gasan.mapper.ListMapper;
 import org.junit.Test;
@@ -24,21 +25,21 @@ public class ListServiceTests {
 	private ListMapper listMapper;
 	
 
-//	@Test
-//	public void getMoiveListTest() throws Exception {
-//		
-//		log.info("getMovieListTest..............");
-//		
-//		ArrayList<MovieVO> movieList = new ArrayList<MovieVO>();
-//
-//			WebConnection wc = new WebConnection();
-//			movieList = (ArrayList<MovieVO>) wc.parseBoxOffice();
-//			
-//			for(int i = 0; i< movieList.size(); i++) {
-//				System.out.println(movieList.get(i).getMovieName());
-//			}
-//
-//	}
+	@Test
+	public void getMoiveListTest() throws Exception {
+		
+		log.info("getMovieListTest..............");
+		
+		ArrayList<MovieVO> movieList = new ArrayList<MovieVO>();
+
+			WebConnection wc = new WebConnection();
+			movieList = (ArrayList<MovieVO>) wc.parseBoxOffice();
+			
+			for(int i = 0; i< movieList.size(); i++) {
+				System.out.println(movieList.get(i).getMovieName());
+			}
+
+	}
 //
 //	@Test
 //	public void getDateListTest() { //예매가능 날짜 얻어오기.

@@ -1,7 +1,8 @@
 package org.gasan.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.gasan.domain.DateVO;
@@ -13,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -29,11 +29,16 @@ public class GasanController {
 
 	@GetMapping(value = "/movieList/{date}") 
 	public String getAllListBySelectedDate(@PathVariable("date") String date, Model model) throws Exception { //영화리스트를 얻어온다.
-
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		
+		//Calendar cal = Calendar.getInstance();
+		//cal.set(2020 , 06 , 20);
+		//log.info("Calendar : "+cal.getTime());
 		log.info("getAllList ..... movieList");
 
 		List<MovieVO> movieList = new ArrayList<MovieVO>(); //영화 리스트(미선택)
-		movieList = listService.getMovieList();
+		movieList = listService.getMovieList(sdf.parse(date));
 		model.addAttribute("movieList", movieList);
 
 		//		--------------------------------------------------------------------
@@ -41,7 +46,7 @@ public class GasanController {
 		log.info("getAllList ....... dateList");
 
 		List<DateVO> dateList = new ArrayList<DateVO>(); //날짜 리스트(현재날짜)
-		dateList = listService.getDateList();
+		dateList = listService.getDateList(sdf.parse(date));
 		model.addAttribute("today", Integer.toString(dateList.get(0).getYear())+
 				Integer.toString(dateList.get(0).getMonth())+Integer.toString(dateList.get(0).getDay()));
 		model.addAttribute("dateList", dateList);
@@ -51,43 +56,12 @@ public class GasanController {
 		log.info("getAllList ....... scheduleList");
 
 		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>(); //현재날짜 기준 상영시간표 리스트
-		scheduleList = listService.getScheduleListByDate(date);
+		scheduleList = listService.getScheduleListByDate(sdf.parse(date));
 		model.addAttribute("scheduleList", scheduleList);
 
 		return "movieList";
 	}
 	
-	@GetMapping(value= "/movieList/{date}/{movieName}")
-	public String getScheduleListBySelectedAll(@PathVariable("date") String date, @PathVariable("movieName") String movieName, Model model) throws Exception {
-		
-		log.info("get ....... movieList");
-		
-		List<MovieVO> movieList = new ArrayList<MovieVO>(); //영화 리스트(미선택)
-		movieList = listService.getMovieList();
-		model.addAttribute("movieList", movieList);
-		
-		//---------------------------------------------------
-		
-		log.info("get ....... dateList");
-		
-		List<DateVO> dateList = new ArrayList<DateVO>(); //날짜 리스트(현재날짜기준)
-		dateList = listService.getDateList();
-		model.addAttribute("today", Integer.toString(dateList.get(0).getYear())+
-				Integer.toString(dateList.get(0).getMonth())+Integer.toString(dateList.get(0).getDay()));
-		model.addAttribute("dateList", dateList);
-
-		//		--------------------------------------------------------------------
-		
-		log.info("get ....... scheduleList");
-
-		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>(); //현재날짜 기준 상영시간표 리스트
-		scheduleList = listService.getScheduleListByAll(date, movieName);
-		model.addAttribute("scheduleList", scheduleList);
-		
-		
-		return "movieList";
-		
-	}
 	
 
 
@@ -113,6 +87,12 @@ public class GasanController {
 		log.info("ajax");
 		
 		return "ajax";
+	}
+	
+	@GetMapping("/index")
+	public String index() {
+		
+		return "index";
 	}
 
 }
