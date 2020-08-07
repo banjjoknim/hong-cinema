@@ -38,7 +38,7 @@
 
 	<select id="getScheduleListByDate" resultMap="ScheduleMap, TheaterMap, MovieMap">
   <![CDATA[
-    select schedule.theatercode, movie.moviename, playdate, starttime, endtime
+    select schedulecode, schedule.theatercode, movie.moviename, playdate, starttime, endtime
 from schedule inner join theater on schedule.theatercode= theater.theatercode 
 inner join movie on schedule.moviecode = movie.moviecode
 where playdate = #{date} 
@@ -49,7 +49,7 @@ order by starttime
 	<select id="getScheduleListByName"
 		resultType="org.gasan.domain.ScheduleVO">
 	<![CDATA[
-	select schedule.theatercode, movie.moviename, playdate, starttime, endtime
+	select schedulecode, schedule.theatercode, movie.moviename, playdate, starttime, endtime
     from schedule inner join theater on schedule.theatercode= theater.theatercode 
     inner join movie on schedule.moviecode = movie.moviecode
     where movieName = #{movieName} order by playdate
@@ -60,7 +60,7 @@ order by starttime
 	<select id="getScheduleListByAll"
 		resultType="org.gasan.domain.ScheduleVO">
   <![CDATA[
-select schedule.theatercode, movie.moviename, playdate, starttime, endtime
+select schedulecode, schedule.theatercode, movie.moviename, playdate, starttime, endtime
 from schedule inner join theater on schedule.theatercode= theater.theatercode 
 inner join movie on schedule.moviecode = movie.moviecode
 where playdate = #{date} and movieName = #{movieName} order by starttime

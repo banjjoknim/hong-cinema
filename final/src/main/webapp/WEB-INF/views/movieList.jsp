@@ -104,12 +104,13 @@ li.date {
 	<!-- reservationBox -->
 	<form name="reservationFrm" action="/seatList" method="GET">
 		<input type="hidden" name="selectedMovie" value="" id="selectedMovie">
-		<input type="hidden" name="selectedDate" value="${today }"
+		<input type="hidden" name="selectedDate" value=""
 			id="selectedDate"> <input type="hidden"
 			name="selectedTheaterNumber" value="" id="selectedTheaterNumber">
 		<input type="hidden" name="selectedStartTime" value=""
 			id="selectedStartTime"> <input type="hidden"
 			name="selectedEndTime" value="" id="selectedEndTime">
+			<input type="hidden" name="selectedScheduleCode" value="" id="selectedScheduleCode">
 
 		<div class="reservationBox"
 			style="margin: 0 auto; width: 900px; height: 490px; border: 5px solid black;">
@@ -264,6 +265,7 @@ li.date {
 									
 									str += '<li class="movieSchedule"><span class="movieName" ';
 									str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
+									str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
 									str += '<span style="float: right; font-size: 110%"><span ';
 									str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 									str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -306,6 +308,7 @@ li.date {
 						
 						str += '<li class="movieSchedule"><span class="movieName" ';
 						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
+						str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
 						str += '<span style="float: right; font-size: 110%"><span ';
 						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 						str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -327,6 +330,7 @@ li.date {
 							
 							str += '<li class="movieSchedule"><span class="movieName" ';
 							str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
+							str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
 							str += '<span style="float: right; font-size: 110%"><span ';
 							str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 							str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -375,6 +379,7 @@ li.date {
 								
 								str += '<li class="movieSchedule"><span class="movieName" ';
 								str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
+								str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
 								str += '<span style="float: right; font-size: 110%"><span ';
 								str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 								str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -427,6 +432,7 @@ li.date {
 						
 						str += '<li class="movieSchedule"><span class="movieName" ';
 						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
+						str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
 						str += '<span style="float: right; font-size: 110%"><span ';
 						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 						str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -448,6 +454,7 @@ li.date {
 							
 							str += '<li class="movieSchedule"><span class="movieName" ';
 							str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
+							str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
 							str += '<span style="float: right; font-size: 110%"><span ';
 							str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 							str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -474,6 +481,8 @@ li.date {
 				var theaterNumber = $(this).find(".theaterNumber").html();
 				var startTime = $(this).find(".startTime").html();
 				var endTime = $(this).find(".endTime").html();
+				var scheduleCode = $(this).find(".scheduleCode").html();
+				
 				$(".movieSchedule").removeClass("selected");
 				$(this).addClass("selected");
 
@@ -481,13 +490,16 @@ li.date {
 				$("#selectedTheaterNumber").val(theaterNumber);
 				$("#selectedStartTime").val(startTime);
 				$("#selectedEndTime").val(endTime);
+				$("#selectedScheduleCode").val(scheduleCode);
 
 				console.log("선택 영화: " + $("#selectedMovie").val());
+				console.log("선택 스케쥴코드: "+ $("#selectedScheduleCode").val());
+				console.log("선택 날짜: " + $("#selectedDate").val());
 				console.log("선택 상영관: " + $("#selectedTheaterNumber").val());
 				console.log("선택 상영시작시간: " + $("#selectedStartTime").val());
 				console.log("선택 상영끝시간: " + $("#selectedEndTime").val());
 				if (confirm('선택하신 영화와 시간으로 예매를 진행하시겠습니까?')) {
-					//reservationFrm.submit();
+					reservationFrm.submit();
 				}
 				
 			});
