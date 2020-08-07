@@ -232,15 +232,14 @@ li.date {
 		$(document).ready(function() {
 
 			var reservationFrm = $("form[name=reservationFrm]");
-			var dateCheck = false;
-			var movieCheck = false;
-			var allCheck = false;
+			var dateCheck = false; //날짜 선택유무
+			var movieCheck = false; //영화 선택유무
+			var allCheck = false; // 날짜, 영화 모두 선택유무
+			console.log("movieCheck: "+movieCheck);
+			console.log("dateCheck: "+dateCheck);
+			console.log("allCheck: "+allCheck);
 
 			//-----------------------------------------------------
-			
-			var scheduleByName = function(){
-				
-			}
 
 			$(document).on("click", ".movieTitle" ,function(e) { //영화 제목 누르면 그에 맞는 DB상의 상영시간표 나오게 함.
 				//alert('영화제목 클릭함');
@@ -252,6 +251,33 @@ li.date {
 					  allCheck = false;
 					  console.log("movieCheck: "+movieCheck);
 					  console.log("allCheck: "+allCheck);
+					  removeSchedule();
+					  
+					  if(dateCheck === true) {
+							//--------------getScheduleByDate-----------------------
+							getScheduleByDate(function(list){
+								
+								var str = "";
+								
+								for(var i = 0, len = list.length||0; i<len; i++){
+									console.log(list[i]);//콘솔에 리스트 출력.
+									
+									str += '<li class="movieSchedule"><span class="movieName" ';
+									str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
+									str += '<span style="float: right; font-size: 110%"><span ';
+									str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
+									str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
+									str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span ';		
+									str += 'class="theaterNumber">'+list[i].theaterCode+'</span>관</span></li>';	
+								}
+											
+									$("#scheduleUL").html(str);
+									movieCheck = false;
+									console.log(movieCheck);
+							});
+							//------------getScheduleByDate-------------------------
+						}
+					  
 					} else {
 					  $(".movieTitle").removeClass("selected");
 				      $(this).addClass("selected");
@@ -269,7 +295,7 @@ li.date {
 				
 				console.log("loading...");
 				
-				if(dateCheck === false && allCheck === false) {
+				if(movieCheck === true && allCheck === false) {
 					//--------------getScheduleByName-----------------------
 				getScheduleByName(function(list){
 					
@@ -290,7 +316,7 @@ li.date {
 						$("#scheduleUL").html(str);
 				});
 				//--------------getScheduleByName-----------------------
-				} else {
+				} else if(allCheck === true){
 					//------------getScheduleByAll-------------------------
 					getScheduleByAll(function(list){
 						
@@ -309,12 +335,12 @@ li.date {
 						}
 									
 							$("#scheduleUL").html(str);
-							allCheck = true;
 							console.log("allCheck: "+allCheck);
 					});
 				//------------getScheduleByAll-------------------------
 				}
-
+				
+				
 				
 				
 				
@@ -337,6 +363,29 @@ li.date {
 					  allCheck = false;
 					  console.log("dateCheck:" + dateCheck);
 					  console.log("allCheck: "+allCheck);
+					  removeSchedule();
+					  
+					//--------------getScheduleByName-----------------------
+						getScheduleByName(function(list){
+							
+							var str = "";
+							
+							for(var i = 0, len = list.length||0; i<len; i++){
+								console.log(list[i]);//콘솔에 리스트 출력.
+								
+								str += '<li class="movieSchedule"><span class="movieName" ';
+								str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
+								str += '<span style="float: right; font-size: 110%"><span ';
+								str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
+								str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
+								str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span ';		
+								str += 'class="theaterNumber">'+list[i].theaterCode+'</span>관</span></li>';	
+							}
+										
+								$("#scheduleUL").html(str);
+						});
+						//--------------getScheduleByName-----------------------
+					  
 					} else {
 						$(".date").removeClass("selected");
 						$(this).addClass("selected");
@@ -345,8 +394,10 @@ li.date {
 						var day = $(this).children(".day").html();
 						if (month < 10) {
 							$("#selectedDate").val(year + "0" + month + day);
+							//console.log("date: "+date);
 						} else {
 							$("#selectedDate").val(year + month + day);
+							//console.log("date: "+date);
 						}
 						dateCheck = true;
 						if(movieCheck === true){
@@ -365,7 +416,7 @@ li.date {
 				console.log("loading...");
 				
 				
-				if(movieCheck === false && allCheck === false) {
+				if(dateCheck === true && allCheck === false) {
 				//--------------getScheduleByDate-----------------------
 				getScheduleByDate(function(list){
 					
@@ -386,7 +437,7 @@ li.date {
 						$("#scheduleUL").html(str);
 				});
 				//------------getScheduleByDate-------------------------
-				} else {
+				} else if (allCheck === true){
 					//------------getScheduleByAll-------------------------
 					getScheduleByAll(function(list){
 						
@@ -405,7 +456,6 @@ li.date {
 						}
 									
 							$("#scheduleUL").html(str);
-							allCheck = true;
 							console.log("allCheck: "+allCheck);
 					});
 				//------------getScheduleByAll-------------------------
@@ -490,12 +540,12 @@ li.date {
 	//------------------------------------------------------
 	function getScheduleByAll(callback, error) {
 		
-		var date = $("#selectedDate").val();
-		var movieName = $("#selectedMovie").val();
-		console.log(date);
-		console.log(movieName);
+		var selectedDate = $("#selectedDate").val();
+		var selectedMovieName = $("#selectedMovie").val();
+		console.log(selectedDate);
+		console.log(selectedMovieName);
 
-		$.getJSON("/getScheduleByAll/"+date+"/"+movieName+".json", //json을 얻어온다. AjaxController mapping
+		$.getJSON("/getScheduleByAll/"+selectedDate+"/"+selectedMovieName+".json", //json을 얻어온다. AjaxController mapping
 				function(data) {
 					if (callback) {
 						callback(data);
@@ -507,6 +557,9 @@ li.date {
 		});
 	};
 	//------------------------------------------------------
+	function removeSchedule(){
+		$("#scheduleUL").html("");
+	}
 </script>
 
 
