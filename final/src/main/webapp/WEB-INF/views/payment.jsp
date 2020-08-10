@@ -83,7 +83,7 @@
 
                 <div class="form-group row"
                     style="float: left; width: 460px; padding: 10px 20px 25px 80px; margin: 0; font-size: 200%; font-weight: bold;">
-                    영화제목 : 반도
+                    영화제목 : ${schedule.selectedMovie }
                 </div>
 
                 <div class="form-group row"

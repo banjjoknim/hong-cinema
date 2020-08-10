@@ -7,8 +7,9 @@ import java.util.List;
 import org.gasan.domain.DateVO;
 import org.gasan.domain.MovieVO;
 import org.gasan.domain.ScheduleVO;
+import org.gasan.domain.SeatReservationVO;
+import org.gasan.domain.SeatVO;
 import org.gasan.domain.SelectedScheduleVO;
-import org.gasan.service.InfoService;
 import org.gasan.service.ListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -83,9 +83,6 @@ public class GasanController {
 	@PostMapping("/seatList")
 	public String getSeatList(SelectedScheduleVO selectedScheduleVO, Model model) {
 
-//		ModelAndView view = new ModelAndView();
-//		view.addObject("SelectedScheduleVO", selectedScheduleVO);
-//		view.setViewName("/seatList");
 		model.addAttribute("schedule", selectedScheduleVO);
 
 		log.info("getList .............. seatList");
@@ -93,9 +90,12 @@ public class GasanController {
 		return "seatList";
 	}
 
-	@GetMapping("/payment")
-	public String getPayment() {
+	@PostMapping("/payment")
+	public String getPayment(SeatReservationVO seatReservationVO, SeatVO seatVO, Model model) {
 
+		model.addAttribute("seatReservation", seatReservationVO);
+		model.addAttribute("seat", seatVO);
+		
 		log.info("payment");
 
 		return "payment";

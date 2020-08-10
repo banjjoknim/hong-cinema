@@ -1,14 +1,20 @@
 package org.gasan.service;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+
+import org.apache.ibatis.annotations.Param;
 
 public interface InfoService {
 
-	public String getMovieName(String movieName);
+	public String getMovieName(@Param("selectedMovie") String movieName);
 	
-	public String getTheaterCode();
+	public int getTheaterCode(@Param("selectedTheaterNumber") String theaterNumber);
 	
-	public String getStartTime();
+	public String getStartTime(@Param("selectedStartTime") String startTime);
 	
-	public String getEndTime();
+	public String getEndTime(@Param("selectedEndTime") String endTime);
+	
+	public Date getPlayDate(@Param("selectedDate") String playDate);
+	
+	public String getScheduleCode(@Param("selectedScheduleCode") String scheduleCode);
 }

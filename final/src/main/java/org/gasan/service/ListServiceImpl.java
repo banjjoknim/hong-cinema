@@ -10,7 +10,7 @@ import org.gasan.controller.ParseByDate;
 import org.gasan.domain.DateVO;
 import org.gasan.domain.MovieVO;
 import org.gasan.domain.ScheduleVO;
-import org.gasan.mapper.ListMapper;
+import org.gasan.mapper.ScheduleListMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ import lombok.extern.log4j.Log4j;
 public class ListServiceImpl implements ListService {
 
 	@Setter(onMethod_ = @Autowired)
-	private ListMapper listMapper;
+	private ScheduleListMapper listMapper;
 	
 	
 
@@ -37,7 +37,6 @@ public class ListServiceImpl implements ListService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		ParseByDate parseByDate = new ParseByDate();
 		movieList = (ArrayList<MovieVO>) parseByDate.getMovieByDate(sdf.format(date));
-		;
 
 		return movieList;
 	}

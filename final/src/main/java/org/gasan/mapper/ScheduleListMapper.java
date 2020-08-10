@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.gasan.domain.ScheduleVO;
 
-public interface ListMapper {
+public interface ScheduleListMapper {
 	
 	public List<ScheduleVO> getScheduleListByDate(@Param("date") String date); 
 	//영화무관 날짜에만 맞는 리스트 출력

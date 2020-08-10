@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="org.gasan.mapper.SeatServiceMapper">
+ 
+<update id="select">
+
+<![CDATA[
+
+update seat set enabled = 'N' where theatercode = #{schedule.selectedTheaterNumber} 
+and schedulecode = #{schedule.selectedScheduleCode} and seat_row = #{seat.seatRow} and seat_column = #{seat.seatColumn}
+
+]]>
+
+</update>
+
+<update id="delete">
+
+<![CDATA[
+
+update seat set enabled = 'Y' where theatercode = #{schedule.selectedTheaterNumber} 
+and schedulecode = #{schedule.selectedScheduleCode} and seat_row = #{seat.seatRow} and seat_column = #{seat.seatColumn}
+
+]]>
+
+</update> 
+
+
+ 
+ 
+ </mapper>

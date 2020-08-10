@@ -6,7 +6,7 @@ import java.util.List;
 import org.gasan.controller.WebConnection;
 import org.gasan.domain.MovieVO;
 import org.gasan.domain.ScheduleVO;
-import org.gasan.mapper.ListMapper;
+import org.gasan.mapper.ScheduleListMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import lombok.extern.log4j.Log4j;
 public class ListServiceTests {
 	
 	@Setter(onMethod_ = @Autowired)
-	private ListMapper listMapper;
+	private ScheduleListMapper listMapper;
 	
 
 	@Test
