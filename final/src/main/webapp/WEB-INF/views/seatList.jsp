@@ -848,7 +848,7 @@ outline: none;
 							reservationFrm.append(str);
 							console.log("선택좌석은 "+$("input[name=selectedSeatList]").eq(i).val()+" 입니다.");
 							}
-							//reservationFrm.submit();
+							reservationFrm.submit();
 						} else {
 							$("input[name=selectedSeatList]").remove();
 						}

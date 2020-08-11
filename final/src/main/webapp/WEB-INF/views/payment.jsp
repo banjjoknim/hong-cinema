@@ -83,27 +83,31 @@
 
                 <div class="form-group row"
                     style="float: left; width: 460px; padding: 10px 20px 25px 80px; margin: 0; font-size: 200%; font-weight: bold;">
-                    영화제목 : ${schedule.selectedMovie }
+                    <span style="font-weight: bold; margin-top: 20px;">${movie.selectedMovie }</span>
                 </div>
 
                 <div class="form-group row"
-                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 150%;">
-                    영화관지점 : 롯데시네마 울산
+                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 135%;">
+                    <span style="font-weight: bold;">가산시네마</span>
                 </div>
 
                 <div class="form-group row"
-                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 150%;">
-                    상영시작시간/상영관 : 17:10~19:30/8관
+                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 135%;">
+                    <span style="font-weight: bold;">${movie.selectedTheaterNumber }관   ${movie.selectedStartTime } ~ ${movie.selectedEndTime }</span>
                 </div>
 
                 <div class="form-group row"
-                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 150%;">
-                    인원수 : 3명(성인 2명/어린이 1명)
+                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 135%;">
+                    <span style="font-weight: bold;">총 ${seatReservation.totalPeople }명(성인 ${seatReservation.adultType }명/청소년 ${seatReservation.youthType }명/우대 ${seatReservation.preferentialType }명)</span>
                 </div>
 
                 <div class="form-group row"
-                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 150%;">
-                    선택좌석 : A17, A18, A19
+                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 135%;">
+                    <span style="font-weight: bold;">선택좌석 : 
+                    <c:forEach items="${seatReservation.selectedSeatList }" var="seat" varStatus="status">
+                    ${seat }, 
+                    <c:if test="${status.last }">${seat }</c:if>
+                    </c:forEach></span>
                 </div>
 
             </fieldset>

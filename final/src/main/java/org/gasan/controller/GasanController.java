@@ -4,15 +4,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.gasan.domain.DateVO;
 import org.gasan.domain.MovieVO;
 import org.gasan.domain.ScheduleVO;
 import org.gasan.domain.SeatReservationVO;
-import org.gasan.domain.SeatVO;
 import org.gasan.domain.SelectedScheduleVO;
 import org.gasan.service.ListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -81,22 +83,25 @@ public class GasanController {
 
 
 	@PostMapping("/seatList")
-	public String getSeatList(SelectedScheduleVO selectedScheduleVO, Model model) {
+	public String getSeatList(SelectedScheduleVO selectedScheduleVO, HttpSession session, Model model) {
 
 		model.addAttribute("schedule", selectedScheduleVO);
+		session.setAttribute("movie", selectedScheduleVO);
+		
 
 		log.info("getList .............. seatList");
+		log.info(selectedScheduleVO);
 
 		return "seatList";
 	}
 
 	@PostMapping("/payment")
-	public String getPayment(SeatReservationVO seatReservationVO, SeatVO seatVO, Model model) {
+	public String getPayment(SeatReservationVO seatReservationVO, HttpSession session, Model model) {
 
 		model.addAttribute("seatReservation", seatReservationVO);
-		model.addAttribute("seat", seatVO);
-		
 		log.info("payment");
+		log.info(seatReservationVO);
+		log.info(session.getAttribute("movie"));
 
 		return "payment";
 	}
