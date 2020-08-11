@@ -82,8 +82,8 @@
                 <img src="https://via.placeholder.com/240x320.png" style="float: left;">
 
                 <div class="form-group row"
-                    style="float: left; width: 460px; padding: 10px 20px 25px 80px; margin: 0; font-size: 200%; font-weight: bold;">
-                    <span style="font-weight: bold; margin-top: 20px;">${movie.selectedMovie }</span>
+                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 200%; font-weight: bold;">
+                    <span style="font-weight: bold;">${movie.selectedMovie }</span>
                 </div>
 
                 <div class="form-group row"
@@ -93,20 +93,24 @@
 
                 <div class="form-group row"
                     style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 135%;">
-                    <span style="font-weight: bold;">${movie.selectedTheaterNumber }관   ${movie.selectedStartTime } ~ ${movie.selectedEndTime }</span>
+                    <span style="font-weight: bold;">상영관 : ${movie.selectedTheaterNumber }관<br> 
+                    상영시간 : ${movie.selectedStartTime } ~ ${movie.selectedEndTime }</span>
                 </div>
 
                 <div class="form-group row"
                     style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 135%;">
-                    <span style="font-weight: bold;">총 ${seatReservation.totalPeople }명(성인 ${seatReservation.adultType }명/청소년 ${seatReservation.youthType }명/우대 ${seatReservation.preferentialType }명)</span>
+                    <span style="font-weight: bold;">인원 수 : 총 ${seatReservation.totalPeople }명<br>
+                    (성인 ${seatReservation.adultType }명/청소년 ${seatReservation.youthType }명/우대 ${seatReservation.preferentialType }명)</span>
                 </div>
 
                 <div class="form-group row"
                     style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 135%;">
                     <span style="font-weight: bold;">선택좌석 : 
                     <c:forEach items="${seatReservation.selectedSeatList }" var="seat" varStatus="status">
-                    ${seat }, 
-                    <c:if test="${status.last }">${seat }</c:if>
+                    <c:choose>
+                    <c:when test="${status.last }">${seat }</c:when>
+                    <c:otherwise>${seat }, </c:otherwise>
+                    </c:choose>
                     </c:forEach></span>
                 </div>
 
