@@ -268,11 +268,12 @@ outline: none;
 	<!-- reservationBox -->
 	<form:form modelAttribute="SeatReservationVO" name="reservationFrm" action="/payment" method="post">
 	<%-- <form name="seatFrm" action="/payment"> --%>
-		<input type="hidden" name="adultType" value=""> <input
-			type="hidden" name="youthType" value=""> <input type="hidden"
-			name="preferentialType" value="">
-			<input type="hidden" name="totalPeople" value="">
-			<input type="hidden" name="payAmount" value="">
+		<input type="hidden" name="adultType" value="0"> <input
+			type="hidden" name="youthType" value="0"> <input type="hidden"
+			name="preferentialType" value="0">
+			<input type="hidden" name="totalPeople" value="0">
+			<input type="hidden" name="payAmount" value="0">
+			
 	<%-- </form> --%>
 	</form:form>
 	<div class="reservationBox"
@@ -691,21 +692,21 @@ outline: none;
 					<div
 						style="width: 250px; height: 120px; margin: 0 auto; border-bottom: 1px solid darkgrey; padding: 0 10px;">
 						<ul style="list-style: none; padding: 0px 15px;" id="selectedSeatList">
-							<!-- <li style="margin: 0 auto;"><button class="selectedSeat"
+							<!-- <li class="finalSeat"><button class="selectedSeat"
 									style="width: 40px; height: 40px; border: none;">A13</button></li>
-							<li><button class="selectedSeat"
+							<li class="finalSeat"><button class="selectedSeat"
 									style="width: 40px; height: 40px; border: none;">A7</button></li>
-							<li><button class="selectedSeat"
+							<li class="finalSeat"><button class="selectedSeat"
 									style="width: 40px; height: 40px; border: none;">B10</button></li>
-							<li><button class="selectedSeat"
+							<li class="finalSeat"><button class="selectedSeat"
 									style="width: 40px; height: 40px; border: none;">B8</button></li>
-							<li><button class="selectedSeat"
+							<li class="finalSeat"><button class="selectedSeat"
 									style="width: 40px; height: 40px; clear: both; border: none;">F8</button></li>
-							<li><button class="selectedSeat"
+							<li class="finalSeat"><button class="selectedSeat"
 									style="width: 40px; height: 40px; border: none;">F12</button></li>
-							<li><button class="selectedSeat"
+							<li class="finalSeat"><button class="selectedSeat"
 									style="width: 40px; height: 40px; border: none;">F8</button></li>
-							<li><button class="selectedSeat"
+							<li class="finalSeat"><button class="selectedSeat"
 									style="width: 40px; height: 40px; border: none;">F12</button></li> -->
 						</ul>
 					</div>
@@ -752,14 +753,20 @@ outline: none;
 					var youthCount = Number(youthNumber);
 					var preferentialNumber = $(".preferentialType").html();
 					var preferentialCount = Number(preferentialNumber);
+					
 
 					//---------------버튼 누를시 고객타입 숫자 변경-------------------------
 					$(".adultCountUp").on("click", function() {
+						var totalCount = adultCount + youthCount + preferentialCount;
+						if(totalCount < 8){
 						adultCount = adultCount + 1;
 						$(".adultType").html(adultCount);
 						$("input[name=adultType]").val(adultCount);
 						//console.log(adultCount);
 						console.log($("input[name=adultType]").val());
+						} else {
+							alert("한 번에 최대 8개의 좌석까지 예매할 수 있습니다.");
+						}
 					});
 					$(".adultCountDown").on("click", function() {
 						if (adultCount > 0) {
@@ -770,10 +777,15 @@ outline: none;
 						//console.log(adultCount);
 					});
 					$(".youthCountUp").on("click", function() {
+						var totalCount = adultCount + youthCount + preferentialCount;
+						if(totalCount < 8){
 						youthCount = youthCount + 1;
 						$(".youthType").html(youthCount);
 						$("input[name=youthType]").val(youthCount);
 						//console.log(youthCount);
+						} else {
+							alert("한 번에 최대 8개의 좌석까지 예매할 수 있습니다.");
+						}
 					});
 					$(".youthCountDown").on("click", function() {
 						if (youthCount > 0) {
@@ -783,14 +795,17 @@ outline: none;
 						$("input[name=youthType]").val(youthCount);
 						//console.log(youthCount);
 					});
-					$(".preferentialCountUp").on(
-							"click",
-							function() {
+					$(".preferentialCountUp").on("click", function() {
+						var totalCount = adultCount + youthCount + preferentialCount;
+						if(totalCount < 8){
 								preferentialCount = preferentialCount + 1;
 								$(".preferentialType").html(preferentialCount);
 								$("input[name=preferentialType]").val(
 										preferentialCount);
 								//console.log(preferentialCount);
+						} else {
+							alert("한 번에 최대 8개의 좌석까지 예매할 수 있습니다.");
+						}
 							});
 					$(".preferentialCountDown").on(
 							"click",
@@ -827,7 +842,15 @@ outline: none;
 							alert("인원 수를 선택해주세요.");
 						}
 						if (totalCount != 0 && confirm("선택하신 좌석으로 예매를 진행하시겠습니까?")) {
+							for(var i = 0; i<selectedSeat.length; i++){
+							var str = "";
+							str += '<input type="hidden" name="selectedSeatList" value="'+selectedSeat[i]+'">';
+							reservationFrm.append(str);
+							console.log("선택좌석은 "+$("input[name=selectedSeatList]").eq(i).val()+" 입니다.");
+							}
 							//reservationFrm.submit();
+						} else {
+							$("input[name=selectedSeatList]").remove();
 						}
 					});
 					
@@ -835,38 +858,104 @@ outline: none;
 					
 					//-----------------좌석 클릭하면 오른쪽 목록에 나오게 하기------------
 					
-					$(".seatRow").find("button").on("click",function(){
-						
+					$(".seatRow").find("button").on("click", function(){
+						var totalCount = adultCount + youthCount + preferentialCount;
 						var selectedSeatList = $("#selectedSeatList");
 						
-						//alert("좌석 선택!");
-						//console.log($(this).val());
-						if($(this).hasClass("selected")){
-							$(this).removeClass("selected");
-							$(this).html($(this).val().substring(1));
-							//$(".selectedSeat").val("");
-							//$(".selectedSeat").html("");
+						if(totalCount == 0){
+							event.preventDefault();
+							alert("인원 수를 선택해주세요.");
 						} else {
-						$(this).addClass("selected");
-						$(this).html("");
-						//$(".selectedSeat").val($(this).val());
-						//$(".selectedSeat").html($(this).val());
-						//console.log($(".selectedSeat").val());
-						//console.log("0번째 : " +selectedSeat[0]);
-						if(selectedSeat.length<8){
-						selectedSeat.push($(this).val());
-						selectedSeatList.append(
-								'<li><button class="selectedSeat" style="width: 40px; height: 40px; border: none;">'+$(this).val()+'</button></li>');
-						}
-						}
+							
+							console.log("총 예매 좌석 수 : "+totalCount);
+							
+							if(selectedSeat.length<totalCount){
+								
+									console.log("누른 버튼 : " + $(this));
+									
+									if($(this).hasClass("selected")){
+										$(this).removeClass("selected");
+										$(this).html($(this).val().substring(1));
+										for(var i = 0; i<selectedSeat.length; i++){
+											if(selectedSeat[i] === $(this).val()){
+												selectedSeat.splice(i,1);
+											}
+										}
+										var str = "";
+										for(var i = 0; i<selectedSeat.length; i++){
+										str += '<li class="finalSeat"><button class="selectedSeat" style="width: 40px; height: 40px; border: none;" value="'+selectedSeat[i]+'">'
+											+selectedSeat[i]+'</button></li>';
+										}
+										selectedSeatList.html(str);
+										
+										console.log("선택된 좌석 수 : "+selectedSeat.length);
+									} else {
+									$(this).addClass("selected");
+										$(this).html("");
+										selectedSeat.push($(this).val());
+										
+										var str = "";
+										for(var i = 0; i<selectedSeat.length; i++){
+										str += '<li class="finalSeat"><button class="selectedSeat" style="width: 40px; height: 40px; border: none;" value="'+selectedSeat[i]+'">'
+											+selectedSeat[i]+'</button></li>';
+										}
+										
+										selectedSeatList.html(str);
+										console.log("선택된 좌석 수 : "+selectedSeat.length);
+									}                                                                                          
+									
+								} else {
+									
+									if($(this).hasClass("selected")){
+										$(this).removeClass("selected");
+										$(this).html($(this).val().substring(1));
+										for(var i = 0; i<selectedSeat.length; i++){
+											if(selectedSeat[i] === $(this).val()){
+												selectedSeat.splice(i,1);
+											}
+										}
+										var str = "";
+										for(var i = 0; i<selectedSeat.length; i++){
+										str += '<li><button class="selectedSeat" style="width: 40px; height: 40px; border: none;" value="'+selectedSeat[i]+'">'
+											+selectedSeat[i]+'</button></li>';
+										}
+										selectedSeatList.html(str);
+										
+										console.log("선택된 좌석 수 : "+selectedSeat.length);
+									} else {
+										event.preventDefault();
+										alert("최대 인원수만큼 좌석을 선택하셨습니다.");
+									}
+								}
+						
+					}
 					});
 					
 					//-----------------좌석 클릭하면 오른쪽 목록에 나오게 하기------------
 					
+					//-----------------오른쪽 목록에 좌석버튼 클릭하면 없애기-----------------
+					$(document).on("click",".selectedSeat", function(){
+						alert($(this));
+						var selectedSeatList = $("#selectedSeatList");
+					
+					for(var i = 0; i<selectedSeat.length; i++){
+						if(selectedSeat[i] === $(this).val()){
+							selectedSeat.splice(i,1);
+							console.log("취소한 좌석 번호 : "+$(this).val());
+						}
+					}
+						
+					var str = "";
+					for(var i = 0; i<selectedSeat.length; i++){
+					str += '<li><button class="selectedSeat" style="width: 40px; height: 40px; border: none;" value="'+selectedSeat[i]+'">'
+						+selectedSeat[i]+'</button></li>';
+					}
+					
+					selectedSeatList.html(str); 
+					});
+					
 					//-----------------오른쪽 목록에 좌석 클릭하면 없애기-----------------
 					
-					
-					//-----------------오른쪽 목록에 좌석 클릭하면 없애기-----------------
 					
 
 				});
