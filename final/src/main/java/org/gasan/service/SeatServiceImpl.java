@@ -7,9 +7,15 @@ import org.gasan.domain.SeatVO;
 import org.gasan.domain.SelectedScheduleVO;
 import org.gasan.mapper.SeatServiceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import lombok.AllArgsConstructor;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
+@Service
+@AllArgsConstructor
 public class SeatServiceImpl implements SeatService {
 
 	@Setter(onMethod_ = @Autowired)
@@ -22,8 +28,7 @@ public class SeatServiceImpl implements SeatService {
 		seat.setScheduleCode(selectedScheduleVO.getSelectedScheduleCode());
 		seat.setTheaterCode(selectedScheduleVO.getSelectedTheaterNumber());
 		seat.setEnabled(false);
-		seat.setSeatRow(seatVO.getSeatRow());
-		seat.setSeatColumn(seatVO.getSeatColumn());
+		seat.setSeat(seat.getSeat());
 		selectedSeatList.add(seat);
 		seatServiceMapper.select(selectedScheduleVO, seatVO);
 	}
@@ -31,10 +36,8 @@ public class SeatServiceImpl implements SeatService {
 	@Override
 	public void remove(SelectedScheduleVO selectedScheduleVO, SeatVO seatVO) {
 		List<SeatVO> selectedSeatList = new ArrayList<SeatVO>();
-		seatVO.setEnabled(true);
 		selectedSeatList.remove(seatVO);
 	}
-
 
 
 }

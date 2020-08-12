@@ -1,5 +1,7 @@
 package org.gasan.mapper;
 
+import java.util.List;
+
 import org.gasan.domain.SeatVO;
 import org.gasan.domain.SelectedScheduleVO;
 import org.junit.Test;
@@ -26,8 +28,7 @@ public class SeatServiceMapperTest {
 		selectedScheduleVO.setSelectedTheaterNumber(1);
 		selectedScheduleVO.setSelectedScheduleCode(1);
 		SeatVO seatVO = new SeatVO();
-		seatVO.setSeatRow("A");
-		seatVO.setSeatColumn(1);
+		seatVO.setSeat("A1");
 		mapper.select(selectedScheduleVO, seatVO);
 	}
 	
@@ -38,9 +39,18 @@ public class SeatServiceMapperTest {
 		selectedScheduleVO.setSelectedTheaterNumber(1);
 		selectedScheduleVO.setSelectedScheduleCode(1);
 		SeatVO seatVO = new SeatVO();
-		seatVO.setSeatRow("A");
-		seatVO.setSeatColumn(1);
+		seatVO.setSeat("A1");
 		mapper.delete(selectedScheduleVO, seatVO);
+	}
+	
+	@Test
+	public void showTotalSeatTest() {
+		mapper.showTotalSeat();
+	}
+	
+	@Test
+	public void showCurrentSeatTest() {
+		mapper.showRemainedSeat();
 	}
 	
 }

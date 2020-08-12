@@ -1,8 +1,9 @@
 package org.gasan.service;
 
+import java.util.List;
+
 import org.gasan.domain.SeatVO;
 import org.gasan.domain.SelectedScheduleVO;
-import org.springframework.ui.Model;
 
 public interface SeatService {
 	
@@ -10,5 +11,4 @@ public interface SeatService {
 	
 	public void remove(SelectedScheduleVO selectedScheduleVO, SeatVO seatVO);
 	
-
 }

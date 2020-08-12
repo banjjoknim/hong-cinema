@@ -10,7 +10,7 @@
 <![CDATA[
 
 update seat set enabled = 'N' where theatercode = #{schedule.selectedTheaterNumber} 
-and schedulecode = #{schedule.selectedScheduleCode} and seat_row = #{seat.seatRow} and seat_column = #{seat.seatColumn}
+and schedulecode = #{schedule.selectedScheduleCode} and seat = #{seat.seat}
 
 ]]>
 
@@ -21,11 +21,27 @@ and schedulecode = #{schedule.selectedScheduleCode} and seat_row = #{seat.seatRo
 <![CDATA[
 
 update seat set enabled = 'Y' where theatercode = #{schedule.selectedTheaterNumber} 
-and schedulecode = #{schedule.selectedScheduleCode} and seat_row = #{seat.seatRow} and seat_column = #{seat.seatColumn}
+and schedulecode = #{schedule.selectedScheduleCode} and seat = #{seat.seat}
 
 ]]>
 
 </update> 
+
+<select id="showTotalSeat" resultType="int">
+
+<![CDATA[
+select count(*) from seat
+]]>
+
+</select>
+
+<select id="showRemainedSeat" resultType="int">
+
+<![CDATA[
+select count(*) from seat where enabled = 'Y' and scheduleCode = #{scheduleCode} 
+]]>
+
+</select>
 
 
  

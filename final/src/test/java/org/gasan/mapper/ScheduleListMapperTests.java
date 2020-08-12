@@ -19,11 +19,12 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class ScheduleListMapperTests {
 
-	private ScheduleListMapper listMapper;
+	private ScheduleListMapper mapper;
 
 
 	@Test
-	public void getScheduleByMovieTest() {//scheduleList는 이미 저장되어 있어야한다.
+	public void getScheduleTest() {//scheduleList는 이미 저장되어 있어야한다.
 
+		mapper.getScheduleListByName("라라랜드");
 	}
 }

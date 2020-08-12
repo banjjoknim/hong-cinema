@@ -842,6 +842,11 @@ outline: none;
 							alert("인원 수를 선택해주세요.");
 						}
 						if (totalCount != 0 && confirm("선택하신 좌석으로 예매를 진행하시겠습니까?")) {
+							if(selectedSeat.length != totalCount){
+								alert("인원수만큼 좌석을 선택해주세요.");
+								$("input[name=selectedSeatList]").remove();
+								return;
+							}
 							for(var i = 0; i<selectedSeat.length; i++){
 							var str = "";
 							str += '<input type="hidden" name="selectedSeatList" value="'+selectedSeat[i]+'">';
