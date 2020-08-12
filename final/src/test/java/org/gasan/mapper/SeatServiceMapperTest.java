@@ -45,12 +45,12 @@ public class SeatServiceMapperTest {
 	
 	@Test
 	public void showTotalSeatTest() {
-		mapper.showTotalSeat();
+		mapper.showRemainedSeat(1);
 	}
 	
 	@Test
-	public void showCurrentSeatTest() {
-		mapper.showRemainedSeat();
+	public void showRemainedSeatTest() {
+		mapper.showRemainedSeat(1);
 	}
 	
 }

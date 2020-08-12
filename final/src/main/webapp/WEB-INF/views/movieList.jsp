@@ -217,6 +217,7 @@ li.date {
 						<%-- <c:forEach items="${scheduleList }" var="schedule">
 							<li class="movieSchedule"><span
 								style="font-weight: bold; font-size: 160%">${schedule.movieName }</span>
+								<span style="float: right; font-size:110%">${remainedSeatCount }</span>
 								<span style="float: right; font-size: 110%"><span
 									class="startTime">${schedule.startTime }</span> ~ <span
 									class="endTime">${schedule.endTime }</span></span> <span
@@ -245,6 +246,8 @@ li.date {
 			console.log("dateCheck: "+dateCheck);
 			console.log("allCheck: "+allCheck);
 			console.log($("#selectedDate").val());
+			//$(".date").eq(0).addClass("selected");
+			
 			
 			//-----------------------------------------------------
 			getMovieByDate(function(list){
@@ -285,9 +288,11 @@ li.date {
 								for(var i = 0, len = list.length||0; i<len; i++){
 									console.log(list[i]);//콘솔에 리스트 출력.
 									
+									
 									str += '<li class="movieSchedule"><span class="movieName" ';
 									str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 									str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+									str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+0+'석</span>';
 									str += '<span style="float: right; font-size: 110%"><span ';
 									str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 									str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -331,6 +336,7 @@ li.date {
 						str += '<li class="movieSchedule"><span class="movieName" ';
 						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 						str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+						str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+0+'석</span>';
 						str += '<span style="float: right; font-size: 110%"><span ';
 						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 						str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -350,9 +356,11 @@ li.date {
 						for(var i = 0, len = list.length||0; i<len; i++){
 							console.log(list[i]);//콘솔에 리스트 출력.
 							
+							
 							str += '<li class="movieSchedule"><span class="movieName" ';
 							str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 							str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+							str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+0+'석</span>';
 							str += '<span style="float: right; font-size: 110%"><span ';
 							str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 							str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -399,9 +407,11 @@ li.date {
 							for(var i = 0, len = list.length||0; i<len; i++){
 								console.log(list[i]);//콘솔에 리스트 출력.
 								
+								
 								str += '<li class="movieSchedule"><span class="movieName" ';
 								str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 								str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+								str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+0+'석</span>';
 								str += '<span style="float: right; font-size: 110%"><span ';
 								str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 								str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -458,9 +468,11 @@ li.date {
 					for(var i = 0, len = list.length||0; i<len; i++){
 						console.log(list[i]);//콘솔에 리스트 출력.
 						
+						
 						str += '<li class="movieSchedule"><span class="movieName" ';
 						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 						str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+						str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+0+'석</span>';
 						str += '<span style="float: right; font-size: 110%"><span ';
 						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 						str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -499,9 +511,11 @@ li.date {
 						for(var i = 0, len = list.length||0; i<len; i++){
 							console.log(list[i]);//콘솔에 리스트 출력.
 							
+							
 							str += '<li class="movieSchedule"><span class="movieName" ';
 							str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 							str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+							str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+0+'석</span>';
 							str += '<span style="float: right; font-size: 110%"><span ';
 							str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 							str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -635,6 +649,20 @@ li.date {
 			}
 		});
 	}
+	
+	var count = function getRemainedSeatCount(scheduleCode, error){
+		
+			$.getJSON("/getRemainedSeatCount/"+scheduleCode,
+					function(data){
+						console.log(data);
+						return data;
+					}).fail(function(xhr, status, err) {
+					if (error) {
+						error();
+					}	
+				});
+			}
+	
 </script>
 
 
