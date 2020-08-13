@@ -51,6 +51,16 @@ select seat from seat where enabled = 'N' and scheduleCode = #{scheduleCode}
 
 </select>
 
+<update id="prevent">
+
+<![CDATA[
+
+update seat set enabled = 'N' where schedulecode = #{reservation.scheduleCode}
+
+]]>
+
+</update>
+
 
  
  

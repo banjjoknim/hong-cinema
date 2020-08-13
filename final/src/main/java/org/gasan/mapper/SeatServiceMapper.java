@@ -3,6 +3,7 @@ package org.gasan.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.gasan.domain.SeatReservationVO;
 import org.gasan.domain.SeatVO;
 import org.gasan.domain.SelectedScheduleVO;
 
@@ -18,4 +19,6 @@ public interface SeatServiceMapper {
 	public int showRemainedSeat(@Param("scheduleCode") int scheduleCode); 
 	
 	public List<SeatVO> showEnabledSeat(@Param("scheduleCode") int scheduleCode);
+	
+	public void prevent(@Param("reservation") SeatReservationVO seatReservationVO);
 }

@@ -89,21 +89,25 @@ public class GasanController {
 
 		model.addAttribute("schedule", selectedScheduleVO);
 		session.setAttribute("movie", selectedScheduleVO);
-		
 
 		log.info("getList .............. seatList");
 		log.info(selectedScheduleVO);
+		log.info(session.getAttribute("scheduleCode"));
 
 		return "seatList";
 	}
 
 	@PostMapping("/payment")
 	public String getPayment(SeatReservationVO seatReservationVO, HttpSession session, Model model) {
-
-		model.addAttribute("seatReservation", seatReservationVO);
+		
+		
 		log.info("payment");
 		log.info(seatReservationVO);
 		log.info(session.getAttribute("movie"));
+		
+		seatReservationVO.setScheduleCode((int) session.getAttribute("scheduleCode"));
+		seatService.prevent(seatReservationVO);
+		model.addAttribute("seatReservation", seatReservationVO);
 
 		return "payment";
 	}

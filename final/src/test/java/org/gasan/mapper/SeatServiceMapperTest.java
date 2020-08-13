@@ -1,7 +1,5 @@
 package org.gasan.mapper;
 
-import java.util.List;
-
 import org.gasan.domain.SeatVO;
 import org.gasan.domain.SelectedScheduleVO;
 import org.junit.Test;
@@ -20,6 +18,7 @@ public class SeatServiceMapperTest {
 	
 	@Setter(onMethod_ = @Autowired)
 	private SeatServiceMapper mapper;
+	
 
 	@Test
 	public void selectTest() {
@@ -51,6 +50,10 @@ public class SeatServiceMapperTest {
 	@Test
 	public void showRemainedSeatTest() {
 		mapper.showRemainedSeat(1);
+	}
+	
+	@Test
+	public void preventTest() {
 	}
 	
 }

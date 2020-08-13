@@ -3,6 +3,7 @@ package org.gasan.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gasan.domain.SeatReservationVO;
 import org.gasan.domain.SeatVO;
 import org.gasan.domain.SelectedScheduleVO;
 import org.gasan.mapper.SeatServiceMapper;
@@ -20,7 +21,7 @@ public class SeatServiceImpl implements SeatService {
 
 	@Setter(onMethod_ = @Autowired)
 	private SeatServiceMapper seatServiceMapper;
-	
+
 	@Override
 	public void select(SelectedScheduleVO selectedScheduleVO, SeatVO seatVO) {
 		List<SeatVO> selectedSeatList = new ArrayList<SeatVO>();
@@ -39,5 +40,18 @@ public class SeatServiceImpl implements SeatService {
 		selectedSeatList.remove(seatVO);
 	}
 
+	@Override
+	public void prevent(SeatReservationVO seatReservationVO) {
+
+		SelectedScheduleVO selectedScheduleVO = new SelectedScheduleVO();
+		SeatVO seatVO = new SeatVO();
+		for (int i = 0; i < seatReservationVO.getSelectedSeatList().size(); i++) {
+			if (seatReservationVO.getSelectedSeatList().get(i).equals("A5")) {
+				selectedScheduleVO.setSelectedScheduleCode(seatReservationVO.getScheduleCode());
+				seatVO.setSeat(seatReservationVO.getSelectedSeatList().get(i));
+				seatServiceMapper.prevent(seatReservationVO);
+			}
+		}
+	}
 
 }

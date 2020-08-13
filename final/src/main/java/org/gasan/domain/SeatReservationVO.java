@@ -13,5 +13,7 @@ public class SeatReservationVO {
 	private int totalPeople;
 	private int payAmount;
 	private List<String> selectedSeatList;
+	private int theaterCode;
+	private int scheduleCode;
 	
 }
