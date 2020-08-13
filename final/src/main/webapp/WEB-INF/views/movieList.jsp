@@ -248,6 +248,7 @@ li.date {
 			console.log($("#selectedDate").val());
 			//$(".date").eq(0).addClass("selected");
 			
+			console.log(count(1));
 			
 			//-----------------------------------------------------
 			getMovieByDate(function(list){
@@ -255,7 +256,7 @@ li.date {
 					var str = ""; 
 					
 					for(var i = 0, len = list.length||0; i<len; i++){
-						console.log(list[i]);//콘솔에 리스트 출력.
+						//console.log(list[i]);//콘솔에 리스트 출력.
 						
 						str += '<li class="movieTitle">'+list[i].movieName+'</li>'
 						
@@ -275,8 +276,8 @@ li.date {
 					  $("#selectedMovie").val("");
 					  movieCheck = false;
 					  allCheck = false;
-					  console.log("movieCheck: "+movieCheck);
-					  console.log("allCheck: "+allCheck);
+					  //console.log("movieCheck: "+movieCheck);
+					  //console.log("allCheck: "+allCheck);
 					  removeSchedule();
 					  
 					  if(dateCheck === true) {
@@ -286,13 +287,15 @@ li.date {
 								var str = "";
 								
 								for(var i = 0, len = list.length||0; i<len; i++){
-									console.log(list[i]);//콘솔에 리스트 출력.
+									//console.log(list[i]);//콘솔에 리스트 출력.
 									
+									var scheduleCode = list[i].scheduleCode;
+									console.log(scheduleCode);
 									
 									str += '<li class="movieSchedule"><span class="movieName" ';
 									str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 									str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
-									str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+0+'석</span>';
+									str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
 									str += '<span style="float: right; font-size: 110%"><span ';
 									str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 									str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -302,7 +305,7 @@ li.date {
 											
 									$("#scheduleUL").html(str);
 									movieCheck = false;
-									console.log(movieCheck);
+									//console.log(movieCheck);
 							});
 							//------------getScheduleByDate-------------------------
 						}
@@ -315,8 +318,8 @@ li.date {
 				      if(dateCheck === true){
 							allCheck = true;
 						}
-				      console.log("movieCheck: "+movieCheck);
-				      console.log("allCheck: "+allCheck);
+				      //console.log("movieCheck: "+movieCheck);
+				      //console.log("allCheck: "+allCheck);
 					}
 
 				
@@ -331,12 +334,15 @@ li.date {
 					var str = "";
 					
 					for(var i = 0, len = list.length||0; i<len; i++){
-						console.log(list[i]);//콘솔에 리스트 출력.
+						//console.log(list[i]);//콘솔에 리스트 출력.
+						
+						var scheduleCode = list[i].scheduleCode;
+									console.log(scheduleCode);
 						
 						str += '<li class="movieSchedule"><span class="movieName" ';
 						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 						str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
-						str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+0+'석</span>';
+						str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
 						str += '<span style="float: right; font-size: 110%"><span ';
 						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 						str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -354,13 +360,15 @@ li.date {
 						var str = "";
 						
 						for(var i = 0, len = list.length||0; i<len; i++){
-							console.log(list[i]);//콘솔에 리스트 출력.
+							//console.log(list[i]);//콘솔에 리스트 출력.
 							
+							var scheduleCode = list[i].scheduleCode;
+									console.log(scheduleCode);
 							
 							str += '<li class="movieSchedule"><span class="movieName" ';
 							str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 							str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
-							str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+0+'석</span>';
+							str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
 							str += '<span style="float: right; font-size: 110%"><span ';
 							str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 							str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -405,13 +413,15 @@ li.date {
 							var str = "";
 							
 							for(var i = 0, len = list.length||0; i<len; i++){
-								console.log(list[i]);//콘솔에 리스트 출력.
+								//console.log(list[i]);//콘솔에 리스트 출력.
 								
+								var scheduleCode = list[i].scheduleCode;
+									console.log(scheduleCode);
 								
 								str += '<li class="movieSchedule"><span class="movieName" ';
 								str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 								str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
-								str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+0+'석</span>';
+								str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
 								str += '<span style="float: right; font-size: 110%"><span ';
 								str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 								str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -466,13 +476,15 @@ li.date {
 					var str = "";
 					
 					for(var i = 0, len = list.length||0; i<len; i++){
-						console.log(list[i]);//콘솔에 리스트 출력.
+						//console.log(list[i]);//콘솔에 리스트 출력.
 						
+						var scheduleCode = list[i].scheduleCode;
+									console.log(scheduleCode);
 						
 						str += '<li class="movieSchedule"><span class="movieName" ';
 						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 						str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
-						str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+0+'석</span>';
+						str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
 						str += '<span style="float: right; font-size: 110%"><span ';
 						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 						str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -509,13 +521,15 @@ li.date {
 						var str = "";
 						
 						for(var i = 0, len = list.length||0; i<len; i++){
-							console.log(list[i]);//콘솔에 리스트 출력.
+							//console.log(list[i]);//콘솔에 리스트 출력.
 							
+							var scheduleCode = list[i].scheduleCode;
+									console.log(scheduleCode);
 							
 							str += '<li class="movieSchedule"><span class="movieName" ';
 							str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 							str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
-							str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+0+'석</span>';
+							str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
 							str += '<span style="float: right; font-size: 110%"><span ';
 							str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
 							str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
@@ -651,17 +665,21 @@ li.date {
 	}
 	
 	var count = function getRemainedSeatCount(scheduleCode, error){
+		var seatCount;
 		
-			$.getJSON("/getRemainedSeatCount/"+scheduleCode,
-					function(data){
-						console.log(data);
-						return data;
-					}).fail(function(xhr, status, err) {
-					if (error) {
-						error();
-					}	
-				});
-			}
+			$.ajax({
+					url: "/getRemainedSeatCount/"+scheduleCode+".json",
+					type: 'get',
+					dataType: 'text',
+					async: false,
+					success: function(data){
+						seatCount =  data;
+				}
+			});
+			return seatCount;
+	}
+	
+	
 	
 </script>
 
