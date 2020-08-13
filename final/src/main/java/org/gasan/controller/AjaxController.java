@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.gasan.domain.MovieVO;
 import org.gasan.domain.ScheduleVO;
+import org.gasan.domain.SeatVO;
 import org.gasan.mapper.SeatServiceMapper;
 import org.gasan.service.ListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,11 @@ public class AjaxController {
 	public ResponseEntity<Integer> getRemainedSeatCount(@PathVariable("scheduleCode") int scheduleCode) {
 		
 		return new ResponseEntity<>(seatServiceMapper.showRemainedSeat(scheduleCode), HttpStatus.OK);
+	}
+	
+	@GetMapping("/getEnabledSeatList/{scheduleCode}")
+	public ResponseEntity<List<SeatVO>> getEnabledSeat(@PathVariable("scheduleCode") int scheduleCode) {
+		
+		return new ResponseEntity<>(seatServiceMapper.showEnabledSeat(scheduleCode), HttpStatus.OK);
 	}
 }

@@ -5,7 +5,7 @@
 
 <mapper namespace="org.gasan.mapper.ScheduleListMapper">
 
-<resultMap type="org.gasan.domain.ScheduleVO" id="ScheduleMap">
+<resultMap type="org.gasan.domain.ScheduleVO" id="Schedule">
 <result column="scheduleCode" property="scheduleCode" javaType="int"/>
 <result column="theaterCode" property="theaterCode" javaType="int"/>
 <result column="movieCode" property="movieCode" javaType="int"/>
@@ -14,13 +14,13 @@
 <result column="endTime" property="endTime" javaType="String"/>
 </resultMap>
 
-<resultMap type="org.gasan.domain.TheaterVO" id="TheaterMap">
+<resultMap type="org.gasan.domain.TheaterVO" id="Theater">
 <result property="theaterCode" column="theaterCode" javaType="int"/>
 <result property="totalSeatCount" column="totalSeatCount" javaType="int"/>
 <result property="currentSeatCount" column="currentSeatCount" javaType="int"/>
 </resultMap>
 
-<resultMap type="org.gasan.domain.MovieVO" id="MovieMap">
+<resultMap type="org.gasan.domain.MovieVO" id="Movie">
 <result property="movieCode" column="movieCode" javaType="int"/>
 <result property="movieName" column="movieName" javaType="String"/>
 <result property="genre" column="genre" javaType="String"/>

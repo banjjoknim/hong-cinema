@@ -183,6 +183,13 @@ div.seatRow button.selected{
 background-color: crimson;
 outline: none;
 }
+
+div.seatRow button.reserved{
+cursor: default !important;
+outline: none;
+background-color: rgb(21,21,21) !important;
+}
+
 </style>
 </head>
 
@@ -291,31 +298,31 @@ outline: none;
 
 			<button type="button" class="row-A represent"
 				style="border: 2px solid black; left: 20px;">A</button>
-			<button type="button" class="row-A col-1"
+			<button type="button" class="row-A col-1 seat"
 				style="border: 2px solid black;" value="A1">1</button>
-			<button type="button" class="row-A col-2"
+			<button type="button" class="row-A col-2 seat"
 				style="border: 2px solid black;" value="A2">2</button>
 			<!-- <button type="button" class="row-A col-3" style=" border: 2px solid black;">3</button>
             <button type="button" class="row-A col-4" style=" border: 2px solid black;">4</button> -->
-			<button type="button" class="row-A col-5"
+			<button type="button" class="row-A col-5 seat"
 				style="border: 2px solid black;" value="A5">5</button>
-			<button type="button" class="row-A col-6"
+			<button type="button" class="row-A col-6 seat"
 				style="border: 2px solid black;" value="A6">6</button>
-			<button type="button" class="row-A col-7"
+			<button type="button" class="row-A col-7 seat"
 				style="border: 2px solid black;" value="A7">7</button>
-			<button type="button" class="row-A col-8"
+			<button type="button" class="row-A col-8 seat"
 				style="border: 2px solid black;" value="A8">8</button>
-			<button type="button" class="row-A col-9"
+			<button type="button" class="row-A col-9 seat"
 				style="border: 2px solid black;" value="A9">9</button>
-			<button type="button" class="row-A col-10"
+			<button type="button" class="row-A col-10 seat"
 				style="border: 2px solid black;" value="A10">10</button>
-			<button type="button" class="row-A col-11"
+			<button type="button" class="row-A col-11 seat"
 				style="border: 2px solid black;" value="A11">11</button>
-			<button type="button" class="row-A col-12"
+			<button type="button" class="row-A col-12 seat"
 				style="border: 2px solid black;" value="A12">12</button>
-			<button type="button" class="row-A col-13"
+			<button type="button" class="row-A col-13 seat"
 				style="border: 2px solid black;" value="A13">13</button>
-			<button type="button" class="row-A col-14"
+			<button type="button" class="row-A col-14 seat"
 				style="border: 2px solid black;" value="A14">14</button>
 			<!-- <button type="button" class="row-A col-15" style=" border: 2px solid black;">15</button>
             <button type="button" class="row-A col-16" style=" border: 2px solid black;">16</button>
@@ -327,32 +334,32 @@ outline: none;
 
 			<button type="button" class="row-B represent"
 				style="border: 2px solid black; left: 20px;">B</button>
-			<button type="button" class="row-B col-1"
-				style="border: 2px solid black;">1</button>
-			<button type="button" class="row-B col-2"
-				style="border: 2px solid black;">2</button>
+			<button type="button" class="row-B col-1 seat"
+				style="border: 2px solid black;" value="B1">1</button>
+			<button type="button" class="row-B col-2 seat"
+				style="border: 2px solid black;" value="B2">2</button>
 			<!-- <button type="button" class="row-B col-3" style=" border: 2px solid black;">3</button>
             <button type="button" class="row-B col-4" style=" border: 2px solid black;">4</button> -->
-			<button type="button" class="row-B col-5"
-				style="border: 2px solid black;">5</button>
-			<button type="button" class="row-B col-6"
-				style="border: 2px solid black;">6</button>
-			<button type="button" class="row-B col-7"
-				style="border: 2px solid black;">7</button>
-			<button type="button" class="row-B col-8"
-				style="border: 2px solid black;">8</button>
-			<button type="button" class="row-B col-9"
-				style="border: 2px solid black;">9</button>
-			<button type="button" class="row-B col-10"
-				style="border: 2px solid black;">10</button>
-			<button type="button" class="row-B col-11"
-				style="border: 2px solid black;">11</button>
-			<button type="button" class="row-B col-12"
-				style="border: 2px solid black;">12</button>
-			<button type="button" class="row-B col-13"
-				style="border: 2px solid black;">13</button>
-			<button type="button" class="row-B col-14"
-				style="border: 2px solid black;">14</button>
+			<button type="button" class="row-B col-5 seat"
+				style="border: 2px solid black;" value="B5">5</button>
+			<button type="button" class="row-B col-6 seat"
+				style="border: 2px solid black;" value="B6">6</button>
+			<button type="button" class="row-B col-7 seat"
+				style="border: 2px solid black;" value="B7">7</button>
+			<button type="button" class="row-B col-8 seat"
+				style="border: 2px solid black;" value="B8">8</button>
+			<button type="button" class="row-B col-9 seat"
+				style="border: 2px solid black;" value="B9">9</button>
+			<button type="button" class="row-B col-10 seat"
+				style="border: 2px solid black;" value="B10">10</button>
+			<button type="button" class="row-B col-11 seat"
+				style="border: 2px solid black;" value="B11">11</button>
+			<button type="button" class="row-B col-12 seat"
+				style="border: 2px solid black;" value="B12">12</button>
+			<button type="button" class="row-B col-13 seat"
+				style="border: 2px solid black;" value="B13">13</button>
+			<button type="button" class="row-B col-14 seat"
+				style="border: 2px solid black;" value="B14">14</button>
 			<!-- <button type="button" class="row-B col-15" style=" border: 2px solid black;">15</button>
             <button type="button" class="row-B col-16" style=" border: 2px solid black;">16</button>
             <button type="button" class="row-B col-17" style=" border: 2px solid black;">17</button> -->
@@ -713,8 +720,8 @@ outline: none;
 				</div>
 				<div>
 					<div style="float: left; margin-top: 25px; padding: 0 30px;">
-						성인 <span class="adultType"></span> 명 청소년 <span class="youthType"></span>
-						명 우대 <span class="preferentialType"></span> 명
+						성인 <span class="adultType">0</span> 명 청소년 <span class="youthType">0</span>
+						명 우대 <span class="preferentialType">0</span> 명
 					</div>
 					<div
 						style="clear: both; padding: 0 30px; margin-top: 20px; font-size: 140%;">
@@ -740,8 +747,7 @@ outline: none;
 		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 		crossorigin="anonymous"></script>
 	<script>
-		$(document).ready(
-				function() {
+		$(document).ready(function() {
 
 					var reservationFrm = $("form[name=reservationFrm]");
 					
@@ -754,6 +760,9 @@ outline: none;
 					var preferentialNumber = $(".preferentialType").html();
 					var preferentialCount = Number(preferentialNumber);
 					
+					console.log("총 좌석 수 : "+$(".seat").length);
+					console.log("예약된 좌석 수 : "+$(".reserved").length);
+					console.log($(".seat").eq(0).val());
 
 					//---------------버튼 누를시 고객타입 숫자 변경-------------------------
 					$(".adultCountUp").on("click", function() {
@@ -867,6 +876,13 @@ outline: none;
 						var totalCount = adultCount + youthCount + preferentialCount;
 						var selectedSeatList = $("#selectedSeatList");
 						
+						if($(this).hasClass("reserved")){
+							event.preventDefault();
+							alert("이미 예매된 좌석입니다.");
+							return;
+						}
+						
+						
 						if(totalCount == 0){
 							event.preventDefault();
 							alert("인원 수를 선택해주세요.");
@@ -934,18 +950,31 @@ outline: none;
 								}
 						
 					}
+						
+						
+						
 					});
 					
 					//-----------------좌석 클릭하면 오른쪽 목록에 나오게 하기------------
 					
 					//-----------------오른쪽 목록에 좌석버튼 클릭하면 없애기-----------------
 					$(document).on("click",".selectedSeat", function(){
-						alert($(this));
+						//alert($(this));
 						var selectedSeatList = $("#selectedSeatList");
 					
 					for(var i = 0; i<selectedSeat.length; i++){
+						
+						for(var j = 0; j<$(".seat").length; j++){
+							if($(this).val() === $(".seat").eq(j).val()){
+								$(".seat").eq(j).removeClass("selected");
+								$(".seat").eq(j).html($(this).val().substring(1));
+								console.log("목록에서 취소한 좌석 : "+$(".seat").eq(j).val());
+							}
+						}
+						
 						if(selectedSeat[i] === $(this).val()){
 							selectedSeat.splice(i,1);
+							
 							console.log("취소한 좌석 번호 : "+$(this).val());
 						}
 					}
@@ -961,6 +990,36 @@ outline: none;
 					
 					//-----------------오른쪽 목록에 좌석 클릭하면 없애기-----------------
 					
+					//-----------------DB반영된 좌석표 출력--------------------------
+				
+				
+					var getEnabledSeatList = function(scheduleCode, callback){
+						
+						$.ajax({
+							url: "/getEnabledSeatList/"+scheduleCode+".json",
+							type: "get",
+							dataType: "json",
+							success: function(data){
+								callback(data);
+							}
+						});
+					};
+				
+					 getEnabledSeatList(1, function(list){
+						for(var i = 0; i<list.length; i++){
+							for(var j = 0; j<$(".seat").length; j++){
+								if(list[i].seat === $(".seat").eq(j).val()){
+									$(".seat").eq(j).addClass("reserved");
+									$(".seat").eq(j).html("");
+									console.log("예매처리된 좌석 : "+$(".seat").eq(j).val());
+								}
+							}
+						}
+					});
+				
+				
+				
+				    //------------------------------------------------------------
 					
 
 				});

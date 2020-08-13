@@ -43,6 +43,14 @@ select count(*) from seat where enabled = 'Y' and scheduleCode = #{scheduleCode}
 
 </select>
 
+<select id="showEnabledSeat" resultType="org.gasan.domain.SeatVO">
+
+<![CDATA[
+select seat from seat where enabled = 'N' and scheduleCode = #{scheduleCode} 
+]]>
+
+</select>
+
 
  
  

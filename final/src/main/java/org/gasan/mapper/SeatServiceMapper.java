@@ -16,4 +16,6 @@ public interface SeatServiceMapper {
 	//public int showTotalSeat();
 	
 	public int showRemainedSeat(@Param("scheduleCode") int scheduleCode); 
+	
+	public List<SeatVO> showEnabledSeat(@Param("scheduleCode") int scheduleCode);
 }
