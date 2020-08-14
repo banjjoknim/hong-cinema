@@ -2,16 +2,22 @@ package org.gasan.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.gasan.domain.MovieVO;
 import org.gasan.domain.ScheduleVO;
+import org.gasan.domain.SeatReservationVO;
 import org.gasan.domain.SeatVO;
 import org.gasan.mapper.SeatServiceMapper;
 import org.gasan.service.ListService;
+import org.gasan.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +35,9 @@ public class AjaxController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private SeatServiceMapper seatServiceMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private SeatService seatService;
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
@@ -67,4 +76,19 @@ public class AjaxController {
 		
 		return new ResponseEntity<>(seatServiceMapper.showEnabledSeat(scheduleCode), HttpStatus.OK);
 	}
+	
+	@GetMapping("/reservationCancel")
+	public void reservationCancel(HttpSession session, Model model) throws Exception {
+		
+		log.info("cancel.................................");
+		log.info(session.getAttribute("seatReservation"));
+		
+		seatService.reserveCancel((SeatReservationVO) session.getAttribute("seatReservation"));
+		
+		session.removeAttribute("seatReservation");
+		session.removeAttribute("movie");
+		session.removeAttribute("scheduleCode");
+
+	}
+	
 }

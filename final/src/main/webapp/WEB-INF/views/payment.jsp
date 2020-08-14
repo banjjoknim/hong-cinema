@@ -240,12 +240,51 @@
     <!-- paymentBox end -->
         <!-- decision button start -->
         <div style="clear: both; margin: 0 auto; width: 280px;">
-        <button type="button" class="btn btn-info"
+        <button type="button" class="btn btn-info" id="pay"
             style="padding: 15px 25px; font-size: 150%;">결제하기</button>
-        <button type="button" class="btn btn-primary"
+        <button type="button" class="btn btn-primary" id="cancel"
             style="padding: 15px 25px; font-size: 150%;">취소</button>
         </div>
         <!-- decision button end -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+		crossorigin="anonymous"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			
+			var timeoutCancel = setTimeout(function(){
+				reservationCancel();
+			}, 1000*5 // 5초 후에 예약취소.
+			);			
+			
+			var reservationCancel = function(){
+			
+				$.ajax({
+					url: "/reservationCancel",
+					type: "get",
+					success: function(){
+						alert("결제를 취소하셨습니다.");
+						window.location.replace("http://localhost:8080/movieList");
+					}
+				});
+			}
+			
+			$("#cancel").on("click", function(){
+				reservationCancel();
+			});
+			
+			$("#pay").on("click", function(){
+					
+			});
+			
+			
+			
+			
+			
+			
+		});
+		//$(document).ready(function(){ end
+		</script>
 </body>
 
 </html>

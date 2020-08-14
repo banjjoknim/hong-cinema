@@ -37,7 +37,7 @@ public class SeatServiceMapperTest {
 			SeatVO seat = new SeatVO();
 			SeatReservationVO seatReservationVO = new SeatReservationVO();
 			seatReservationVO.setScheduleCode(1);
-			seat.setSeat("A1");
+			seat.setSeat("A6");
 			mapper.reserveSeatCancel(seatReservationVO, seat);
 		}
 	}
