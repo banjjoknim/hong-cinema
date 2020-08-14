@@ -5,28 +5,6 @@
   
  <mapper namespace="org.gasan.mapper.SeatServiceMapper">
  
-<update id="select">
-
-<![CDATA[
-
-update seat set enabled = 'N' where theatercode = #{schedule.selectedTheaterNumber} 
-and schedulecode = #{schedule.selectedScheduleCode} and seat = #{seat.seat}
-
-]]>
-
-</update>
-
-<update id="delete">
-
-<![CDATA[
-
-update seat set enabled = 'Y' where theatercode = #{schedule.selectedTheaterNumber} 
-and schedulecode = #{schedule.selectedScheduleCode} and seat = #{seat.seat}
-
-]]>
-
-</update> 
-
 <select id="showTotalSeat" resultType="int">
 
 <![CDATA[
@@ -51,7 +29,7 @@ select seat from seat where enabled = 'N' and scheduleCode = #{scheduleCode}
 
 </select>
 
-<update id="prevent">
+<update id="reserveSeat">
 
 <![CDATA[
 
@@ -61,7 +39,15 @@ update seat set enabled = 'N' where schedulecode = #{reservation.scheduleCode} a
 
 </update>
 
+<update id="reserveSeatCancel">
 
+<![CDATA[
+
+update seat set enabled = 'Y' where schedulecode = #{reservation.scheduleCode} and seat = #{seat.seat}
+
+]]>
+
+</update>
  
  
  </mapper>

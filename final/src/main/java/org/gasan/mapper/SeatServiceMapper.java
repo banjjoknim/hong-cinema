@@ -9,16 +9,11 @@ import org.gasan.domain.SelectedScheduleVO;
 
 public interface SeatServiceMapper {
 
-	public void select(@Param("schedule") SelectedScheduleVO selectedScheduleVO, @Param("seat") SeatVO seatVO);
-
-
-	public void delete(@Param("schedule") SelectedScheduleVO selectedScheduleVO, @Param("seat") SeatVO seatVO);
-	
-	//public int showTotalSeat();
-	
 	public int showRemainedSeat(@Param("scheduleCode") int scheduleCode); 
 	
 	public List<SeatVO> showEnabledSeat(@Param("scheduleCode") int scheduleCode);
 	
-	public void prevent(@Param("reservation") SeatReservationVO seatReservationVO, @Param("seat") SeatVO seatVO);
+	public void reserveSeat(@Param("reservation") SeatReservationVO seatReservationVO, @Param("seat") SeatVO seatVO);
+	
+	public void reserveSeatCancel(@Param("reservation") SeatReservationVO seatReservationVO, @Param("seat") SeatVO seatVO);
 }

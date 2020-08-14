@@ -93,10 +93,10 @@ public class GasanController {
 		cal.setTime(sdf.parse(selectedScheduleVO.getSelectedDate()));
 		String[] weekDay = new String[] {"일", "월", "화", "수", "목", "금", "토"};
 		
-		model.addAttribute("schedule", selectedScheduleVO);
 		session.setAttribute("movie", selectedScheduleVO);
 		session.setAttribute("scheduleCode", selectedScheduleVO.getSelectedScheduleCode());
-		model.addAttribute("dayOfWeek", weekDay[cal.get(Calendar.DAY_OF_WEEK)+1]);
+		model.addAttribute("schedule", selectedScheduleVO);
+		model.addAttribute("dayOfWeek", weekDay[cal.get(Calendar.DAY_OF_WEEK)-1]);
 		
 		log.info("getList .............. seatList");
 		log.info(selectedScheduleVO);
@@ -115,7 +115,7 @@ public class GasanController {
 		seatReservationVO.setScheduleCode((int) session.getAttribute("scheduleCode"));
 		log.info(seatReservationVO);
 		
-		seatService.preventReservation(seatReservationVO);
+		seatService.reserve(seatReservationVO);
 		model.addAttribute("seatReservation", seatReservationVO);
 
 		return "payment";

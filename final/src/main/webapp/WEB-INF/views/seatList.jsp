@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -179,17 +179,17 @@ div.selectType button {
 	cursor: pointer;
 	border: solid 1px gray;
 }
-div.seatRow button.selected{
-background-color: crimson;
-outline: none;
+
+div.seatRow button.selected {
+	background-color: crimson;
+	outline: none;
 }
 
-div.seatRow button.reserved{
-cursor: default !important;
-outline: none;
-background-color: rgb(21,21,21) !important;
+div.seatRow button.reserved {
+	cursor: default !important;
+	outline: none;
+	background-color: rgb(21, 21, 21) !important;
 }
-
 </style>
 </head>
 
@@ -273,394 +273,91 @@ background-color: rgb(21,21,21) !important;
 	<!-- selectType end -->
 
 	<!-- reservationBox -->
-	<form:form modelAttribute="SeatReservationVO" name="reservationFrm" action="/payment" method="post">
-	<%-- <form name="seatFrm" action="/payment"> --%>
-		<input type="hidden" name="adultType" value="0"> <input
-			type="hidden" name="youthType" value="0"> <input type="hidden"
-			name="preferentialType" value="0">
-			<input type="hidden" name="totalPeople" value="0">
-			<input type="hidden" name="payAmount" value="0">
-			
-	<%-- </form> --%>
+	<form:form modelAttribute="SeatReservationVO" name="reservationFrm"
+		action="/payment" method="post">
+		<%-- <form name="seatFrm" action="/payment"> --%>
+		<input type="hidden" name="adultType" value="0">
+		<input type="hidden" name="youthType" value="0">
+		<input type="hidden" name="preferentialType" value="0">
+		<input type="hidden" name="totalPeople" value="0">
+		<input type="hidden" name="payAmount" value="0">
+
+		<%-- </form> --%>
 	</form:form>
 	<div class="reservationBox"
 		style="margin: 0 auto; width: 900px; height: 555px;">
 
 
-
+		<%
+			String[] row = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"};
+		%>
 
 		<div class="seatRow"
 			style="padding: 0 100px; width: 560px; height: 555px; background-color: rgb(80, 80, 80); float: left;">
 
 			<h3 style="margin-left: 150px; color: white; margin-top: 30px;">SCREEN</h3>
 
-			<!-- row A start -->
+			<!-- row start -->
 
-			<button type="button" class="row-A represent"
-				style="border: 2px solid black; left: 20px;">A</button>
-			<button type="button" class="row-A col-1 seat"
-				style="border: 2px solid black;" value="A1">1</button>
-			<button type="button" class="row-A col-2 seat"
-				style="border: 2px solid black;" value="A2">2</button>
-			<!-- <button type="button" class="row-A col-3" style=" border: 2px solid black;">3</button>
-            <button type="button" class="row-A col-4" style=" border: 2px solid black;">4</button> -->
-			<button type="button" class="row-A col-5 seat"
-				style="border: 2px solid black;" value="A5">5</button>
-			<button type="button" class="row-A col-6 seat"
-				style="border: 2px solid black;" value="A6">6</button>
-			<button type="button" class="row-A col-7 seat"
-				style="border: 2px solid black;" value="A7">7</button>
-			<button type="button" class="row-A col-8 seat"
-				style="border: 2px solid black;" value="A8">8</button>
-			<button type="button" class="row-A col-9 seat"
-				style="border: 2px solid black;" value="A9">9</button>
-			<button type="button" class="row-A col-10 seat"
-				style="border: 2px solid black;" value="A10">10</button>
-			<button type="button" class="row-A col-11 seat"
-				style="border: 2px solid black;" value="A11">11</button>
-			<button type="button" class="row-A col-12 seat"
-				style="border: 2px solid black;" value="A12">12</button>
-			<button type="button" class="row-A col-13 seat"
-				style="border: 2px solid black;" value="A13">13</button>
-			<button type="button" class="row-A col-14 seat"
-				style="border: 2px solid black;" value="A14">14</button>
-			<!-- <button type="button" class="row-A col-15" style=" border: 2px solid black;">15</button>
-            <button type="button" class="row-A col-16" style=" border: 2px solid black;">16</button>
-            <button type="button" class="row-A col-17" style=" border: 2px solid black;">17</button> -->
-
+			<%
+				for (int j = 0; j < 10; j++) {
+					if(j == 6 || j == 7){
+						continue;
+					}
+			%>
+			<button type="button" class="row-<%=row[j] %> represent"
+				style="border: 2px solid black; left: 20px;"><%=row[j] %></button>
+			<%
+				for (int i = 0; i < 14; i++) {
+				if (i == 2 || i == 3) {
+				} else {
+			%>
+			<button type="button" class="row-<%=row[j]%> col-<%=i + 1%> seat"
+				style="border: 2px solid black;" value="<%=row[j]%><%=i + 1%>"><%=i + 1%></button>
+			<%
+				}
+			}
+			}
+			%>
 			<!-- row A end -->
 
 			<!-- row B start -->
-
-			<button type="button" class="row-B represent"
-				style="border: 2px solid black; left: 20px;">B</button>
-			<button type="button" class="row-B col-1 seat"
-				style="border: 2px solid black;" value="B1">1</button>
-			<button type="button" class="row-B col-2 seat"
-				style="border: 2px solid black;" value="B2">2</button>
-			<!-- <button type="button" class="row-B col-3" style=" border: 2px solid black;">3</button>
-            <button type="button" class="row-B col-4" style=" border: 2px solid black;">4</button> -->
-			<button type="button" class="row-B col-5 seat"
-				style="border: 2px solid black;" value="B5">5</button>
-			<button type="button" class="row-B col-6 seat"
-				style="border: 2px solid black;" value="B6">6</button>
-			<button type="button" class="row-B col-7 seat"
-				style="border: 2px solid black;" value="B7">7</button>
-			<button type="button" class="row-B col-8 seat"
-				style="border: 2px solid black;" value="B8">8</button>
-			<button type="button" class="row-B col-9 seat"
-				style="border: 2px solid black;" value="B9">9</button>
-			<button type="button" class="row-B col-10 seat"
-				style="border: 2px solid black;" value="B10">10</button>
-			<button type="button" class="row-B col-11 seat"
-				style="border: 2px solid black;" value="B11">11</button>
-			<button type="button" class="row-B col-12 seat"
-				style="border: 2px solid black;" value="B12">12</button>
-			<button type="button" class="row-B col-13 seat"
-				style="border: 2px solid black;" value="B13">13</button>
-			<button type="button" class="row-B col-14 seat"
-				style="border: 2px solid black;" value="B14">14</button>
-			<!-- <button type="button" class="row-B col-15" style=" border: 2px solid black;">15</button>
-            <button type="button" class="row-B col-16" style=" border: 2px solid black;">16</button>
-            <button type="button" class="row-B col-17" style=" border: 2px solid black;">17</button> -->
 
 			<!-- row B end -->
 
 			<!-- row C start -->
 
-			<button type="button" class="row-C represent"
-				style="border: 2px solid black; left: 20px;">C</button>
-			<button type="button" class="row-C col-1"
-				style="border: 2px solid black;">1</button>
-			<button type="button" class="row-C col-2"
-				style="border: 2px solid black;">2</button>
-			<!-- <button type="button" class="row-A col-3" style=" border: 2px solid black;">3</button>
-            <button type="button" class="row-A col-4" style=" border: 2px solid black;">4</button> -->
-			<button type="button" class="row-C col-5"
-				style="border: 2px solid black;">5</button>
-			<button type="button" class="row-C col-6"
-				style="border: 2px solid black;">6</button>
-			<button type="button" class="row-C col-7"
-				style="border: 2px solid black;">7</button>
-			<button type="button" class="row-C col-8"
-				style="border: 2px solid black;">8</button>
-			<button type="button" class="row-C col-9"
-				style="border: 2px solid black;">9</button>
-			<button type="button" class="row-C col-10"
-				style="border: 2px solid black;">10</button>
-			<button type="button" class="row-C col-11"
-				style="border: 2px solid black;">11</button>
-			<button type="button" class="row-C col-12"
-				style="border: 2px solid black;">12</button>
-			<button type="button" class="row-C col-13"
-				style="border: 2px solid black;">13</button>
-			<button type="button" class="row-C col-14"
-				style="border: 2px solid black;">14</button>
-			<!-- <button type="button" class="row-A col-15" style=" border: 2px solid black;">15</button>
-            <button type="button" class="row-A col-16" style=" border: 2px solid black;">16</button>
-            <button type="button" class="row-A col-17" style=" border: 2px solid black;">17</button> -->
-
 			<!-- row C end -->
 
 			<!-- row D start -->
-
-			<button type="button" class="row-D represent"
-				style="border: 2px solid black; left: 20px;">D</button>
-			<button type="button" class="row-D col-1"
-				style="border: 2px solid black;">1</button>
-			<button type="button" class="row-D col-2"
-				style="border: 2px solid black;">2</button>
-			<!-- <button type="button" class="row-A col-3" style=" border: 2px solid black;">3</button>
-            <button type="button" class="row-A col-4" style=" border: 2px solid black;">4</button> -->
-			<button type="button" class="row-D col-5"
-				style="border: 2px solid black;">5</button>
-			<button type="button" class="row-D col-6"
-				style="border: 2px solid black;">6</button>
-			<button type="button" class="row-D col-7"
-				style="border: 2px solid black;">7</button>
-			<button type="button" class="row-D col-8"
-				style="border: 2px solid black;">8</button>
-			<button type="button" class="row-D col-9"
-				style="border: 2px solid black;">9</button>
-			<button type="button" class="row-D col-10"
-				style="border: 2px solid black;">10</button>
-			<button type="button" class="row-D col-11"
-				style="border: 2px solid black;">11</button>
-			<button type="button" class="row-D col-12"
-				style="border: 2px solid black;">12</button>
-			<button type="button" class="row-D col-13"
-				style="border: 2px solid black;">13</button>
-			<button type="button" class="row-D col-14"
-				style="border: 2px solid black;">14</button>
-			<!-- <button type="button" class="row-A col-15" style=" border: 2px solid black;">15</button>
-            <button type="button" class="row-A col-16" style=" border: 2px solid black;">16</button>
-            <button type="button" class="row-A col-17" style=" border: 2px solid black;">17</button> -->
 
 			<!-- row D end -->
 
 			<!-- row E start -->
 
-			<button type="button" class="row-E represent"
-				style="border: 2px solid black; left: 20px;">E</button>
-			<button type="button" class="row-E col-1"
-				style="border: 2px solid black;">1</button>
-			<button type="button" class="row-E col-2"
-				style="border: 2px solid black;">2</button>
-			<!-- <button type="button" class="row-A col-3" style=" border: 2px solid black;">3</button>
-            <button type="button" class="row-A col-4" style=" border: 2px solid black;">4</button> -->
-			<button type="button" class="row-E col-5"
-				style="border: 2px solid black;">5</button>
-			<button type="button" class="row-E col-6"
-				style="border: 2px solid black;">6</button>
-			<button type="button" class="row-E col-7"
-				style="border: 2px solid black;">7</button>
-			<button type="button" class="row-E col-8"
-				style="border: 2px solid black;">8</button>
-			<button type="button" class="row-E col-9"
-				style="border: 2px solid black;">9</button>
-			<button type="button" class="row-E col-10"
-				style="border: 2px solid black;">10</button>
-			<button type="button" class="row-E col-11"
-				style="border: 2px solid black;">11</button>
-			<button type="button" class="row-E col-12"
-				style="border: 2px solid black;">12</button>
-			<button type="button" class="row-E col-13"
-				style="border: 2px solid black;">13</button>
-			<button type="button" class="row-E col-14"
-				style="border: 2px solid black;">14</button>
-			<!-- <button type="button" class="row-A col-15" style=" border: 2px solid black;">15</button>
-            <button type="button" class="row-A col-16" style=" border: 2px solid black;">16</button>
-            <button type="button" class="row-A col-17" style=" border: 2px solid black;">17</button> -->
-
 			<!-- row E end -->
 
 			<!-- row F start -->
-
-			<!-- <button type="button" class="row-F represent" style=" border: 2px solid black; left: 20px;">F</button>
-            <button type="button" class="row-F col-1" style=" border: 2px solid black;">1</button>
-            <button type="button" class="row-F col-2" style=" border: 2px solid black;">2</button> -->
-			<!-- <button type="button" class="row-A col-3" style=" border: 2px solid black;">3</button>
-            <button type="button" class="row-A col-4" style=" border: 2px solid black;">4</button> -->
-			<!-- <button type="button" class="row-F col-5" style=" border: 2px solid black;">5</button>
-            <button type="button" class="row-F col-6" style=" border: 2px solid black;">6</button>
-            <button type="button" class="row-F col-7" style=" border: 2px solid black;">7</button>
-            <button type="button" class="row-F col-8" style=" border: 2px solid black;">8</button>
-            <button type="button" class="row-F col-9" style=" border: 2px solid black;">9</button>
-            <button type="button" class="row-F col-10" style=" border: 2px solid black;">10</button>
-            <button type="button" class="row-F col-11" style=" border: 2px solid black;">11</button>
-            <button type="button" class="row-F col-12" style=" border: 2px solid black;">12</button>
-            <button type="button" class="row-F col-13" style=" border: 2px solid black;">13</button>
-            <button type="button" class="row-F col-14" style=" border: 2px solid black;">14</button> -->
-			<!-- <button type="button" class="row-A col-15" style=" border: 2px solid black;">15</button>
-            <button type="button" class="row-A col-16" style=" border: 2px solid black;">16</button>
-            <button type="button" class="row-A col-17" style=" border: 2px solid black;">17</button> -->
 
 			<!-- row F end -->
 
 			<!-- row G start -->
 
-			<!-- <button type="button" class="row-G represent" style=" border: 2px solid black; left: 20px;">G</button>
-            <button type="button" class="row-G col-1" style=" border: 2px solid black;">1</button>
-            <button type="button" class="row-G col-2" style=" border: 2px solid black;">2</button> -->
-			<!-- <button type="button" class="row-A col-3" style=" border: 2px solid black;">3</button>
-            <button type="button" class="row-A col-4" style=" border: 2px solid black;">4</button> -->
-			<!-- <button type="button" class="row-G col-5" style=" border: 2px solid black;">5</button>
-            <button type="button" class="row-G col-6" style=" border: 2px solid black;">6</button>
-            <button type="button" class="row-G col-7" style=" border: 2px solid black;">7</button>
-            <button type="button" class="row-G col-8" style=" border: 2px solid black;">8</button>
-            <button type="button" class="row-G col-9" style=" border: 2px solid black;">9</button>
-            <button type="button" class="row-G col-10" style=" border: 2px solid black;">10</button>
-            <button type="button" class="row-G col-11" style=" border: 2px solid black;">11</button>
-            <button type="button" class="row-G col-12" style=" border: 2px solid black;">12</button>
-            <button type="button" class="row-G col-13" style=" border: 2px solid black;">13</button>
-            <button type="button" class="row-G col-14" style=" border: 2px solid black;">14</button> -->
-			<!-- <button type="button" class="row-A col-15" style=" border: 2px solid black;">15</button>
-            <button type="button" class="row-A col-16" style=" border: 2px solid black;">16</button>
-            <button type="button" class="row-A col-17" style=" border: 2px solid black;">17</button> -->
-
 			<!-- row G end -->
 
 			<!-- row H start -->
-
-			<button type="button" class="row-H represent"
-				style="border: 2px solid black; left: 20px;">H</button>
-			<button type="button" class="row-H col-1"
-				style="border: 2px solid black;">1</button>
-			<button type="button" class="row-H col-2"
-				style="border: 2px solid black;">2</button>
-			<!-- <button type="button" class="row-A col-3" style=" border: 2px solid black;">3</button>
-            <button type="button" class="row-A col-4" style=" border: 2px solid black;">4</button> -->
-			<button type="button" class="row-H col-5"
-				style="border: 2px solid black;">5</button>
-			<button type="button" class="row-H col-6"
-				style="border: 2px solid black;">6</button>
-			<button type="button" class="row-H col-7"
-				style="border: 2px solid black;">7</button>
-			<button type="button" class="row-H col-8"
-				style="border: 2px solid black;">8</button>
-			<button type="button" class="row-H col-9"
-				style="border: 2px solid black;">9</button>
-			<button type="button" class="row-H col-10"
-				style="border: 2px solid black;">10</button>
-			<button type="button" class="row-H col-11"
-				style="border: 2px solid black;">11</button>
-			<button type="button" class="row-H col-12"
-				style="border: 2px solid black;">12</button>
-			<button type="button" class="row-H col-13"
-				style="border: 2px solid black;">13</button>
-			<button type="button" class="row-H col-14"
-				style="border: 2px solid black;">14</button>
-			<!-- <button type="button" class="row-A col-15" style=" border: 2px solid black;">15</button>
-            <button type="button" class="row-A col-16" style=" border: 2px solid black;">16</button>
-            <button type="button" class="row-A col-17" style=" border: 2px solid black;">17</button> -->
 
 			<!-- row H end -->
 
 			<!-- row I start -->
 
-			<button type="button" class="row-I represent"
-				style="border: 2px solid black; left: 20px;">I</button>
-			<button type="button" class="row-I col-1"
-				style="border: 2px solid black;">1</button>
-			<button type="button" class="row-I col-2"
-				style="border: 2px solid black;">2</button>
-			<!-- <button type="button" class="row-A col-3" style=" border: 2px solid black;">3</button>
-            <button type="button" class="row-A col-4" style=" border: 2px solid black;">4</button> -->
-			<button type="button" class="row-I col-5"
-				style="border: 2px solid black;">5</button>
-			<button type="button" class="row-I col-6"
-				style="border: 2px solid black;">6</button>
-			<button type="button" class="row-I col-7"
-				style="border: 2px solid black;">7</button>
-			<button type="button" class="row-I col-8"
-				style="border: 2px solid black;">8</button>
-			<button type="button" class="row-I col-9"
-				style="border: 2px solid black;">9</button>
-			<button type="button" class="row-I col-10"
-				style="border: 2px solid black;">10</button>
-			<button type="button" class="row-I col-11"
-				style="border: 2px solid black;">11</button>
-			<button type="button" class="row-I col-12"
-				style="border: 2px solid black;">12</button>
-			<button type="button" class="row-I col-13"
-				style="border: 2px solid black;">13</button>
-			<button type="button" class="row-I col-14"
-				style="border: 2px solid black;">14</button>
-			<!-- <button type="button" class="row-A col-15" style=" border: 2px solid black;">15</button>
-            <button type="button" class="row-A col-16" style=" border: 2px solid black;">16</button>
-            <button type="button" class="row-A col-17" style=" border: 2px solid black;">17</button> -->
-
 			<!-- row I end -->
 
 			<!-- row J start -->
 
-			<button type="button" class="row-J represent"
-				style="border: 2px solid black; left: 20px;">J</button>
-			<button type="button" class="row-J col-1"
-				style="border: 2px solid black;">1</button>
-			<button type="button" class="row-J col-2"
-				style="border: 2px solid black;">2</button>
-			<!-- <button type="button" class="row-A col-3" style=" border: 2px solid black;">3</button>
-            <button type="button" class="row-A col-4" style=" border: 2px solid black;">4</button> -->
-			<button type="button" class="row-J col-5"
-				style="border: 2px solid black;">5</button>
-			<button type="button" class="row-J col-6"
-				style="border: 2px solid black;">6</button>
-			<button type="button" class="row-J col-7"
-				style="border: 2px solid black;">7</button>
-			<button type="button" class="row-J col-8"
-				style="border: 2px solid black;">8</button>
-			<button type="button" class="row-J col-9"
-				style="border: 2px solid black;">9</button>
-			<button type="button" class="row-J col-10"
-				style="border: 2px solid black;">10</button>
-			<button type="button" class="row-J col-11"
-				style="border: 2px solid black;">11</button>
-			<button type="button" class="row-J col-12"
-				style="border: 2px solid black;">12</button>
-			<button type="button" class="row-J col-13"
-				style="border: 2px solid black;">13</button>
-			<button type="button" class="row-J col-14"
-				style="border: 2px solid black;">14</button>
-			<!-- <button type="button" class="row-A col-15" style=" border: 2px solid black;">15</button>
-            <button type="button" class="row-A col-16" style=" border: 2px solid black;">16</button>
-            <button type="button" class="row-A col-17" style=" border: 2px solid black;">17</button> -->
-
 			<!-- row J end -->
 
 			<!-- row K start -->
-
-			<button type="button" class="row-K represent"
-				style="border: 2px solid black; left: 20px;">K</button>
-			<button type="button" class="row-K col-1"
-				style="border: 2px solid black;">1</button>
-			<button type="button" class="row-K col-2"
-				style="border: 2px solid black;">2</button>
-			<!-- <button type="button" class="row-A col-3" style=" border: 2px solid black;">3</button>
-            <button type="button" class="row-A col-4" style=" border: 2px solid black;">4</button> -->
-			<button type="button" class="row-K col-5"
-				style="border: 2px solid black;">5</button>
-			<button type="button" class="row-K col-6"
-				style="border: 2px solid black;">6</button>
-			<button type="button" class="row-K col-7"
-				style="border: 2px solid black;">7</button>
-			<button type="button" class="row-K col-8"
-				style="border: 2px solid black;">8</button>
-			<button type="button" class="row-K col-9"
-				style="border: 2px solid black;">9</button>
-			<button type="button" class="row-K col-10"
-				style="border: 2px solid black;">10</button>
-			<button type="button" class="row-K col-11"
-				style="border: 2px solid black;">11</button>
-			<button type="button" class="row-K col-12"
-				style="border: 2px solid black;">12</button>
-			<button type="button" class="row-K col-13"
-				style="border: 2px solid black;">13</button>
-			<button type="button" class="row-K col-14"
-				style="border: 2px solid black;">14</button>
-			<!-- <button type="button" class="row-A col-15" style=" border: 2px solid black;">15</button>
-            <button type="button" class="row-A col-16" style=" border: 2px solid black;">16</button>
-            <button type="button" class="row-A col-17" style=" border: 2px solid black;">17</button> -->
 
 			<!-- row K end -->
 
@@ -682,9 +379,10 @@ background-color: rgb(21,21,21) !important;
 						style="width: 250px; height: 140px; border-bottom: 1px solid darkgrey; margin-left: 6px;">
 						<ul
 							style="list-style: none; float: left; margin-right: 15px; margin-left: 10px; padding: 10px 20px;">
-							<li class="theaterInfo">가산시네마</li>
+							<li class="theaterInfo">가산시네마<span class="scheduleCode" style="font-size: 0%;">${schedule.selectedScheduleCode }</span></li>
 							<li class="theaterInfo">${schedule.selectedTheaterNumber }관</li>
-							<li class="theaterInfo">${schedule.selectedDate.substring(4, 6) }.${schedule.selectedDate.substring(6, 8) } (${dayOfWeek })</li>
+							<li class="theaterInfo">${schedule.selectedDate.substring(4, 6) }.${schedule.selectedDate.substring(6, 8) }
+								(${dayOfWeek })</li>
 							<li class="theaterInfo">${schedule.selectedStartTime }~
 								${schedule.selectedEndTime }</li>
 						</ul>
@@ -698,7 +396,8 @@ background-color: rgb(21,21,21) !important;
 					<h3 style="margin-left: 35px;">선택좌석</h3>
 					<div
 						style="width: 250px; height: 120px; margin: 0 auto; border-bottom: 1px solid darkgrey; padding: 0 10px;">
-						<ul style="list-style: none; padding: 0px 15px;" id="selectedSeatList">
+						<ul style="list-style: none; padding: 0px 15px;"
+							id="selectedSeatList">
 							<!-- <li class="finalSeat"><button class="selectedSeat"
 									style="width: 40px; height: 40px; border: none;">A13</button></li>
 							<li class="finalSeat"><button class="selectedSeat"
@@ -749,280 +448,430 @@ background-color: rgb(21,21,21) !important;
 	<script>
 		$(document).ready(function() {
 
-					var reservationFrm = $("form[name=reservationFrm]");
-					
-					var selectedSeat = [];
+							var reservationFrm = $("form[name=reservationFrm]");
 
-					var adultNumber = $(".adultType").html();
-					var adultCount = Number(adultNumber);
-					var youthNumber = $(".youthType").html();
-					var youthCount = Number(youthNumber);
-					var preferentialNumber = $(".preferentialType").html();
-					var preferentialCount = Number(preferentialNumber);
-					
-					console.log("총 좌석 수 : "+$(".seat").length);
-					console.log("예약된 좌석 수 : "+$(".reserved").length);
-					console.log($(".seat").eq(0).val());
+							var selectedSeat = [];
 
-					//---------------버튼 누를시 고객타입 숫자 변경-------------------------
-					$(".adultCountUp").on("click", function() {
-						var totalCount = adultCount + youthCount + preferentialCount;
-						if(totalCount < 8){
-						adultCount = adultCount + 1;
-						$(".adultType").html(adultCount);
-						$("input[name=adultType]").val(adultCount);
-						//console.log(adultCount);
-						console.log($("input[name=adultType]").val());
-						} else {
-							alert("한 번에 최대 8개의 좌석까지 예매할 수 있습니다.");
-						}
-					});
-					$(".adultCountDown").on("click", function() {
-						if (adultCount > 0) {
-							adultCount = adultCount - 1;
-						}
-						$(".adultType").html(adultCount);
-						$("input[name=adultType]").val(adultCount);
-						//console.log(adultCount);
-					});
-					$(".youthCountUp").on("click", function() {
-						var totalCount = adultCount + youthCount + preferentialCount;
-						if(totalCount < 8){
-						youthCount = youthCount + 1;
-						$(".youthType").html(youthCount);
-						$("input[name=youthType]").val(youthCount);
-						//console.log(youthCount);
-						} else {
-							alert("한 번에 최대 8개의 좌석까지 예매할 수 있습니다.");
-						}
-					});
-					$(".youthCountDown").on("click", function() {
-						if (youthCount > 0) {
-							youthCount = youthCount - 1;
-						}
-						$(".youthType").html(youthCount);
-						$("input[name=youthType]").val(youthCount);
-						//console.log(youthCount);
-					});
-					$(".preferentialCountUp").on("click", function() {
-						var totalCount = adultCount + youthCount + preferentialCount;
-						if(totalCount < 8){
-								preferentialCount = preferentialCount + 1;
-								$(".preferentialType").html(preferentialCount);
-								$("input[name=preferentialType]").val(
-										preferentialCount);
-								//console.log(preferentialCount);
-						} else {
-							alert("한 번에 최대 8개의 좌석까지 예매할 수 있습니다.");
-						}
-							});
-					$(".preferentialCountDown").on(
-							"click",
-							function() {
-								if (preferentialCount > 0) {
-									preferentialCount = preferentialCount - 1;
+							var adultNumber = $(".adultType").html();
+							var adultCount = Number(adultNumber);
+							var youthNumber = $(".youthType").html();
+							var youthCount = Number(youthNumber);
+							var preferentialNumber = $(".preferentialType")
+									.html();
+							var preferentialCount = Number(preferentialNumber);
+
+							console.log("총 좌석 수 : " + $(".seat").length);
+							console.log("예약된 좌석 수 : " + $(".reserved").length);
+							console.log($(".seat").eq(0).val());
+							console.log($(".scheduleCode").html());
+							
+							var scheduleCode = $(".scheduleCode").html(); 
+							
+							$(".row-G").hide();
+							$(".row-H").hide();
+
+							//---------------버튼 누를시 고객타입 숫자 변경-------------------------
+							$(".adultCountUp")
+									.on(
+											"click",
+											function() {
+												var totalCount = adultCount
+														+ youthCount
+														+ preferentialCount;
+												if (totalCount < 8) {
+													adultCount = adultCount + 1;
+													$(".adultType").html(
+															adultCount);
+													$("input[name=adultType]")
+															.val(adultCount);
+													//console.log(adultCount);
+													console
+															.log($(
+																	"input[name=adultType]")
+																	.val());
+												} else {
+													alert("한 번에 최대 8개의 좌석까지 예매할 수 있습니다.");
+												}
+											});
+							$(".adultCountDown").on("click", function() {
+								if (adultCount > 0) {
+									adultCount = adultCount - 1;
 								}
-								$(".preferentialType").html(preferentialCount);
-								$("input[name=preferentialType]").val(
-										preferentialCount);
-								//console.log(preferentialCount);
+								$(".adultType").html(adultCount);
+								$("input[name=adultType]").val(adultCount);
+								//console.log(adultCount);
 							});
-					//---------------버튼 누를시 고객타입 숫자 변경-------------------------
-
-					//-------------------버튼 누를시 구매창 금액 및 인원 변경-----------------
-					$(".countButton").on(
-							"click",
-							function() {
-								var payment = $(".payment").html(
-										adultCount * 8000 + youthCount * 5000 + preferentialCount * 0);
-								console.log(payment);
+							$(".youthCountUp")
+									.on(
+											"click",
+											function() {
+												var totalCount = adultCount
+														+ youthCount
+														+ preferentialCount;
+												if (totalCount < 8) {
+													youthCount = youthCount + 1;
+													$(".youthType").html(
+															youthCount);
+													$("input[name=youthType]")
+															.val(youthCount);
+													//console.log(youthCount);
+												} else {
+													alert("한 번에 최대 8개의 좌석까지 예매할 수 있습니다.");
+												}
+											});
+							$(".youthCountDown").on("click", function() {
+								if (youthCount > 0) {
+									youthCount = youthCount - 1;
+								}
+								$(".youthType").html(youthCount);
+								$("input[name=youthType]").val(youthCount);
+								//console.log(youthCount);
 							});
-					//-------------------버튼 누를시 구매창 금액 및 인원 변경-----------------
+							$(".preferentialCountUp")
+									.on(
+											"click",
+											function() {
+												var totalCount = adultCount
+														+ youthCount
+														+ preferentialCount;
+												if (totalCount < 8) {
+													preferentialCount = preferentialCount + 1;
+													$(".preferentialType")
+															.html(
+																	preferentialCount);
+													$(
+															"input[name=preferentialType]")
+															.val(
+																	preferentialCount);
+													//console.log(preferentialCount);
+												} else {
+													alert("한 번에 최대 8개의 좌석까지 예매할 수 있습니다.");
+												}
+											});
+							$(".preferentialCountDown")
+									.on(
+											"click",
+											function() {
+												if (preferentialCount > 0) {
+													preferentialCount = preferentialCount - 1;
+												}
+												$(".preferentialType").html(
+														preferentialCount);
+												$(
+														"input[name=preferentialType]")
+														.val(preferentialCount);
+												//console.log(preferentialCount);
+											});
+							//---------------버튼 누를시 고객타입 숫자 변경-------------------------
 
-					//-------------------결제 버튼----------------------
+							//-------------------버튼 누를시 구매창 금액 및 인원 변경-----------------
+							$(".countButton")
+									.on(
+											"click",
+											function() {
+												var payment = $(".payment")
+														.html(
+																adultCount
+																		* 8000
+																		+ youthCount
+																		* 5000
+																		+ preferentialCount
+																		* 0);
+												console.log(payment);
+											});
+							//-------------------버튼 누를시 구매창 금액 및 인원 변경-----------------
 
-					$(".payBtn").on("click", function() {
-						var totalCount = adultCount + youthCount + preferentialCount;
-						$("input[name=totalPeople]").val(totalCount);
-						$("input[name=payAmount]").val($(".payment").html());
-						console.log($("input[name=totalPeople]").val());
-						console.log($("input[name=payAmount]").val()+"원");
-						if(totalCount == 0){
-							alert("인원 수를 선택해주세요.");
-						}
-						if (totalCount != 0 && confirm("선택하신 좌석으로 예매를 진행하시겠습니까?")) {
-							if(selectedSeat.length != totalCount){
-								alert("인원수만큼 좌석을 선택해주세요.");
-								$("input[name=selectedSeatList]").remove();
-								return;
-							}
-							for(var i = 0; i<selectedSeat.length; i++){
-							var str = "";
-							str += '<input type="hidden" name="selectedSeatList" value="'+selectedSeat[i]+'">';
-							reservationFrm.append(str);
-							console.log("선택좌석은 "+$("input[name=selectedSeatList]").eq(i).val()+" 입니다.");
-							}
-							reservationFrm.submit();
-						} else {
-							$("input[name=selectedSeatList]").remove();
-						}
-					});
-					
-					//-------------------결제 버튼----------------------
-					
-					//-----------------좌석 클릭하면 오른쪽 목록에 나오게 하기------------
-					
-					$(".seatRow").find("button").on("click", function(){
-						var totalCount = adultCount + youthCount + preferentialCount;
-						var selectedSeatList = $("#selectedSeatList");
-						
-						if($(this).hasClass("reserved")){
-							event.preventDefault();
-							alert("이미 예매된 좌석입니다.");
-							return;
-						}
-						
-						
-						if(totalCount == 0){
-							event.preventDefault();
-							alert("인원 수를 선택해주세요.");
-						} else {
-							
-							console.log("총 예매 좌석 수 : "+totalCount);
-							
-							if(selectedSeat.length<totalCount){
-								
-									console.log("누른 버튼 : " + $(this));
-									
-									if($(this).hasClass("selected")){
-										$(this).removeClass("selected");
-										$(this).html($(this).val().substring(1));
-										for(var i = 0; i<selectedSeat.length; i++){
-											if(selectedSeat[i] === $(this).val()){
-												selectedSeat.splice(i,1);
-											}
-										}
-										var str = "";
-										for(var i = 0; i<selectedSeat.length; i++){
-										str += '<li class="finalSeat"><button class="selectedSeat" style="width: 40px; height: 40px; border: none;" value="'+selectedSeat[i]+'">'
-											+selectedSeat[i]+'</button></li>';
-										}
-										selectedSeatList.html(str);
-										
-										console.log("선택된 좌석 수 : "+selectedSeat.length);
-									} else {
-									$(this).addClass("selected");
-										$(this).html("");
-										selectedSeat.push($(this).val());
-										
-										var str = "";
-										for(var i = 0; i<selectedSeat.length; i++){
-										str += '<li class="finalSeat"><button class="selectedSeat" style="width: 40px; height: 40px; border: none;" value="'+selectedSeat[i]+'">'
-											+selectedSeat[i]+'</button></li>';
-										}
-										
-										selectedSeatList.html(str);
-										console.log("선택된 좌석 수 : "+selectedSeat.length);
-									}                                                                                          
-									
-								} else {
-									
-									if($(this).hasClass("selected")){
-										$(this).removeClass("selected");
-										$(this).html($(this).val().substring(1));
-										for(var i = 0; i<selectedSeat.length; i++){
-											if(selectedSeat[i] === $(this).val()){
-												selectedSeat.splice(i,1);
-											}
-										}
-										var str = "";
-										for(var i = 0; i<selectedSeat.length; i++){
-										str += '<li><button class="selectedSeat" style="width: 40px; height: 40px; border: none;" value="'+selectedSeat[i]+'">'
-											+selectedSeat[i]+'</button></li>';
-										}
-										selectedSeatList.html(str);
-										
-										console.log("선택된 좌석 수 : "+selectedSeat.length);
-									} else {
-										event.preventDefault();
-										alert("최대 인원수만큼 좌석을 선택하셨습니다.");
+							//-------------------결제 버튼----------------------
+
+							$(".payBtn")
+									.on(
+											"click",
+											function() {
+												var totalCount = adultCount
+														+ youthCount
+														+ preferentialCount;
+												$("input[name=totalPeople]")
+														.val(totalCount);
+												$("input[name=payAmount]").val(
+														$(".payment").html());
+												console
+														.log($(
+																"input[name=totalPeople]")
+																.val());
+												console
+														.log($(
+																"input[name=payAmount]")
+																.val()
+																+ "원");
+												if (totalCount == 0) {
+													alert("인원 수를 선택해주세요.");
+												}
+												if (totalCount != 0
+														&& confirm("선택하신 좌석으로 예매를 진행하시겠습니까?")) {
+													if (selectedSeat.length != totalCount) {
+														alert("인원수만큼 좌석을 선택해주세요.");
+														$(
+																"input[name=selectedSeatList]")
+																.remove();
+														return;
+													}
+													for (var i = 0; i < selectedSeat.length; i++) {
+														var str = "";
+														str += '<input type="hidden" name="selectedSeatList" value="'+selectedSeat[i]+'">';
+														reservationFrm
+																.append(str);
+														console
+																.log("선택좌석은 "
+																		+ $(
+																				"input[name=selectedSeatList]")
+																				.eq(
+																						i)
+																				.val()
+																		+ " 입니다.");
+													}
+													reservationFrm.submit();
+												} else {
+													$(
+															"input[name=selectedSeatList]")
+															.remove();
+												}
+											});
+
+							//-------------------결제 버튼----------------------
+
+							//-----------------좌석 클릭하면 오른쪽 목록에 나오게 하기------------
+
+							$(".seatRow")
+									.find("button")
+									.on(
+											"click",
+											function() {
+												var totalCount = adultCount
+														+ youthCount
+														+ preferentialCount;
+												var selectedSeatList = $("#selectedSeatList");
+
+												if ($(this)
+														.hasClass("reserved")) {
+													event.preventDefault();
+													alert("이미 예매된 좌석입니다.");
+													return;
+												}
+
+												if (totalCount == 0) {
+													event.preventDefault();
+													alert("인원 수를 선택해주세요.");
+												} else {
+
+													console.log("총 예매 좌석 수 : "
+															+ totalCount);
+
+													if (selectedSeat.length < totalCount) {
+
+														console.log("누른 버튼 : "
+																+ $(this));
+
+														if ($(this).hasClass(
+																"selected")) {
+															$(this)
+																	.removeClass(
+																			"selected");
+															$(this)
+																	.html(
+																			$(
+																					this)
+																					.val()
+																					.substring(
+																							1));
+															for (var i = 0; i < selectedSeat.length; i++) {
+																if (selectedSeat[i] === $(
+																		this)
+																		.val()) {
+																	selectedSeat
+																			.splice(
+																					i,
+																					1);
+																}
+															}
+															var str = "";
+															for (var i = 0; i < selectedSeat.length; i++) {
+																str += '<li class="finalSeat"><button class="selectedSeat" style="width: 40px; height: 40px; border: none;" value="'+selectedSeat[i]+'">'
+																		+ selectedSeat[i]
+																		+ '</button></li>';
+															}
+															selectedSeatList
+																	.html(str);
+
+															console
+																	.log("선택된 좌석 수 : "
+																			+ selectedSeat.length);
+														} else {
+															$(this).addClass(
+																	"selected");
+															$(this).html("");
+															selectedSeat
+																	.push($(
+																			this)
+																			.val());
+
+															var str = "";
+															for (var i = 0; i < selectedSeat.length; i++) {
+																str += '<li class="finalSeat"><button class="selectedSeat" style="width: 40px; height: 40px; border: none;" value="'+selectedSeat[i]+'">'
+																		+ selectedSeat[i]
+																		+ '</button></li>';
+															}
+
+															selectedSeatList
+																	.html(str);
+															console
+																	.log("선택된 좌석 수 : "
+																			+ selectedSeat.length);
+														}
+
+													} else {
+
+														if ($(this).hasClass(
+																"selected")) {
+															$(this)
+																	.removeClass(
+																			"selected");
+															$(this)
+																	.html(
+																			$(
+																					this)
+																					.val()
+																					.substring(
+																							1));
+															for (var i = 0; i < selectedSeat.length; i++) {
+																if (selectedSeat[i] === $(
+																		this)
+																		.val()) {
+																	selectedSeat
+																			.splice(
+																					i,
+																					1);
+																}
+															}
+															var str = "";
+															for (var i = 0; i < selectedSeat.length; i++) {
+																str += '<li><button class="selectedSeat" style="width: 40px; height: 40px; border: none;" value="'+selectedSeat[i]+'">'
+																		+ selectedSeat[i]
+																		+ '</button></li>';
+															}
+															selectedSeatList
+																	.html(str);
+
+															console
+																	.log("선택된 좌석 수 : "
+																			+ selectedSeat.length);
+														} else {
+															event
+																	.preventDefault();
+															alert("최대 인원수만큼 좌석을 선택하셨습니다.");
+														}
+													}
+
+												}
+
+											});
+
+							//-----------------좌석 클릭하면 오른쪽 목록에 나오게 하기------------
+
+							//-----------------오른쪽 목록에 좌석버튼 클릭하면 없애기-----------------
+							$(document).on("click",".selectedSeat",function() {
+												//alert($(this));
+												var selectedSeatList = $("#selectedSeatList");
+
+												for (var i = 0; i < selectedSeat.length; i++) {
+
+													for (var j = 0; j < $(".seat").length; j++) {
+														if ($(this).val() === $(
+																".seat").eq(j)
+																.val()) {
+															$(".seat")
+																	.eq(j)
+																	.removeClass(
+																			"selected");
+															$(".seat")
+																	.eq(j)
+																	.html(
+																			$(
+																					this)
+																					.val()
+																					.substring(
+																							1));
+															console
+																	.log("목록에서 취소한 좌석 : "
+																			+ $(
+																					".seat")
+																					.eq(
+																							j)
+																					.val());
+														}
+													}
+
+													if (selectedSeat[i] === $(
+															this).val()) {
+														selectedSeat.splice(i,
+																1);
+
+														console
+																.log("취소한 좌석 번호 : "
+																		+ $(
+																				this)
+																				.val());
+													}
+												}
+
+												var str = "";
+												for (var i = 0; i < selectedSeat.length; i++) {
+													str += '<li><button class="selectedSeat" style="width: 40px; height: 40px; border: none;" value="'+selectedSeat[i]+'">'
+															+ selectedSeat[i]
+															+ '</button></li>';
+												}
+
+												selectedSeatList.html(str);
+											});
+
+							//-----------------오른쪽 목록에 좌석 클릭하면 없애기-----------------
+
+							//-----------------DB반영된 좌석표 출력--------------------------
+
+							var getEnabledSeatList = function(scheduleCode,
+									callback) {
+
+								$.ajax({
+									url : "/getEnabledSeatList/" + scheduleCode
+											+ ".json",
+									type : "get",
+									dataType : "json",
+									success : function(data) {
+										callback(data);
 									}
-								}
-						
-					}
-						
-						
-						
-					});
-					
-					//-----------------좌석 클릭하면 오른쪽 목록에 나오게 하기------------
-					
-					//-----------------오른쪽 목록에 좌석버튼 클릭하면 없애기-----------------
-					$(document).on("click",".selectedSeat", function(){
-						//alert($(this));
-						var selectedSeatList = $("#selectedSeatList");
-					
-					for(var i = 0; i<selectedSeat.length; i++){
-						
-						for(var j = 0; j<$(".seat").length; j++){
-							if($(this).val() === $(".seat").eq(j).val()){
-								$(".seat").eq(j).removeClass("selected");
-								$(".seat").eq(j).html($(this).val().substring(1));
-								console.log("목록에서 취소한 좌석 : "+$(".seat").eq(j).val());
-							}
-						}
-						
-						if(selectedSeat[i] === $(this).val()){
-							selectedSeat.splice(i,1);
-							
-							console.log("취소한 좌석 번호 : "+$(this).val());
-						}
-					}
-						
-					var str = "";
-					for(var i = 0; i<selectedSeat.length; i++){
-					str += '<li><button class="selectedSeat" style="width: 40px; height: 40px; border: none;" value="'+selectedSeat[i]+'">'
-						+selectedSeat[i]+'</button></li>';
-					}
-					
-					selectedSeatList.html(str); 
-					});
-					
-					//-----------------오른쪽 목록에 좌석 클릭하면 없애기-----------------
-					
-					//-----------------DB반영된 좌석표 출력--------------------------
-				
-				
-					var getEnabledSeatList = function(scheduleCode, callback){
-						
-						$.ajax({
-							url: "/getEnabledSeatList/"+scheduleCode+".json",
-							type: "get",
-							dataType: "json",
-							success: function(data){
-								callback(data);
-							}
-						});
-					};
-				
-					 getEnabledSeatList(1, function(list){
-						for(var i = 0; i<list.length; i++){
-							for(var j = 0; j<$(".seat").length; j++){
-								if(list[i].seat === $(".seat").eq(j).val()){
-									$(".seat").eq(j).addClass("reserved");
-									$(".seat").eq(j).html("");
-									console.log("예매처리된 좌석 : "+$(".seat").eq(j).val());
-								}
-							}
-						}
-					});
-				
-				
-				
-				    //------------------------------------------------------------
-					
+								});
+							};
 
-				});
+							getEnabledSeatList(
+									scheduleCode,
+									function(list) {
+										for (var i = 0; i < list.length; i++) {
+											for (var j = 0; j < $(".seat").length; j++) {
+												if (list[i].seat === $(".seat")
+														.eq(j).val()) {
+													$(".seat").eq(j).addClass(
+															"reserved");
+													$(".seat").eq(j).html("");
+													console.log("예매처리된 좌석 : "
+															+ $(".seat").eq(j)
+																	.val());
+												}
+											}
+										}
+									});
+
+							//------------------------------------------------------------
+
+						});
 	</script>
 
 
