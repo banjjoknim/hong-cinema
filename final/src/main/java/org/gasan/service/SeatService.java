@@ -8,9 +8,9 @@ import org.gasan.domain.SelectedScheduleVO;
 
 public interface SeatService {
 	
-	public void select(SelectedScheduleVO selectedScheduleVO, SeatVO seatVO);
+	public void reserve(SelectedScheduleVO selectedScheduleVO, SeatVO seatVO);
 	
-	public void remove(SelectedScheduleVO selectedScheduleVO, SeatVO seatVO);
+	public void reserveCancel(SelectedScheduleVO selectedScheduleVO, SeatVO seatVO);
 	
-	public void prevent(SeatReservationVO seatReservationVO);
+	public void preventReservation(SeatReservationVO seatReservationVO);
 }

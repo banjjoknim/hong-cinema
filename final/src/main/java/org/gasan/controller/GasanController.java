@@ -1,5 +1,6 @@
 package org.gasan.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -85,11 +86,18 @@ public class GasanController {
 
 
 	@PostMapping("/seatList")
-	public String getSeatList(SelectedScheduleVO selectedScheduleVO, HttpSession session, Model model) {
+	public String getSeatList(SelectedScheduleVO selectedScheduleVO, HttpSession session, Model model) throws ParseException {
 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(sdf.parse(selectedScheduleVO.getSelectedDate()));
+		String[] weekDay = new String[] {"일", "월", "화", "수", "목", "금", "토"};
+		
 		model.addAttribute("schedule", selectedScheduleVO);
 		session.setAttribute("movie", selectedScheduleVO);
-
+		session.setAttribute("scheduleCode", selectedScheduleVO.getSelectedScheduleCode());
+		model.addAttribute("dayOfWeek", weekDay[cal.get(Calendar.DAY_OF_WEEK)+1]);
+		
 		log.info("getList .............. seatList");
 		log.info(selectedScheduleVO);
 		log.info(session.getAttribute("scheduleCode"));
@@ -102,11 +110,12 @@ public class GasanController {
 		
 		
 		log.info("payment");
-		log.info(seatReservationVO);
 		log.info(session.getAttribute("movie"));
 		
 		seatReservationVO.setScheduleCode((int) session.getAttribute("scheduleCode"));
-		seatService.prevent(seatReservationVO);
+		log.info(seatReservationVO);
+		
+		seatService.preventReservation(seatReservationVO);
 		model.addAttribute("seatReservation", seatReservationVO);
 
 		return "payment";

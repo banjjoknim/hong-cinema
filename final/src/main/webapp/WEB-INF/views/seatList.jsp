@@ -684,7 +684,7 @@ background-color: rgb(21,21,21) !important;
 							style="list-style: none; float: left; margin-right: 15px; margin-left: 10px; padding: 10px 20px;">
 							<li class="theaterInfo">가산시네마</li>
 							<li class="theaterInfo">${schedule.selectedTheaterNumber }관</li>
-							<li class="theaterInfo">${schedule.selectedDate }</li>
+							<li class="theaterInfo">${schedule.selectedDate.substring(4, 6) }.${schedule.selectedDate.substring(6, 8) } (${dayOfWeek })</li>
 							<li class="theaterInfo">${schedule.selectedStartTime }~
 								${schedule.selectedEndTime }</li>
 						</ul>

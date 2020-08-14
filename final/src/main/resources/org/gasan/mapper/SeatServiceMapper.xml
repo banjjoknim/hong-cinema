@@ -55,7 +55,7 @@ select seat from seat where enabled = 'N' and scheduleCode = #{scheduleCode}
 
 <![CDATA[
 
-update seat set enabled = 'N' where schedulecode = #{reservation.scheduleCode}
+update seat set enabled = 'N' where schedulecode = #{reservation.scheduleCode} and seat = #{seat.seat}
 
 ]]>
 

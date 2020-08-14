@@ -20,5 +20,5 @@ public interface SeatServiceMapper {
 	
 	public List<SeatVO> showEnabledSeat(@Param("scheduleCode") int scheduleCode);
 	
-	public void prevent(@Param("reservation") SeatReservationVO seatReservationVO);
+	public void prevent(@Param("reservation") SeatReservationVO seatReservationVO, @Param("seat") SeatVO seatVO);
 }

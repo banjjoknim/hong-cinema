@@ -3,6 +3,7 @@ package org.gasan.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.gasan.domain.SeatReservationVO;
 import org.gasan.domain.SeatVO;
 import org.gasan.domain.SelectedScheduleVO;
@@ -23,7 +24,7 @@ public class SeatServiceImpl implements SeatService {
 	private SeatServiceMapper seatServiceMapper;
 
 	@Override
-	public void select(SelectedScheduleVO selectedScheduleVO, SeatVO seatVO) {
+	public void reserve(SelectedScheduleVO selectedScheduleVO, SeatVO seatVO) {
 		List<SeatVO> selectedSeatList = new ArrayList<SeatVO>();
 		SeatVO seat = new SeatVO();
 		seat.setScheduleCode(selectedScheduleVO.getSelectedScheduleCode());
@@ -35,22 +36,18 @@ public class SeatServiceImpl implements SeatService {
 	}
 
 	@Override
-	public void remove(SelectedScheduleVO selectedScheduleVO, SeatVO seatVO) {
+	public void reserveCancel(SelectedScheduleVO selectedScheduleVO, SeatVO seatVO) {
 		List<SeatVO> selectedSeatList = new ArrayList<SeatVO>();
 		selectedSeatList.remove(seatVO);
 	}
 
 	@Override
-	public void prevent(SeatReservationVO seatReservationVO) {
+	public void preventReservation(SeatReservationVO seatReservationVO) {
 
-		SelectedScheduleVO selectedScheduleVO = new SelectedScheduleVO();
-		SeatVO seatVO = new SeatVO();
 		for (int i = 0; i < seatReservationVO.getSelectedSeatList().size(); i++) {
-			if (seatReservationVO.getSelectedSeatList().get(i).equals("A5")) {
-				selectedScheduleVO.setSelectedScheduleCode(seatReservationVO.getScheduleCode());
-				seatVO.setSeat(seatReservationVO.getSelectedSeatList().get(i));
-				seatServiceMapper.prevent(seatReservationVO);
-			}
+			SeatVO seat = new SeatVO();
+			seat.setSeat(seatReservationVO.getSelectedSeatList().get(i));
+			seatServiceMapper.prevent(seatReservationVO, seat);
 		}
 	}
 
