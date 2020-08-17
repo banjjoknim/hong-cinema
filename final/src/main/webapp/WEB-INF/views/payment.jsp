@@ -116,124 +116,119 @@
 
             </fieldset>
         </div>
+        
+        <!-- payment way start -->
+        <div style="float: left; width: 540px; margin-left: 50px;">
+            <h3 style="font-size: 250%; margin-top: 30px;">결제수단</h3>
+
+            <table style="width: 540px; height: 480px;">
+                <tr>
+                    <td style="width: 180px; height: 80px;">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1"
+                                    value="option1" checked="" style="width: 15px; height: 15px;">
+                                <span style="font-size: 120%;">카드</span>
+                            </label>
+                        </div>
+                    </td>
+                    <td style="width: 180px; height: 80px;">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
+                                    value="option2" style="width: 15px; height: 15px;">
+                                <span style="font-size: 120%;">계좌이체</span>
+                            </label>
+                        </div>
+                    </td>
+                    <td style="width: 180px; height: 80px;">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3"
+                                    value="option3" style="width: 15px; height: 15px;">
+                                <span style="font-size: 120%;">휴대폰 결제</span>
+                            </label>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="3" style="font-size: 150%;">
+                        <!-- <div style="width: 40%; float: left; margin-left: 20px;">
+                            여기는 카드 또는 은행 선택영역 카드 은행 그림.
+                        </div>
+                        <div style="width: 40%; float: left; margin-left: 40px;">
+                            <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
+                                readonly="" style="width: 200px; margin-top: 3px;">
+                            <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
+                                readonly="" style="width: 200px; margin-top: 3px;">
+                            <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
+                                readonly="" style="width: 200px; margin-top: 3px;">
+                            <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
+                                readonly="" style="width: 200px; margin-top: 3px;">
+                        </div> -->
+                        <div style="height: 362px; overflow: hidden;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et viverra libero, ac
+                            dignissim enim. Mauris nec bibendum ex, et rhoncus tortor. Vivamus non enim sed ipsum
+                            ultricies semper a ut odio. In scelerisque euismod mauris sed tempor. Integer tellus tellus,
+                            ornare quis aliquet in, tincidunt non leo. Nam sem mi, hendrerit sed purus vitae, aliquet
+                            hendrerit felis. Integer tristique tempus ante, vitae pretium augue tempus a.
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- payment way end -->
+            
+        <!-- pay amount show start -->
+        <div style="float: left; width: 280px;">
+            <h3 style="font-size: 250%; margin-top: 30px; margin-left: 50px;">결제금액</h3>
 
 
-
-
-        <!-- customer start -->
-            <div style="float: left; width: 340px; padding: 20px;">
-                <h3 style="font-size: 200%; margin-top: 30px; margin-left: 50px;">구매자정보</h3>
-
-                <div class="form-group row"
-                    style="border-top: 1px solid darkgrey; margin-bottom: 0; padding: 5px 10px;">
-                    <label for="staticEmail" class="col-form-label"
-                        style="width: 80px; padding: 10px; float: left;">이름</label>
-                    <div style="float: left;">
-                        <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
-                            readonly="" style="width: 150px; margin-top: 3px;">
-                    </div>
+            <div class="form-group row" style="border: 3px solid darkslategray; margin-bottom: 0; margin-top: 10px;">
+                <label for="payAmount" class="col-form-label"
+                    style="width: 100%; font-size: 130%; font-weight: bold; text-align: center; background-color: darkslategray; color: white;">결제하실
+                    금액</label>
+                <div style="width: 100%;">
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 10px;">성인 3명 : <span style="font-weight: bold;"> 24000</span>원</li>
+                        <li style="padding: 10px;">청소년 3명 : <span style="font-weight: bold;"> 15000</span>원</li>
+                        <li style="padding: 10px;">우대 3명 : <span style="font-weight: bold;"> 0</span>원</li>
+                    </ul>
                 </div>
-
-                <div class="form-group row"
-                    style="border-top: 1px solid darkgrey; margin-bottom: 0; padding: 5px 10px;">
-                    <label for="staticEmail" class="col-form-label"
-                        style="width: 80px; padding: 10px; float: left;">연락처</label>
-                    <div style="float: left;">
-                        <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
-                            readonly="" style="width: 150px; margin-top: 3px;">
-                    </div>
+                <div
+                    style="width: 100%; height: 30px; background-color: darkslategray; color: white; text-align: right; padding-right: 20px;">
+                    총 <span style="font-size: 150%; font-weight: bold;">50000</span>원
                 </div>
-
-                <div class="form-group row"
-                    style="border-bottom: 1px solid darkgrey; border-top: 1px solid darkgrey; margin-bottom: 0; padding: 5px 10px;">
-                    <label for="staticEmail" class="col-form-label"
-                        style="width: 80px; padding: 10px; float: left;">이메일</label>
-                    <div style="float: left;">
-                        <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
-                            readonly="" style="width: 150px; margin-top: 3px;">
-                    </div>
-                </div>
-
-                <div class="form-group row"
-                    style="border-bottom: 1px solid darkgrey; border-top: 1px solid darkgrey; margin-bottom: 0; padding: 5px 10px;">
-                    <label for="staticEmail" class="col-form-label"
-                        style="width: 80px; padding: 10px; float: left;">추가내용1</label>
-                    <div style="float: left;">
-                        <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
-                            readonly="" style="width: 150px; margin-top: 3px;">
-                    </div>
-                </div>
-
-                <div class="form-group row"
-                    style="border-bottom: 1px solid darkgrey; border-top: 1px solid darkgrey; margin-bottom: 0; padding: 5px 10px;">
-                    <label for="staticEmail" class="col-form-label"
-                        style="width: 80px; padding: 10px; float: left;">추가내용2</label>
-                    <div style="float: left;">
-                        <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
-                            readonly="" style="width: 150px; margin-top: 3px;">
-                    </div>
-                </div>
-
             </div>
-            <!-- customer end -->
 
-            <!-- payment way start -->
-            <div style="float: left; width: 540px; padding: 20px;">
-                <h3 style="font-size: 200%; margin-top: 30px; margin-left: 10px; ">결제수단</h3>
-
-                <legend></legend>
-                <table style="width: 540px;">
-                    <tr>
-                        <td style="width: 100px;">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="optionsRadios"
-                                        id="optionsRadios1" value="option1" checked=""
-                                        style="width: 15px; height: 15px;">
-                                    <span style="font-size: 120%;">카드</span>
-                                </label>
-                            </div>
-                        </td>
-                        <td style="width: 100px;">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="optionsRadios"
-                                        id="optionsRadios2" value="option2" style="width: 15px; height: 15px;">
-                                    <span style="font-size: 120%;">계좌이체</span>
-                                </label>
-                            </div>
-                        </td>
-                        <td style="width: 100px;">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="optionsRadios"
-                                        id="optionsRadios3" value="option3" style="width: 15px; height: 15px;">
-                                    <span style="font-size: 120%;">휴대폰 결제</span>
-                                </label>
-                            </div>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="font-size: 150%;">
-                            <div style="width: 40%; float: left; margin-left: 20px;">
-                                여기는 카드 또는 은행 선택영역 카드 은행 그림.
-                            </div>
-                            <div style="width: 40%; float: left; margin-left: 40px;">
-                                <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
-                                    readonly="" style="width: 200px; margin-top: 3px;">
-                                <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
-                                    readonly="" style="width: 200px; margin-top: 3px;">
-                                <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
-                                    readonly="" style="width: 200px; margin-top: 3px;">
-                                <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
-                                    readonly="" style="width: 200px; margin-top: 3px;">
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+            <div class="form-group row" style="border: 3px solid darkslategray; margin-bottom: 0; margin-top: 10px;">
+                <label for="saleAmount" class="col-form-label"
+                    style="width: 100%; font-size: 130%; font-weight: bold; text-align: center; background-color: darkslategray; color: white;">할인내역</label>
+                <div style="width: 100%;">
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 10px;">할인 1 : <span style="font-weight: bold;"> 24000</span>원</li>
+                        <li style="padding: 10px;">할인 2 : <span style="font-weight: bold;"> 24000</span>원</li>
+                        <li style="padding: 10px;">할인 3 : <span style="font-weight: bold;"> 24000</span>원</li>
+                    </ul>
+                </div>
+                <div
+                    style="width: 100%; height: 30px; background-color: darkslategray; color: white; text-align: right; padding-right: 20px;">
+                    총 <span style="font-size: 150%; font-weight: bold;">50000</span>원
+                </div>
             </div>
-            <!-- payment way end -->
+
+            <div class="form-group row" style="border: 3px solid darkslategray; margin-bottom: 0; margin-top: 10px;">
+                <label for="finalPayment" class="col-form-label"
+                    style="width: 100%; font-size: 130%; font-weight: bold; text-align: center;">남은 결제금액</label>
+
+                <div
+                    style="width: 100%; height: 30px; background-color: darkslategray; color: white; text-align: right; padding-right: 20px;">
+                    총 <span style="font-size: 150%; font-weight: bold;">50000</span>원
+                </div>
+            </div>
+        </div>
+        <!-- pay amount show end -->
 
         <!-- form end -->
     </div>
@@ -241,11 +236,12 @@
         <!-- decision button start -->
         <div style="clear: both; margin: 0 auto; width: 280px;">
         <button type="button" class="btn btn-info" id="pay"
-            style="padding: 15px 25px; font-size: 150%;">결제하기</button>
+            style="padding: 15px 25px; font-size: 150%;">결제</button>
         <button type="button" class="btn btn-primary" id="cancel"
             style="padding: 15px 25px; font-size: 150%;">취소</button>
         </div>
         <!-- decision button end -->
+        
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 		crossorigin="anonymous"></script>
@@ -254,7 +250,7 @@
 			
 			var timeoutCancel = setTimeout(function(){
 				reservationCancel();
-			}, 1000*5 // 5초 후에 예약취소.
+			}, 1000*60*5 // 1000ms * 60 * 5-> 5분 후에 예약취소.
 			);			
 			
 			var reservationCancel = function(){
