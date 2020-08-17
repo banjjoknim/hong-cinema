@@ -14,6 +14,7 @@ import org.gasan.domain.ScheduleVO;
 import org.gasan.domain.SeatReservationVO;
 import org.gasan.domain.SelectedScheduleVO;
 import org.gasan.service.ListService;
+import org.gasan.service.PayService;
 import org.gasan.service.SeatService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,7 @@ public class GasanController {
 
 	private ListService listService;
 	private SeatService seatService;
+	private PayService payService;
 
 	@GetMapping(value = "/movieList")
 	public String getAllListBySelectedDate(Model model) throws Exception { // 영화리스트를 얻어온다.
@@ -90,6 +92,7 @@ public class GasanController {
 
 		session.setAttribute("movie", selectedScheduleVO);
 		session.setAttribute("scheduleCode", selectedScheduleVO.getSelectedScheduleCode());
+		session.setAttribute("dayOfWeek", weekDay[cal.get(Calendar.DAY_OF_WEEK) - 1]);
 		model.addAttribute("schedule", selectedScheduleVO);
 		model.addAttribute("dayOfWeek", weekDay[cal.get(Calendar.DAY_OF_WEEK) - 1]);
 
@@ -113,6 +116,16 @@ public class GasanController {
 		log.info(seatReservationVO);
 		
 		return "payment";
+	}
+	
+	@GetMapping("/pay")
+	public String pay(HttpSession session) {
+		
+		SelectedScheduleVO schedule = (SelectedScheduleVO) session.getAttribute("movie");
+		SeatReservationVO seat = (SeatReservationVO) session.getAttribute("seatReservation");
+		payService.pay(schedule, seat);
+		
+		return "redirect:/movieList";
 	}
 
 	@GetMapping("/ajax") // ajax 연습용

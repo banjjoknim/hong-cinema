@@ -82,7 +82,7 @@
                 <img src="https://via.placeholder.com/240x320.png" style="float: left;">
 
                 <div class="form-group row"
-                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 200%; font-weight: bold;">
+                    style="float: left; width: 460px; padding: 0px 20px 15px 80px; margin: 0; font-size: 200%; font-weight: bold;">
                     <span style="font-weight: bold;">${movie.selectedMovie }</span>
                 </div>
 
@@ -93,7 +93,8 @@
 
                 <div class="form-group row"
                     style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 135%;">
-                    <span style="font-weight: bold;">상영관 : ${movie.selectedTheaterNumber }관<br> 
+                    <span style="font-weight: bold;">상영관 : ${movie.selectedTheaterNumber }관<br>
+                     상영날짜 : ${movie.selectedDate.substring(0,4)}.${movie.selectedDate.substring(4,6)}.${movie.selectedDate.substring(6,8)} (${dayOfWeek })<br>
                     상영시간 : ${movie.selectedStartTime } ~ ${movie.selectedEndTime }</span>
                 </div>
 
@@ -181,7 +182,7 @@
         <!-- payment way end -->
             
         <!-- pay amount show start -->
-        <div style="float: left; width: 280px;">
+        <div style="float: left; width: 296px;">
             <h3 style="font-size: 250%; margin-top: 30px; margin-left: 50px;">결제금액</h3>
 
 
@@ -207,14 +208,14 @@
                     style="width: 100%; font-size: 130%; font-weight: bold; text-align: center; background-color: darkslategray; color: white;">할인내역</label>
                 <div style="width: 100%;">
                     <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="padding: 10px;">할인 1 : <span style="font-weight: bold;"> 24000</span>원</li>
-                        <li style="padding: 10px;">할인 2 : <span style="font-weight: bold;"> 24000</span>원</li>
-                        <li style="padding: 10px;">할인 3 : <span style="font-weight: bold;"> 24000</span>원</li>
+                        <li style="padding: 10px;">할인 1 : <span style="font-weight: bold;"> 8000</span>원</li>
+                        <li style="padding: 10px;">할인 2 : <span style="font-weight: bold;"> 3000</span>원</li>
+                        <li style="padding: 10px;">할인 3 : <span style="font-weight: bold;"> 10000</span>원</li>
                     </ul>
                 </div>
                 <div
                     style="width: 100%; height: 30px; background-color: darkslategray; color: white; text-align: right; padding-right: 20px;">
-                    총 <span style="font-size: 150%; font-weight: bold;">50000</span>원
+                    총 <span style="font-size: 150%; font-weight: bold;">21000</span>원
                 </div>
             </div>
 
@@ -224,7 +225,7 @@
 
                 <div
                     style="width: 100%; height: 30px; background-color: darkslategray; color: white; text-align: right; padding-right: 20px;">
-                    총 <span style="font-size: 150%; font-weight: bold;">50000</span>원
+                    총 <span style="font-size: 150%; font-weight: bold;">29000</span>원
                 </div>
             </div>
         </div>
@@ -232,9 +233,10 @@
 
         <!-- form end -->
     </div>
+    <form action="/pay" name="payFrm" method="GET"></form>
     <!-- paymentBox end -->
         <!-- decision button start -->
-        <div style="clear: both; margin: 0 auto; width: 280px;">
+        <div style="clear: both; margin: 40px auto; width: 280px; padding-top: 60px;">
         <button type="button" class="btn btn-info" id="pay"
             style="padding: 15px 25px; font-size: 150%;">결제</button>
         <button type="button" class="btn btn-primary" id="cancel"
@@ -247,6 +249,8 @@
 		crossorigin="anonymous"></script>
 		<script type="text/javascript">
 		$(document).ready(function(){
+			
+			var payFrm = $("form[name='payFrm']");
 			
 			var timeoutCancel = setTimeout(function(){
 				reservationCancel();
@@ -265,12 +269,24 @@
 				});
 			}
 			
+			var payment = function(){
+				
+				$.ajax({
+					url: "/pay",
+					type: "get",
+					success: function(){
+						alert("결제가 완료되었습니다.");
+					}
+				});
+			}
+			
 			$("#cancel").on("click", function(){
 				reservationCancel();
 			});
 			
 			$("#pay").on("click", function(){
-					
+				payFrm.submit();
+				//window.location.replace("http://localhost:8080/movieList");
 			});
 			
 			
