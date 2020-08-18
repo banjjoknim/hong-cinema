@@ -123,7 +123,10 @@ public class GasanController {
 		
 		SelectedScheduleVO schedule = (SelectedScheduleVO) session.getAttribute("movie");
 		SeatReservationVO seat = (SeatReservationVO) session.getAttribute("seatReservation");
-		payService.pay(schedule, seat);
+		session.setAttribute("seatStr", seat.getSelectedSeatList().toString().replace("[", "").replace("]", ""));
+		payService.pay(schedule, seat, (String) session.getAttribute("seatStr"));
+		
+		log.info(seat.getSelectedSeatList().toString().replace("[", "").replace("]", ""));
 		
 		return "redirect:/movieList";
 	}

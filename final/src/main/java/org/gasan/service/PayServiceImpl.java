@@ -1,5 +1,7 @@
 package org.gasan.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.gasan.domain.SeatReservationVO;
 import org.gasan.domain.SelectedScheduleVO;
 import org.gasan.mapper.PayServiceMapper;
@@ -19,8 +21,8 @@ public class PayServiceImpl implements PayService {
 	private PayServiceMapper payServiceMapper;
 
 	@Override
-	public void pay(SelectedScheduleVO selectedScheduleVO, SeatReservationVO seatReservationVO) {
-		payServiceMapper.registPaymentHistory("userId", selectedScheduleVO, seatReservationVO);
+	public void pay(SelectedScheduleVO selectedScheduleVO, SeatReservationVO seatReservationVO, String seatList) {
+		payServiceMapper.registPaymentHistory("userId", selectedScheduleVO, seatReservationVO, seatList);
 	}
 
 }
