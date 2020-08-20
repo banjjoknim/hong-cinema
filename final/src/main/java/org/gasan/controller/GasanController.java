@@ -144,5 +144,10 @@ public class GasanController {
 
 		return "index";
 	}
+	
+	@GetMapping("/iamportEx")
+	public String dd() {
+		return "iamportEx";
+	}
 
 }
