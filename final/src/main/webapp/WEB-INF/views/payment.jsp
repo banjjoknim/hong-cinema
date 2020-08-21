@@ -233,7 +233,7 @@
 
         <!-- form end -->
     </div>
-    <form action="/pay" name="payFrm" method="GET"></form>
+    <form action="/pay" name="payFrm" method="POST"></form>
     <!-- paymentBox end -->
         <!-- decision button start -->
         <div style="clear: both; margin: 40px auto; width: 280px; padding-top: 60px;">
@@ -273,7 +273,12 @@
 				
 				$.ajax({
 					url: "/pay",
-					type: "get",
+					type: "post",
+					contentType: 'application/json; charset=utf-8',
+					data: JSON.stringify({
+						imp_uid: 'rsp.imp_uid',
+                        merchant_uid: 'rsp.merchant_uid'
+					}),
 					success: function(){
 						alert("결제가 완료되었습니다.");
 					}
@@ -285,7 +290,8 @@
 			});
 			
 			$("#pay").on("click", function(){
-				payFrm.submit();
+				payment();
+				//payFrm.submit();
 				//window.location.replace("http://localhost:8080/movieList");
 			});
 			

@@ -10,7 +10,7 @@
   
   <![CDATA[
 	insert into paymentHistory values(
-	paymentHistory_seq.nextval, reservation_seq.nextval, 'userId', #{schedule.selectedMovie},
+	#{imp_uid}, reservation_seq.nextval, 'userId', #{schedule.selectedMovie},
 	#{schedule.selectedTheaterNumber}, #{schedule.selectedDate}, #{schedule.selectedStartTime}, #{schedule.selectedEndTime}, #{seat.adultType}, #{seat.youthType}, #{seat.preferentialType}, #{seatList}, #{seat.payAmount}, sysdate
 	)
   ]]>
