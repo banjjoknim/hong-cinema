@@ -192,14 +192,14 @@
                     금액</label>
                 <div style="width: 100%;">
                     <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="padding: 10px;">성인 3명 : <span style="font-weight: bold;"> 24000</span>원</li>
-                        <li style="padding: 10px;">청소년 3명 : <span style="font-weight: bold;"> 15000</span>원</li>
-                        <li style="padding: 10px;">우대 3명 : <span style="font-weight: bold;"> 0</span>원</li>
+                        <li style="padding: 10px;">성인 ${seatReservation.adultType }명 : <span style="font-weight: bold;"> ${seatReservation.adultType * 8000 }</span>원</li>
+                        <li style="padding: 10px;">청소년 ${seatReservation.youthType }명 : <span style="font-weight: bold;"> ${seatReservation.youthType * 5000 }</span>원</li>
+                        <li style="padding: 10px;">우대 ${seatReservation.preferentialType }명 : <span style="font-weight: bold;"> ${seatReservation.preferentialType * 0 }</span>원</li>
                     </ul>
                 </div>
                 <div
                     style="width: 100%; height: 30px; background-color: darkslategray; color: white; text-align: right; padding-right: 20px;">
-                    총 <span style="font-size: 150%; font-weight: bold;">50000</span>원
+                    총 <span style="font-size: 150%; font-weight: bold;">${seatReservation.adultType * 8000 + seatReservation.youthType * 5000 + seatReservation.preferentialType * 0 }</span>원
                 </div>
             </div>
 
@@ -215,7 +215,7 @@
                 </div>
                 <div
                     style="width: 100%; height: 30px; background-color: darkslategray; color: white; text-align: right; padding-right: 20px;">
-                    총 <span style="font-size: 150%; font-weight: bold;">21000</span>원
+                    총 <span style="font-size: 150%; font-weight: bold;"> 0</span>원
                 </div>
             </div>
 
@@ -225,7 +225,7 @@
 
                 <div
                     style="width: 100%; height: 30px; background-color: darkslategray; color: white; text-align: right; padding-right: 20px;">
-                    총 <span style="font-size: 150%; font-weight: bold;">29000</span>원
+                    총 <span id="finalPayAmount" style="font-size: 150%; font-weight: bold;">${seatReservation.adultType * 8000 + seatReservation.youthType * 5000 + seatReservation.preferentialType * 0 }</span>원
                 </div>
             </div>
         </div>
@@ -233,7 +233,6 @@
 
         <!-- form end -->
     </div>
-    <form action="/pay" name="payFrm" method="POST"></form>
     <!-- paymentBox end -->
         <!-- decision button start -->
         <div style="clear: both; margin: 40px auto; width: 280px; padding-top: 60px;">
@@ -247,15 +246,29 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 		crossorigin="anonymous"></script>
+		<script type="text/javascript"
+        src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function(){
 			
-			var payFrm = $("form[name='payFrm']");
+			console.log('최종 결제금액 : '+$("#finalPayAmount").html());
 			
-			var timeoutCancel = setTimeout(function(){
-				reservationCancel();
-			}, 1000*60*5 // 1000ms * 60 * 5-> 5분 후에 예약취소.
-			);			
+			var timeout; 
+            var settingTimeout = function(){ //일정 시간 이후에 동작하는 함수 등록
+            	console.log('timeout 설정함.');
+                timeout = setTimeout(function(){
+                reservationCancel();
+                }, 1000 * 60 * 5 // 1000ms * 60 * 5-> 5분 후에 예약취소.
+                );          
+            }
+			
+			settingTimeout(); // 함수 실행.
+			
+			$(document).on('click',function(){ //화면 클릭시 예약취소함수 갱신
+				clearTimeout(timeout);
+				settingTimeout();
+			})
+			
 			
 			var reservationCancel = function(){
 			
@@ -263,13 +276,13 @@
 					url: "/reservationCancel",
 					type: "get",
 					success: function(){
-						alert("결제를 취소하셨습니다.");
+						alert("결제가 취소되었습니다.");
 						window.location.replace("http://localhost:8080/movieList");
 					}
 				});
 			}
 			
-			var payment = function(){
+			/* var payment = function(){
 				
 				$.ajax({
 					url: "/pay",
@@ -283,16 +296,55 @@
 						alert("결제가 완료되었습니다.");
 					}
 				});
-			}
+			} */
+			
+			var IMP = window.IMP; // 생략가능
+            IMP.init('imp00435953'); // 가맹점 식별 코드 
+			
+			var requestPay = function() {
+				alert('requestPay 호출됨.');
+                // IMP.request_pay(param, callback) 호출
+                IMP.request_pay({ // param
+                    pg: "inicis",
+                    pay_method: "card",
+                    merchant_uid: "ORD20180131-0000012",
+                    name: "노르웨이 회전 의자",
+                    amount: $("#finalPayAmount").html(),
+                    buyer_email: "gildong@gmail.com",
+                    buyer_name: "홍길동은 의적인가 ?",
+                    buyer_tel: "010-4242-4242",
+                    buyer_addr: "서울특별시 강남구 신사동",
+                    buyer_postcode: "01181"
+                }, function (rsp) { // callback
+                      if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+                          // jQuery로 HTTP 요청
+                          $.ajax({
+                              url: "/pay", // 가맹점 서버
+                              method: "POST",
+                              headers: { "Content-Type": "application/json" },
+                              data: JSON.stringify({
+                                  imp_uid: rsp.imp_uid,
+                                  merchant_uid: rsp.merchant_uid
+                              })
+                          }).done(function () {
+                            // 가맹점 서버 결제 API 성공시 로직
+                              alert('결제가 완료되었습니다.');
+                              window.location.replace("http://localhost:8080/movieList");
+                          })
+                        } else {
+                          alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+                        }
+                });
+              }
+			
+			
 			
 			$("#cancel").on("click", function(){
 				reservationCancel();
 			});
 			
 			$("#pay").on("click", function(){
-				payment();
-				//payFrm.submit();
-				//window.location.replace("http://localhost:8080/movieList");
+			    requestPay();
 			});
 			
 			

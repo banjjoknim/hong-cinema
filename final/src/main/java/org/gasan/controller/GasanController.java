@@ -123,14 +123,14 @@ public class GasanController {
 
     @PostMapping(value = "/pay", produces = "application/json;charset=utf-8")
     @ResponseBody
-    public void pay(HttpSession session, @RequestBody Map<String, String> map) {
+    public void pay(HttpSession session, @RequestBody Map<String, String> map) { //ajax로 보낸 data map으로 받음.
 
         SelectedScheduleVO schedule = (SelectedScheduleVO)session.getAttribute("movie");
         SeatReservationVO seat = (SeatReservationVO)session.getAttribute("seatReservation");
         session.setAttribute("seatStr", seat.getSelectedSeatList().toString().replace("[", "").replace("]", ""));
-        payService.pay(schedule, seat, (String)session.getAttribute("seatStr"), map.get("imp_uid"));
+        payService.pay(schedule, seat, (String)session.getAttribute("seatStr"), map.get("imp_uid")); //DB에 데이터 추가.
 
-        log.info(map.get("imp_uid"));
+        log.info("결제 고유번호 : " + map.get("imp_uid"));
         log.info(map.get("merchant_uid"));
         log.info(seat.getSelectedSeatList().toString().replace("[", "").replace("]", ""));
 
