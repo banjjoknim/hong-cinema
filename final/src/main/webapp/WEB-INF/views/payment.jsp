@@ -255,7 +255,7 @@
 			
 			var timeout; 
             var settingTimeout = function(){ //일정 시간 이후에 동작하는 함수 등록
-            	console.log('timeout 설정함.');
+            	//console.log('timeout 재설정함.');
                 timeout = setTimeout(function(){
                 reservationCancel();
                 }, 1000 * 60 * 5 // 1000ms * 60 * 5-> 5분 후에 예약취소.
@@ -282,21 +282,30 @@
 				});
 			}
 			
-			/* var payment = function(){
+			var csrfHeaderName = "${_csrf.headerName}";
+			var csrfTokenValue = "${_csrf.token}";
+			
+			var payment = function(){
 				
 				$.ajax({
 					url: "/pay",
-					type: "post",
+					type: "POST",
 					contentType: 'application/json; charset=utf-8',
+					beforeSend: function(xhr){
+						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+					},
 					data: JSON.stringify({
-						imp_uid: 'rsp.imp_uid',
-                        merchant_uid: 'rsp.merchant_uid'
+                        merchant_uid: paymentNumber
 					}),
 					success: function(){
 						alert("결제가 완료되었습니다.");
+					},
+					error:function(request,status,error){
+			             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 					}
+
 				});
-			} */
+			}
 			
 			var IMP = window.IMP; // 생략가능
             IMP.init('imp00435953'); // 가맹점 식별 코드 
@@ -307,13 +316,12 @@
                 IMP.request_pay({ // param
                     pg: "inicis",
                     pay_method: "card",
-                    merchant_uid: "ORD20180131-0000012",
+                    merchant_uid: paymentNumber,
                     name: "노르웨이 회전 의자",
-                    amount: $("#finalPayAmount").html(),
-                    buyer_email: "gildong@gmail.com",
-                    buyer_name: "홍길동은 의적인가 ?",
+                    amount: 100, //$("#finalPayAmount").html(),
+                    buyer_email: "qowoghd@gmail.com",
+                    buyer_name: "배재홍",
                     buyer_tel: "010-4242-4242",
-                    buyer_addr: "서울특별시 강남구 신사동",
                     buyer_postcode: "01181"
                 }, function (rsp) { // callback
                       if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
@@ -322,9 +330,11 @@
                               url: "/pay", // 가맹점 서버
                               method: "POST",
                               headers: { "Content-Type": "application/json" },
+                              beforeSend: function(xhr){
+          						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+          					  },
                               data: JSON.stringify({
-                                  imp_uid: rsp.imp_uid,
-                                  merchant_uid: rsp.merchant_uid
+                                  merchant_uid: paymentNumber
                               })
                           }).done(function () {
                             // 가맹점 서버 결제 API 성공시 로직
@@ -339,12 +349,33 @@
 			
 			
 			
+			
+           var paymentNumber = "";
+           var getPaymentNumber = function(){
+            	$.ajax({
+            		url: '/getPaymentNumber',
+            		type: 'post',
+            		dataType: 'text',
+            		beforeSend: function(xhr){
+  						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+  					  }, 
+            		success: function(data){
+            			//alert('예매번호 얻어오기 성공!');
+            			paymentNumber = data;
+            			console.log(paymentNumber);
+            		}
+            	});
+            	return paymentNumber;
+            }
+			
+			
 			$("#cancel").on("click", function(){
 				reservationCancel();
 			});
-			
 			$("#pay").on("click", function(){
-			    requestPay();
+				getPaymentNumber();
+			    //requestPay();
+			    payment();
 			});
 			
 			

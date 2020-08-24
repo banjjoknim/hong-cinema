@@ -20,8 +20,20 @@ public class PayServiceImpl implements PayService {
 
     @Override
     public void pay(SelectedScheduleVO selectedScheduleVO, SeatReservationVO seatReservationVO, String seatList,
-            String imp_uid, String userId) {
-        payServiceMapper.registPaymentHistory(userId, imp_uid, selectedScheduleVO, seatReservationVO, seatList);
+            String merchant_uid, String userId) {
+        payServiceMapper.registPaymentHistory(userId, merchant_uid, selectedScheduleVO, seatReservationVO, seatList);
     }
+
+	@Override
+	public String createPaymentNumber() {
+		
+		String paymentNumber = "";
+    	
+    	do {
+    		paymentNumber = "ORD"+String.valueOf((int)(Math.random()*99999));
+    	} while(payServiceMapper.checkPaymentNumber(paymentNumber) != 0);
+    	
+		return paymentNumber;
+	}
 
 }

@@ -10,12 +10,16 @@
   
   <![CDATA[
 	insert into paymentHistory values(
-	#{imp_uid}, reservation_seq.nextval, #{userId}, #{schedule.selectedMovie},
+	#{merchant_uid}, reservation_seq.nextval, #{userId}, #{schedule.selectedMovie},
 	#{schedule.selectedTheaterNumber}, #{schedule.selectedDate}, #{schedule.selectedStartTime}, #{schedule.selectedEndTime}, #{seat.adultType}, #{seat.youthType}, #{seat.preferentialType}, #{seatList}, #{seat.payAmount}, sysdate
 	)
   ]]>
 
 	</insert>
+	
+	<select id="checkPaymentNumber" resultType="int">
+	select count(*) from paymenthistory where paymentNumber = #{paymentNumber}
+	</select>
 
 
 </mapper>
