@@ -20,8 +20,8 @@ public class PayServiceImpl implements PayService {
 
     @Override
     public void pay(SelectedScheduleVO selectedScheduleVO, SeatReservationVO seatReservationVO, String seatList,
-            String imp_uid) {
-        payServiceMapper.registPaymentHistory("userId", imp_uid, selectedScheduleVO, seatReservationVO, seatList);
+            String imp_uid, String userId) {
+        payServiceMapper.registPaymentHistory(userId, imp_uid, selectedScheduleVO, seatReservationVO, seatList);
     }
 
 }

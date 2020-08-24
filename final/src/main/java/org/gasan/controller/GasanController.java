@@ -1,5 +1,6 @@
 package org.gasan.controller;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,8 +40,10 @@ public class GasanController {
     private PayService payService;
 
     @GetMapping(value = "/movieList")
-    public String getAllListBySelectedDate(Model model) throws Exception { // 영화리스트를 얻어온다.
+    public String getAllListBySelectedDate(Model model, Principal principal) throws Exception { // 영화리스트를 얻어온다.
 
+    	log.info("userName : "+principal.getName());
+    	
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
         Calendar cal = Calendar.getInstance();
@@ -123,12 +126,14 @@ public class GasanController {
 
     @PostMapping(value = "/pay", produces = "application/json;charset=utf-8")
     @ResponseBody
-    public void pay(HttpSession session, @RequestBody Map<String, String> map) { //ajax로 보낸 data map으로 받음.
+    public void pay(HttpSession session, @RequestBody Map<String, String> map, Principal principal) { //ajax로 보낸 data map으로 받음.
 
+    	log.info("/pay 매핑됨.");
+    	
         SelectedScheduleVO schedule = (SelectedScheduleVO)session.getAttribute("movie");
         SeatReservationVO seat = (SeatReservationVO)session.getAttribute("seatReservation");
         session.setAttribute("seatStr", seat.getSelectedSeatList().toString().replace("[", "").replace("]", ""));
-        payService.pay(schedule, seat, (String)session.getAttribute("seatStr"), map.get("imp_uid")); //DB에 데이터 추가.
+        payService.pay(schedule, seat, (String)session.getAttribute("seatStr"), map.get("imp_uid"), principal.getName()); //DB에 데이터 추가.
 
         log.info("결제 고유번호 : " + map.get("imp_uid"));
         log.info(map.get("merchant_uid"));

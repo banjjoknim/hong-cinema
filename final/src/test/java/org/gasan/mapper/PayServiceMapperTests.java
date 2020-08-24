@@ -19,6 +19,5 @@ public class PayServiceMapperTests {
 	
 	@Test
 	public void registPaymentHistoryTest() {
-		
 	}
 }

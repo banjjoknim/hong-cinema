@@ -23,6 +23,11 @@
 	
 	<context:component-scan base-package="org.gasan.controller" />
 	
+	<context:component-scan base-package="org.gasan.exception"></context:component-scan>
+	
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+	</beans:bean>
 	
 	
 </beans:beans>

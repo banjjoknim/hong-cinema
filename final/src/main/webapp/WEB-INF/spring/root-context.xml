@@ -33,19 +33,47 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate"
+		destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactory"></constructor-arg>
+	</bean>
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 	<property name="dataSource" ref="dataSource"></property>
 	</bean>
+	
+	<!-- 메일보내기 -->
+   <bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="smtp.gmail.com" />
+      <property name="port" value="587" />
+      <property name="username" value="koittih@gmail.com" />
+      <property name="password" value="koitt03@@" />
+      
+      <property name="javaMailProperties">
+         <props>
+               <prop key="mail.transport.protocol">smtp</prop>
+               <prop key="mail.smtp.auth">true</prop>
+               <prop key="mail.smtp.starttls.enable">true</prop>
+               <prop key="mail.debug">true</prop>
+         </props>
+      </property>
+    </bean>
 	
 	<tx:annotation-driven/>
 
 	<mybatis-spring:scan
 		base-package="org.gasan.mapper" />
+		
+		<context:component-scan
+		base-package="org.gasan.dao"></context:component-scan>
 
 	
 	<context:component-scan
 		base-package="org.gasan.service"></context:component-scan>
 		<context:component-scan base-package="org.zerock.aop"></context:component-scan>
+		
+		<context:annotation-config></context:annotation-config>
 		
 		<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 		

@@ -6,6 +6,6 @@ import org.gasan.domain.SelectedScheduleVO;
 public interface PayService {
 
     public void pay(SelectedScheduleVO selectedScheduleVO, SeatReservationVO seatReservationVO, String seatList,
-            String imp_uid);
+            String imp_uid, String userId);
 
 }
