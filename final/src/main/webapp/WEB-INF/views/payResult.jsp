@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="/movieList/20200425">예매하기</a>
+<a href="/movieList">예매하기</a>
 </body>
 </html>

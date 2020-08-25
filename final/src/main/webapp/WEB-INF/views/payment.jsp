@@ -12,26 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="/resources/simplex.css" rel="stylesheet">
-    <style>
-        .form-group {
-            margin-left: 50px;
-        }
-
-        tr {
-            border: 1px solid darkgray;
-        }
-
-        table {
-            border-collapse: collapse;
-            border: 1px solid darkgray;
-            margin: 0 auto;
-        }
-
-        td {
-            padding: 20px;
-            border-right: 1px solid darkgray;
-        }
-    </style>
+    <link href="/resources/payment.css" rel="stylesheet">
 </head>
 
 <body>
@@ -106,7 +87,7 @@
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1"
-                                    value="option1" checked="" style="width: 15px; height: 15px;">
+                                    value="card" checked="checked" style="width: 15px; height: 15px;">
                                 <span style="font-size: 120%;">카드</span>
                             </label>
                         </div>
@@ -115,7 +96,7 @@
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-                                    value="option2" style="width: 15px; height: 15px;">
+                                    value="trans" style="width: 15px; height: 15px;">
                                 <span style="font-size: 120%;">계좌이체</span>
                             </label>
                         </div>
@@ -124,7 +105,7 @@
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3"
-                                    value="option3" style="width: 15px; height: 15px;">
+                                    value="phone" style="width: 15px; height: 15px;">
                                 <span style="font-size: 120%;">휴대폰 결제</span>
                             </label>
                         </div>
@@ -170,14 +151,14 @@
                     금액</label>
                 <div style="width: 100%;">
                     <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="padding: 10px;">성인 ${seatReservation.adultType }명 : <span style="font-weight: bold;"> ${seatReservation.adultType * 8000 }</span>원</li>
-                        <li style="padding: 10px;">청소년 ${seatReservation.youthType }명 : <span style="font-weight: bold;"> ${seatReservation.youthType * 5000 }</span>원</li>
+                        <li style="padding: 10px;">성인 ${seatReservation.adultType }명 : <span style="font-weight: bold;"> ${seatReservation.adultType * 200 }</span>원</li>
+                        <li style="padding: 10px;">청소년 ${seatReservation.youthType }명 : <span style="font-weight: bold;"> ${seatReservation.youthType * 100 }</span>원</li>
                         <li style="padding: 10px;">우대 ${seatReservation.preferentialType }명 : <span style="font-weight: bold;"> ${seatReservation.preferentialType * 0 }</span>원</li>
                     </ul>
                 </div>
                 <div
                     style="width: 100%; height: 30px; background-color: darkslategray; color: white; text-align: right; padding-right: 20px;">
-                    총 <span style="font-size: 150%; font-weight: bold;">${seatReservation.adultType * 8000 + seatReservation.youthType * 5000 + seatReservation.preferentialType * 0 }</span>원
+                    총 <span style="font-size: 150%; font-weight: bold;">${seatReservation.adultType * 200 + seatReservation.youthType * 100 + seatReservation.preferentialType * 0 }</span>원
                 </div>
             </div>
 
@@ -203,7 +184,7 @@
 
                 <div
                     style="width: 100%; height: 30px; background-color: darkslategray; color: white; text-align: right; padding-right: 20px;">
-                    총 <span id="finalPayAmount" style="font-size: 150%; font-weight: bold;">${seatReservation.adultType * 8000 + seatReservation.youthType * 5000 + seatReservation.preferentialType * 0 }</span>원
+                    총 <span id="finalPayAmount" style="font-size: 150%; font-weight: bold;">${seatReservation.adultType * 200 + seatReservation.youthType * 100 + seatReservation.preferentialType * 0 }</span>원
                 </div>
             </div>
         </div>
@@ -226,6 +207,7 @@
 		crossorigin="anonymous"></script>
 		<script type="text/javascript"
         src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
+        <!-- <script src="/resources/js/payment.js"></script> -->
 		<script type="text/javascript">
 		$(document).ready(function(){
 			
@@ -282,42 +264,23 @@
 	            	return paymentNumber;
 	            }
 			
-			var payment = function(paymentNumber){
-				
-				$.ajax({
-					url: "/pay",
-					type: "POST",
-					contentType: 'application/json; charset=utf-8',
-					beforeSend: function(xhr){
-						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-					},
-					data: JSON.stringify({
-						imp_uid: 'rsp.imp_uid',
-                        merchant_uid: paymentNumber
-					}),
-					success: function(){
-						alert("결제가 완료되었습니다.");
-						console.log("${userid}")
-					},
-					error:function(request,status,error){
-			             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-					}
-
-				});
-			}
-			
+			var payOption = "card"; // default 결제수단
+			$('input[name=optionsRadios]').on('click',function(){
+			payOption = $(this).val();
+            //console.log(payOption);
+			});
+            
 			var IMP = window.IMP; // 생략가능
             IMP.init('imp00435953'); // 가맹점 식별 코드 
-			
 			var requestPay = function(paymentNumber) {
-				alert('requestPay 호출됨.');
+				//alert('requestPay 호출됨.');
                 // IMP.request_pay(param, callback) 호출
                 IMP.request_pay({ // param
-                    pg: "inicis",
-                    pay_method: "card",
+                    pg: "inisis",
+                    pay_method: payOption,
                     merchant_uid: paymentNumber,
-                    name: '${movie.selectedDate.substring(4,6)}.${movie.selectedDate.substring(6,8)} (${dayOfWeek }) ${movie.selectedMovie } 좌석 예매',
-                    amount: 100, //$("#finalPayAmount").html(),
+                    name: '${movie.selectedDate.substring(4,6)}.${movie.selectedDate.substring(6,8)} (${dayOfWeek }) 영화 : ${movie.selectedMovie } 좌석 예매',
+                    amount: $("#finalPayAmount").html(),
                     buyer_email: "${userEmail}",
                     buyer_name: "${userName}",
                     buyer_tel: "${userPhone}",
@@ -338,7 +301,7 @@
                           }).done(function () {
                             // 가맹점 서버 결제 API 성공시 로직
                               alert('결제가 완료되었습니다.');
-                              window.location.replace("http://localhost:8080/movieList");
+                              window.location.replace("http://localhost:8080/payResult");
                           })
                         } else {
                           alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
@@ -352,13 +315,7 @@
 			$("#pay").on("click", function(){
 				console.log("현재 주문 고유번호 : " +getPaymentNumber());
 			    requestPay(paymentNumber);
-			    //payment(paymentNumber);
 			});
-			
-			
-			
-			
-			
 			
 		});
 		//$(document).ready(function(){ end

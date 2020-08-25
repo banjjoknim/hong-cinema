@@ -147,10 +147,10 @@ public class GasanController {
         return "ajax";
     }
 
-    @GetMapping("/index") // 페이지 기능 동작 확인용
+    @GetMapping("/payResult") // 결제 결과 페이지
     public String index() {
 
-        return "index";
+        return "payResult";
     }
 
     @GetMapping("/iamportEx")

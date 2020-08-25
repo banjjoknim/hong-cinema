@@ -1,0 +1,19 @@
+@charset "UTF-8";
+        .form-group {
+            margin-left: 50px;
+        }
+
+        tr {
+            border: 1px solid darkgray;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid darkgray;
+            margin: 0 auto;
+        }
+
+        td {
+            padding: 20px;
+            border-right: 1px solid darkgray;
+        }
