@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,42 +36,18 @@
 
 <body>
 
-    <!-- navbar start -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
-            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarColor02">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
-    <!-- navbar end -->
-
     <header>
 
         <!-- <h1 style="text-align: center; margin: 40px; font-size: 300%;">결제정보</h1> -->
 
     </header>
+    
+    <sec:authorize access="isAuthenticated()">
+       	<sec:authentication property="principal.username" var="userid" />
+       	<sec:authentication property="principal.member.userName" var="userName"/>
+       	<sec:authentication property="principal.member.userEmail" var="userEmail"/>
+       	<sec:authentication property="principal.member.userPhone" var="userPhone"/>
+    </sec:authorize>
 
     <!-- paymentBox start -->
     <div class="paymentBox" style="margin: 0 auto; width: 900px;">
@@ -319,6 +297,7 @@
 					}),
 					success: function(){
 						alert("결제가 완료되었습니다.");
+						console.log("${userid}")
 					},
 					error:function(request,status,error){
 			             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -337,12 +316,11 @@
                     pg: "inicis",
                     pay_method: "card",
                     merchant_uid: paymentNumber,
-                    name: '이름',
+                    name: '${movie.selectedDate.substring(4,6)}.${movie.selectedDate.substring(6,8)} (${dayOfWeek }) ${movie.selectedMovie } 좌석 예매',
                     amount: 100, //$("#finalPayAmount").html(),
-                    buyer_email: "qowoghd@gmail.com",
-                    buyer_name: "배재홍",
-                    buyer_tel: "010-4242-4242",
-                    buyer_postcode: "01181"
+                    buyer_email: "${userEmail}",
+                    buyer_name: "${userName}",
+                    buyer_tel: "${userPhone}",
                 }, function (rsp) { // callback
                       if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
                           // jQuery로 HTTP 요청
@@ -354,7 +332,7 @@
           						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
           					  },
                               data: JSON.stringify({
-                            	  imp_uid: 'rsp.imp_uid',
+                            	  imp_uid: rsp.imp_uid,
                                   merchant_uid: paymentNumber
                               })
                           }).done(function () {
@@ -373,8 +351,8 @@
 			});
 			$("#pay").on("click", function(){
 				console.log("현재 주문 고유번호 : " +getPaymentNumber());
-			    //requestPay();
-			    payment(paymentNumber);
+			    requestPay(paymentNumber);
+			    //payment(paymentNumber);
 			});
 			
 			
@@ -385,6 +363,7 @@
 		});
 		//$(document).ready(function(){ end
 		</script>
+		
 </body>
 
 </html>
