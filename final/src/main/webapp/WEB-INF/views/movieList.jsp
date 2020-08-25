@@ -242,13 +242,41 @@ li.date {
 			var dateCheck = false; //날짜 선택유무
 			var movieCheck = false; //영화 선택유무
 			var allCheck = false; // 날짜, 영화 모두 선택유무
-			console.log("movieCheck: "+movieCheck);
-			console.log("dateCheck: "+dateCheck);
-			console.log("allCheck: "+allCheck);
-			console.log($("#selectedDate").val());
+			//console.log("movieCheck: "+movieCheck);
+			//console.log("dateCheck: "+dateCheck);
+			//console.log("allCheck: "+allCheck);
+			//console.log($("#selectedDate").val());
 			//$(".date").eq(0).addClass("selected");
 			
-			console.log(count(1));
+			//console.log(count(1)); 1번 스케쥴에 해당하는 좌석수 출력
+			
+			$('.date').eq(0).addClass('selected');
+			
+			//--------------getScheduleByDate------추가-----------------
+			getScheduleByDate(function(list){
+				
+				var str = "";
+				
+				for(var i = 0, len = list.length||0; i<len; i++){
+					//console.log(list[i]);//콘솔에 리스트 출력.
+					
+					var scheduleCode = list[i].scheduleCode;
+								//console.log(scheduleCode);
+					
+					str += '<li class="movieSchedule"><span class="movieName" ';
+					str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
+					str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+					str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
+					str += '<span style="float: right; font-size: 110%"><span ';
+					str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
+					str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
+					str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span ';		
+					str += 'class="theaterNumber">'+list[i].theaterCode+'</span>관</span></li>';	
+				}
+							
+					$("#scheduleUL").html(str);
+			});
+			//------------getScheduleByDate-----추가--------------------
 			
 			//-----------------------------------------------------
 			getMovieByDate(function(list){
@@ -271,7 +299,16 @@ li.date {
 			$(document).on("click", ".movieTitle" ,function(e) { //영화 제목 누르면 그에 맞는 DB상의 상영시간표 나오게 함.
 				//alert('영화제목 클릭함');
 				//$("#selectedMovie").val($(this).html());
-				if($(this).is(".selected") === true) {
+				var checkDate; 
+				  for(var i = 0; i<$('.date').length; i++){ // 날짜 선택유무 체크
+					  if($('.date').eq(i).hasClass('selected')){
+						  checkDate = true;
+						  //console.log(checkDate);
+						  break;
+					  }
+				  }
+				if($(this).hasClass("selected") === true) { 
+					if(checkDate == true) { // 날짜가 선택되어 있다면 날짜로 스케쥴 얻어옴. 아니라면 유지.
 					  $(this).removeClass("selected");
 					  $("#selectedMovie").val("");
 					  movieCheck = false;
@@ -290,7 +327,7 @@ li.date {
 									//console.log(list[i]);//콘솔에 리스트 출력.
 									
 									var scheduleCode = list[i].scheduleCode;
-									console.log(scheduleCode);
+									//console.log(scheduleCode);
 									
 									str += '<li class="movieSchedule"><span class="movieName" ';
 									str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
@@ -308,8 +345,8 @@ li.date {
 									//console.log(movieCheck);
 							});
 							//------------getScheduleByDate-------------------------
+							} 
 						}
-					  
 					} else {
 					  $(".movieTitle").removeClass("selected");
 				      $(this).addClass("selected");
@@ -323,9 +360,9 @@ li.date {
 					}
 
 				
-				console.log("선택 영화: " + $("#selectedMovie").val());
+				//console.log("선택 영화: " + $("#selectedMovie").val());
 				
-				console.log("loading...");
+				//console.log("loading...");
 				
 				if(movieCheck === true && allCheck === false) {
 					//--------------getScheduleByName-----------------------
@@ -337,7 +374,7 @@ li.date {
 						//console.log(list[i]);//콘솔에 리스트 출력.
 						
 						var scheduleCode = list[i].scheduleCode;
-									console.log(scheduleCode);
+									//console.log(scheduleCode);
 						
 						str += '<li class="movieSchedule"><span class="movieName" ';
 						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
@@ -363,7 +400,7 @@ li.date {
 							//console.log(list[i]);//콘솔에 리스트 출력.
 							
 							var scheduleCode = list[i].scheduleCode;
-									console.log(scheduleCode);
+									//console.log(scheduleCode);
 							
 							str += '<li class="movieSchedule"><span class="movieName" ';
 							str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
@@ -377,18 +414,12 @@ li.date {
 						}
 									
 							$("#scheduleUL").html(str);
-							console.log("allCheck: "+allCheck);
+							//console.log("allCheck: "+allCheck);
 					});
 				//------------getScheduleByAll-------------------------
 				}
 				
-				
-				
-				
-				
 			});
-			
-			
 			
 			//------------$(".date").on("click", function(e) {-------------------------
 			$(".date").on("click", function(e) {
@@ -397,16 +428,25 @@ li.date {
 				//var month = $(this).children(".month").html();
 				//var day = $(this).children(".day").html();
 				
+				var checkMovie;
+				  for(var i = 0; i<$('.movieTitle').length; i++){ // 영화 선택유무 체크
+					  if($('.movieTitle').eq(i).hasClass('selected')){
+						  checkMovie = true;
+						  //console.log(checkMovie);
+						  break;
+					  }
+				  }
 				
-				if($(this).is(".selected") === true) {
-					  $(this).removeClass("selected");
-					  $("#selectedDate").val("");
-					  dateCheck = false;
-					  allCheck = false;
-					  console.log("dateCheck:" + dateCheck);
-					  console.log("allCheck: "+allCheck);
-					  removeSchedule();
+				if($(this).hasClass("selected") === true) {
 					  
+					  if(checkMovie == true) { // 영화가 선택되어 있다면 영화로 스케쥴 얻어옴. 아니라면 유지.
+						  $(this).removeClass("selected");
+						  $("#selectedDate").val("");
+						  dateCheck = false;
+						  allCheck = false;
+						  //console.log("dateCheck:" + dateCheck);
+						  //console.log("allCheck: "+allCheck);
+						  removeSchedule();
 					//--------------getScheduleByName-----------------------
 						getScheduleByName(function(list){
 							
@@ -416,7 +456,7 @@ li.date {
 								//console.log(list[i]);//콘솔에 리스트 출력.
 								
 								var scheduleCode = list[i].scheduleCode;
-									console.log(scheduleCode);
+									//console.log(scheduleCode);
 								
 								str += '<li class="movieSchedule"><span class="movieName" ';
 								str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
@@ -432,6 +472,7 @@ li.date {
 								$("#scheduleUL").html(str);
 						});
 						//--------------getScheduleByName-----------------------
+					  }
 					  
 					} else {
 						$(".date").removeClass("selected");
@@ -456,17 +497,17 @@ li.date {
 						if(movieCheck === true){
 							allCheck = true;
 						}
-						console.log("dateCheck:" + dateCheck);
-						console.log("allCheck: "+allCheck);
+						//console.log("dateCheck:" + dateCheck);
+						//console.log("allCheck: "+allCheck);
 					}
 				
 				//console.log(year);
 				//console.log(month);
 				//console.log(day);
 				
-				console.log("선택 날짜: " + $("#selectedDate").val());
+				//console.log("선택 날짜: " + $("#selectedDate").val());
 				
-				console.log("loading...");
+				//console.log("loading...");
 				
 				
 				if(dateCheck === true && allCheck === false) {
@@ -479,7 +520,7 @@ li.date {
 						//console.log(list[i]);//콘솔에 리스트 출력.
 						
 						var scheduleCode = list[i].scheduleCode;
-									console.log(scheduleCode);
+									//console.log(scheduleCode);
 						
 						str += '<li class="movieSchedule"><span class="movieName" ';
 						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
@@ -502,7 +543,7 @@ li.date {
 					var str = ""; 
 					
 					for(var i = 0, len = list.length||0; i<len; i++){
-						console.log(list[i]);//콘솔에 리스트 출력.
+						//console.log(list[i]);//콘솔에 리스트 출력.
 						
 						str += '<li class="movieTitle">'+list[i].movieName+'</li>'
 						
@@ -524,7 +565,7 @@ li.date {
 							//console.log(list[i]);//콘솔에 리스트 출력.
 							
 							var scheduleCode = list[i].scheduleCode;
-									console.log(scheduleCode);
+									//console.log(scheduleCode);
 							
 							str += '<li class="movieSchedule"><span class="movieName" ';
 							str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
@@ -538,7 +579,7 @@ li.date {
 						}
 									
 							$("#scheduleUL").html(str);
-							console.log("allCheck: "+allCheck);
+							//console.log("allCheck: "+allCheck);
 					});
 				//------------getScheduleByAll-------------------------
 				}
@@ -590,7 +631,7 @@ li.date {
 	function getScheduleByDate(callback, error) {
 		
 		var date = $("#selectedDate").val();
-		console.log(date);
+		//console.log(date);
 
 		$.getJSON("/getScheduleByDate/"+date+".json", //json을 얻어온다. AjaxController mapping
 				function(data) {
@@ -611,7 +652,7 @@ li.date {
 	function getScheduleByName(callback, error) {
 		
 		var movieName = $("#selectedMovie").val();
-		console.log(movieName);
+		//console.log(movieName);
 
 		$.getJSON("/getScheduleByName/"+movieName+".json", //json을 얻어온다. AjaxController mapping
 				function(data) {
@@ -629,8 +670,8 @@ li.date {
 		
 		var selectedDate = $("#selectedDate").val();
 		var selectedMovieName = $("#selectedMovie").val();
-		console.log(selectedDate);
-		console.log(selectedMovieName);
+		//console.log(selectedDate);
+		//console.log(selectedMovieName);
 
 		$.getJSON("/getScheduleByAll/"+selectedDate+"/"+selectedMovieName+".json", //json을 얻어온다. AjaxController mapping
 				function(data) {
