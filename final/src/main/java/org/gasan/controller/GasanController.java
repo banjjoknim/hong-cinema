@@ -131,10 +131,10 @@ public class GasanController {
         SelectedScheduleVO schedule = (SelectedScheduleVO)session.getAttribute("movie");
         SeatReservationVO seat = (SeatReservationVO)session.getAttribute("seatReservation");
         session.setAttribute("seatStr", seat.getSelectedSeatList().toString().replace("[", "").replace("]", ""));
-//        payService.pay(schedule, seat, (String)session.getAttribute("seatStr"), map.get("merchant_uid"), principal.getName()); //DB에 데이터 추가.
+        payService.pay(schedule, seat, (String)session.getAttribute("seatStr"), map.get("imp_uid"), map.get("merchant_uid"), principal.getName()); //DB에 데이터 추가.
 
+        log.info("i'mport 고유번호 : " + map.get("imp_uid"));
         log.info("가맹점 결제 고유번호 : " + map.get("merchant_uid"));
-        log.info(map.get("merchant_uid"));
         log.info(seat.getSelectedSeatList().toString().replace("[", "").replace("]", ""));
 
     }

@@ -284,8 +284,27 @@
 			
 			var csrfHeaderName = "${_csrf.headerName}";
 			var csrfTokenValue = "${_csrf.token}";
+			var paymentNumber;
 			
-			var payment = function(){
+			function getPaymentNumber(){
+	            	$.ajax({
+	            		url: '/getPaymentNumber',
+	            		type: 'post',
+	            		async: false,
+	            		dataType: 'text',
+	            		beforeSend: function(xhr){
+	  						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+	  					  }, 
+	            		success: function(data){
+	            			//alert('예매번호 얻어오기 성공!');
+	            			paymentNumber = data;
+	            			//console.log(paymentNumber);
+	            		}
+	            	});
+	            	return paymentNumber;
+	            }
+			
+			var payment = function(paymentNumber){
 				
 				$.ajax({
 					url: "/pay",
@@ -295,6 +314,7 @@
 						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 					},
 					data: JSON.stringify({
+						imp_uid: 'rsp.imp_uid',
                         merchant_uid: paymentNumber
 					}),
 					success: function(){
@@ -310,14 +330,14 @@
 			var IMP = window.IMP; // 생략가능
             IMP.init('imp00435953'); // 가맹점 식별 코드 
 			
-			var requestPay = function() {
+			var requestPay = function(paymentNumber) {
 				alert('requestPay 호출됨.');
                 // IMP.request_pay(param, callback) 호출
                 IMP.request_pay({ // param
                     pg: "inicis",
                     pay_method: "card",
                     merchant_uid: paymentNumber,
-                    name: "노르웨이 회전 의자",
+                    name: '이름',
                     amount: 100, //$("#finalPayAmount").html(),
                     buyer_email: "qowoghd@gmail.com",
                     buyer_name: "배재홍",
@@ -334,6 +354,7 @@
           						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
           					  },
                               data: JSON.stringify({
+                            	  imp_uid: 'rsp.imp_uid',
                                   merchant_uid: paymentNumber
                               })
                           }).done(function () {
@@ -347,35 +368,13 @@
                 });
               }
 			
-			
-			
-			
-           var paymentNumber = "";
-           var getPaymentNumber = function(){
-            	$.ajax({
-            		url: '/getPaymentNumber',
-            		type: 'post',
-            		dataType: 'text',
-            		beforeSend: function(xhr){
-  						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-  					  }, 
-            		success: function(data){
-            			//alert('예매번호 얻어오기 성공!');
-            			paymentNumber = data;
-            			console.log(paymentNumber);
-            		}
-            	});
-            	return paymentNumber;
-            }
-			
-			
 			$("#cancel").on("click", function(){
 				reservationCancel();
 			});
 			$("#pay").on("click", function(){
-				getPaymentNumber();
+				console.log("현재 주문 고유번호 : " +getPaymentNumber());
 			    //requestPay();
-			    payment();
+			    payment(paymentNumber);
 			});
 			
 			
