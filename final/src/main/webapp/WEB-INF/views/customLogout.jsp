@@ -24,7 +24,7 @@
     <![endif]-->
 </head>
 <body>
-	<h1>Logout Page</h1>
+	<%@ include file="board/header.jsp" %>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">

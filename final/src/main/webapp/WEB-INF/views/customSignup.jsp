@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<link rel="stylesheet" href="/resources/simplex.css">
+<!-- <link rel="stylesheet" href="/resources/simplex.css"> -->
 <link rel="stylesheet" href="/resources/user_join.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -23,6 +23,7 @@
 
 </head>
 <body>
+<%@ include file="board/header.jsp" %>
 	<div class="container">
 		<form role="form" method='post' action="/customSignup" id="regForm">
 			<fieldset>

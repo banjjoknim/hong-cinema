@@ -19,9 +19,7 @@
 
 </head>
 <body>
-<h1>Custom Login Page</h1>
-<h2><c:out value="${error}"/></h2>
-<h2><c:out value="${logout}"/></h2>
+<%@ include file="board/header.jsp" %>
 
 
 
@@ -39,7 +37,7 @@
       </ul>
     </div>
     <div id="myTabContent" class="tab-content">
-      <div style="width:2000px; height: 300px; margin-top: 20px; background-color: #F2F2F2;">
+      <div style="width:100%; height: 300px; margin-top: 20px; background-color: #F2F2F2;">
         <div class="tab-pane fade active show" name="user">
           <div class="container_inner">
             <div class="login_box">
