@@ -276,6 +276,30 @@
 			payOption = $(this).val();
             //console.log(payOption);
 			});
+			
+			var payment = function(paymentNumber){
+			
+			$.ajax({
+				url: "/pay",
+				type: "POST",
+				contentType: 'application/json; charset=utf-8',
+				beforeSend: function(xhr){
+					xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+				},
+				data: JSON.stringify({
+					imp_uid: 'rsp.imp_uid',
+                    merchant_uid: paymentNumber
+				}),
+				success: function(){
+					alert("결제가 완료되었습니다.");
+					console.log("${userid}")
+				},
+				error:function(request,status,error){
+		             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+
+			});
+		}
             
 			var IMP = window.IMP; // 생략가능
             IMP.init('imp00435953'); // 가맹점 식별 코드 
@@ -323,8 +347,9 @@
 			$("#pay").on("click", function(){
 				console.log("현재 주문 고유번호 : " +getPaymentNumber());
 				//alert('결제가 완료되었습니다.');
-				$('#myModal').show();
+				//$('#myModal').show();
 			    //requestPay(paymentNumber);
+			    payment(paymentNumber);
 			});
 			
 			$(".modalClose").on("click",function(){
