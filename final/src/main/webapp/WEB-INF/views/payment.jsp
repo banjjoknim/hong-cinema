@@ -33,49 +33,69 @@
     <!-- paymentBox start -->
     <div class="paymentBox" style="margin: 0 auto; width: 900px;">
 
-        <!-- form start -->
-        <h3 style="font-size: 250%; margin-top: 150px; margin-left: 50px;">예매정보</h3>
+        <!-- The Modal -->
+    <div id="myModal" class="modal">
 
-        <div class="form-group" style="border-top: 1px solid darkgrey;">
-            <fieldset style="margin: 0px auto; width: 700px; padding: 30px 0;">
-                <img src="https://via.placeholder.com/240x320.png" style="float: left;">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <p style="text-align: center;"><span style="font-size: 14pt;"><b><span
+                            style="font-size: 24pt;">예매내역</span></b></span></p>
 
-                <div class="form-group row"
-                    style="float: left; width: 460px; padding: 0px 20px 15px 80px; margin: 0; font-size: 200%; font-weight: bold;">
-                    <span style="font-weight: bold;">${movie.selectedMovie }</span>
-                </div>
-
-                <div class="form-group row"
-                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 135%;">
-                    <span style="font-weight: bold;">가산시네마</span>
-                </div>
-
-                <div class="form-group row"
-                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 135%;">
-                    <span style="font-weight: bold;">상영관 : ${movie.selectedTheaterNumber }관<br>
-                     상영날짜 : ${movie.selectedDate.substring(0,4)}.${movie.selectedDate.substring(4,6)}.${movie.selectedDate.substring(6,8)} (${dayOfWeek })<br>
-                    상영시간 : ${movie.selectedStartTime } ~ ${movie.selectedEndTime }</span>
-                </div>
-
-                <div class="form-group row"
-                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 135%;">
-                    <span style="font-weight: bold;">인원 수 : 총 ${seatReservation.totalPeople }명<br>
-                    (성인 ${seatReservation.adultType }명/청소년 ${seatReservation.youthType }명/우대 ${seatReservation.preferentialType }명)</span>
-                </div>
-
-                <div class="form-group row"
-                    style="float: left; width: 460px; padding: 10px 20px 15px 80px; margin: 0; font-size: 135%;">
-                    <span style="font-weight: bold;">선택좌석 : 
-                    <c:forEach items="${seatReservation.selectedSeatList }" var="seat" varStatus="status">
-                    <c:choose>
-                    <c:when test="${status.last }">${seat }</c:when>
-                    <c:otherwise>${seat }, </c:otherwise>
-                    </c:choose>
-                    </c:forEach></span>
-                </div>
-
-            </fieldset>
+                            <div class="form-group" style="border-top: 1px solid darkgrey; margin-right: 50px;">
+                                <fieldset style="margin: 0px auto; width: 700px; padding: 30px 0;">
+                                
+                                <div class="form-group row"
+                                            style="width: 440px; padding: 10px 20px 15px 30px; margin: 0; font-size: 200%;">
+                                                	<b>예매번호 : <span id="paymentNumber"></span></b>
+                                        </div>
+                                
+                                    <img src="/resources/images/${movie.selectedPoster }" width="240" height="320" style="float: left; margin-left: 20px;">
+                    
+                                    <div class="form-group row"
+                                        style="float: left; width: 440px; padding: 0px 20px 15px 30px; margin: 0; font-size: 200%; font-weight: bold;">
+                                        <span style="font-weight: bold;">${movie.selectedMovie }</span>
+                                    </div>
+                    
+                                    <div class="form-group row"
+                                        style="float: left; width: 440px; padding: 10px 20px 15px 30px; margin: 0; font-size: 135%;">
+                                        <span style="font-weight: bold;">가산시네마</span>
+                                    </div>
+                    
+                                    <div class="form-group row"
+                                        style="float: left; width: 440px; padding: 10px 20px 15px 30px; margin: 0; font-size: 135%;">
+                                        <span style="font-weight: bold;">상영관 : ${movie.selectedTheaterNumber }관<br>
+                                         상영날짜 : ${movie.selectedDate.substring(0,4)}.${movie.selectedDate.substring(4,6)}.${movie.selectedDate.substring(6,8)} (${dayOfWeek })<br>
+                                        상영시간 : ${movie.selectedStartTime } ~ ${movie.selectedEndTime }</span>
+                                    </div>
+                    
+                                    <div class="form-group row"
+                                        style="float: left; width: 440px; padding: 10px 20px 15px 30px; margin: 0; font-size: 135%;">
+                                        <span style="font-weight: bold;">인원 수 : 총 ${seatReservation.totalPeople }명<br>
+                                        (성인 ${seatReservation.adultType }명/청소년 ${seatReservation.youthType }명/우대 ${seatReservation.preferentialType }명)</span>
+                                    </div>
+                    
+                                    <div class="form-group row"
+                                        style="float: left; width: 440px; padding: 10px 20px 15px 30px; margin: 0; font-size: 135%;">
+                                        <span style="font-weight: bold;">선택좌석 : 
+                                        <c:forEach items="${seatReservation.selectedSeatList }" var="seat" varStatus="status">
+                                        <c:choose>
+                                        <c:when test="${status.last }">${seat }</c:when>
+                                        <c:otherwise>${seat }, </c:otherwise>
+                                        </c:choose>
+                                        </c:forEach></span>
+                                    </div>
+                    
+                                </fieldset>
+                            </div>
+            <div class="modalClose" style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px; clear: both;">
+                <span style="font-size: 13pt;">
+                    확인
+                </span>
+            </div>
         </div>
+
+    </div>
+    <!--End Modal-->
         
         <!-- payment way start -->
         <div style="float: left; width: 540px; margin-left: 50px;">
@@ -114,19 +134,6 @@
                 </tr>
                 <tr>
                     <td colspan="3" style="font-size: 150%;">
-                        <!-- <div style="width: 40%; float: left; margin-left: 20px;">
-                            여기는 카드 또는 은행 선택영역 카드 은행 그림.
-                        </div>
-                        <div style="width: 40%; float: left; margin-left: 40px;">
-                            <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
-                                readonly="" style="width: 200px; margin-top: 3px;">
-                            <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
-                                readonly="" style="width: 200px; margin-top: 3px;">
-                            <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
-                                readonly="" style="width: 200px; margin-top: 3px;">
-                            <input class="form-control" id="readOnlyInput" type="text" placeholder="naver@naver.com"
-                                readonly="" style="width: 200px; margin-top: 3px;">
-                        </div> -->
                         <div style="height: 362px; overflow: hidden;">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et viverra libero, ac
                             dignissim enim. Mauris nec bibendum ex, et rhoncus tortor. Vivamus non enim sed ipsum
@@ -190,7 +197,6 @@
         </div>
         <!-- pay amount show end -->
 
-        <!-- form end -->
     </div>
     <!-- paymentBox end -->
         <!-- decision button start -->
@@ -258,6 +264,7 @@
 	            		success: function(data){
 	            			//alert('예매번호 얻어오기 성공!');
 	            			paymentNumber = data;
+	            			$("#paymentNumber").html(paymentNumber);
 	            			//console.log(paymentNumber);
 	            		}
 	            	});
@@ -300,8 +307,9 @@
                               })
                           }).done(function () {
                             // 가맹점 서버 결제 API 성공시 로직
+                            //window.location.replace("http://localhost:8080/movieList");
                               alert('결제가 완료되었습니다.');
-                              window.location.replace("http://localhost:8080/payResult");
+                              $('#myModal').show();
                           })
                         } else {
                           alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
@@ -314,9 +322,16 @@
 			});
 			$("#pay").on("click", function(){
 				console.log("현재 주문 고유번호 : " +getPaymentNumber());
-			    requestPay(paymentNumber);
+				//alert('결제가 완료되었습니다.');
+				$('#myModal').show();
+			    //requestPay(paymentNumber);
 			});
 			
+			$(".modalClose").on("click",function(){
+				event.preventDefault();
+				window.location.replace("http://localhost:8080/movieList");
+				//$('#myModal').hide();
+			})
 		});
 		//$(document).ready(function(){ end
 		</script>

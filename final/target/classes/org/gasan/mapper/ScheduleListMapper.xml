@@ -12,6 +12,7 @@
 <result column="playDate" property="playDate" javaType="String"/>
 <result column="startTime" property="startTime" javaType="String"/>
 <result column="endTime" property="endTime" javaType="String"/>
+<result column="poster" property="poster" javaType="String"/>
 </resultMap>
 
 <resultMap type="org.gasan.domain.TheaterVO" id="Theater">
@@ -38,7 +39,7 @@
 
 	<select id="getScheduleListByDate" resultType="org.gasan.domain.ScheduleVO">
   <![CDATA[
-    select schedulecode, schedule.theatercode, movie.moviename, playdate, starttime, endtime
+    select schedulecode, schedule.theatercode, movie.moviename, movie.movieCode, playdate, starttime, endtime, poster
 from schedule inner join theater on schedule.theatercode= theater.theatercode 
 inner join movie on schedule.moviecode = movie.moviecode
 where playdate = #{date} 
@@ -49,7 +50,7 @@ order by starttime
 	<select id="getScheduleListByName"
 		resultType="org.gasan.domain.ScheduleVO">
 	<![CDATA[
-	select schedulecode, schedule.theatercode, movie.moviename, playdate, starttime, endtime
+	select schedulecode, schedule.theatercode, movie.moviename, movie.movieCode, playdate, starttime, endtime, poster
     from schedule inner join theater on schedule.theatercode= theater.theatercode 
     inner join movie on schedule.moviecode = movie.moviecode
     where movieName = #{movieName} order by playdate
@@ -60,7 +61,7 @@ order by starttime
 	<select id="getScheduleListByAll"
 		resultType="org.gasan.domain.ScheduleVO">
   <![CDATA[
-select schedulecode, schedule.theatercode, movie.moviename, playdate, starttime, endtime
+select schedulecode, schedule.theatercode, movie.moviename, movie.movieCode, playdate, starttime, endtime, poster
 from schedule inner join theater on schedule.theatercode= theater.theatercode 
 inner join movie on schedule.moviecode = movie.moviecode
 where playdate = #{date} and movieName = #{movieName} order by starttime

@@ -12,6 +12,7 @@ public class ScheduleVO { //영화 하나에 해당하는 스케쥴
 	private String startTime; //시작 시간
 	private String endTime; //마치는 시간
 	private String movieName; //영화이름
+	private String poster; // 영화 포스터 사진
 	
 
 }

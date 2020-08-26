@@ -114,7 +114,7 @@ public class GasanController {
         seatService.reserve(seatReservationVO);
         model.addAttribute("seatReservation", seatReservationVO);
         session.setAttribute("seatReservation", seatReservationVO);
-
+        
         log.info("payment............................................");
         log.info(session.getAttribute("movie"));
         log.info(seatReservationVO);
@@ -147,15 +147,14 @@ public class GasanController {
         return "ajax";
     }
 
-    @GetMapping("/payResult") // 결제 결과 페이지
-    public String index() {
-
-        return "payResult";
-    }
-
     @GetMapping("/iamportEx")
     public String dd() {
         return "iamportEx";
+    }
+    
+    @GetMapping("/modalTest")
+    public String modal() {
+    	return "modalTest";
     }
 
 }

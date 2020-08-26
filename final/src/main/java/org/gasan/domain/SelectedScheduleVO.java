@@ -12,5 +12,6 @@ public class SelectedScheduleVO {
 	private String selectedStartTime; //시작 시간
 	private String selectedEndTime; //마치는 시간
 	private String selectedMovie; //영화이름
+	private String selectedPoster; // 영화 포스터 사진
 	
 }

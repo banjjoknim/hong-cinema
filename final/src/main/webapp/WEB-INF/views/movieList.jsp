@@ -58,6 +58,8 @@
 			id="selectedStartTime"> <input type="hidden"
 			name="selectedEndTime" value="" id="selectedEndTime">
 			<input type="hidden" name="selectedScheduleCode" value="" id="selectedScheduleCode">
+			<input type="hidden" name="selectedMovieCode" value="" id="selectedMovieCode">
+			<input type="hidden" name="selectedPoster" value="" id="selectedPoster">
 	<%-- </form> --%>
 	</form:form>
 
@@ -158,16 +160,6 @@
 				<div
 					style="border-right: 1px solid black; overflow: hidden; width: 356px; height: 432px; float: left; overflow-y: scroll;">
 					<ul id="scheduleUL" style="margin: 0px; padding: 0px;">
-						<%-- <c:forEach items="${scheduleList }" var="schedule">
-							<li class="movieSchedule"><span
-								style="font-weight: bold; font-size: 160%">${schedule.movieName }</span>
-								<span style="float: right; font-size:110%">${remainedSeatCount }</span>
-								<span style="float: right; font-size: 110%"><span
-									class="startTime">${schedule.startTime }</span> ~ <span
-									class="endTime">${schedule.endTime }</span></span> <span
-								style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span
-									class="theaterNumber">${schedule.theaterNumber }</span>관</span></li>
-						</c:forEach> --%>
 					</ul>
 				</div>
 			</div>

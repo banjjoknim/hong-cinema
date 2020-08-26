@@ -30,6 +30,8 @@
 					str += '<li class="movieSchedule"><span class="movieName" ';
 					str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 					str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+					str += '<span class="movieCode" style="visibility: hidden; font-size: 0%;">'+list[i].movieCode+'</span>';
+					str += '<span class="poster" style="visibility: hidden; font-size: 0%;">'+list[i].poster+'</span>';
 					str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
 					str += '<span style="float: right; font-size: 110%"><span ';
 					str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
@@ -96,6 +98,8 @@
 									str += '<li class="movieSchedule"><span class="movieName" ';
 									str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 									str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+									str += '<span class="movieCode" style="visibility: hidden; font-size: 0%;">'+list[i].movieCode+'</span>';
+									str += '<span class="poster" style="visibility: hidden; font-size: 0%;">'+list[i].poster+'</span>';
 									str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
 									str += '<span style="float: right; font-size: 110%"><span ';
 									str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
@@ -143,6 +147,8 @@
 						str += '<li class="movieSchedule"><span class="movieName" ';
 						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 						str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+						str += '<span class="movieCode" style="visibility: hidden; font-size: 0%;">'+list[i].movieCode+'</span>';
+						str += '<span class="poster" style="visibility: hidden; font-size: 0%;">'+list[i].poster+'</span>';
 						str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
 						str += '<span style="float: right; font-size: 110%"><span ';
 						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
@@ -169,6 +175,8 @@
 							str += '<li class="movieSchedule"><span class="movieName" ';
 							str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 							str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+							str += '<span class="movieCode" style="visibility: hidden; font-size: 0%;">'+list[i].movieCode+'</span>';
+							str += '<span class="poster" style="visibility: hidden; font-size: 0%;">'+list[i].poster+'</span>';
 							str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
 							str += '<span style="float: right; font-size: 110%"><span ';
 							str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
@@ -225,6 +233,8 @@
 								str += '<li class="movieSchedule"><span class="movieName" ';
 								str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 								str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+								str += '<span class="movieCode" style="visibility: hidden; font-size: 0%;">'+list[i].movieCode+'</span>';
+								str += '<span class="poster" style="visibility: hidden; font-size: 0%;">'+list[i].poster+'</span>';
 								str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
 								str += '<span style="float: right; font-size: 110%"><span ';
 								str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
@@ -289,6 +299,8 @@
 						str += '<li class="movieSchedule"><span class="movieName" ';
 						str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 						str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+						str += '<span class="movieCode" style="visibility: hidden; font-size: 0%;">'+list[i].movieCode+'</span>';
+						str += '<span class="poster" style="visibility: hidden; font-size: 0%;">'+list[i].poster+'</span>';
 						str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
 						str += '<span style="float: right; font-size: 110%"><span ';
 						str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
@@ -334,6 +346,8 @@
 							str += '<li class="movieSchedule"><span class="movieName" ';
 							str += 'style="font-weight: bold; font-size: 160%">'+list[i].movieName+'</span>';
 							str += '<span class="scheduleCode" style="visibility: hidden; font-size: 0%;">'+list[i].scheduleCode+'</span>';
+							str += '<span class="movieCode" style="visibility: hidden; font-size: 0%;">'+list[i].movieCode+'</span>';
+							str += '<span class="poster" style="visibility: hidden; font-size: 0%;">'+list[i].poster+'</span>';
 							str += '<span style="float: right; font-size:110%; color:green; margin-left: 10px;">'+count(list[i].scheduleCode)+'석</span>';
 							str += '<span style="float: right; font-size: 110%"><span ';
 							str += 'class="startTime">'+list[i].startTime+'</span> ~ <span ';	
@@ -362,6 +376,8 @@
 				var startTime = $(this).find(".startTime").html();
 				var endTime = $(this).find(".endTime").html();
 				var scheduleCode = $(this).find(".scheduleCode").html();
+				var movieCode = $(this).find(".movieCode").html();
+				var poster = $(this).find(".poster").html();
 				
 				$(".movieSchedule").removeClass("selected");
 				$(this).addClass("selected");
@@ -371,8 +387,12 @@
 				$("#selectedStartTime").val(startTime);
 				$("#selectedEndTime").val(endTime);
 				$("#selectedScheduleCode").val(scheduleCode);
+				$("#selectedMovieCode").val(movieCode);
+				$("#selectedPoster").val(poster);
 
 				console.log("선택 영화: " + $("#selectedMovie").val());
+				console.log("선택 영화코드: "+ $("#selectedMovieCode").val());
+				console.log("선택 영화 포스터 파일: "+ $("#selectedPoster").val());
 				console.log("선택 스케쥴코드: "+ $("#selectedScheduleCode").val());
 				console.log("선택 날짜: " + $("#selectedDate").val());
 				console.log("선택 상영관: " + $("#selectedTheaterNumber").val());

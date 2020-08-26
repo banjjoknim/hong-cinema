@@ -206,8 +206,8 @@
 							<li class="theaterInfo">${schedule.selectedStartTime }~
 								${schedule.selectedEndTime }</li>
 						</ul>
-						<img src="https://via.placeholder.com/90x120.png" width="90px"
-							height="120px" style="margin-bottom: 0px; float: left;">
+						<img src="/resources/images/${movie.selectedPoster }" width="90"
+							height="120" style="margin-bottom: 0px; float: left;">
 					</div>
 				</div>
 
