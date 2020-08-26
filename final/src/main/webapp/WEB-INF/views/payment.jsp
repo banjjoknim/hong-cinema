@@ -348,8 +348,8 @@
 				console.log("현재 주문 고유번호 : " +getPaymentNumber());
 				//alert('결제가 완료되었습니다.');
 				//$('#myModal').show();
-			    //requestPay(paymentNumber);
-			    payment(paymentNumber);
+			    requestPay(paymentNumber);
+			    //payment(paymentNumber);
 			});
 			
 			$(".modalClose").on("click",function(){

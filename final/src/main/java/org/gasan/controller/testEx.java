@@ -55,15 +55,15 @@ public class testEx {
 	Elements movieRates = doc.select(".percent span");
 	Elements movieOpenDates = doc.select(".txt-info strong");
 	Elements likes = doc.select(".link-reservation");
-	for(int i=0;i<ranks.size();i++) {
-		System.out.println(ranks.get(i));
-		System.out.println(imgs.get(i));
-		System.out.println(movieAges.get(i));
-		System.out.println(movieTitles.get(i));
-		System.out.println(movieRates.get(i));
-		System.out.println(movieOpenDates.get(i));
-		System.out.println(likes.get(i));
-	}
+//	for(int i=0;i<ranks.size();i++) {
+//		System.out.println(ranks.get(i));
+//		System.out.println(imgs.get(i));
+//		System.out.println(movieAges.get(i));
+//		System.out.println(movieTitles.get(i));
+//		System.out.println(movieRates.get(i));
+//		System.out.println(movieOpenDates.get(i));
+//		System.out.println(likes.get(i));
+//	}
 	List<CGVInfoDTO> list = new ArrayList<CGVInfoDTO>();
 	for(int i=0;i<ranks.size();i++) {
 		String rank = ranks.get(i).text();
@@ -77,7 +77,7 @@ public class testEx {
 		
 		CGVInfoDTO cgvInfoDTO = new CGVInfoDTO(rank,img,str,movieTitle,movieRate,movieOpenDate,like);
 		list.add(cgvInfoDTO);
-		System.out.println(cgvInfoDTO);
+//		System.out.println(cgvInfoDTO);
 	}
 	model.addAttribute("list",list);
 	
