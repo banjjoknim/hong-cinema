@@ -16,5 +16,6 @@ public class PaymentHistoryVO {
 	private String seatList;
 	private int payAmount;
 	private String poster;
+	private String cancelable;
 	
 }

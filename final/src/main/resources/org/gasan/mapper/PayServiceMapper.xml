@@ -11,7 +11,7 @@
   <![CDATA[
 	insert into paymentHistory values(
 	#{imp_uid}, #{merchant_uid}, reservation_seq.nextval, #{userId}, #{schedule.selectedMovie},
-	#{schedule.selectedTheaterNumber}, #{schedule.selectedDate}, #{schedule.selectedStartTime}, #{schedule.selectedEndTime}, #{seat.adultType}, #{seat.youthType}, #{seat.preferentialType}, #{seatList}, #{seat.payAmount}, sysdate
+	#{schedule.selectedTheaterNumber}, #{schedule.selectedDate}, #{schedule.selectedStartTime}, #{schedule.selectedEndTime}, #{seat.adultType}, #{seat.youthType}, #{seat.preferentialType}, #{seatList}, #{seat.payAmount}, sysdate, #{schedule.selectedMovieCode}, 'Y'
 	)
   ]]>
 

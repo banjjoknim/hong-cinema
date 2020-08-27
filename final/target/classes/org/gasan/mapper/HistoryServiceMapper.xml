@@ -18,16 +18,21 @@
 <result column="seatList" property="seatList" javaType="String"/>
 <result column="payAmount" property="payAmount" javaType="int"/>
 <result column="poster" property="poster" javaType="String"/>
+<result column="cancelable" property="cancelable" javaType="String"/>
 </resultMap>
 
 <select id="getPaymentHistory" resultType="org.gasan.domain.PaymentHistoryVO">
 
-select paymentNumber, movie.movieName, theaterNumber, playDate, payDate, adultType, youthType, preferentialType, seatList, payAmount, poster 
-from paymentHistory inner join movie on paymenthistory.moviecode = movie.moviecode
+select paymentNumber, movie.movieName, theaterNumber, playDate, payDate, adultType, youthType, preferentialType, seatList, payAmount, poster, cancelable 
+from paymentHistory inner join movie on paymenthistory.moviecode = movie.moviecode where userId = #{userId}
 
 </select>
 
+<update id="cancelPayment">
 
+update paymentHistory set cancelable = 'N' where paymentNumber = #{paymentNumber}
+
+</update>
 
 
 

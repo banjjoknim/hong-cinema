@@ -10,8 +10,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link href="/resources/simplex.css" rel="stylesheet">
-<link href="/resources/seatList.css" rel="stylesheet">
+<link href="/resources/css/simplex.css" rel="stylesheet">
+<link href="/resources/css/seatList.css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="../board/header.jsp" %>

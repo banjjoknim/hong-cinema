@@ -84,7 +84,7 @@ $(document).ready(function(){
 			console.log(list[i]);
 			var totalPeople = list[i].adultType + list[i].youthType + list[i].preferentialType;
 			str += "<tr>"
-			str += "<td>"+list[i].paymentNumber+"</th>"
+			str += "<td class='paymentNumber'>"+list[i].paymentNumber+"</th>"
 			str += "<td><img src='/resources/images/"+list[i].poster+"' width='90' height='120'></th>"
 			str += "<td>"+list[i].movieName+"</td>"
 			str += "<td>"+list[i].theaterNumber+"관</td>"
@@ -93,19 +93,42 @@ $(document).ready(function(){
 			str += "<td>"+totalPeople+"</td>"
 			str += "<td>"+list[i].seatList+"</td>"
 			str += "<td>"+list[i].payAmount+"</td>"
-			str += '<td><button type="button" class="btn btn-outline-primary cancelBtn">취소</button></td>'
+			if(list[i].cancelable === "Y"){
+				str += '<td><button type="button" class="btn btn-outline-primary cancelBtn">취소</button></td>'
+			} else {
+				str += '<td>취소불가</td>'
+			}
 			str += '</tr>'
 		}
 		$('tbody').html(str);
 	});
 	
 	$('tbody').on('click', '.cancelBtn', function(){
-		alert('');
+		var paymentNumber = $(this).parent().parent().find('td.paymentNumber').html();
+		console.log(paymentNumber);
+		if(confirm('취소하시겠습니까?')){
+			$.ajax({
+				url: '/cancelPayment/'+paymentNumber,
+				type: 'post',
+				beforeSend: function(xhr){
+						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+					  }, 
+				contentType: 'application/json; charset=utf-8',
+				success: function(data) {
+					console.log("ok!");
+					alert('결제내역이 취소되었습니다.');
+				},
+				error:function(request,status,error){
+		             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+			$(this).replaceWith('취소되었음');
+		}
 	})
 	
 	function getPaymentHistory(callback, error){
 		$.ajax({
-			url: '/getPaymentHistory/'+'hong'+'.json',
+			url: '/getPaymentHistory/'+'${userid}',
 			type: 'post',
 			dataType: 'json',
 			beforeSend: function(xhr){

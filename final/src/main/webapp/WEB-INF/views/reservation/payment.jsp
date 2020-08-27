@@ -11,8 +11,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="/resources/simplex.css" rel="stylesheet">
-    <link href="/resources/payment.css" rel="stylesheet">
+    <link href="/resources/css/simplex.css" rel="stylesheet">
+    <link href="/resources/css/payment.css" rel="stylesheet">
 </head>
 
 <body>
@@ -277,7 +277,7 @@
             //console.log(payOption);
 			});
 			
-			var payment = function(paymentNumber){
+			/* var payment = function(paymentNumber){
 			
 			$.ajax({
 				url: "/pay",
@@ -298,8 +298,8 @@
 		             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
 
-			});
-		}
+			}); 
+		} */
             
 			var IMP = window.IMP; // 생략가능
             IMP.init('imp00435953'); // 가맹점 식별 코드 
@@ -347,8 +347,8 @@
 			$("#pay").on("click", function(){
 				console.log("현재 주문 고유번호 : " +getPaymentNumber());
 				//alert('결제가 완료되었습니다.');
-				//$('#myModal').show();
-			    requestPay(paymentNumber);
+				$('#myModal').show();
+			    //requestPay(paymentNumber);
 			    //payment(paymentNumber);
 			});
 			

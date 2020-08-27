@@ -126,7 +126,15 @@ public class AjaxController {
     @PostMapping(value="/getPaymentHistory/{userId}", produces ="application/json;charset=utf-8")
     public ResponseEntity<List<PaymentHistoryVO>> getPaymentHistory(@PathVariable("userId") String userId){
     	
-    	return new ResponseEntity<>(historyServiceMapper.getPaymentHistory(), HttpStatus.OK);
+    	return new ResponseEntity<>(historyServiceMapper.getPaymentHistory(userId), HttpStatus.OK);
+    }
+
+    @PostMapping(value="/cancelPayment/{paymentNumber}", produces ="application/json;charset=utf-8")
+    public void cancelPayment(@PathVariable("paymentNumber") String paymentNumber) {
+    	
+    	log.info("cancelPayment");
+    	historyServiceMapper.cancelPayment(paymentNumber);
+    	
     }
 
 }

@@ -42,7 +42,7 @@
         /* Modal Content/Box */
         .modal-content {
             background-color: #fefefe;
-            width: 700px;
+            width: 70% !important;
             margin: 10% auto;
             /* 15% from the top and centered */
             padding: 20px;
