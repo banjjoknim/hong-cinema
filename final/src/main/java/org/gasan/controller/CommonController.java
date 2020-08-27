@@ -95,9 +95,11 @@ public class CommonController {
 
 	// 회원가입 페이지 접근
 	@GetMapping("/customSignup")
-	public void signupGET() {
+	public String signupGET() {
 
 		log.info("�쉶�썝媛��엯 �뤌");
+		
+		return "/users/customSignup";
 	}
 
 	// 회원 가입 처리

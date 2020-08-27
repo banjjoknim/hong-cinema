@@ -7,9 +7,11 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.gasan.domain.MovieVO;
+import org.gasan.domain.PaymentHistoryVO;
 import org.gasan.domain.ScheduleVO;
 import org.gasan.domain.SeatReservationVO;
 import org.gasan.domain.SeatVO;
+import org.gasan.mapper.HistoryServiceMapper;
 import org.gasan.mapper.PayServiceMapper;
 import org.gasan.mapper.SeatServiceMapper;
 import org.gasan.service.ListService;
@@ -42,6 +44,9 @@ public class AjaxController {
     
     @Setter(onMethod_ = @Autowired)
     private PayServiceMapper payServiceMapper;
+    
+    @Setter(onMethod_ = @Autowired)
+    private HistoryServiceMapper historyServiceMapper;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
@@ -116,6 +121,12 @@ public class AjaxController {
     	} while(payServiceMapper.checkPaymentNumber(paymentNumber) != 0);
     	
     	return new ResponseEntity<>(paymentNumber, HttpStatus.OK);
+    }
+    
+    @PostMapping(value="/getPaymentHistory/{userId}", produces ="application/json;charset=utf-8")
+    public ResponseEntity<List<PaymentHistoryVO>> getPaymentHistory(@PathVariable("userId") String userId){
+    	
+    	return new ResponseEntity<>(historyServiceMapper.getPaymentHistory(), HttpStatus.OK);
     }
 
 }

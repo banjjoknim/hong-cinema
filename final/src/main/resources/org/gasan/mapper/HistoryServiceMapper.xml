@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.gasan.mapper.HistoryServiceMapper">
+
+<resultMap type="org.gasan.domain.PaymentHistoryVO" id="payHistory">
+<result column="paymentNumber" property="paymentNumber" javaType="String"/>
+<result column="movieName" property="movieName" javaType="String"/>
+<result column="theaterNumber" property="theaterNumber" javaType="int"/>
+<result column="playDate" property="playDate" javaType="String"/>
+<result column="payDate" property="payDate" javaType="String"/>
+<result column="adultType" property="adultType" javaType="int"/>
+<result column="youthType" property="youthType" javaType="int"/>
+<result column="preferentialType" property="preferentialType" javaType="int"/>
+<result column="totalPeople" property="totalPeople" javaType="int"/>
+<result column="seatList" property="seatList" javaType="String"/>
+<result column="payAmount" property="payAmount" javaType="int"/>
+<result column="poster" property="poster" javaType="String"/>
+</resultMap>
+
+<select id="getPaymentHistory" resultType="org.gasan.domain.PaymentHistoryVO">
+
+select paymentNumber, movie.movieName, theaterNumber, playDate, payDate, adultType, youthType, preferentialType, seatList, payAmount, poster 
+from paymentHistory inner join movie on paymenthistory.moviecode = movie.moviecode
+
+</select>
+
+
+
+
+
+
+
+
+
+</mapper>
