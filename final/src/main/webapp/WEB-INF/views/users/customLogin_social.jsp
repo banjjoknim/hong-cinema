@@ -12,33 +12,30 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	
-	<link rel="stylesheet" href="/resources/simplex.css">
-  	<link rel="stylesheet" href="/resources/login_page.css">
+	<link rel="stylesheet" href="/resources/css/simplex.css">
+  	<link rel="stylesheet" href="/resources/css/login_page.css">
   	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  	<title>로그인</title>
+  	<title>소셜 로그인</title>
 
 </head>
 <body>
-<h1>Custom Login Page</h1>
-<h2><c:out value="${error}"/></h2>
-<h2><c:out value="${logout}"/></h2>
+<%@ include file="../board/header.jsp" %>
 
 
-
-   <form role="form" method='post' action="/login">
+   <form role="form" method='post' action="/customLogin">
     <div class="container">
       <ul style="z-index:1;" class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link " style="text-align:center; width:450px; " data-toggle="tab" href="login_user.html">회원</a>
+          <a class="nav-link " style="text-align:center; width:450px; " data-toggle="tab" href="/customLogin">회원</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" style="text-align:center; width:450px; " data-toggle="tab"
-            href="login_social.html">소셜 로그인</a>
+            href="customLogin_social.html">소셜 로그인</a>
         </li>
       </ul>
     </div>
     <div id="myTabContent" class="tab-content">
-      <div style="width:2000px; height: 300px; margin-top: 20px; background-color: #F2F2F2;">
+      <div style="width:100%; height: 300px; margin-top: 20px; background-color: #F2F2F2;">
         <div class="tab-pane fade active show" name="user">
           <div class="container_inner">
             <div class="login_box">
@@ -53,7 +50,7 @@
               </div>
             </div>
             <div class="ad_box">
-              <img src="/images/test.jpg" alt="poster">
+              <img src="/resources/images/test.jpg" alt="poster">
             </div>
           </div>
         </div>
@@ -69,6 +66,10 @@
     <script src="/resources/js/jquery-3.5.1.min.js"></script>
 
   
+	
+	
+	
+	
 	<script>
 	$(".btn-primary").on("click", function(e){
 		

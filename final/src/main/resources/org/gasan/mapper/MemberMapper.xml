@@ -69,7 +69,21 @@
 		SELECT count(*) FROM tbl_member
 		WHERE USERID = #{userid}
 	</select>
+	
+	<!-- 이메일 중복 체크 -->
+	<select id="emailChk" resultType="int">
+		SELECT count(*) FROM tbl_member
+		WHERE USEREMAIL = #{userEmail}
+	</select>
+	
+	<!-- 휴대폰 번호 중복 체크 -->
+	<select id="phoneChk" resultType="int">
+		SELECT count(*) FROM tbl_member
+		WHERE USERPHONE = #{userPhone}
+	</select>
 
+	
+	
 	<!-- 메일 인증키 -->
 	<insert id="createAuthKey">
 		insert into userAuth values(#{userEmail}, #{authKey})
@@ -88,8 +102,15 @@
 	<delete id="memberDelete">
 	DELETE FROM TBL_MEMBER
 	WHERE USERID = #{userid}
-	AND USERPW = #{userpw}
+	<!-- AND USERPW = #{userpw} -->
 	</delete>
+	
+	<!-- 패스워드 체크 -->
+	<select id="passChk">
+	SELECT * FROM tbl_member
+	WHERE USERID = #{userid}
+	AND USERPW = #{userpw}
+	</select>
 	
 	
 	<!--  회원정보 수정 -->
@@ -101,6 +122,15 @@
 		USERGENRE = #{userGenre}
 		WHERE USERID = #{userid}
 	</update>
+	
+	    <!-- 로그인 -->
+	<select id="login" resultType="org.gasan.domain.MemberVO">
+		SELECT *
+		  FROM tbl_MEMBER
+		 WHERE USERID = #{userid}
+		   AND USERPW = #{userpw}   
+	</select>
+	
 	
 	
 </mapper>

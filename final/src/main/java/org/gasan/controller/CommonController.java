@@ -1,15 +1,16 @@
 package org.gasan.controller;
 
-
-
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.gasan.domain.MemberVO;
 import org.gasan.service.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,9 +32,12 @@ public class CommonController {
 
 	@Setter(onMethod_ = @Autowired)
 	private CommonService commonService;
+	
+	
+	@Inject
+	BCryptPasswordEncoder pwEncoder;
 
-
-	//시큐리티 에러 문구
+	// 에러 페이지
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth, Model model) {
 
@@ -42,11 +46,10 @@ public class CommonController {
 		model.addAttribute("msg", "Access Denied");
 
 	}
-	
-	
-	//로그인
+
+	// 로그인
 	@GetMapping("/customLogin")
-	public void loginInput(String error, String logout, Model model) {
+	public String loginInput(String error, String logout, Model model) {
 
 		log.info("error: " + error);
 		log.info("logout: " + logout);
@@ -58,131 +61,200 @@ public class CommonController {
 		if (logout != null) {
 			model.addAttribute("logout", "Logout!!");
 		}
-		
+
+		return "/users/customLogin";
 	}
 
-	
-	//로그아웃 겟 방식
+	// 로그아웃 페이지 접근
 	@GetMapping("/customLogout")
-	public void logoutGET() {
+	public String logoutGET() {
 
 		log.info("custom logout");
+		
+		return "/users/customLogout";
 	}
 	
-	//로그아웃 포스트 방식
+	//소셜 로그인 페이지 접근
+	@GetMapping("/customLogin_social")
+	public String login_social() {
+
+		log.info("customLogin_social");
+		
+		return "/users/customLogin_social";
+	}
+	
+
+	// 로그아웃 처리
 	@PostMapping("/customLogout")
-	public void logoutPost () {
+	public String logoutPost() {
 
 		log.info("post custom logout");
+		
+		return "/users/customLogout";
 	}
 
-
-
-	//회원가입 폼 접근
+	// 회원가입 페이지 접근
 	@GetMapping("/customSignup")
 	public void signupGET() {
 
-		log.info("회원가입 폼");
+		log.info("�쉶�썝媛��엯 �뤌");
 	}
 
-
-	//회원가입 
+	// 회원 가입 처리
 	@PostMapping("/customSignup")
 	public String signupPOST(MemberVO vo, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
 		log.info(vo);
 
-		// 아이디 체크 
+		// 아이디 체크
 		int result = commonService.idChk(vo);
 
-		//회원가입 
+		// 아이디체크 후 회원가입 처리
 		try {
 
-			if(result ==1) {
+			if (result == 1) {
 				return "/customSignup";
-			}else if (result == 0) {
+			} else if (result == 0) {
 
 				commonService.customSignup(vo);
 				rttr.addFlashAttribute("result", vo.getUserName());
 			}
 
 		} catch (Exception e) {
-			
+
 			throw new RuntimeException();
 		}
-
 
 		return "redirect:/";
 	}
 
-
-	// 아이디 중복 체크
+	// 아이디 체크
 	@ResponseBody
-	@RequestMapping(value="/idChk", method = RequestMethod.GET)
+	@RequestMapping(value = "/idChk", method = RequestMethod.GET)
 	public int idChk(MemberVO vo) throws Exception {
 		int result = commonService.idChk(vo);
 		return result;
 	}
-	
+
 	// 이메일 인증
 	@RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
-	public String emailConfirm(String userEmail, Model model) throws Exception { // 이메일 인증 확인창
-			commonService.userAuth(userEmail);
-			model.addAttribute("userEmail", userEmail);
+	public String emailConfirm(String userEmail, Model model) throws Exception { // �씠硫붿씪 �씤利� �솗�씤李�
+		commonService.userAuth(userEmail);
+		model.addAttribute("userEmail", userEmail);
 
-			return "/emailConfirm"; // emailConfirm.jsp
+		return "/emailConfirm"; // emailConfirm.jsp
+	}
+
+	// 회원수정 페이지 접근
+	@RequestMapping(value = "/myInfo", method = RequestMethod.GET)
+	public String myInfo() throws Exception {
+
+		return "/users/myInfo";
+	}
+	@RequestMapping(value = "/myReservation", method = RequestMethod.GET)
+	public String myReservation() throws Exception {
+
+		return "/users/myReservation";
+	}
+	@RequestMapping(value = "/myBoard", method = RequestMethod.GET)
+	public String myBoard() throws Exception {
+
+		return "/users/myBoard";
 	}
 	
-	//회원 정보 페이지
-	@RequestMapping(value="/myPage_info", method = RequestMethod.GET)
-	public String registerUpdateView() throws Exception{
-		
-		return "/myPage_info";
-	}
-	
 
-
-	//회원 정보 수정 실행 매핑
-	@RequestMapping(value="/memberUpdate", method = RequestMethod.POST)
-	public String registerUpdate(MemberVO vo, HttpSession session) throws Exception{
+	// 회원 수정 처리
+	@RequestMapping(value = "/memberUpdate", method = RequestMethod.POST)
+	public String registerUpdate(MemberVO vo) throws Exception {
 		log.info(vo.getUserpw());
 		commonService.memberUpdate(vo);
-		
-//		session.invalidate();
-		
+
 		return "redirect:/";
 	}
-		
-	
-	// 회원 탈퇴 get
-		@RequestMapping(value="/memberDeleteView", method = RequestMethod.GET)
-		public String memberDeleteView() throws Exception{
-			return "/memberDeleteView";
-		}
-		
-		// 회원 탈퇴 post
-		@RequestMapping(value="/memberDelete", method = RequestMethod.POST)
-		public String memberDelete(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
-			
-			// 세션에 있는 member를 가져와 member변수에 넣어줍니다.
-			MemberVO member = (MemberVO) session.getAttribute("member");
-			// 세션에있는 비밀번호
-			String sessionPass = member.getUserpw();
-			// vo로 들어오는 비밀번호
-			String voPass = vo.getUserpw();
-			
-			if(!(sessionPass.equals(voPass))) {
-				rttr.addFlashAttribute("msg", false);
-				return "redirect:/memberDeleteView";
-			}
-			commonService.memberDelete(vo);
-			//session.invalidate();
-			return "redirect:/";
-		}
-	
-	
-   
 
+	// 회원탈퇴 페이지 접근
+	@RequestMapping(value = "/memberDeleteView", method = RequestMethod.GET)
+	public String memberDeleteView() throws Exception {
+		return "/memberDeleteView";
+	}
+
+	
+	
+	// 회원 탈퇴 처리
+	@RequestMapping(value = "/memberDelete", method = RequestMethod.POST)
+	public String memberDelete(MemberVO vo) throws Exception{
+		
+//		// 세션에 있는 member를 가져와 member변수에 넣어줍니다.
+//		MemberVO member = (MemberVO) session.getAttribute("member");
+//		// 세션에있는 비밀번호
+//		String sessionPass = member.getUserpw();
+//		// vo로 들어오는 비밀번호
+//		String voPass = vo.getUserpw();
+//		
+//		if(!(sessionPass.equals(voPass))) {
+//			rttr.addFlashAttribute("msg", false);
+//			return "redirect:/member/memberDeleteView";
+//		}
+		commonService.memberDelete(vo);
+		//session.invalidate();
+		return "redirect:/";
+	}
+
+	// 패스워드 체크 처리
+	@ResponseBody
+	@RequestMapping(value="/passChk", method = RequestMethod.POST)
+	public boolean passChk(MemberVO vo) throws Exception {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+		UserDetails userDetails = (UserDetails)principal; 
+		String password = userDetails.getPassword();
+
+		log.info(password);
+		
+		boolean pwdChk = pwEncoder.matches(vo.getUserpw(), userDetails.getPassword());
+		return pwdChk;
+			
+			
+//		int result = commonService.passChk(vo); 
+//			 return result;
+			 
+			
+		}
+
+	//작동안되는 로그인
+	@RequestMapping(value = "/customLogin", method = RequestMethod.POST)
+	public String login(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception {
+		log.info("post login");
+
+		session.getAttribute("member");
+		MemberVO login = commonService.login(vo);
+		boolean pwdMatch = pwEncoder.matches(vo.getUserpw(), login.getUserpw());
+
+		if (login != null && pwdMatch == true) {
+			session.setAttribute("member", login);
+		} else {
+			session.setAttribute("member", null);
+			rttr.addFlashAttribute("msg", false);
+		}
+
+		return "redirect:/";
+	}
+	
+	
+
+	// 이메일 중복 확인
+	@ResponseBody
+	@RequestMapping(value = "/emailChk", method = RequestMethod.GET)
+	public int emailChk(MemberVO vo) throws Exception {
+		int result = commonService.emailChk(vo);
+		return result;
+	}
+
+	// 휴대폰 번호 중복 확인
+	@ResponseBody
+	@RequestMapping(value = "/phoneChk", method = RequestMethod.GET)
+	public int phoneChk(MemberVO vo) throws Exception {
+		int result = commonService.phoneChk(vo);
+		return result;
+	}
 
 }
-
-

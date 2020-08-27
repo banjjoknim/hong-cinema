@@ -16,7 +16,7 @@
 </head>
 
 <body>
-
+<%@ include file="../board/header.jsp" %>
     <header>
 
         <!-- <h1 style="text-align: center; margin: 40px; font-size: 300%;">결제정보</h1> -->
@@ -148,8 +148,8 @@
         <!-- payment way end -->
             
         <!-- pay amount show start -->
-        <div style="float: left; width: 296px;">
-            <h3 style="font-size: 250%; margin-top: 30px; margin-left: 50px;">결제금액</h3>
+        <div style="float: left; width: 220px; margin-left: 50px;">
+            <h3 style="font-size: 250%; margin-top: 30px;">결제금액</h3>
 
 
             <div class="form-group row" style="border: 3px solid darkslategray; margin-bottom: 0; margin-top: 10px;">

@@ -8,8 +8,8 @@
 
     <meta charset="utf-8">
 	<!-- <link href="http://img.cgv.co.kr/R2014/css/reset.css" rel="stylesheet"> -->
-	<link href="/resources/cgv.css" rel="stylesheet">
-	<link href="/resources/simplex.css" rel="stylesheet">
+	<link href="/resources/css/cgv.css" rel="stylesheet">
+	<link href="/resources/css/simplex.css" rel="stylesheet">
 
 </head>
 
@@ -40,21 +40,21 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
               <a class="nav-link" href="#">영화 <span class="sr-only">(current)</span></a>
-                <ul class="sub-menu">
+                <ul class="sub-menu" style="padding:0px;">
                     <li><a href="#">무비 차트</a></li>
                     <li><a href="#">무비 파인더</a></li>
                 </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">예매 <span class="sr-only">(current)</span></a>
-                  <ul class="sub-menu">
-                      <li><a href="#">빠른예매</a></li>
-                      <li><a href="#">상영시간표</a></li>
+                  <ul class="sub-menu" style="padding:0px;">
+                      <li><a href="/movieList">빠른예매</a></li>
+                      <li><a href="/movieList">상영시간표</a></li>
                   </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">이벤트<span class="sr-only">(current)</span></a>
-                    <ul class="sub-menu">
+                    <ul class="sub-menu" style="padding:0px;">
                         <li><a href="#">영화</a></li>
                         <li><a href="#">시사회</a></li>
                         <li><a href="#">제휴할인</a></li>

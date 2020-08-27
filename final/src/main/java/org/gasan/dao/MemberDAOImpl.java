@@ -74,4 +74,32 @@ public class MemberDAOImpl implements MemberDAO {
 		//아이디가 memberUpdate인 쿼리에 파라미터들을 넣어줍니다.
 		sql.update(namespace + ".memberUpdate", vo);
 	}
+	
+	//패스워드 체크
+	@Override
+	public boolean passChk(MemberVO vo) throws Exception {
+		boolean result = sql.selectOne(namespace + ".passChk", vo);
+		return result;
+	}	
+		
+	//로그인
+	@Override
+	public MemberVO login(MemberVO vo) throws Exception {
+			return sql.selectOne(namespace + ".login", vo);
+	}
+	
+	//이메일 중복 체크
+	@Override
+	public int emailChk(MemberVO vo) throws Exception{
+		int result = sql.selectOne(namespace + ".emailChk", vo);
+		return result;
+		}
+	
+	//휴대폰 번호 중복 체크
+	@Override
+	public int phoneChk(MemberVO vo) throws Exception{
+		int result = sql.selectOne(namespace + ".phoneChk", vo);
+		return result;
+		}
+	
 }

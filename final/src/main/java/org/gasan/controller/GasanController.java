@@ -82,7 +82,7 @@ public class GasanController {
         scheduleList = listService.getScheduleListByDate(cal.getTime());
         model.addAttribute("scheduleList", scheduleList);
 
-        return "movieList";
+        return "reservation/movieList";
     }
 
     @PostMapping("/seatList")
@@ -104,7 +104,7 @@ public class GasanController {
         log.info(selectedScheduleVO);
         log.info("scheduleCode : "+session.getAttribute("scheduleCode"));
 
-        return "seatList";
+        return "reservation/seatList";
     }
 
     @PostMapping("/payment")
@@ -119,7 +119,7 @@ public class GasanController {
         log.info(session.getAttribute("movie"));
         log.info(seatReservationVO);
 
-        return "payment";
+        return "reservation/payment";
     }
 
     @PostMapping(value = "/pay", produces = "application/json;charset=utf-8")
@@ -149,19 +149,24 @@ public class GasanController {
     @GetMapping("/ajax") // ajax 연습용
     public String getAjax() {
 
-        log.info("ajax");
+        log.info("reservation/ajax");
 
-        return "ajax";
+        return "reservation/ajax";
     }
 
     @GetMapping("/iamportEx")
     public String dd() {
-        return "iamportEx";
+        return "reservation/iamportEx";
     }
     
     @GetMapping("/modalTest")
     public String modal() {
-    	return "modalTest";
+    	return "reservation/modalTest";
+    }
+    
+    @GetMapping("/getToken")
+    public String token() {
+    	return "/reservation/getToken";
     }
 
 }

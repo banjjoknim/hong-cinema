@@ -12,14 +12,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	
-	<link rel="stylesheet" href="/resources/simplex.css">
-  	<link rel="stylesheet" href="/resources/login_page.css?v=1">
+	<link rel="stylesheet" href="/resources/css/simplex.css">
+  	<link rel="stylesheet" href="/resources/css/login_page.css">
   	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   	<title>로그인</title>
 
 </head>
 <body>
-<%@ include file="board/header.jsp" %>
+<%@ include file="../board/header.jsp" %>
 
 
 
@@ -41,6 +41,7 @@
         <div class="tab-pane fade active show" name="user">
           <div class="container_inner">
             <div class="login_box">
+              
               <input style="width:330px; height: 45px; float: left; padding: 0 18px; margin-top: 50px;" type="text"
                 name="username" placeholder="아이디를 입력해주세요.">
               <input style="width:330px; height: 45px; float: left; padding: 0 18px; margin-top: 15px;" type="password"
@@ -49,6 +50,7 @@
                 class="btn btn-primary btn-lg">로그인</button></a>
               <input style="margin:15px 5px 0 0; width: 15px; height: 15px;" name="remember-me" type="checkbox"
                 ><span style="font-size: 13px;">아이디 저장</span>
+              
               <div class="login_menu">
                 <a href="/customSignup" style="color:gray;">회원가입</a> |
                 <a href="#" style="color:gray;">아이디찾기</a> |

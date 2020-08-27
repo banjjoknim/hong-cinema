@@ -75,5 +75,33 @@ public class CommonServiceImpl implements CommonService {
 	public void memberDelete(MemberVO vo) throws Exception {
 		dao.memberDelete(vo);
 	}
+	
+	//패스워드 체크
+	@Override
+	public boolean passChk(MemberVO vo) throws Exception {
+		boolean result = dao.passChk(vo);
+		return result;
+	}
+		
+	//로그인
+	@Override
+	public MemberVO login(MemberVO vo) throws Exception {
+		return dao.login(vo);
+	}
+	
+	//이메일 중복 체크
+	@Override
+	public int emailChk(MemberVO vo) throws Exception {
+		int result = dao.emailChk(vo);
+		return result;
+	}
+	
+	//이메일 중복 체크
+	@Override
+	public int phoneChk(MemberVO vo) throws Exception {
+		int result = dao.phoneChk(vo);
+		return result;
+	}
+	
 
 }

@@ -18,4 +18,14 @@ public interface CommonService {
 	
 	//이메일 유저 인증
 	public void userAuth(String userEmail) throws Exception;
+	
+	//패스워드 체크
+	public boolean passChk(MemberVO vo) throws Exception;
+
+	//로그인
+	public MemberVO login(MemberVO vo) throws Exception;
+	
+	public int emailChk(MemberVO vo) throws Exception;
+	
+	public int phoneChk(MemberVO vo) throws Exception;
 }

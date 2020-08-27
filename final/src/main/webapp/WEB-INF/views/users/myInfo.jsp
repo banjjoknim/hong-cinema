@@ -13,8 +13,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<link rel="stylesheet" href="/resources/simplex.css">
-<link rel="stylesheet" href="/resources/my_page.css">
+<link rel="stylesheet" href="/resources/css/simplex.css">
+<link rel="stylesheet" href="/resources/css/my_page.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<!-- jQuery -->
@@ -22,17 +22,18 @@
 <title>회원정보</title>
 </head>
 <body>
-	<div class="nav_container" style="margin-left: 510px;">
+<%@ include file="../board/header.jsp" %>
+	<div class="nav_container">
 		<ul class="nav nav-tabs">
 			<li class="nav-item"><a class="nav-link"
 				style="text-align: center; width: 300px;" data-toggle="tab"
-				href="my_page_booking.html">예매내역</a></li>
+				href="/myReservation">예매내역</a></li>
 			<li class="nav-item"><a class="nav-link"
 				style="text-align: center; width: 300px;" data-toggle="tab"
-				href="my_page_board.html">게시글정보</a></li>
+				href="/myBoard">게시글정보</a></li>
 			<li class="nav-item"><a class="nav-link active"
 				style="text-align: center; width: 300px;" data-toggle="tab"
-				href="/myPage_info">회원정보수정</a></li>
+				href="/myInfo">회원정보수정</a></li>
 		</ul>
 		
 		
@@ -43,6 +44,7 @@
        	<sec:authentication property="principal.member.userName" var="userName"/>
        	<sec:authentication property="principal.member.userEmail" var="userEmail"/>
 
+		
 
 		<form action="/memberUpdate" method="post">
 			<fieldset>
@@ -182,7 +184,9 @@
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		</form>
+		
 		</sec:authorize>
+		
 	</div>
 
 </body>

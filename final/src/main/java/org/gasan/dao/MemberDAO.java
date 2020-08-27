@@ -32,4 +32,17 @@ public interface MemberDAO {
 	//이메일 인증
 	public void userAuth(String userEmail) throws Exception;
 	
+	
+	//로그인
+	public MemberVO login(MemberVO vo) throws Exception;
+	
+	//패스워드 체크
+	public boolean passChk (MemberVO vo) throws Exception;
+	
+	//이메일 중복 체크
+	public int emailChk(MemberVO vo) throws Exception;
+	
+	//휴대폰 번호 중복 체크
+	public int phoneChk(MemberVO vo) throws Exception;
 }
+
