@@ -45,7 +45,7 @@ public class GasanController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
         Calendar cal = Calendar.getInstance();
-        cal.set(2020, 03, 25);
+        cal.set(2020, 7, 26);
         log.info("Calendar : " + cal.getTime());
         log.info("getAllList ..... movieList");
 
@@ -167,6 +167,11 @@ public class GasanController {
     @GetMapping("/getToken")
     public String token() {
     	return "/reservation/getToken";
+    }
+    
+    @GetMapping(value ="/kmDB")
+    public String kmDB() {
+    	return "/kmDB";
     }
 
 }
