@@ -17,7 +17,7 @@
 			//console.log(count(1)); 1번 스케쥴에 해당하는 좌석수 출력
 			
 			$('.date').eq(0).addClass('selected');
-			
+			if(ref !== "http://localhost:8080/main"){
 			//--------------getScheduleByDate------추가-----------------
 			getScheduleByDate(function(list){
 				
@@ -44,8 +44,9 @@
 							
 					$("#scheduleUL").html(str);
 			});
+			}
 			//------------getScheduleByDate-----추가--------------------
-			
+			var ref = document.referrer;
 			//-----------------------------------------------------
 			getMovieByDate(function(list){
 					
@@ -60,7 +61,7 @@
 					
 					$("#movieListUL").html(str);
 					
-					var ref = document.referrer;
+					
 					console.log(ref);
 					if(ref === "http://localhost:8080/main"){ // 메인페이지에서 예매버튼으로 접근할때.
 						str = location.search;
@@ -78,6 +79,7 @@
 									for(var i = 0, len = list.length||0; i<len; i++){
 										//console.log(list[i]);//콘솔에 리스트 출력.
 										
+										if(list[i].movieName === movieName){
 										var scheduleCode = list[i].scheduleCode;
 												//console.log(scheduleCode);
 										
@@ -92,11 +94,12 @@
 										str += 'class="endTime">'+list[i].endTime+'</span></span> <span ';		
 										str += 'style="font-weight: bold; font-size: 110%; float: right; margin-right: 10px;"><span ';		
 										str += 'class="theaterNumber">'+list[i].theaterCode+'</span>관</span></li>';	
+										}
 									}
-												
 										$("#scheduleUL").html(str);
 										//console.log("allCheck: "+allCheck);
 								});
+								
 							//------------getScheduleByAll-------------------------
 								
 								break;

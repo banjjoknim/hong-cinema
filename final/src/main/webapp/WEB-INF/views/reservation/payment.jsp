@@ -207,7 +207,7 @@
             style="padding: 15px 25px; font-size: 150%;">취소</button>
         </div>
         <!-- decision button end -->
-        
+       <%@ include file="../board/footer.jsp" %> 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 		crossorigin="anonymous"></script>
@@ -347,14 +347,14 @@
 			$("#pay").on("click", function(){
 				console.log("현재 주문 고유번호 : " +getPaymentNumber());
 				//alert('결제가 완료되었습니다.');
-				$('#myModal').show();
-			    //requestPay(paymentNumber);
+				//$('#myModal').show();
+			    requestPay(paymentNumber);
 			    //payment(paymentNumber);
 			});
 			
 			$(".modalClose").on("click",function(){
 				event.preventDefault();
-				window.location.replace("http://localhost:8080/movieList");
+				window.location.replace("http://localhost:8080/main");
 				//$('#myModal').hide();
 			})
 		});

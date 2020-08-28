@@ -8,7 +8,7 @@
 
 <html>
 	<head>
-		<link rel="stylesheet" href="/resources/simplex.css">
+		<link rel="stylesheet" href="/resources/css/simplex.css">
 		<title>회원탈퇴</title>
 	</head>
 	

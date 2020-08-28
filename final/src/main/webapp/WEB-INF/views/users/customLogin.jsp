@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>   
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
 <html>
 <head>
@@ -19,12 +20,18 @@
 
 </head>
 <body>
+<sec:authorize access="isAuthenticated()">
+            	<sec:authentication property="principal.username" var="userid" />
+       			<sec:authentication property="principal.member.userName" var="userName"/>
+       			<sec:authentication property="principal.member.userEmail" var="userEmail"/>
+       			<sec:authentication property="principal.member.userCertification" var="userCertification"/>
+</sec:authorize>
 <%@ include file="../board/header.jsp" %>
 
 
 
   <form role="form" method='post' action="/login">
-    <div class="container">
+    <div class="container" style="margin-left: 490px; width:930px;">
       <ul style="z-index:1;" class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link active" style="text-align:center; width:450px; " data-toggle="tab"
@@ -46,8 +53,19 @@
                 name="username" placeholder="아이디를 입력해주세요.">
               <input style="width:330px; height: 45px; float: left; padding: 0 18px; margin-top: 15px;" type="password"
                 name="password" placeholder="비밀번호를 입력해주세요.">
-              <a href="/"><button type="submit" style="margin: 50px 0 0 10px; width: 105px; height: 105px;"
+                
+
+              <a href="/"><button type="submit" id="sub" style="margin: 50px 0 0 10px; width: 105px; height: 105px;"
                 class="btn btn-primary btn-lg">로그인</button></a>
+             
+               <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+   					 <font color="red">
+       					<p>${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+       				 <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+    				</font>
+				</c:if>
+             
+             
               <input style="margin:15px 5px 0 0; width: 15px; height: 15px;" name="remember-me" type="checkbox"
                 ><span style="font-size: 13px;">아이디 저장</span>
               
@@ -67,7 +85,7 @@
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   </form>
 
-
+<%@ include file="../board/footer.jsp" %>		
 </body>
     
     
@@ -77,14 +95,15 @@
   
 	<script>
 	$(".btn-primary").on("click", function(e){
-		
-		e.preventDefault();
-		$("form").submit();
-		
-	});
+
+			
+			e.preventDefault();
+			$("form").submit();
+
+		});	
+
 	
 	</script>
 	
 
-</body>
 </html>

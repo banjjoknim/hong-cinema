@@ -64,5 +64,6 @@
 <hr color="lightgray">
 
 </div>
+<%@ include file="../board/footer.jsp" %>		
 </body>
 </html>

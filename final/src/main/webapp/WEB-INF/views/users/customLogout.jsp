@@ -68,6 +68,6 @@
 		</script>
 	</c:if>
 
-
+<%@ include file="../board/footer.jsp" %>		
 </body>
 </html>

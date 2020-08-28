@@ -63,5 +63,5 @@
 		</div>
 	</div>
 </div>
-				
+<%@ include file="../board/footer.jsp" %>				
 				

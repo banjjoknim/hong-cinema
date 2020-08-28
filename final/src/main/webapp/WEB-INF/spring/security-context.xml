@@ -21,6 +21,13 @@
 	
 	<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
 	
+
+	<security:session-management session-fixation-protection="migrateSession">
+  		<security:concurrency-control max-sessions="1" expired-url="/customLogin"/> 
+ 	</security:session-management> 
+	
+	
+	
 	<!-- <security:access-denied-handler error-page="/accessError"/> -->
 	
 	<security:access-denied-handler ref="customAccessDenied" />

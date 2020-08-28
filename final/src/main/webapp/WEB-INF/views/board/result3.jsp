@@ -36,4 +36,4 @@
 		<td colspan="2"><br>${plot }</td>
 	</tr>
 </table>
-
+<%@ include file="../board/footer.jsp" %>

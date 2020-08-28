@@ -23,3 +23,4 @@
 			</c:forEach></td>
 	</tr>
 </table>
+<%@ include file="../board/footer.jsp" %>

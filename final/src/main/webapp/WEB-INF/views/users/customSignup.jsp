@@ -58,9 +58,9 @@
 							type="password" class="form-control" id="userPasswordChk"
 							name="userPasswordChk" placeholder="입력하신 비밀번호를 다시 입력해주세요.">
 					</div>
-					<div class="alert alert-success" style="margin: -43px 0 0 600px;"
+					<div class="alert alert-success" style="margin: -43px 0 0 620px;"
 						id="alert-success">비밀번호가 일치합니다.</div>
-					<div class="alert alert-danger" style="margin: -43px 0 0 600px;"
+					<div class="alert alert-danger" style="margin: -43px 0 0 620px;"
 						id="alert-danger">비밀번호가 일치하지 않습니다.</div>
 				</div>
 				<hr color="lightgray">
@@ -189,7 +189,7 @@
 		</form>
 	</div>
 
-
+<%@ include file="../board/footer.jsp" %>		
 	<!-- jQuery -->
 	<script src="/resources/js/jquery-3.5.1.min.js"></script>
 

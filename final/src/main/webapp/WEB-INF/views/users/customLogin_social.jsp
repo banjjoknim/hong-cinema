@@ -23,7 +23,7 @@
 
 
    <form role="form" method='post' action="/customLogin">
-    <div class="container">
+    <div class="container" style="margin-left: 490px; width:930px;">
       <ul style="z-index:1;" class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link " style="text-align:center; width:450px; " data-toggle="tab" href="/customLogin">회원</a>
@@ -58,7 +58,7 @@
       </div>
   </form>
 
-
+<%@ include file="../board/footer.jsp" %>		
 </body>
     
     
@@ -80,5 +80,4 @@
 	
 	</script>
 
-</body>
 </html>

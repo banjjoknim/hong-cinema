@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,15 +16,34 @@
 </head>
 
 <body>
-
+		
 	
 
-</body>
         
     <div class="display-5">
+        
+        
+        
         <ul>
-            <li><a href="/customLogin">로그인</a></li>
+        <sec:authorize access="isAnonymous()">
+			<li><a href="/customLogin">로그인</a></li>
+		</sec:authorize>
+           
+           
+            <sec:authorize access="isAuthenticated()">
+            	<sec:authentication property="principal.username" var="userid" />
+       			<sec:authentication property="principal.member.userName" var="userName"/>
+       			<sec:authentication property="principal.member.userEmail" var="userEmail"/>
+            <li>${userName}님, 반갑습니다.</li>
+            <li><a href="/myInfo">마이페이지</a></li>
+    		<li><a href="#" onclick="document.getElementById('logout-form').submit();">로그아웃</a></li>
+				<form id="logout-form" action='<c:url value='/customLogout'/>' method="POST">
+   					<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+				</form>
+			</sec:authorize>
+			<sec:authorize access="isAnonymous()">
             <li><a href="/customSignup">회원가입</a></li>
+            </sec:authorize>
         </ul>
     </div>
 
@@ -31,7 +52,7 @@
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/main">메인으로</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

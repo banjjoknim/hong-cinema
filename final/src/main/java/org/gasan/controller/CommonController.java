@@ -97,7 +97,7 @@ public class CommonController {
 	@GetMapping("/customSignup")
 	public String signupGET() {
 
-		log.info("�쉶�썝媛��엯 �뤌");
+		log.info("회원가입 폼");
 		
 		return "/users/customSignup";
 	}
@@ -185,20 +185,11 @@ public class CommonController {
 	@RequestMapping(value = "/memberDelete", method = RequestMethod.POST)
 	public String memberDelete(MemberVO vo) throws Exception{
 		
-//		// 세션에 있는 member를 가져와 member변수에 넣어줍니다.
-//		MemberVO member = (MemberVO) session.getAttribute("member");
-//		// 세션에있는 비밀번호
-//		String sessionPass = member.getUserpw();
-//		// vo로 들어오는 비밀번호
-//		String voPass = vo.getUserpw();
-//		
-//		if(!(sessionPass.equals(voPass))) {
-//			rttr.addFlashAttribute("msg", false);
-//			return "redirect:/member/memberDeleteView";
-//		}
+
 		commonService.memberDelete(vo);
-		//session.invalidate();
-		return "redirect:/";
+		
+		
+		return "redirect:/customLogout";
 	}
 
 	// 패스워드 체크 처리
@@ -215,9 +206,6 @@ public class CommonController {
 		boolean pwdChk = pwEncoder.matches(vo.getUserpw(), userDetails.getPassword());
 		return pwdChk;
 			
-			
-//		int result = commonService.passChk(vo); 
-//			 return result;
 			 
 			
 		}

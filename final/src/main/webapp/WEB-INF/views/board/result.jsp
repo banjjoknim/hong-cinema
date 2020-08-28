@@ -54,7 +54,7 @@
 		${tot} 건의 결과가 검색됨<br>
 	</div>
 </div>
-
+<%@ include file="../board/footer.jsp" %>
 <%-- <div class='pull-right'>
 					<ul class="pagination">
 
