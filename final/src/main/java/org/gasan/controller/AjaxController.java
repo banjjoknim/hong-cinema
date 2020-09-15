@@ -1,5 +1,10 @@
 package org.gasan.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -33,73 +38,73 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/*")
 @Log4j
 public class AjaxController {
-    @Setter(onMethod_ = @Autowired)
-    private ListService listService;
+	@Setter(onMethod_ = @Autowired)
+	private ListService listService;
 
-    @Setter(onMethod_ = @Autowired)
-    private SeatServiceMapper seatServiceMapper;
+	@Setter(onMethod_ = @Autowired)
+	private SeatServiceMapper seatServiceMapper;
 
-    @Setter(onMethod_ = @Autowired)
-    private SeatService seatService;
-    
-    @Setter(onMethod_ = @Autowired)
-    private PayServiceMapper payServiceMapper;
-    
-    @Setter(onMethod_ = @Autowired)
-    private HistoryServiceMapper historyServiceMapper;
+	@Setter(onMethod_ = @Autowired)
+	private SeatService seatService;
 
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	@Setter(onMethod_ = @Autowired)
+	private PayServiceMapper payServiceMapper;
 
-    @GetMapping("/getScheduleByDate/{date}") //날짜별로 스케쥴표 얻어옴(기본값)
-    public ResponseEntity<List<ScheduleVO>> getScheduleByDate(@PathVariable("date") String date) throws ParseException {
+	@Setter(onMethod_ = @Autowired)
+	private HistoryServiceMapper historyServiceMapper;
 
-        return new ResponseEntity<>(listService.getScheduleListByDate(sdf.parse(date)), HttpStatus.OK);
-    }
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
-    @GetMapping("/getScheduleByAll/{date}/{movieName}") //날짜와 영화 모두 선택시 스케쥴표 얻어옴
-    public ResponseEntity<List<ScheduleVO>> getScheduleByAll(@PathVariable("date") String date,
-            @PathVariable("movieName") String movieName) throws ParseException {
+	@GetMapping("/getScheduleByDate/{date}") // 날짜별로 스케쥴표 얻어옴(기본값)
+	public ResponseEntity<List<ScheduleVO>> getScheduleByDate(@PathVariable("date") String date) throws ParseException {
 
-        return new ResponseEntity<>(listService.getScheduleListByAll(sdf.parse(date), movieName), HttpStatus.OK);
-    }
+		return new ResponseEntity<>(listService.getScheduleListByDate(sdf.parse(date)), HttpStatus.OK);
+	}
 
-    @GetMapping("/getScheduleByName/{movieName}") //영화만 선택시 스케쥴표 얻어옴
-    public ResponseEntity<List<ScheduleVO>> getScheduleByName(@PathVariable("movieName") String movieName) {
+	@GetMapping("/getScheduleByAll/{date}/{movieName}") // 날짜와 영화 모두 선택시 스케쥴표 얻어옴
+	public ResponseEntity<List<ScheduleVO>> getScheduleByAll(@PathVariable("date") String date,
+			@PathVariable("movieName") String movieName) throws ParseException {
 
-        return new ResponseEntity<>(listService.getScheduleListByName(movieName), HttpStatus.OK);
-    }
+		return new ResponseEntity<>(listService.getScheduleListByAll(sdf.parse(date), movieName), HttpStatus.OK);
+	}
 
-    @GetMapping("/getMovieByDate/{date}")
-    public ResponseEntity<List<MovieVO>> getMovieByDate(@PathVariable("date") String date) throws Exception {
+	@GetMapping("/getScheduleByName/{movieName}") // 영화만 선택시 스케쥴표 얻어옴
+	public ResponseEntity<List<ScheduleVO>> getScheduleByName(@PathVariable("movieName") String movieName) {
 
-        return new ResponseEntity<>(new ParseByDate().getMovieByDate(date), HttpStatus.OK);
-    }
+		return new ResponseEntity<>(listService.getScheduleListByName(movieName), HttpStatus.OK);
+	}
 
-    @GetMapping("/getRemainedSeatCount/{scheduleCode}")
-    public ResponseEntity<Integer> getRemainedSeatCount(@PathVariable("scheduleCode") int scheduleCode) {
+	@GetMapping("/getMovieByDate/{date}")
+	public ResponseEntity<List<MovieVO>> getMovieByDate(@PathVariable("date") String date) throws Exception {
 
-        return new ResponseEntity<>(seatServiceMapper.showRemainedSeat(scheduleCode), HttpStatus.OK);
-    }
+		return new ResponseEntity<>(new ParseByDate().getMovieByDate(date), HttpStatus.OK);
+	}
 
-    @GetMapping("/getEnabledSeatList/{scheduleCode}")
-    public ResponseEntity<List<SeatVO>> getEnabledSeat(@PathVariable("scheduleCode") int scheduleCode) {
+	@GetMapping("/getRemainedSeatCount/{scheduleCode}")
+	public ResponseEntity<Integer> getRemainedSeatCount(@PathVariable("scheduleCode") int scheduleCode) {
 
-        return new ResponseEntity<>(seatServiceMapper.showEnabledSeat(scheduleCode), HttpStatus.OK);
-    }
+		return new ResponseEntity<>(seatServiceMapper.showRemainedSeat(scheduleCode), HttpStatus.OK);
+	}
 
-    @GetMapping("/reservationCancel")
-    public void reservationCancel(HttpSession session, Model model) throws Exception {
+	@GetMapping("/getEnabledSeatList/{scheduleCode}")
+	public ResponseEntity<List<SeatVO>> getEnabledSeat(@PathVariable("scheduleCode") int scheduleCode) {
 
-        log.info("cancel.................................");
-        log.info(session.getAttribute("seatReservation"));
+		return new ResponseEntity<>(seatServiceMapper.showEnabledSeat(scheduleCode), HttpStatus.OK);
+	}
 
-        seatService.reserveCancel((SeatReservationVO)session.getAttribute("seatReservation"));
+	@GetMapping("/reservationCancel")
+	public void reservationCancel(HttpSession session, Model model) throws Exception {
 
-        session.removeAttribute("seatReservation");
-        session.removeAttribute("movie");
-        session.removeAttribute("scheduleCode");
+		log.info("cancel.................................");
+		log.info(session.getAttribute("seatReservation"));
 
-    }
+		seatService.reserveCancel((SeatReservationVO) session.getAttribute("seatReservation"));
+
+		session.removeAttribute("seatReservation");
+		session.removeAttribute("movie");
+		session.removeAttribute("scheduleCode");
+
+	}
 
 //    @PostMapping(value = "/payTest", produces = "application/json;charset=utf-8")
 //    @ResponseBody
@@ -111,30 +116,36 @@ public class AjaxController {
 //        return new ResponseEntity<>(map, HttpStatus.OK);
 //
 //    }
-    
-    @PostMapping(value="/getPaymentNumber", produces = "text/html")
-    public ResponseEntity<String> getReservationNumber(){
-    	String paymentNumber = "";
-    	
-    	do {
-    		paymentNumber = "ORD"+String.valueOf((int)(Math.random()*99999));
-    	} while(payServiceMapper.checkPaymentNumber(paymentNumber) != 0);
-    	
-    	return new ResponseEntity<>(paymentNumber, HttpStatus.OK);
-    }
-    
-    @PostMapping(value="/getPaymentHistory/{userId}", produces ="application/json;charset=utf-8")
-    public ResponseEntity<List<PaymentHistoryVO>> getPaymentHistory(@PathVariable("userId") String userId){
-    	
-    	return new ResponseEntity<>(historyServiceMapper.getPaymentHistory(userId), HttpStatus.OK);
-    }
 
-    @PostMapping(value="/cancelPayment/{paymentNumber}", produces ="application/json;charset=utf-8")
-    public void cancelPayment(@PathVariable("paymentNumber") String paymentNumber) {
-    	
-    	log.info("cancelPayment");
-    	historyServiceMapper.cancelPayment(paymentNumber);
-    	
-    }
+	@PostMapping(value = "/getPaymentNumber", produces = "text/html")
+	public ResponseEntity<String> getReservationNumber() {
+		String paymentNumber = "";
 
+		do {
+			paymentNumber = "ORD" + String.valueOf((int) (Math.random() * 99999));
+		} while (payServiceMapper.checkPaymentNumber(paymentNumber) != 0);
+
+		return new ResponseEntity<>(paymentNumber, HttpStatus.OK);
+	}
+
+	@PostMapping(value = "/getPaymentHistory/{userId}", produces = "application/json;charset=utf-8")
+	public ResponseEntity<List<PaymentHistoryVO>> getPaymentHistory(@PathVariable("userId") String userId) {
+
+		return new ResponseEntity<>(historyServiceMapper.getPaymentHistory(userId), HttpStatus.OK);
+	}
+
+	@PostMapping(value = "/cancelPayment/{paymentNumber}", produces = "application/json;charset=utf-8")
+	public void cancelPayment(@PathVariable("paymentNumber") String paymentNumber) {
+
+		log.info("cancelPayment");
+		historyServiceMapper.cancelPayment(paymentNumber);
+
+	}
+
+	@GetMapping(value = "/description/{payOption}", produces = "text/html;charset=utf-8")
+	public ResponseEntity<String> getDiscription(@PathVariable("payOption") String payOption)
+			throws IOException {
+		return new ResponseEntity<>("테스트다 임마", HttpStatus.OK);
+	}
+	
 }

@@ -107,8 +107,8 @@
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1"
-                                    value="card" checked="checked" style="width: 15px; height: 15px;">
-                                <span style="font-size: 120%;">카드</span>
+                                    value="card" checked="checked" style="width: 15px; height: 15px; margin-left: 0px;">
+                                <span style="font-size: 120%; margin-left: 20px;">카드</span>
                             </label>
                         </div>
                     </td>
@@ -116,8 +116,8 @@
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-                                    value="trans" style="width: 15px; height: 15px;">
-                                <span style="font-size: 120%;">계좌이체</span>
+                                    value="trans" style="width: 15px; height: 15px; margin-left: 0px;">
+                                <span style="font-size: 120%; margin-left: 20px;">계좌이체</span>
                             </label>
                         </div>
                     </td>
@@ -125,21 +125,17 @@
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3"
-                                    value="phone" style="width: 15px; height: 15px;">
-                                <span style="font-size: 120%;">휴대폰 결제</span>
+                                    value="phone" style="width: 15px; height: 15px; margin-left: 0px;">
+                                <span style="font-size: 120%; margin-left: 20px;">휴대폰 결제</span>
                             </label>
                         </div>
                     </td>
 
                 </tr>
                 <tr>
-                    <td colspan="3" style="font-size: 150%;">
-                        <div style="height: 362px; overflow: hidden;">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et viverra libero, ac
-                            dignissim enim. Mauris nec bibendum ex, et rhoncus tortor. Vivamus non enim sed ipsum
-                            ultricies semper a ut odio. In scelerisque euismod mauris sed tempor. Integer tellus tellus,
-                            ornare quis aliquet in, tincidunt non leo. Nam sem mi, hendrerit sed purus vitae, aliquet
-                            hendrerit felis. Integer tristique tempus ante, vitae pretium augue tempus a.
+                    <td colspan="3" style="font-size: 100%;">
+                        <div id="description" style="height: 362px; font-size: 12pt; overflow: auto;">
+                            	개인정보 취급방침 전문
                         </div>
                     </td>
                 </tr>
@@ -217,6 +213,8 @@
 		<script type="text/javascript">
 		$(document).ready(function(){
 			
+			$("#description").load("/reservation/card");
+			
 			console.log('최종 결제금액 : '+$("#finalPayAmount").html());
 			
 			var timeout; 
@@ -275,6 +273,7 @@
 			$('input[name=optionsRadios]').on('click',function(){
 			payOption = $(this).val();
             //console.log(payOption);
+            $("#description").load("/reservation/"+payOption);
 			});
 			
 			/* var payment = function(paymentNumber){
