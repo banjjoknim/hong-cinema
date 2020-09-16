@@ -222,7 +222,7 @@
             	//console.log('timeout 재설정함.');
                 timeout = setTimeout(function(){
                 reservationCancel();
-                }, 1000 * 60 * 5 // 1000ms * 60 * 5-> 5분 후에 예약취소.
+                }, 1000 * 60 * 1 // 1000ms * 60 * 1-> 1분 후에 예약취소.
                 );          
             }
 			

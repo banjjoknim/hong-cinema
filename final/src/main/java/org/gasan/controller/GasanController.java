@@ -10,14 +10,18 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.gasan.domain.BoardVO;
 import org.gasan.domain.DateVO;
 import org.gasan.domain.MovieVO;
 import org.gasan.domain.ScheduleVO;
 import org.gasan.domain.SeatReservationVO;
 import org.gasan.domain.SelectedScheduleVO;
+import org.gasan.service.BoardService;
 import org.gasan.service.ListService;
 import org.gasan.service.PayService;
 import org.gasan.service.SeatService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,158 +39,158 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class GasanController {
 
-    private ListService listService;
-    private SeatService seatService;
-    private PayService payService;
+	private ListService listService;
+	private SeatService seatService;
+	private PayService payService;
 
-    @GetMapping(value = "/movieList")
-    public String getAllListBySelectedDate(Model model) throws Exception { // 영화리스트를 얻어온다.
+	@GetMapping(value = "/movieList")
+	public String getAllListBySelectedDate(Model model) throws Exception { // 영화리스트를 얻어온다.
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(2020, 8, 14);
-        log.info("Calendar : " + cal.getTime());
-        log.info("getAllList ..... movieList");
+		Calendar cal = Calendar.getInstance();
+		cal.set(2020, 8, 14);
+		log.info("Calendar : " + cal.getTime());
+		log.info("getAllList ..... movieList");
 
-        List<MovieVO> movieList = new ArrayList<MovieVO>(); // 영화 리스트(미선택)
-        movieList = listService.getMovieList(cal.getTime());
-        model.addAttribute("movieList", movieList);
+		List<MovieVO> movieList = new ArrayList<MovieVO>(); // 영화 리스트(미선택)
+		movieList = listService.getMovieList(cal.getTime());
+		model.addAttribute("movieList", movieList);
 
-        // --------------------------------------------------------------------
+		// --------------------------------------------------------------------
 
-        log.info("getAllList ....... dateList");
-        String month = null;
-        String day = null;
-        List<DateVO> dateList = new ArrayList<DateVO>(); // 날짜 리스트(현재날짜)
-        dateList = listService.getDateList(cal.getTime());
-        if (dateList.get(0).getMonth() < 10) {
-            month = "0" + dateList.get(0).getMonth();
-        } else {
-            month = Integer.toString(dateList.get(0).getMonth());
-        }
-        if (dateList.get(0).getDay() < 10) {
-            day = "0" + dateList.get(0).getDay();
-        } else {
-            day = Integer.toString(dateList.get(0).getDay());
-        }
+		log.info("getAllList ....... dateList");
+		String month = null;
+		String day = null;
+		List<DateVO> dateList = new ArrayList<DateVO>(); // 날짜 리스트(현재날짜)
+		dateList = listService.getDateList(cal.getTime());
+		if (dateList.get(0).getMonth() < 10) {
+			month = "0" + dateList.get(0).getMonth();
+		} else {
+			month = Integer.toString(dateList.get(0).getMonth());
+		}
+		if (dateList.get(0).getDay() < 10) {
+			day = "0" + dateList.get(0).getDay();
+		} else {
+			day = Integer.toString(dateList.get(0).getDay());
+		}
 
-        model.addAttribute("today", Integer.toString(dateList.get(0).getYear()) + month + day);
-        model.addAttribute("dateList", dateList);
+		model.addAttribute("today", Integer.toString(dateList.get(0).getYear()) + month + day);
+		model.addAttribute("dateList", dateList);
 
-        // --------------------------------------------------------------------
+		// --------------------------------------------------------------------
 
-        log.info("getAllList ....... scheduleList");
+		log.info("getAllList ....... scheduleList");
 
-        List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>(); // 현재날짜 기준 상영시간표 리스트
-        scheduleList = listService.getScheduleListByDate(cal.getTime());
-        model.addAttribute("scheduleList", scheduleList);
+		List<ScheduleVO> scheduleList = new ArrayList<ScheduleVO>(); // 현재날짜 기준 상영시간표 리스트
+		scheduleList = listService.getScheduleListByDate(cal.getTime());
+		model.addAttribute("scheduleList", scheduleList);
 
-        return "reservation/movieList";
-    }
+		return "reservation/movieList";
+	}
 
-    @PostMapping("/seatList")
-    public String getSeatList(SelectedScheduleVO selectedScheduleVO, HttpSession session, Model model)
-            throws ParseException {
+	@PostMapping("/seatList")
+	public String getSeatList(SelectedScheduleVO selectedScheduleVO, HttpSession session, Model model)
+			throws ParseException {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(sdf.parse(selectedScheduleVO.getSelectedDate()));
-        String[] weekDay = new String[] {"일", "월", "화", "수", "목", "금", "토"};
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(sdf.parse(selectedScheduleVO.getSelectedDate()));
+		String[] weekDay = new String[] { "일", "월", "화", "수", "목", "금", "토" };
 
-        session.setAttribute("movie", selectedScheduleVO);
-        session.setAttribute("scheduleCode", selectedScheduleVO.getSelectedScheduleCode());
-        session.setAttribute("dayOfWeek", weekDay[cal.get(Calendar.DAY_OF_WEEK) - 1]);
-        model.addAttribute("schedule", selectedScheduleVO);
-        model.addAttribute("dayOfWeek", weekDay[cal.get(Calendar.DAY_OF_WEEK) - 1]);
+		session.setAttribute("movie", selectedScheduleVO);
+		session.setAttribute("scheduleCode", selectedScheduleVO.getSelectedScheduleCode());
+		session.setAttribute("dayOfWeek", weekDay[cal.get(Calendar.DAY_OF_WEEK) - 1]);
+		model.addAttribute("schedule", selectedScheduleVO);
+		model.addAttribute("dayOfWeek", weekDay[cal.get(Calendar.DAY_OF_WEEK) - 1]);
 
-        log.info("getList .............. seatList");
-        log.info(selectedScheduleVO);
-        log.info("scheduleCode : "+session.getAttribute("scheduleCode"));
+		log.info("getList .............. seatList");
+		log.info(selectedScheduleVO);
+		log.info("scheduleCode : " + session.getAttribute("scheduleCode"));
 
-        return "reservation/seatList";
-    }
+		return "reservation/seatList";
+	}
 
-    @PostMapping("/payment")
-    public String getPayment(SeatReservationVO seatReservationVO, HttpSession session, Model model) {
+	@PostMapping("/payment")
+	public String getPayment(SeatReservationVO seatReservationVO, HttpSession session, Model model) {
 
-        seatReservationVO.setScheduleCode((int)session.getAttribute("scheduleCode"));
-        seatService.reserve(seatReservationVO);
-        model.addAttribute("seatReservation", seatReservationVO);
-        session.setAttribute("seatReservation", seatReservationVO);
-        
-        log.info("payment............................................");
-        log.info(session.getAttribute("movie"));
-        log.info(seatReservationVO);
+		seatReservationVO.setScheduleCode((int) session.getAttribute("scheduleCode"));
+		seatService.reserve(seatReservationVO);
+		model.addAttribute("seatReservation", seatReservationVO);
+		session.setAttribute("seatReservation", seatReservationVO);
 
-        return "reservation/payment";
-    }
+		log.info("payment............................................");
+		log.info(session.getAttribute("movie"));
+		log.info(seatReservationVO);
 
-    @PostMapping(value = "/pay", produces = "application/json;charset=utf-8")
-    @ResponseBody
-    public void pay(HttpSession session, @RequestBody Map<String, String> map, Principal principal) { //ajax로 보낸 data map으로 받음.
+		return "reservation/payment";
+	}
 
-    	log.info("/pay 매핑됨.");
-    	
-        SelectedScheduleVO schedule = (SelectedScheduleVO)session.getAttribute("movie");
-        SeatReservationVO seat = (SeatReservationVO)session.getAttribute("seatReservation");
-        session.setAttribute("seatStr", seat.getSelectedSeatList().toString().replace("[", "").replace("]", ""));
-        
-        log.info(principal.getName());
-        log.info("schedule: "+schedule);
-        log.info("seat: "+seat);
-        log.info("i'mport 고유번호 : " + map.get("imp_uid"));
-        log.info("가맹점 결제 고유번호 : " + map.get("merchant_uid"));
-        log.info(seat.getSelectedSeatList().toString().replace("[", "").replace("]", ""));
-        String userId = principal.getName();
-        
-        payService.pay(schedule, seat, (String)session.getAttribute("seatStr"), map.get("imp_uid"), map.get("merchant_uid"), userId); //DB에 데이터 추가.
+	@PostMapping(value = "/pay", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public void pay(HttpSession session, @RequestBody Map<String, String> map, Principal principal) { // ajax로 보낸 data
+																										// map으로 받음.
 
-        
+		log.info("/pay 매핑됨.");
 
-    }
+		SelectedScheduleVO schedule = (SelectedScheduleVO) session.getAttribute("movie");
+		SeatReservationVO seat = (SeatReservationVO) session.getAttribute("seatReservation");
+		session.setAttribute("seatStr", seat.getSelectedSeatList().toString().replace("[", "").replace("]", ""));
 
-    @GetMapping("/ajax") // ajax 연습용
-    public String getAjax() {
+		log.info(principal.getName());
+		log.info("schedule: " + schedule);
+		log.info("seat: " + seat);
+		log.info("i'mport 고유번호 : " + map.get("imp_uid"));
+		log.info("가맹점 결제 고유번호 : " + map.get("merchant_uid"));
+		log.info(seat.getSelectedSeatList().toString().replace("[", "").replace("]", ""));
+		String userId = principal.getName();
 
-        log.info("reservation/ajax");
+		payService.pay(schedule, seat, (String) session.getAttribute("seatStr"), map.get("imp_uid"),
+				map.get("merchant_uid"), userId); // DB에 데이터 추가.
 
-        return "reservation/ajax";
-    }
+	}
 
-    @GetMapping("/iamportEx")
-    public String dd() {
-        return "reservation/iamportEx";
-    }
-    
-    @GetMapping("/modalTest")
-    public String modal() {
-    	return "reservation/modalTest";
-    }
-    
-    @GetMapping("/getToken")
-    public String token() {
-    	return "/reservation/getToken";
-    }
-    
-    @GetMapping(value ="/kmDB")
-    public String kmDB() {
-    	return "/kmDB";
-    }
-    
-    @GetMapping(value = "/reservation/phone")
-    public String phone() {
-    	return "/reservation/phone";
-    }
-    
-    @GetMapping(value = "/reservation/card")
-    public String card() {
-    	return "/reservation/card";
-    }
-    
-    @GetMapping(value = "/reservation/trans")
-    public String trans() {
-    	return "/reservation/trans";
-    }
+	@GetMapping("/ajax") // ajax 연습용
+	public String getAjax() {
+
+		log.info("reservation/ajax");
+
+		return "reservation/ajax";
+	}
+
+	@GetMapping("/iamportEx")
+	public String dd() {
+		return "reservation/iamportEx";
+	}
+
+	@GetMapping("/modalTest")
+	public String modal() {
+		return "reservation/modalTest";
+	}
+
+	@GetMapping("/getToken")
+	public String token() {
+		return "/reservation/getToken";
+	}
+
+	@GetMapping(value = "/kmDB")
+	public String kmDB() {
+		return "/kmDB";
+	}
+
+	@GetMapping(value = "/reservation/phone")
+	public String phone() {
+		return "/reservation/phone";
+	}
+
+	@GetMapping(value = "/reservation/card")
+	public String card() {
+		return "/reservation/card";
+	}
+
+	@GetMapping(value = "/reservation/trans")
+	public String trans() {
+		return "/reservation/trans";
+	}
 
 }

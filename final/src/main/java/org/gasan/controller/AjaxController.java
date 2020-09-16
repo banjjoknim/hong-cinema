@@ -148,4 +148,6 @@ public class AjaxController {
 		return new ResponseEntity<>("테스트다 임마", HttpStatus.OK);
 	}
 	
+	
+	
 }
