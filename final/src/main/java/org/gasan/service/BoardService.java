@@ -1,16 +1,17 @@
 package org.gasan.service;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.gasan.domain.BoardVO;
 
 public interface BoardService {
 
-	public void write(BoardVO board);
+	public void write(BoardVO board, Principal principal);
 
-	public void delete();
+	public void delete(BoardVO board, Principal principal);
 
-	public void update();
+	public void update(BoardVO board, Principal principal);
 	
 	public BoardVO read(int boardNumber);
 

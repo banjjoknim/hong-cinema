@@ -8,6 +8,7 @@ a{
     margin : 0 auto;
     margin-bottom : 100px;
     width: 900px;
+    padding: 20px;
     
 }
 
@@ -83,9 +84,39 @@ fieldset{
 	margin-right: 20px;
 	float: right;
 }
+.goToListButton{
+	margin: 20px;
+	float: right;
+}
 .textarea{
 	resize: none;
 }
 .boardTitleInList{
 	cursor: pointer;
+}
+.content{
+	width: 80%;
+}
+.btn-category{
+	float: right;
+}
+.btn-delete{
+	margin-left: 20px;
+	margin-top: 20px;
+	float: left;
+}
+.btn-modify{
+	margin-left: 20px;
+	margin-top: 20px;
+	float: left;
+}
+.completeModify{
+	margin-left: 20px;
+	margin-top: 20px;
+	float: left;
+}
+.cancelModify{
+	margin-left: 20px;
+	margin-top: 20px;
+	float: left;
 }

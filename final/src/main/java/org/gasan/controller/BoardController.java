@@ -1,5 +1,6 @@
 package org.gasan.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,31 +27,16 @@ public class BoardController {
 	
 	private BoardService boardService;
 
-	@GetMapping(value = "/board/write")
-	public String startWriting() {
-		return "/board/write";
-	}
-
 	@GetMapping(value = "/board/boardList")
 	public String board(Model model) {
-
+		
 		log.info("boardList.....");
-
+		
 		List<BoardVO> boards = new ArrayList<BoardVO>();
 		boards = boardService.getBoardList();
 		model.addAttribute("boards", boards);
-
-		return "/board/boardList";
-	}
-
-	@PostMapping(value = "/write.do")
-	public String writingComplete(BoardVO board) {
-
-		log.info("writing......");
 		
-		boardService.write(board);
-
-		return "redirect:/board/boardList";
+		return "/board/boardList";
 	}
 	
 	@GetMapping(value = "/getBoardList")
@@ -61,7 +47,7 @@ public class BoardController {
 		return new ResponseEntity<>(boardList, HttpStatus.OK);
 	}
 	
-	@GetMapping(value="/board/boardList/{boardNumber}")
+	@GetMapping(value="/board/boardList/{boardNumber}", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public ResponseEntity<BoardVO> getBoardByNumber(@PathVariable int boardNumber){
 		
@@ -69,4 +55,55 @@ public class BoardController {
 		
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/board/write")
+	public String startWriting() {
+		return "/board/write";
+	}
+	
+	@PostMapping(value = "/write.do")
+	public String writingComplete(BoardVO board, Principal principal) {
+
+		log.info("writing......");
+		
+		boardService.write(board, principal);
+
+		return "redirect:/board/boardList";
+	}
+	
+	@GetMapping(value = "/board/read")
+	public String readingBoard() {
+		
+		log.info("reading.......");
+		
+		return "/board/read";
+	}
+	
+	@GetMapping(value ="/board/modify/{boardNumber}", produces="application/json;charset=utf-8")
+	@ResponseBody
+	public ResponseEntity<BoardVO> updateBoard(@PathVariable("boardNumber") int boardNumber) {
+		
+		return new ResponseEntity<>(boardService.read(boardNumber), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/board/modify")
+	public String modifyPage() {
+		
+		return "/board/modify";
+	}
+	
+	@GetMapping(value = "/getBoardList/{category}")
+	@ResponseBody
+	public ResponseEntity<List<BoardVO>> getBoardListByCategory(@PathVariable("category") String category) {
+		if("review".equals(category)) {
+			category = "영화 리뷰";
+		}
+		if("recommand".equals(category)) {
+			category = "영화 추천";
+		}
+		
+		return new ResponseEntity<>(boardService.getBoardListByCategory(category), HttpStatus.OK); 
+	}
+	
+	
 }

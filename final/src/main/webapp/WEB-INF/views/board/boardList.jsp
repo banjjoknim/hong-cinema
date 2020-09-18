@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,13 +16,24 @@
 </head>
 <body>
 
+			<sec:authorize access="isAuthenticated()">
+            	<sec:authentication property="principal.username" var="userid" />
+       			<sec:authentication property="principal.member.userName" var="userName"/>
+       			<sec:authentication property="principal.member.userEmail" var="userEmail"/>
+			</sec:authorize>
+
 	<%@ include file="../board/header.jsp"%>
 	<div class="boardContainer">
 
-		<h4 style="font-weight: 600; margin-top: 100px;">게시글 목록</h4>
+		<div style="height: 30px;">
+		<span class="thisBoardTitle" style="font-weight: 600; font-size: 200%; margin-top: 100px;">게시글 목록</span>
+		<button type="button" class="btn btn-outline-primary btn-category" value="category3">category3</button>
+		<button type="button" class="btn btn-outline-primary btn-category" value="recommand">영화 추천</button>
+		<button type="button" class="btn btn-outline-primary btn-category" value="review">영화 리뷰</button>
+		</div>
 		<hr color="black">
 		<div class="contents">
-			<table class="table table-hover" style="padding-bottom: 0px;">
+			<table class="table table-hover" style="padding-bottom: 0px; width: 100%;">
 				<thead>
 					<tr class="table-active">
 						<th class="no" scope="col">번호</th>
@@ -30,22 +44,16 @@
 						<th class="hit" scope="col">조회수</th>
 					</tr>
 				</thead>
-				<tbody class="boardList">
-					<%-- <c:forEach var="board" items="${boards }">
-						<tr style="margin-bottom: 0px;">
-							<td class="boardNumberInList">${board.boardNumber }</td>
-							<td>${board.category }</td>
-							<td class="boardTitleInList">${board.title }</td>
-							<td class="writerInList">${board.writer }</td>
-							<td>${board.writeDate }</td>
-							<td>${board.hit }</td>
-						</tr>
-					</c:forEach> --%>
+				<tbody class="boardList" style="width: 100%;">
 				</tbody>
 			</table>
 		</div>
 		<button class="registButton btn btn-info">게시글 작성</button>
-		<hr color="lightgray">
+		<button class="goToListButton btn btn-info">목록으로</button>
+		<button class="btn-modify btn btn-success">게시글 수정</button>
+		<button class="btn-delete btn btn-primary">게시글 삭제</button>
+		<button class="completeModify btn btn-success">수정완료</button>
+		<button class="cancelModify btn btn-primary">취소</button>
 	</div>
 	<%@ include file="../board/footer.jsp"%>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -70,7 +78,7 @@
  					
 					$('tbody').append(str);
 				}
-			}
+			} 
 			
 			$.ajax({
                 url: "/getBoardList.json",
@@ -90,16 +98,27 @@
 			$('.contents').on('click','.completeWrite', function(){
 				alert('게시글 작성이 완료되었습니다.');
 				$('#writeFrm').submit();
-				
+			})
+			
+			$('.contents').on('click', '.cancelWrite', function(){
+				alert('게시글 작성이 취소되었습니다.');
+				window.location.href ='http://localhost:8080/board/boardList';
 			})
 			
 			$(".registButton").on("click",function(){
-				alert('게시글 작성!');
+				//alert('게시글 작성!');
 				$(".contents").load("/board/write #writeFrm");
 				$(this).hide();
+				$('.goToListButton').hide();
 		    	$('h4').html('게시글 작성');
 			})
 			
+			$('.goToListButton').on('click', function(){
+				//alert('목록으로');
+				window.location.href ='http://localhost:8080/board/boardList';
+			})
+			
+			var thisBoardNumber;
 			$('.boardList').on('click', '.boardTitleInList', function(){
 				var requestUrl = "http://localhost:8080/board/boardList/"+$(this).parent().find('.boardNumberInList').html()+".json";
 				// console.log($(this).parent().find('.boardNumberInList').html());
@@ -112,35 +131,85 @@
   						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
   					  },
 				}).done(function (data) {
-                      //alert('게시글 읽기 성공.');
-                      //alert(data.boardNumber);
+					console.log(data);
+					thisBoardNumber = data.boardNumber;
+					$(".contents").load("/board/read", function(){
+						$('.thisBoardTitle').html(data.title);
+						$('.categoryName').html(data.category);
+						$('.writerName').html(data.writer);
+						$('.content').html(data.contents);
+						$('.writeDate').html(data.writeDate);
+						$('.hit').html(data.hit);
+					});
+					$('.registButton').hide();
+					$('.btn-category').hide();
+					$('.btn-modify').hide();
+					$('.btn-delete').hide();
+					$('.completeModify').hide();
+					$('.cancelModify').hide();
+					if('${userid}' === data.writer){
+						$('.btn-delete').show();
+						$('.btn-modify').show();
+					}
                   })
 			})
 			
 			$('.contents').on('click','.writerInList', function(){
-				var requestUrl = "http://localhost:8080/board/boardList/"+$(this).parent().find('.writerInList').html()+".json";
 				window.location.href = "http://localhost:8080/board/boardList/"+$(this).html();
+			})
+			
+			$('.btn-category').on('click', function(){
+				//alert('카테고리 선택');
+				
+				$.ajax({
+					url: '/getBoardList/'+$(this).val()+".json",
+					type: 'get',
+					contentType: 'application/json;charset=utf-8',
+					beforeSend: function(xhr){
+  						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+  					  },
+				}).done(function (data) {
+					console.log(data);
+					$('tbody').html('');
+					showList(data);
+                  })
+			})
+			
+			$('.btn-modify').on('click', function(){
+				//alert('수정하기');
+				console.log(thisBoardNumber);
+				$.ajax({
+					url: '/board/modify/'+thisBoardNumber,
+					type: 'get',
+					contentType: 'application/json;charset=utf-8',
+					beforeSend: function(xhr){
+  						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+  					  },
+				}).done(function (data) {
+					//alert('수정페이지 진입.');
+					$(".contents").load("/board/modify", function(){
+						$('.thisBoardTitle').html(data.title);
+						$('.categoryName').html(data.category);
+						$('.writerName').html(data.writer);
+						$('.content').html(data.contents);
+						$('.writeDate').html(data.writeDate);
+						$('.hit').html(data.hit);
+						$('.btn-modify').hide();
+						$('.btn-delete').hide();
+						$('.completeModify').show();
+						$('.cancelModify').show();
+					});
+                  })
+			})
+			
+			$('.btn-delete').on('click', function(){
+				if(confirm('게시글을 삭제하시겠습니까?')){
+				};
 			})
 			
 			
 			
-			
 		})
-		/* $.ajax({
-					url:"/board/write.do",
-					type:"post",
-					contentType:'application/json;charset=utf-8',
-					headers: { "Content-Type": "application/json" },
-					data: JSON.stringify({
-                  	  writer : "userId",
-                  	  category : "분류",
-                  	  title : $('input[name=title]').val(),
-                  	  content : $('input[name=content]').val()
-                    }),
-					success: function(){
-						alert('게시글 등록 성공!');
-					}
-				}) */
 		</script>
 		
 </body>

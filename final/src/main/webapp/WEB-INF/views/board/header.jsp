@@ -74,11 +74,11 @@
                   </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">이벤트<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/board/boardList">게시판<span class="sr-only">(current)</span></a>
                     <ul class="sub-menu" style="padding:0px;">
-                        <li><a href="#">영화</a></li>
-                        <li><a href="#">시사회</a></li>
-                        <li><a href="#">제휴할인</a></li>
+                        <li><a href="/board/boardList">리뷰</a></li>
+                        <li><a href="/board/boardList">추천</a></li>
+                        <li><a href="#">기타</a></li>
                     </ul>
             </li>
           </ul>

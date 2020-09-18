@@ -11,7 +11,7 @@ public interface BoardServiceMapper {
 	
 	public void delete(@Param("boardNumber") int boardNumber);
 	
-	public void update(@Param("boardNumber") int boardNumber, @Param("newTitle") String newTitle, @Param("contents") String contents, @Param("updateDate") String updateDate);
+	public void update(@Param("boardNumber") int boardNumber, @Param("contents") String contents);
 	
 	public BoardVO read(@Param("boardNumber") int boardNumber);
 	

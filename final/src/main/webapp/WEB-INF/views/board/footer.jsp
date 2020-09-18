@@ -9,6 +9,7 @@
 footer{
 width: 100%;
 margin: 0 auto;
+margin-top: 50px;
 }
 #footerBox{
 width: 900px;

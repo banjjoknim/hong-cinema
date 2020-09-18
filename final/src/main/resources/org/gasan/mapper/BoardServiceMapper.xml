@@ -27,18 +27,36 @@
   </delete>
   
   <update id="update">
-  update board set title = #{newTitle}, updateDate = #{updateDate}, contents = #{contents} where boardNumber = #{boardNumber}
+  update board set updateDate = sysdate, contents = #{contents} where boardNumber = #{boardNumber}
   </update>
-  
-  <select id="getBoardList" resultType="org.gasan.domain.BoardVO">
-  <![CDATA[
-  select * from board
-  ]]>
-  </select>
   
   <select id="read" resultType="org.gasan.domain.BoardVO">
   <![CDATA[
   select * from board where boardNumber = #{boardNumber}
+  ]]>
+  </select>
+  
+  <select id="getBoardList" resultType="org.gasan.domain.BoardVO">
+  <![CDATA[
+  select * from board order by writeDate desc
+  ]]>
+  </select>
+  
+  <select id="getBoardListByCategory" resultType="org.gasan.domain.BoardVO">
+  <![CDATA[
+  select * from board where category = #{category} order by writeDate desc
+  ]]>
+  </select>
+  
+  <select id="getBoardListByWriter" resultType="org.gasan.domain.BoardVO">
+  <![CDATA[
+  select * from board where writer = #{writer} order by writeDate desc
+  ]]>
+  </select>
+  
+  <select id="getBoardListByDate" resultType="org.gasan.domain.BoardVO">
+  <![CDATA[
+  select * from board where writeDate = #{writeDate} order by writeDate desc
   ]]>
   </select>
   
