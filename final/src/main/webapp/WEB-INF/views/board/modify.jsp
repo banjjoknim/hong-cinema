@@ -48,10 +48,12 @@ content {
 				<td colspan="4" class="table-active">내용</td>
 			</tr>
 			<tr>
-				<td colspan="4"><textarea rows="10" cols="50" class="content"
-						style="text-align: left;"></textarea></td>
+				<td colspan="4"><textarea class="content" name="contents"
+						style="text-align: left; width: 100%; height: 300px; resize: none; overflow-y: scroll;"></textarea></td>
 			</tr>
 		</table>
+		<input type="hidden" name="writer" value=""/>
+		<input type="hidden" name="boardNumber" value=""/>
 		<input type="hidden" name="${_csrf.parameterName }"
 			value="${_csrf.token }" />
 	</form:form>

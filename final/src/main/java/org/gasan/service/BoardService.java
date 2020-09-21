@@ -14,6 +14,8 @@ public interface BoardService {
 	public void update(BoardVO board, Principal principal);
 	
 	public BoardVO read(int boardNumber);
+	
+	public void hit(int boardNumber);
 
 	public List<BoardVO> getBoardList();
 

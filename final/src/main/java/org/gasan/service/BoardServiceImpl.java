@@ -80,8 +80,16 @@ public class BoardServiceImpl implements BoardService {
 		log.info("read.....");
 
 		BoardVO board = boardServiceMapper.read(boardNumber);
-
+		
 		return board;
+	}
+
+	@Override
+	public void hit(int boardNumber) {
+		
+		BoardVO board = boardServiceMapper.read(boardNumber);
+		boardServiceMapper.hit(boardNumber, board.getHit() + 1);
+		
 	}
 
 }

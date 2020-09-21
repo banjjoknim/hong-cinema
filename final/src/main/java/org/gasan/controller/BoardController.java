@@ -51,9 +51,9 @@ public class BoardController {
 	@ResponseBody
 	public ResponseEntity<BoardVO> getBoardByNumber(@PathVariable int boardNumber){
 		
-		BoardVO board = boardService.read(boardNumber);
+		boardService.hit(boardNumber);
 		
-		return new ResponseEntity<>(board, HttpStatus.OK);
+		return new ResponseEntity<>(boardService.read(boardNumber), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/board/write")
@@ -103,6 +103,22 @@ public class BoardController {
 		}
 		
 		return new ResponseEntity<>(boardService.getBoardListByCategory(category), HttpStatus.OK); 
+	}
+	
+	@PostMapping(value = "/modify.do")
+	public String modifyComplete(BoardVO board, Principal principal) {
+		
+		boardService.update(board, principal);
+		
+		return "redirect:/board/boardList";
+	}
+	
+	@PostMapping(value = "/delete.do")
+	public String delete(BoardVO board, Principal principal) {
+		
+		boardService.delete(board, principal);
+		
+		return "redirect:/board/boardList";
 	}
 	
 	

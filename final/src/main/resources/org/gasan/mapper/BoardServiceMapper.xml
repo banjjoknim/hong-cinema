@@ -36,6 +36,10 @@
   ]]>
   </select>
   
+  <update id="hit">
+  update board set hit = #{hit} where boardNumber = #{boardNumber}
+  </update>
+  
   <select id="getBoardList" resultType="org.gasan.domain.BoardVO">
   <![CDATA[
   select * from board order by writeDate desc

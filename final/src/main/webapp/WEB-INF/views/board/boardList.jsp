@@ -62,6 +62,11 @@
 	<script>
 		$(document).ready(function(){
 			
+			$('.btn-modify').hide();
+			$('.btn-delete').hide();
+			$('.completeModify').hide();
+			$('.cancelModify').hide();
+			
 			var showList = function(list){
 				
 				for(var i = 0; len = list.length||0, i<len; i++){
@@ -131,7 +136,7 @@
   						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
   					  },
 				}).done(function (data) {
-					console.log(data);
+					//console.log(data);
 					thisBoardNumber = data.boardNumber;
 					$(".contents").load("/board/read", function(){
 						$('.thisBoardTitle').html(data.title);
@@ -140,6 +145,11 @@
 						$('.content').html(data.contents);
 						$('.writeDate').html(data.writeDate);
 						$('.hit').html(data.hit);
+						if('${userid}' === data.writer){
+							console.log(data);
+							$('input[name=writer]').val('${userid}');
+							$('input[name=boardNumber]').val(thisBoardNumber);
+						}
 					});
 					$('.registButton').hide();
 					$('.btn-category').hide();
@@ -194,16 +204,25 @@
 						$('.content').html(data.contents);
 						$('.writeDate').html(data.writeDate);
 						$('.hit').html(data.hit);
-						$('.btn-modify').hide();
-						$('.btn-delete').hide();
-						$('.completeModify').show();
-						$('.cancelModify').show();
+						$('input[name=boardNumber]').val(data.boardNumber);
+						$('input[name=writer]').val(data.writer);
 					});
+					$('.btn-modify').hide();
+					$('.btn-delete').hide();
+					$('.completeModify').show();
+					$('.cancelModify').show();
                   })
+			})
+			
+			$('.completeModify').on('click',function(){
+				$('form[name=modifyFrm]').submit();
+				alert('수정이 완료되었습니다.');
 			})
 			
 			$('.btn-delete').on('click', function(){
 				if(confirm('게시글을 삭제하시겠습니까?')){
+					$('form[name=deleteFrm]').submit();
+					alert('게시글 삭제가 완료되었습니다.');
 				};
 			})
 			

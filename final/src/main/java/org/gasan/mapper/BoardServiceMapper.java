@@ -15,6 +15,8 @@ public interface BoardServiceMapper {
 	
 	public BoardVO read(@Param("boardNumber") int boardNumber);
 	
+	public void hit(@Param("boardNumber") int boardNumber, @Param("hit") int hit);
+	
 	public List<BoardVO> getBoardList();
 	
 	public List<BoardVO> getBoardListByCategory(@Param("category") String category);
