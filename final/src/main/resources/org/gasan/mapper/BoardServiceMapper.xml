@@ -46,6 +46,24 @@
   ]]>
   </select>
   
+  <select id="getReviewBoardList" resultType="org.gasan.domain.BoardVO">
+  <![CDATA[
+  select * from board where category = '영화 리뷰' order by writeDate desc 
+  ]]>
+  </select>
+  
+  <select id="getRecommandBoardList" resultType="org.gasan.domain.BoardVO">
+  <![CDATA[
+  select * from board where category = '영화 추천' order by writeDate desc 
+  ]]>
+  </select>
+  
+  <select id="getTalkBoardList" resultType="org.gasan.domain.BoardVO">
+  <![CDATA[
+  select * from board where category = '잡담' order by writeDate desc 
+  ]]>
+  </select>
+  
   <select id="getBoardListByCategory" resultType="org.gasan.domain.BoardVO">
   <![CDATA[
   select * from board where category = #{category} order by writeDate desc

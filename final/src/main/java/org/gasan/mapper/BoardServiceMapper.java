@@ -19,6 +19,12 @@ public interface BoardServiceMapper {
 	
 	public List<BoardVO> getBoardList();
 	
+	public List<BoardVO> getReviewBoardList();
+	
+	public List<BoardVO> getRecommandBoardList();
+	
+	public List<BoardVO> getTalkBoardList();
+	
 	public List<BoardVO> getBoardListByCategory(@Param("category") String category);
 	
 	public List<BoardVO> getBoardListByWriter(@Param("writer") String writer);

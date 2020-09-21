@@ -18,6 +18,12 @@ public interface BoardService {
 	public void hit(int boardNumber);
 
 	public List<BoardVO> getBoardList();
+	
+	public List<BoardVO> getReviewBoardList();
+	
+	public List<BoardVO> getRecommandBoardList();
+	
+	public List<BoardVO> getTalkBoardList();
 
 	public List<BoardVO> getBoardListByCategory(String category);
 

@@ -74,11 +74,11 @@
                   </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/board/boardList">게시판<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/board/boardList/total/1">게시판<span class="sr-only">(current)</span></a>
                     <ul class="sub-menu" style="padding:0px;">
-                        <li><a href="/board/boardList">리뷰</a></li>
-                        <li><a href="/board/boardList">추천</a></li>
-                        <li><a href="#">기타</a></li>
+                        <li><a href="/board/boardList/review/1" class="reviewBoardBtn">리뷰</a></li>
+                        <li><a href="/board/boardList/recommand/1" class="recommandBoardBtn">추천</a></li>
+                        <li><a href="/board/boardList/talk/1" class="talkBoardBtn">잡담</a></li>
                     </ul>
             </li>
           </ul>
@@ -90,5 +90,19 @@
       </nav>     
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+        	$('.reviewBoardBtn').on('click',function(){
+        		alert('리뷰 게시판!');
+        	})
+        	$('.recommandBoardBtn').on('click',function(){
+        		alert('추천 게시판!');
+        	})
+        	$('.talkBoardBtn').on('click',function(){
+        		alert('잡담 게시판!');
+        	})
+        })
+        
+        </script>
         
 </html>        

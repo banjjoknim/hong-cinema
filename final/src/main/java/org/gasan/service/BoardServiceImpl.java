@@ -92,4 +92,22 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	@Override
+	public List<BoardVO> getReviewBoardList() {
+		
+		return boardServiceMapper.getReviewBoardList();
+	}
+
+	@Override
+	public List<BoardVO> getRecommandBoardList() {
+		
+		return boardServiceMapper.getRecommandBoardList();
+	}
+
+	@Override
+	public List<BoardVO> getTalkBoardList() {
+		
+		return boardServiceMapper.getTalkBoardList();
+	}
+
 }

@@ -120,3 +120,15 @@ fieldset{
 	margin-top: 20px;
 	float: left;
 }
+.pageNum{
+	margin-top: 20px;
+	float: left;
+}
+.nextPageNum{
+	margin-top: 20px;
+	float: left;
+}
+.previousPageNum{
+	margin-top: 20px;
+	float: left;
+}

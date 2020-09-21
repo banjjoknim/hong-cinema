@@ -27,7 +27,7 @@
 
 		<div style="height: 30px;">
 		<span class="thisBoardTitle" style="font-weight: 600; font-size: 200%; margin-top: 100px;">게시글 목록</span>
-		<button type="button" class="btn btn-outline-primary btn-category" value="category3">category3</button>
+		<button type="button" class="btn btn-outline-primary btn-category" value="잡담">잡담</button>
 		<button type="button" class="btn btn-outline-primary btn-category" value="recommand">영화 추천</button>
 		<button type="button" class="btn btn-outline-primary btn-category" value="review">영화 리뷰</button>
 		</div>
@@ -48,12 +48,19 @@
 				</tbody>
 			</table>
 		</div>
+		<div>
+		<button class="previousPageNum btn btn-success">이전 페이지</button>
+		<c:forEach var="pageNum" begin="${criteria.startPageNum}" end="${criteria.endPageNum}">
+		<button class="pageNum btn btn-success" value="${pageNum }">${pageNum }</button>
+		</c:forEach>
+		<button class="nextPageNum btn btn-success">다음 페이지</button>
 		<button class="registButton btn btn-info">게시글 작성</button>
 		<button class="goToListButton btn btn-info">목록으로</button>
 		<button class="btn-modify btn btn-success">게시글 수정</button>
 		<button class="btn-delete btn btn-primary">게시글 삭제</button>
 		<button class="completeModify btn btn-success">수정완료</button>
 		<button class="cancelModify btn btn-primary">취소</button>
+		</div>
 	</div>
 	<%@ include file="../board/footer.jsp"%>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -66,10 +73,13 @@
 			$('.btn-delete').hide();
 			$('.completeModify').hide();
 			$('.cancelModify').hide();
+			$('.goToListButton').hide();
 			
+			
+			var pageNum;
 			var showList = function(list){
-				
-				for(var i = 0; len = list.length||0, i<len; i++){
+				pageNum = Number('${criteria.pageNum}');
+				for(var i = (pageNum-1)*10; len = (pageNum)*10, i<len; i++){
 					var str = "";
 					
 					str += '<tr style="margin-bottom: 0px;">'
@@ -84,7 +94,6 @@
 					$('tbody').append(str);
 				}
 			} 
-			
 			$.ajax({
                 url: "/getBoardList.json",
                 method: "get"
@@ -114,13 +123,17 @@
 				//alert('게시글 작성!');
 				$(".contents").load("/board/write #writeFrm");
 				$(this).hide();
-				$('.goToListButton').hide();
-		    	$('h4').html('게시글 작성');
+				//$('.goToListButton').hide();
+				$('.btn-category').hide();	
+				$('.thisBoardTitle').html('게시글 작성');
+				$('.pageNum').hide();
+				$('.previousPageNum').hide();
+				$('.nextPageNum').hide();
 			})
 			
 			$('.goToListButton').on('click', function(){
 				//alert('목록으로');
-				window.location.href ='http://localhost:8080/board/boardList';
+				window.location.href ='http://localhost:8080/board/boardList/total/'+pageNum;
 			})
 			
 			var thisBoardNumber;
@@ -151,6 +164,7 @@
 							$('input[name=boardNumber]').val(thisBoardNumber);
 						}
 					});
+					$('.goToListButton').show();
 					$('.registButton').hide();
 					$('.btn-category').hide();
 					$('.btn-modify').hide();
@@ -161,6 +175,9 @@
 						$('.btn-delete').show();
 						$('.btn-modify').show();
 					}
+					$('.pageNum').hide();
+					$('.previousPageNum').hide();
+					$('.nextPageNum').hide();
                   })
 			})
 			
@@ -211,6 +228,9 @@
 					$('.btn-delete').hide();
 					$('.completeModify').show();
 					$('.cancelModify').show();
+					$('.pageNum').hide();
+					$('.previousPageNum').hide();
+					$('.nextPageNum').hide();
                   })
 			})
 			
@@ -224,6 +244,16 @@
 					$('form[name=deleteFrm]').submit();
 					alert('게시글 삭제가 완료되었습니다.');
 				};
+			})
+			
+			$('.pageNum').on('click',function(){
+				window.location.href = 'http://localhost:8080/board/boardList/total/'+$(this).val();
+			})
+			$('.nextPageNum').on('click',function(){
+				window.location.href = 'http://localhost:8080/board/boardList/total/'+Number(pageNum+1);
+			})
+			$('.previousPageNum').on('click',function(){
+				window.location.href = 'http://localhost:8080/board/boardList/total/'+Number(pageNum-1);
 			})
 			
 			

@@ -31,7 +31,7 @@ content {
 <body>
 	<form:form modelAttribute="BoardVO" name="modifyFrm" id="modifyFrm"
 		action="/modify.do" method="post">
-		<table class="readTable" style="width: 100%;">
+		<table class="modifyTable" style="width: 100%;">
 			<tr>
 				<td class="table-active" style="width: 10%;">작성자</td>
 				<td class="writerName"></td>

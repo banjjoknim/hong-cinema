@@ -10,6 +10,23 @@
 <link rel="stylesheet" href="/resources/css/boardList.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style>
+tr {
+	padding: 20px;
+	margin: 0 auto;
+}
+
+table td {
+	padding: 20px;
+	text-align: center;
+	border: 1px solid rgb(200, 200, 200);
+}
+
+content {
+	height: 70%;
+	overflow: scroll;
+}
+</style>
 </head>
 <body>
 	<form:form modelAttribute="BoardVO" name="writeFrm" id="writeFrm"
@@ -18,28 +35,31 @@
 
 		<%-- </form> --%>
 
-		<table>
-			<tr>
-				<td>작성자</td>
-				<td>아이디</td>
-			</tr>
-			<tr>
-				<td>분류</td>
-				<td><select name="category">
-						<option value="영화 리뷰">영화 리뷰</option>
-						<option value="영화 추천">영화 추천</option>
-						<option value="category3">category3</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>제목</td>
-				<td><input type="text" size="50" name="title"></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea rows="10" cols="50" class="textarea"
-						name="contents"></textarea></td>
-			</tr>
+		<table style="border: 1px solid darkgray; width: 100%;">
+			<tbody>
+				<tr>
+					<td class="table-active" style="width: 25%;">작성자</td>
+					<td style="width: 25%;">아이디</td>
+					<td class="table-active" style="width: 25%;">분류</td>
+					<td style="width: 25%;"><select name="category" style="width: 100%;">
+							<option value="영화 리뷰">영화 리뷰</option>
+							<option value="영화 추천">영화 추천</option>
+							<option value="잡담">잡담</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td colspan="1" class="table-active" style="width: 30%;">제목</td>
+					<td colspan="3"><input type="text" name="title"
+						style="width: 100%;"></td>
+				</tr>
+				<tr>
+					<td colspan="4" class="table-active">내용</td>
+				</tr>
+				<tr>
+					<td colspan="4"><textarea style="width: 100%; height: 300px; outline: none;"
+							class="textarea" name="contents"></textarea></td>
+				</tr>
+			</tbody>
 		</table>
 		<input type="submit" class="completeWrite btn btn-info" value="작성완료" />
 		<input type="button" class="cancelWrite btn btn-primary" value="취소" />
