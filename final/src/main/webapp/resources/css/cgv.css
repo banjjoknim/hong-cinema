@@ -43,14 +43,14 @@ li {
 }
 .rank {
     display: block;
-    height: 28px;
+    height: 35px;
     margin-bottom: 4px;
     border: 6px solid #000000;
     background: #e71a0f;
     color: #ffffff;
-    font-size: 19px;
+    font-size: 23px;
     text-align: center;
-    line-height: 28px;
+    line-height: 20px;
 }
 strong {
     font-weight: 500;

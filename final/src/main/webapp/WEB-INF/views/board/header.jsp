@@ -62,7 +62,7 @@
             <li class="nav-item">
               <a class="nav-link" href="#">영화 <span class="sr-only">(current)</span></a>
                 <ul class="sub-menu" style="padding:0px;">
-                    <li><a href="#">무비 차트</a></li>
+                    <li><a href="/movieChart">무비 차트</a></li>
                     <li><a href="#">무비 파인더</a></li>
                 </ul>
             </li>

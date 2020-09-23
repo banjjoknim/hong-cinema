@@ -21,7 +21,7 @@
 		<div class="box-image">
 			<strong class="rank">${list.ranks}</strong>
 			<span class="thumb-image">
-				<a href="/board/result5?title=${list.movieTitles}&rel=${list.movieOpenDates.replaceAll('\\.','').replaceAll('개봉','')}"><img src="${list.imgs}"></a>
+				<a href="/board/result5?title=${list.movieTitles.replaceAll(' ','')}&rel=${list.movieOpenDates.replaceAll('\\.','').replaceAll('개봉','')}"><img src="${list.imgs}"></a>
 				<c:set var="name" value="${list.movieAges}" /> 
 					<c:choose>
 						<c:when test="${name eq '전체'}" >
