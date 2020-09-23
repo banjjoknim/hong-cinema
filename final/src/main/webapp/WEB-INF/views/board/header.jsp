@@ -28,22 +28,33 @@
         <sec:authorize access="isAnonymous()">
 			<li><a href="/customLogin">로그인</a></li>
 		</sec:authorize>
-           
-           
-            <sec:authorize access="isAuthenticated()">
-            	<sec:authentication property="principal.username" var="userid" />
+        <sec:authorize access="isAuthenticated()">
+            	
        			<sec:authentication property="principal.member.userName" var="userName"/>
        			<sec:authentication property="principal.member.userEmail" var="userEmail"/>
             <li>${userName}님, 반갑습니다.</li>
+           </sec:authorize>
+           
+           <sec:authorize access="hasRole('ROLE_USER')">
             <li><a href="/myInfo">마이페이지</a></li>
+            </sec:authorize>
+              
+             <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <li><a href="/admin_mem">관리자페이지</a></li>
+            <li><a href="/customSignup">회원등록</a></li>
+            </sec:authorize>
+            
+			<sec:authorize access="isAnonymous()">
+            <li><a href="/customSignup">회원가입</a></li>
+            </sec:authorize>
+            
+            <sec:authorize access="isAuthenticated()">
     		<li><a href="#" onclick="document.getElementById('logout-form').submit();">로그아웃</a></li>
 				<form id="logout-form" action='<c:url value='/customLogout'/>' method="POST">
    					<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 				</form>
 			</sec:authorize>
-			<sec:authorize access="isAnonymous()">
-            <li><a href="/customSignup">회원가입</a></li>
-            </sec:authorize>
+           
         </ul>
     </div>
 

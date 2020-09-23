@@ -1,11 +1,14 @@
 package org.gasan.dao;
 
+import java.util.List;
+
 import org.gasan.domain.MemberVO;
 
 public interface MemberDAO {
 	
-	 
-	
+	//회원 목록
+	public List<MemberVO> getUserList() throws Exception;
+
 	//가입과 권한 조인
 	public MemberVO read(String userid);
 	
@@ -44,5 +47,9 @@ public interface MemberDAO {
 	
 	//휴대폰 번호 중복 체크
 	public int phoneChk(MemberVO vo) throws Exception;
+
+	//회원 상세보기 조회
+	public MemberVO viewMember(String userid) throws Exception;
+
 }
 

@@ -9,7 +9,8 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-widt
+h, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
 
@@ -23,8 +24,8 @@
 </head>
 <body>
 <%@ include file="../board/header.jsp" %>
-	<div class="nav_container">
-		<ul class="nav nav-tabs">
+	<div style="padding: 0;" class="nav_container">
+	<!-- 	<ul class="nav nav-tabs">
 			<li class="nav-item"><a class="nav-link"
 				style="text-align: center; width: 300px;" data-toggle="tab"
 				href="/myReservation">예매내역</a></li>
@@ -34,17 +35,9 @@
 			<li class="nav-item"><a class="nav-link active"
 				style="text-align: center; width: 300px;" data-toggle="tab"
 				href="/myInfo">회원정보수정</a></li>
-		</ul>
+		</ul> -->
 		
 		<sec:authorize access="isAuthenticated()">
-
-       	
-       	<sec:authentication property="principal.username" var="userid"/>
-       	<sec:authentication property="principal.member.userName" var="userName"/>
-       	<sec:authentication property="principal.member.userEmail" var="userEmail"/>
-       	<sec:authentication property="principal.member.userPhone" var="userPhone"/>
-       	<sec:authentication property="principal.member.userBirth" var="userBirth"/> 
-
 
 		<form action="/memberUpdate" method="post">
 			<fieldset>
@@ -56,7 +49,7 @@
 						<input class="form-control-plaintext"
 							style="width: 400px; height: 40px; float: left; font-size: 15px;"
 							type="text" class="form-control" id="userid" name="userid"
-							value="${userid}" readonly>
+							value="${vo.userid}" readonly>
 					</div>
 				</div>
 				<hr color="lightgray">
@@ -90,7 +83,7 @@
 						<input class="form-control-plaintext"
 							style="width: 400px; height: 40px; float: left; font-size: 15px;"
 							type="text" class="form-control" id="userEmail" name="userEmail"
-							value="${userEmail}" readonly>			
+							value="${vo.userEmail}" readonly>			
 					</div>
 				</div>
 				<hr color="lightgray">
@@ -101,7 +94,7 @@
 							<input class="form-control-plaintext"
 							style="width: 400px; height: 40px; float: left; font-size: 15px;"
 							type="text" class="form-control" id="userEmail" name="userEmail"
-							value="${userName}" readonly>
+							value="${vo.userName}" readonly>
 					</div>
 
 				</div>
@@ -111,8 +104,8 @@
 					<label for="phone" class="col-sm-2 col-form-label">휴대폰 번호</label>
 					<div class="col-sm-10">
 						<input style="width: 400px; height: 40px; float: left;"
-							type="phone" class="form-control" id="userPhone" name="userPhone"
-							value="${userPhone}">
+							type="text" class="form-control" id="userPhone" name="userPhone"
+							value="${vo.userPhone}">
 					</div>
 				</div>
 				<hr color="lightgray">
@@ -121,7 +114,7 @@
 					<div class="col-sm-10">
 						<input style="width: 400px; height: 40px; float: left;"
 							type="text" class="form-control" id="userBirth" name="userBirth"
-							value="${userBirth}">
+							value="${vo.userBirth}">
 					</div>
 				</div>
 				<hr color="lightgray">
@@ -180,6 +173,7 @@
 
 					</div>
 				</div>
+	
 				<hr color="lightgray">
 
 				<div align="center" class="buttonbox">
@@ -188,12 +182,13 @@
 					<button type="button" style="width: 100px;" class="cancel btn-primary btn-lg" id="cancel">취소</button>
 				</div>
 			</fieldset>
+		
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		</form>
 		</sec:authorize>
 	</div>
-
+<%@ include file="../board/footer.jsp" %>
 </body>
 </html>
 

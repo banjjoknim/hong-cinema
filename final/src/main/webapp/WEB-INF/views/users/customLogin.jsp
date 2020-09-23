@@ -85,7 +85,7 @@
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   </form>
 
-<%@ include file="../board/footer.jsp" %>		
+
 </body>
     
     
@@ -106,4 +106,5 @@
 	</script>
 	
 
+</body>
 </html>

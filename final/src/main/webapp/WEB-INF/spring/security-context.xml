@@ -15,15 +15,15 @@
 
 <security:http>
 
-	<security:intercept-url pattern="/sample/all" access="permitAll"/>
+	<security:intercept-url pattern="/**" access="permitAll"/>
 	
 	<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')"/>
 	
-	<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
+	<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
 	
 
 	<security:session-management session-fixation-protection="migrateSession">
-  		<security:concurrency-control max-sessions="1" expired-url="/customLogin"/> 
+  		<!-- <security:concurrency-control max-sessions="1" expired-url="/customLogin"/> --> 
  	</security:session-management> 
 	
 	

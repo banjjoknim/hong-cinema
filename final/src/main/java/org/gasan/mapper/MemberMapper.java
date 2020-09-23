@@ -1,8 +1,12 @@
 package org.gasan.mapper;
 
+import java.util.List;
+
 import org.gasan.domain.MemberVO;
 
 public interface MemberMapper {
+	
+	public List<MemberVO> getUserList();
 	
 	//가입과 권한 조인
 	public MemberVO read(String userid);

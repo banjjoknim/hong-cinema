@@ -1,5 +1,6 @@
 package org.gasan.controller;
 
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,8 +33,7 @@ public class CommonController {
 
 	@Setter(onMethod_ = @Autowired)
 	private CommonService commonService;
-	
-	
+
 	@Inject
 	BCryptPasswordEncoder pwEncoder;
 
@@ -70,26 +70,26 @@ public class CommonController {
 	public String logoutGET() {
 
 		log.info("custom logout");
-		
+
 		return "/users/customLogout";
 	}
-	
+
 	//소셜 로그인 페이지 접근
 	@GetMapping("/customLogin_social")
 	public String login_social() {
 
 		log.info("customLogin_social");
-		
+
 		return "/users/customLogin_social";
 	}
-	
+
 
 	// 로그아웃 처리
 	@PostMapping("/customLogout")
 	public String logoutPost() {
 
 		log.info("post custom logout");
-		
+
 		return "/users/customLogout";
 	}
 
@@ -98,7 +98,7 @@ public class CommonController {
 	public String signupGET() {
 
 		log.info("회원가입 폼");
-		
+
 		return "/users/customSignup";
 	}
 
@@ -115,9 +115,11 @@ public class CommonController {
 
 			if (result == 1) {
 				return "/customSignup";
+			
 			} else if (result == 0) {
 
 				commonService.customSignup(vo);
+				
 				rttr.addFlashAttribute("result", vo.getUserName());
 			}
 
@@ -148,68 +150,101 @@ public class CommonController {
 
 	// 회원수정 페이지 접근
 	@RequestMapping(value = "/myInfo", method = RequestMethod.GET)
-	public String myInfo() throws Exception {
+	public String myInfo(Model model) throws Exception {
 
 		return "/users/myInfo";
 	}
+	
+	
+	
+	//예매내역
 	@RequestMapping(value = "/myReservation", method = RequestMethod.GET)
 	public String myReservation() throws Exception {
 
 		return "/users/myReservation";
 	}
+	
+	
+	//게시판 정보
 	@RequestMapping(value = "/myBoard", method = RequestMethod.GET)
 	public String myBoard() throws Exception {
 
 		return "/users/myBoard";
 	}
-	
+
 
 	// 회원 수정 처리
 	@RequestMapping(value = "/memberUpdate", method = RequestMethod.POST)
 	public String registerUpdate(MemberVO vo) throws Exception {
-		log.info(vo.getUserpw());
+		log.info("memberUpdate....");
+		commonService.memberUpdate(vo);
+
+		return "redirect:/";
+	}
+	
+	
+	// 회원 수정 처리
+	@RequestMapping(value = "/memberUpdate", method = RequestMethod.GET)
+	public String Update(MemberVO vo) throws Exception {
+			
+		log.info("memberUpdate....");
+			
 		commonService.memberUpdate(vo);
 
 		return "redirect:/";
 	}
 
+	
 	// 회원탈퇴 페이지 접근
 	@RequestMapping(value = "/memberDeleteView", method = RequestMethod.GET)
 	public String memberDeleteView() throws Exception {
+		
 		return "/memberDeleteView";
+	
 	}
 
-	
+
+
 	
 	// 회원 탈퇴 처리
 	@RequestMapping(value = "/memberDelete", method = RequestMethod.POST)
 	public String memberDelete(MemberVO vo) throws Exception{
-		
 
 		commonService.memberDelete(vo);
-		
-		
+
 		return "redirect:/customLogout";
 	}
+	
+	
+	
+	// 회원 탈퇴 처리
+		@RequestMapping(value = "/memberDelete", method = RequestMethod.GET)
+		public String Delete(MemberVO vo) throws Exception{
+			
+			commonService.memberDelete(vo);
 
-	// 패스워드 체크 처리
+			return "redirect:/admin_mem";
+		}
+
+	
+		
+	// 패스워드 체크 처리(탈퇴용)
 	@ResponseBody
 	@RequestMapping(value="/passChk", method = RequestMethod.POST)
 	public boolean passChk(MemberVO vo) throws Exception {
-		
+
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
 		UserDetails userDetails = (UserDetails)principal; 
 		String password = userDetails.getPassword();
 
 		log.info(password);
-		
+
 		boolean pwdChk = pwEncoder.matches(vo.getUserpw(), userDetails.getPassword());
 		return pwdChk;
-			
-			 
-			
-		}
+		
+	}
 
+	
 	//작동안되는 로그인
 	@RequestMapping(value = "/customLogin", method = RequestMethod.POST)
 	public String login(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception {
@@ -228,8 +263,8 @@ public class CommonController {
 
 		return "redirect:/";
 	}
-	
-	
+
+
 
 	// 이메일 중복 확인
 	@ResponseBody
@@ -239,6 +274,7 @@ public class CommonController {
 		return result;
 	}
 
+	
 	// 휴대폰 번호 중복 확인
 	@ResponseBody
 	@RequestMapping(value = "/phoneChk", method = RequestMethod.GET)
@@ -247,4 +283,60 @@ public class CommonController {
 		return result;
 	}
 
+
+	
+	
+	
+	//회원 관리 페이지
+	@RequestMapping(value = "/admin_mem", method = RequestMethod.GET) 
+	public String getUserList(Model model, HttpSession session) throws Exception{ 
+		log.info("getUserList()...."); 
+		
+		model.addAttribute("userList", 
+				commonService.getUserList()); 
+		/* session.setAttribute("userListSession", commonService.getUserList()); */
+		return "/admin/admin_mem"; 
+
+	}
+	
+	
+	// 영화 관리 페이지 접근
+	@RequestMapping(value = "/admin_mov", method = RequestMethod.GET)
+	public String admin_mov() throws Exception {
+
+		return "/admin/admin_mov";
+	}
+	
+	
+	//회원 상세정보 조회
+	@RequestMapping("/memberView")
+	public String memberView(String userid, Model model) throws Exception{
+		//회원 정보를 model에 저장
+		model.addAttribute("vo", commonService.viewMember(userid));
+		
+		log.info("클릭한 아이디 : " + userid);
+		
+		//member_view.jsp로 포워드
+		return "users/member_view";
+	
+	}
+	
+	
+	// 관리자 회원수정 페이지 접근
+	@RequestMapping(value = "/admin_modify_userInfo", method = RequestMethod.GET)
+	public String admin_myInfo(Model model, String userid, HttpSession session) throws Exception {
+			
+		model.addAttribute("vo", commonService.viewMember(userid));
+			
+		log.info("클릭한 아이디 : " + userid);
+			
+		return "/admin/admin_modify_userInfo";
+		
+	}
+		
+	
+
 }
+
+
+

@@ -1,8 +1,14 @@
 package org.gasan.service;
 
+import java.util.List;
+
 import org.gasan.domain.MemberVO;
 
 public interface CommonService {
+
+	public List<MemberVO> getUserList() throws Exception;
+	
+	public MemberVO read(String userid);
 
 	//회원가입
 	public void customSignup(MemberVO vo) throws Exception;
@@ -25,7 +31,12 @@ public interface CommonService {
 	//로그인
 	public MemberVO login(MemberVO vo) throws Exception;
 	
+	//이메일 중복체크
 	public int emailChk(MemberVO vo) throws Exception;
 	
+	//휴대폰 번호 중복체크
 	public int phoneChk(MemberVO vo) throws Exception;
+	
+	//회원 상세보기 조회
+	public MemberVO viewMember(String userid) throws Exception;
 }

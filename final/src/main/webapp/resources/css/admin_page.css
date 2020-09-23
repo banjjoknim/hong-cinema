@@ -1,0 +1,33 @@
+.container {
+    width: 900%;
+}
+
+.breadcrumb {
+    margin-top: 100px;
+    font-size: larger;
+   
+}
+
+.buttonbox{
+    margin-top: 50px;
+    width: 900px;
+    height: 150px;
+    clear: both;
+}
+
+.col-sm-10 input { 
+    vertical-align:-2px; 
+}
+
+.table-active{
+    vertical-align : middle;
+    text-align: center;
+}
+
+.table td{
+    margin-top: 0px;
+    vertical-align : middle;
+    text-align: center;
+}
+
+

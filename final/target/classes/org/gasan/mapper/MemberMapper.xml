@@ -6,6 +6,7 @@
 
 	<resultMap type="org.gasan.domain.MemberVO" id="memberMap">
 		<id property="userid" column="userid" />
+		<result property="no" column="no" />
 		<result property="userid" column="userid" />
 		<result property="userpw" column="userpw" />
 		<result property="userName" column="username" />
@@ -32,7 +33,7 @@
 
 	<select id="read" resultMap="memberMap">
 		SELECT
-		mem.userid, userpw, userName,
+		no, mem.userid, userpw, userName,
 		usergender, userbirth, userphone, useremail, userGenre, enabled,
 		regdate, updatedate, userCertification, auth
 		FROM
@@ -46,11 +47,11 @@
 	<!-- 등록 (회원) -->
 	<insert id="createMember">
 		insert into tbl_member (
-		USERID, USERPW, USERNAME,
+		NO, USERID, USERPW, USERNAME,
 		USERGENDER, USERBIRTH, USERPHONE, USEREMAIL,
 		USERGENRE, REGDATE,
 		UPDATEDATE, ENABLED, userCertification)
-		VALUES(#{userid}, #{userpw},
+		VALUES(tbl_member_seq.nextval, #{userid}, #{userpw},
 		#{userName}, #{userGender}, #{userBirth}, #{userPhone},
 		#{userEmail},
 		#{userGenre}, SYSDATE, SYSDATE, '1', '0')
@@ -62,6 +63,8 @@
 		values
 		(#{userid}, 'ROLE_USER')
 	</insert>
+	
+	
 
 
 	<!-- 아이디 중복 체크 -->
@@ -119,7 +122,7 @@
 		USERPW = #{userpw},
 		userphone = #{userPhone},
 		userbirth = #{userBirth},
-		USERGENRE = #{userGenre}
+		USERGENRE = #{userGenre, jdbcType=VARCHAR}
 		WHERE USERID = #{userid}
 	</update>
 	
@@ -131,6 +134,29 @@
 		   AND USERPW = #{userpw}   
 	</select>
 	
+	<!--관리자 페이지 회원관리 -->
+	<select id="getUserList" resultType="org.gasan.domain.MemberVO"> 
+	
+	SELECT * FROM tbl_MEMBER
+	ORDER BY userid ASC
+	
+	</select>
+
+	<!-- 회원 정보 상세조회 -->
+	<select id="viewMember" resultType="org.gasan.domain.MemberVO">
+	SELECT
+	no,
+	userid,
+	username,
+	useremail,
+	userphone,
+	userbirth,
+	usergenre,
+	regdate,
+	updatedate 
+	FROM tbl_member
+	WHERE userid = #{userid}
+	</select>
 	
 	
 </mapper>

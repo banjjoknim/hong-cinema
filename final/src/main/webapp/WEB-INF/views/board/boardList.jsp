@@ -85,18 +85,18 @@
 			var category = 'total';
 			var locationWindow = 'http://192.168.0.154:8080';
 			var pageNum;
+			
 			var showList = function(list){
 				pageNum = Number('${criteria.pageNum}');
 				for(var i = (pageNum-1)*10; len = (pageNum)*10, i<len; i++){
 					var str = "";
-					
-					str += '<tr style="margin-bottom: 0px;">'
-					str += '<td class="boardNumberInList">'+list[i].boardNumber +'</td>'
-					str += '<td>'+list[i].category +'</td>'
-					str += '<td class="boardTitleInList">'+list[i].title +'</td>'
-					str += '<td class="writerInList">'+list[i].writer +'</td>'
-					str += '<td>'+list[i].writeDate +'</td>'
-					str += '<td>'+list[i].hit +'</td>'
+					str += '<tr style="margin-bottom: 0px; vertical-align: middle;">'
+					str += '<td class="boardNumberInList" style = "vertical-align: middle;">'+list[i].boardNumber +'</td>'
+					str += '<td style = "vertical-align: middle;">'+list[i].category +'</td>'
+					str += '<td class="boardTitleInList" style = "vertical-align: middle;">'+list[i].title +'</td>'
+					str += '<td class="writerInList" style = "vertical-align: middle;">'+list[i].writer +'</td>'
+					str += '<td style = "vertical-align: middle;">'+list[i].writeDate.substring(0,11) +'</td>'
+					str += '<td style = "vertical-align: middle;">'+list[i].hit +'</td>'
 					str += '</tr>'
  					
 					$('tbody').append(str);

@@ -42,7 +42,7 @@
                             style="font-size: 24pt;">예매내역</span></b></span></p>
 
                             <div class="form-group" style="border-top: 1px solid darkgrey; margin-right: 50px;">
-                                <fieldset style="margin: 0px auto; width: 700px; padding: 30px 0;">
+                                <fieldset style="margin: 0px auto; width: 900px; padding: 30px 0;">
                                 
                                 <div class="form-group row"
                                             style="width: 440px; padding: 10px 20px 15px 30px; margin: 0; font-size: 200%;">
@@ -170,9 +170,9 @@
                     style="width: 100%; font-size: 130%; font-weight: bold; text-align: center; background-color: darkslategray; color: white;">할인내역</label>
                 <div style="width: 100%;">
                     <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="padding: 10px;">할인 1 : <span style="font-weight: bold;"> 8000</span>원</li>
-                        <li style="padding: 10px;">할인 2 : <span style="font-weight: bold;"> 3000</span>원</li>
-                        <li style="padding: 10px;">할인 3 : <span style="font-weight: bold;"> 10000</span>원</li>
+                        <li style="padding: 10px;">할인 1 : <span style="font-weight: bold;"> 0</span>원</li>
+                        <li style="padding: 10px;">할인 2 : <span style="font-weight: bold;"> 0</span>원</li>
+                        <li style="padding: 10px;">할인 3 : <span style="font-weight: bold;"> 0</span>원</li>
                     </ul>
                 </div>
                 <div
@@ -222,7 +222,7 @@
             	//console.log('timeout 재설정함.');
                 timeout = setTimeout(function(){
                 reservationCancel();
-                }, 1000 * 60 * 1 // 1000ms * 60 * 1-> 1분 후에 예약취소.
+                }, 1000 * 60 * 5 // 1000ms * 60 * 1-> 1분 후에 예약취소.
                 );          
             }
 			

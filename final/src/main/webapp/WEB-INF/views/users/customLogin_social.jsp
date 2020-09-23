@@ -58,7 +58,7 @@
       </div>
   </form>
 
-<%@ include file="../board/footer.jsp" %>		
+
 </body>
     
     
@@ -80,4 +80,5 @@
 	
 	</script>
 
+</body>
 </html>

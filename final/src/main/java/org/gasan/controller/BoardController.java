@@ -108,6 +108,7 @@ public class BoardController {
 
 	@GetMapping(value = "/board/write")
 	public String startWriting() {
+		
 		return "/board/write";
 	}
 
@@ -163,7 +164,7 @@ public class BoardController {
 
 		boardService.update(board, principal);
 
-		return "redirect:/board/boardList";
+		return "redirect:/board/boardList/total/1";
 	}
 
 	@PostMapping(value = "/delete.do")
@@ -171,7 +172,7 @@ public class BoardController {
 
 		boardService.delete(board, principal);
 
-		return "redirect:/board/boardList";
+		return "redirect:/board/boardList/total/1";
 	}
 	
 	@GetMapping(value = "/board/search.do")

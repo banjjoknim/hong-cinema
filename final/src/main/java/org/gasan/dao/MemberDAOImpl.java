@@ -1,6 +1,7 @@
 package org.gasan.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -19,6 +20,14 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	private String namespace = "org.gasan.mapper.MemberMapper";
 	
+	
+	@Override 
+	public List<MemberVO> getUserList() throws Exception { 
+		
+		return sql.selectList(namespace + ".getUserList"); 
+		
+	}
+
 	//가입과 권한 조인
 	@Override
 	public MemberVO read(String userid){
@@ -101,5 +110,11 @@ public class MemberDAOImpl implements MemberDAO {
 		int result = sql.selectOne(namespace + ".phoneChk", vo);
 		return result;
 		}
+	
+	//회원 정보 상세 조회
+	@Override
+	public MemberVO viewMember(String userid) {
+		return sql.selectOne(namespace + ".viewMember", userid);
+	}
 	
 }
