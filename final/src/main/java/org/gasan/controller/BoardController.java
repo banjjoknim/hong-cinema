@@ -55,7 +55,7 @@ public class BoardController {
 
 		log.info(criteria);
 
-		return "/board/boardList";
+		return "/board/boardListReview";
 	}
 	
 	@GetMapping(value = "/board/boardList/recommand/{pageNum}")
@@ -70,7 +70,7 @@ public class BoardController {
 
 		log.info(criteria);
 
-		return "/board/boardList";
+		return "/board/boardListRecommand";
 	}
 	
 	@GetMapping(value = "/board/boardList/talk/{pageNum}")
@@ -85,7 +85,7 @@ public class BoardController {
 
 		log.info(criteria);
 
-		return "/board/boardList";
+		return "/board/boardListTalk";
 	}
 	
 
@@ -93,16 +93,7 @@ public class BoardController {
 	public ResponseEntity<List<BoardVO>> getBoardList() {
 
 		List<BoardVO> boardList = boardService.getBoardList();
-//		if("review".equals(category)) {
-//			boardList = boardService.getReviewBoardList();
-//		}
-//		if("recommand".equals(category)) {
-//			boardList = boardService.getRecommandBoardList();
-//		}
-//		if("talk".equals(category)) {
-//			boardList = boardService.getTalkBoardList();
-//		}
-
+		
 		return new ResponseEntity<>(boardList, HttpStatus.OK);
 	}
 
@@ -127,7 +118,7 @@ public class BoardController {
 
 		boardService.write(board, principal);
 
-		return "redirect:/board/boardList";
+		return "redirect:/board/boardList/total/1";
 	}
 
 	@GetMapping(value = "/board/read")
@@ -160,6 +151,9 @@ public class BoardController {
 		if ("recommand".equals(category)) {
 			category = "영화 추천";
 		}
+		if("talk".equals(category)) {
+			category = "잡담";
+		}
 
 		return new ResponseEntity<>(boardService.getBoardListByCategory(category), HttpStatus.OK);
 	}
@@ -178,6 +172,13 @@ public class BoardController {
 		boardService.delete(board, principal);
 
 		return "redirect:/board/boardList";
+	}
+	
+	@GetMapping(value = "/board/search.do")
+	@ResponseBody
+	public ResponseEntity<BoardVO> searchBoard(){
+		
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +31,13 @@ content {
 </style>
 </head>
 <body>
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal.username" var="userid" />
+		<sec:authentication property="principal.member.userName"
+			var="userName" />
+		<sec:authentication property="principal.member.userEmail"
+			var="userEmail" />
+	</sec:authorize>
 	<form:form modelAttribute="BoardVO" name="writeFrm" id="writeFrm"
 		action="/write.do" method="post">
 		<%-- <form name="seatFrm" action="/payment"> --%>
@@ -39,9 +48,10 @@ content {
 			<tbody>
 				<tr>
 					<td class="table-active" style="width: 25%;">작성자</td>
-					<td style="width: 25%;">아이디</td>
+					<td style="width: 25%;">${userid }</td>
 					<td class="table-active" style="width: 25%;">분류</td>
-					<td style="width: 25%;"><select name="category" style="width: 100%;">
+					<td style="width: 25%;"><select name="category"
+						style="width: 100%;">
 							<option value="영화 리뷰">영화 리뷰</option>
 							<option value="영화 추천">영화 추천</option>
 							<option value="잡담">잡담</option>
@@ -56,7 +66,8 @@ content {
 					<td colspan="4" class="table-active">내용</td>
 				</tr>
 				<tr>
-					<td colspan="4"><textarea style="width: 100%; height: 300px; outline: none;"
+					<td colspan="4"><textarea
+							style="width: 100%; height: 300px; outline: none;"
 							class="textarea" name="contents"></textarea></td>
 				</tr>
 			</tbody>

@@ -93,13 +93,13 @@
         <script type="text/javascript">
         $(document).ready(function(){
         	$('.reviewBoardBtn').on('click',function(){
-        		alert('리뷰 게시판!');
+        		window.location.href ='http://192.168.0.154:8080/board/boardList/review/1';
         	})
         	$('.recommandBoardBtn').on('click',function(){
-        		alert('추천 게시판!');
+        		window.location.href ='http://192.168.0.154:8080/board/boardList/recommand/1';
         	})
         	$('.talkBoardBtn').on('click',function(){
-        		alert('잡담 게시판!');
+        		window.location.href ='http://192.168.0.154:8080/board/boardList/talk/1';
         	})
         })
         

@@ -27,7 +27,7 @@
 
 		<div style="height: 30px;">
 		<span class="thisBoardTitle" style="font-weight: 600; font-size: 200%; margin-top: 100px;">게시글 목록</span>
-		<button type="button" class="btn btn-outline-primary btn-category" value="talk">잡담</button>
+		<button type="button" class="btn btn-outline-primary btn-category" value="잡담">잡담</button>
 		<button type="button" class="btn btn-outline-primary btn-category" value="recommand">영화 추천</button>
 		<button type="button" class="btn btn-outline-primary btn-category" value="review">영화 리뷰</button>
 		</div>
@@ -49,16 +49,11 @@
 			</table>
 		</div>
 		<div>
-		<form action="/board/search.do" method="get">
-		<input type="text" placeholder="검색어를 입력해주세요.">
-		<button class="btn btn-info">검색</button>
-		</form>
 		<button class="previousPageNum btn btn-success">이전 페이지</button>
 		<c:forEach var="pageNum" begin="${criteria.startPageNum}" end="${criteria.endPageNum}">
 		<button class="pageNum btn btn-success" value="${pageNum }">${pageNum }</button>
 		</c:forEach>
 		<button class="nextPageNum btn btn-success">다음 페이지</button>
-		
 		<button class="registButton btn btn-info">게시글 작성</button>
 		<button class="goToListButton btn btn-info">목록으로</button>
 		<button class="btn-modify btn btn-success">게시글 수정</button>
@@ -82,7 +77,8 @@
 			if('${userid}' == ''){
 				$('.registButton').hide();
 			}
-			var category = 'total';
+			var category = 'review';
+			var review = "영화 리뷰";
 			var locationWindow = 'http://192.168.0.154:8080';
 			var pageNum;
 			var showList = function(list){
@@ -103,7 +99,7 @@
 				}
 			} 
 			$.ajax({
-                url: "/getBoardList.json",
+                url: "/getBoardList/"+review+".json",
                 method: "get"
                 //headers: { "Content-Type": "application/json" },
                 //beforeSend: function(xhr){
@@ -167,7 +163,7 @@
 						$('.writeDate').html(data.writeDate);
 						$('.hit').html(data.hit);
 						if('${userid}' === data.writer){
-							//console.log(data);
+							console.log(data);
 							$('input[name=writer]').val('${userid}');
 							$('input[name=boardNumber]').val(thisBoardNumber);
 						}
