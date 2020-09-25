@@ -28,13 +28,13 @@ li.selected {
 li.region {
 	padding: 10px;
 	margin: 0px auto;
-	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
 }
 
 li.theater {
 	padding: 10px;
 	margin: 0px auto;
-	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
 }
 
 li.movieTitle {

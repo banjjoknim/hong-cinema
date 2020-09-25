@@ -59,7 +59,7 @@
     </div>
 
     <div class="jumbotron">
-        <h1 class="display-3">CINEMA</h1>
+        <h1 class="display-3"><a href="/main">HONG-CINEMA</a></h1>
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

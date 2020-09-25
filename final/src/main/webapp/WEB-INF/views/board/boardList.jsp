@@ -50,8 +50,8 @@
 		</div>
 		<div>
 		<form action="/board/search.do" method="get">
-		<input type="text" placeholder="검색어를 입력해주세요.">
-		<button class="btn btn-info">검색</button>
+		<!-- <input type="text" placeholder="검색어를 입력해주세요.">
+		<button class="btn btn-info">검색</button> -->
 		</form>
 		<button class="previousPageNum btn btn-success">이전 페이지</button>
 		<c:forEach var="pageNum" begin="${criteria.startPageNum}" end="${criteria.endPageNum}">
@@ -195,16 +195,26 @@
 			
 			$('.btn-category').on('click', function(){
 				//alert('카테고리 선택');
-				category = $(this).val();
+				category = '/'+$(this).val();
+				$('.btn-category').removeClass('btn-primary');
+				$('.btn-category').addClass('btn-outline-primary');
+				if($(this).hasClass('selected')){
+					$(this).removeClass('selected');
+					category = '';
+				} else{
+					$(this).addClass('selected');
+					$(this).removeClass('btn-outline-primary');
+					$(this).addClass('btn-primary');	
+				}
 				$.ajax({
-					url: '/getBoardList/'+$(this).val()+".json",
+					url: '/getBoardList'+category+".json",
 					type: 'get',
 					contentType: 'application/json;charset=utf-8',
 					beforeSend: function(xhr){
   						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
   					  },
 				}).done(function (data) {
-					console.log(data);
+					//console.log(data);
 					$('tbody').html('');
 					showList(data);
                   })

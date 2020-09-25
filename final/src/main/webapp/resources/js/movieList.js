@@ -17,7 +17,7 @@
 			//console.log(count(1)); 1번 스케쥴에 해당하는 좌석수 출력
 			
 			$('.date').eq(0).addClass('selected');
-			if(ref !== "http://localhost:8080/main"){
+			if(ref !== "http://192.168.0.154:8080/main"){
 			//--------------getScheduleByDate------추가-----------------
 			getScheduleByDate(function(list){
 				
@@ -66,6 +66,7 @@
 					if(ref === "http://localhost:8080/main"){ // 메인페이지에서 예매버튼으로 접근할때.
 						str = location.search;
 						var movieName = decodeURI(str.substr(str.indexOf('=')+1));
+						//console.log(movieName);
 						$('#selectedMovie').val(movieName);
 						for(var i = 0; i<$('.movieTitle').length; i++){
 							if($('.movieTitle').eq(i).html() === movieName){

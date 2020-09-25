@@ -27,7 +27,7 @@
 
 		<div style="height: 30px;">
 		<span class="thisBoardTitle" style="font-weight: 600; font-size: 200%; margin-top: 100px;">게시글 목록</span>
-		<button type="button" class="btn btn-outline-primary btn-category" value="잡담">잡담</button>
+		<button type="button" class="btn btn-primary btn-category" value="잡담">잡담</button>
 		<button type="button" class="btn btn-outline-primary btn-category" value="recommand">영화 추천</button>
 		<button type="button" class="btn btn-outline-primary btn-category" value="review">영화 리뷰</button>
 		</div>
@@ -78,7 +78,7 @@
 				$('.registButton').hide();
 			}
 			var category = 'talk';
-			var talk = "잡담";
+			var talk = "talk";
 			var locationWindow = 'http://192.168.0.154:8080';
 			var pageNum;
 			var showList = function(list){
@@ -191,9 +191,19 @@
 			
 			$('.btn-category').on('click', function(){
 				//alert('카테고리 선택');
-				category = $(this).val();
+				category = '/'+$(this).val();
+				$('.btn-category').removeClass('btn-primary');
+				$('.btn-category').addClass('btn-outline-primary');
+				if($(this).hasClass('selected')){
+					$(this).removeClass('selected');
+					category = '';
+				} else{
+					$(this).addClass('selected');
+					$(this).removeClass('btn-outline-primary');
+					$(this).addClass('btn-primary');	
+				}
 				$.ajax({
-					url: '/getBoardList/'+$(this).val()+".json",
+					url: '/getBoardList'+category+".json",
 					type: 'get',
 					contentType: 'application/json;charset=utf-8',
 					beforeSend: function(xhr){

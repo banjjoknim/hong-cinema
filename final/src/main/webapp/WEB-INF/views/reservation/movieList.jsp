@@ -57,30 +57,12 @@
 							<li class="region"><b>대구</b></li>
 							<li class="region"><b>울산</b></li>
 							<li class="region"><b>부산</b></li>
-							<li class="region"><b>서울</b></li>
-							<li class="region"><b>경기</b></li>
-							<li class="region"><b>인천</b></li>
-							<li class="region"><b>대구</b></li>
-							<li class="region"><b>울산</b></li>
-							<li class="region"><b>부산</b></li>
 						</ul>
 					</div>
 					<div
 						style="border-right: 1px solid black; overflow: hidden; width: 122px; height: 432px; float: left; overflow-y: scroll;">
 						<ul style="margin: 0px; padding: 0px;">
 							<li class="theater"><b>1호점</b></li>
-							<li class="theater"><b>2호점</b></li>
-							<li class="theater"><b>3호</b></li>
-							<li class="theater"><b>4호</b></li>
-							<li class="theater"><b>5호</b></li>
-							<li class="theater"><b>6호</b></li>
-							<li class="theater"><b>7호</b></li>
-							<li class="theater"><b>8호</b></li>
-							<li class="theater"><b>인천</b></li>
-							<li class="theater"><b>대구</b></li>
-							<li class="theater"><b>울산</b></li>
-							<li class="theater"><b>부산</b></li>
-
 						</ul>
 					</div>
 				</div>

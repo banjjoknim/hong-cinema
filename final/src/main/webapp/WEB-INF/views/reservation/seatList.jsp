@@ -19,7 +19,7 @@
 	<header>
 		<div class="selectType"
 			style="width: 900px; height: 45px; margin: 7px auto; font-size: 130%; padding: 0 20px; border-bottom: 1px solid gray;">
-			<h1 style="text-align: left;">좌석선택</h1>
+			<h1 style="text-align: left;">좌석 선택</h1>
 		</div>
 	</header>
 
@@ -182,7 +182,7 @@
 							<li class="theaterInfo">${schedule.selectedStartTime }~
 								${schedule.selectedEndTime }</li>
 						</ul>
-						<img src="/resources/images/${movie.selectedPoster }" width="90"
+						<img src="${movie.selectedPoster }" width="90"
 							height="120" style="margin-bottom: 0px; float: left;">
 					</div>
 				</div>

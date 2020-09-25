@@ -49,7 +49,7 @@ public class GasanController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
 		Calendar cal = Calendar.getInstance();
-		cal.set(2020, 8, 14);
+		cal.set(2020, 8, 21);
 		log.info("Calendar : " + cal.getTime());
 		log.info("getAllList ..... movieList");
 

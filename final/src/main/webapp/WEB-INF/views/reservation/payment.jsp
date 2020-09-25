@@ -49,7 +49,7 @@
                                                 	<b>예매번호 : <span id="paymentNumber"></span></b>
                                         </div>
                                 
-                                    <img src="/resources/images/${movie.selectedPoster }" width="240" height="320" style="float: left; margin-left: 20px;">
+                                    <img src="${movie.selectedPoster }" width="240" height="320" style="float: left; margin-left: 20px;">
                     
                                     <div class="form-group row"
                                         style="float: left; width: 440px; padding: 0px 20px 15px 30px; margin: 0; font-size: 200%; font-weight: bold;">
@@ -58,7 +58,7 @@
                     
                                     <div class="form-group row"
                                         style="float: left; width: 440px; padding: 10px 20px 15px 30px; margin: 0; font-size: 135%;">
-                                        <span style="font-weight: bold;">가산시네마</span>
+                                        <span style="font-weight: bold;">홍시네마</span>
                                     </div>
                     
                                     <div class="form-group row"

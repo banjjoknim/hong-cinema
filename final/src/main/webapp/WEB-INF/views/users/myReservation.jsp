@@ -85,7 +85,7 @@ $(document).ready(function(){
 			var totalPeople = list[i].adultType + list[i].youthType + list[i].preferentialType;
 			str += "<tr>"
 			str += "<td class='paymentNumber'>"+list[i].paymentNumber+"</th>"
-			str += "<td><img src='/resources/images/"+list[i].poster+"' width='90' height='120'></th>"
+			str += "<td><img src='"+list[i].poster+"' width='90' height='120'></th>"
 			str += "<td>"+list[i].movieName+"</td>"
 			str += "<td>"+list[i].theaterNumber+"관</td>"
 			str += "<td>"+list[i].playDate.substring(0,4)+"."+list[i].playDate.substring(4,6)+"."+list[i].playDate.substring(6,8)+"</td>"
