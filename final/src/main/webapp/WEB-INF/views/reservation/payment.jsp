@@ -241,7 +241,7 @@
 					type: "get",
 					success: function(){
 						alert("결제가 취소되었습니다.");
-						window.location.replace("http://localhost:8080/movieList");
+						window.location.replace("http://192.168.0.154:8080/movieList");
 					}
 				});
 			}
@@ -353,7 +353,7 @@
 			
 			$(".modalClose").on("click",function(){
 				event.preventDefault();
-				window.location.replace("http://localhost:8080/main");
+				window.location.replace("http://192.168.0.154:8080/main");
 				//$('#myModal').hide();
 			})
 		});

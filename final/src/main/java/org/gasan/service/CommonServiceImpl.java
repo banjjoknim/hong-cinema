@@ -45,7 +45,8 @@ public class CommonServiceImpl implements CommonService {
 		sendMail.setSubject("[홈페이지 이메일 인증]"); // 메일제목
 		sendMail.setText( // 메일내용
 				"<h1>메일인증</h1>" +
-				"<a href='http://localhost:8080/emailConfirm?userEmail=" + vo.getUserEmail() +
+				"<h3>아래 이메일 인증 확인을 누르시면 인증이 완료됩니다.</h3>"+
+				"<a href='http://192.168.0.154:8080/emailConfirm?userEmail=" + vo.getUserEmail() +
 				"&key=" + key +
 				"' target='_blenk'>이메일 인증 확인</a>");
 		sendMail.setFrom("koittih@gmail.com", "관리자"); // 보낸이

@@ -55,7 +55,7 @@
                 name="password" placeholder="비밀번호를 입력해주세요.">
                 
 
-              <a href="/"><button type="submit" id="sub" style="margin: 50px 0 0 10px; width: 105px; height: 105px;"
+              <a href="/"><button type="submit" id="sub" style="margin: 50px 0 0 10px; width: 105px; height: 105px; outline: none;"
                 class="btn btn-primary btn-lg">로그인</button></a>
              
                <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
@@ -85,7 +85,7 @@
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   </form>
 
-
+<%@ include file="../board/footer.jsp" %>
 </body>
     
     

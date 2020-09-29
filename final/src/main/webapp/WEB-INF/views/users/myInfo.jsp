@@ -44,6 +44,7 @@
        	<sec:authentication property="principal.member.userEmail" var="userEmail"/>
        	<sec:authentication property="principal.member.userPhone" var="userPhone"/>
        	<sec:authentication property="principal.member.userBirth" var="userBirth"/> 
+       	<sec:authentication property="principal.member.userGenre" var="userGenre"/> 
 
 
 		<form action="/memberUpdate" method="post">
@@ -53,8 +54,7 @@
 				<div class="form-group row">
 					<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 					<div class="col-sm-10">
-						<input class="form-control-plaintext"
-							style="width: 400px; height: 40px; float: left; font-size: 15px;"
+						<input class="form-control-plaintext"  style="outline: none;"
 							type="text" class="form-control" id="userid" name="userid"
 							value="${userid}" readonly>
 					</div>
@@ -87,8 +87,7 @@
 				<div class="form-group row">
 					<label for="email" class="col-sm-2 col-form-label">이메일</label>
 					<div class="col-sm-10">
-						<input class="form-control-plaintext"
-							style="width: 400px; height: 40px; float: left; font-size: 15px;"
+						<input class="form-control-plaintext" style="outline: none;"
 							type="text" class="form-control" id="userEmail" name="userEmail"
 							value="${userEmail}" readonly>			
 					</div>
@@ -98,8 +97,7 @@
 				<div class="form-group row">
 					<label for="gender" class="col-sm-2 col-form-label">이름</label>
 					<div class="col-sm-10">
-							<input class="form-control-plaintext"
-							style="width: 400px; height: 40px; float: left; font-size: 15px;"
+							<input class="form-control-plaintext" style="outline: none;"
 							type="text" class="form-control" id="userEmail" name="userEmail"
 							value="${userName}" readonly>
 					</div>
@@ -119,9 +117,9 @@
 				<div class="form-group row">
 					<label for="birth" class="col-sm-2 col-form-label">생년월일</label>
 					<div class="col-sm-10">
-						<input style="width: 400px; height: 40px; float: left;"
+						<input class="form-control-plaintext" style="outline: none;"
 							type="text" class="form-control" id="userBirth" name="userBirth"
-							value="${userBirth}">
+							value="${userBirth}" readonly>			
 					</div>
 				</div>
 				<hr color="lightgray">
@@ -129,8 +127,7 @@
 					<label for="userGenre" class="col-sm-2 col-form-label">관심장르</label>
 					<div class="col-sm-10">
 						<span
-							style="display: block; margin-bottom: 10px; font-size: small; color: red;">※
-							하나 이상의 관심장르를 선택해주세요.<b>(3개)</b> 원하는 영화의 정보를 더욱 빠르게 추천받으실 수 있습니다.
+							style="display: block; margin-bottom: 10px; font-size: small; color: red;">※ 관심장르를 선택해주세요. <b>(최대 3개)</b> 선택하지 않으면 현재 설정 그대로 유지됩니다.
 						</span> <input style="margin: 15px 5px 0 0;" id="userGenre"
 							name="userGenre" type="checkbox" onclick="count_ck(this);"
 							value="sport"><span
@@ -193,7 +190,7 @@
 		</form>
 		</sec:authorize>
 	</div>
-
+<%@ include file="../board/footer.jsp" %>
 </body>
 </html>
 
@@ -238,14 +235,7 @@
 					return false;
 				}
 				
-				//생년월일 유효성 검사
-				if (!userBirthCheck.test($(
-						"#userBirth").val())) {
-					alert("생년월일 형식에 맞게 입력해주세요")
-					$("#userBirth").val("");
-					$("#userBirth").focus();
-					return false;
-				}
+			
 				
 			
 				//관심장르 유효성 검사
@@ -293,6 +283,17 @@
 			}
 
 		}
+	</script>
+	
+	 <!--체크된 상태로 값 넘기기 -->
+	 <script>
+	     var DATA = "${userGenre}";
+         console.log(DATA);
+         
+         var splitDATA = DATA.split(",");
+         for (var i=0; i<splitDATA.length; i++) {
+            $('input:checkbox[name="userGenre"][value='+splitDATA[i]+']').attr("checked", true).parent().addClass('on');
+         }
 	</script>
 	
 	<script type="text/javascript">

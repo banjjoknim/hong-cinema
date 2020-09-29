@@ -121,7 +121,6 @@
 		UPDATE tbl_member SET
 		USERPW = #{userpw},
 		userphone = #{userPhone},
-		userbirth = #{userBirth},
 		USERGENRE = #{userGenre, jdbcType=VARCHAR}
 		WHERE USERID = #{userid}
 	</update>

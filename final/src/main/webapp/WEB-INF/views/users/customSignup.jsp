@@ -504,17 +504,7 @@
 		}
 	</script>
 
-
-
-
-
-
-
-
-
-
-
-
+<%@ include file="../board/footer.jsp" %>
 
 </body>
 

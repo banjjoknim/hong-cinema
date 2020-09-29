@@ -46,7 +46,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		if(vo==null) {
 			log.debug("no user :::::::: AuthenticationProvider");
-			throw new InternalAuthenticationServiceException("존재하지 않는 아이디입니다. 회원가입을 해주세요.");
+			throw new InternalAuthenticationServiceException("입력한 아이디가 존재하지 않습니다. 아이디를 다시 한번 입력해 주세요.");
+			
+			  } else if(vo.isUserCertification() == false) {
+			  log.debug("no user :::::::: AuthenticationProvider"); throw new
+			  InternalAuthenticationServiceException("이메일 인증을 하지 않은 아이디입니다. 인증 후 이용이 가능합니다."
+			  );
+			  
 		}
 		
 		log.warn("queried by member mapper: " + vo);
