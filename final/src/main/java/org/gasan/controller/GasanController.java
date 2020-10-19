@@ -8,20 +8,17 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
-import org.gasan.domain.BoardVO;
 import org.gasan.domain.DateVO;
 import org.gasan.domain.MovieVO;
 import org.gasan.domain.ScheduleVO;
 import org.gasan.domain.SeatReservationVO;
 import org.gasan.domain.SelectedScheduleVO;
-import org.gasan.service.BoardService;
 import org.gasan.service.ListService;
 import org.gasan.service.PayService;
 import org.gasan.service.SeatService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +46,7 @@ public class GasanController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
 		Calendar cal = Calendar.getInstance();
-		cal.set(2020, 8, 21);
+		cal.set(2020, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH) - 3);
 		log.info("Calendar : " + cal.getTime());
 		log.info("getAllList ..... movieList");
 

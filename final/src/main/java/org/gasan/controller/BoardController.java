@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.gasan.domain.BoardVO;
 import org.gasan.domain.Criteria;
+import org.gasan.domain.ReplyVO;
 import org.gasan.service.BoardService;
+import org.gasan.service.ReplyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,7 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 
 	private BoardService boardService;
+	private ReplyService replyService;
 
 	@GetMapping(value = "/board/boardList/total/{pageNum}")
 	public String totalBoard(Model model, @PathVariable("pageNum") int pageNum) {
@@ -125,7 +128,7 @@ public class BoardController {
 	@GetMapping(value = "/board/read")
 	public String readingBoard() {
 
-		log.info("reading.......");
+		log.info("reading....... board....");
 
 		return "/board/read";
 	}
@@ -180,6 +183,21 @@ public class BoardController {
 	public ResponseEntity<BoardVO> searchBoard(){
 		
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/board/reply")
+	public String readingReplies() {
+
+		log.info("reading.......replies");
+
+		return "/board/reply";
+	}
+	
+	@GetMapping(value = "/board/reply/{boardNumber}", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public ResponseEntity<List<ReplyVO>> getReplies(@PathVariable("boardNumber") int boardNumber){
+			
+		return new ResponseEntity<>(replyService.getReplies(boardNumber), HttpStatus.OK);
 	}
 
 }

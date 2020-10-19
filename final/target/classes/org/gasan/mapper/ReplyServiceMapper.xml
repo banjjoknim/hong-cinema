@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="org.gasan.mapper.ReplyServiceMapper">
+  
+  <resultMap type="org.gasan.domain.BoardVO" id="board">
+<result column="reply_number" property="replyNumber" javaType="int"/>
+<result column="replied_boardNumber" property="repliedBoardNumber" javaType="int"/>
+<result column="replier" property="replier" javaType="String"/>
+<result column="replied_time" property="repliedTime" javaType="String"/>
+<result column="comments" property="comments" javaType="String"/>
+</resultMap>
+  
+  <insert id="write">
+  insert into reply values(reply_seq.nextval, #{boardNumber}, #{replier}, sysdate, #{comments});
+  </insert>
+  
+  <delete id="delete">
+  delete from reply where replyNumber = #{replyNumber}
+  </delete>
+  
+  <update id="update">
+  update reply set comments = #{comments} where replyNumber = #{replyNumber}
+  </update>
+  
+  <select id="getReplies" resultType="org.gasan.domain.ReplyVO">
+  select * from reply where replied_BoardNumber = #{boardNumber}
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>
+  

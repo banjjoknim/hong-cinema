@@ -1,11 +1,11 @@
 package org.gasan.controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import javax.mail.Session;
 
 import org.gasan.domain.CGVInfoDTO;
 import org.jsoup.Jsoup;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class HomeController {
-	
+		
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**

@@ -60,12 +60,16 @@
 		<button class="nextPageNum btn btn-success">다음 페이지</button>
 		
 		<button class="registButton btn btn-info">게시글 작성</button>
+		<button class="writeReplyButton btn btn-success">글쓰기</button>
 		<button class="goToListButton btn btn-info">목록으로</button>
 		<button class="btn-modify btn btn-success">게시글 수정</button>
 		<button class="btn-delete btn btn-primary">게시글 삭제</button>
 		<button class="completeModify btn btn-success">수정완료</button>
 		<button class="cancelModify btn btn-primary">취소</button>
 		</div>
+	</div>
+	<div class="replyContainer">
+	
 	</div>
 	<%@ include file="../board/footer.jsp"%>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -172,6 +176,28 @@
 							$('input[name=boardNumber]').val(thisBoardNumber);
 						}
 					});
+					var requestReplyUrl = "/board/reply/"+thisBoardNumber+".json";
+					$(".replyContainer").load("/board/reply", function(){
+						$.ajax({
+							url: requestReplyUrl,
+							type: 'get',
+							contentType: 'application/json;charset=utf-8',
+							beforeSend: function(xhr){
+		  						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		  					  },
+						}).done(function(data){
+							var str = "";
+							for(var i = 0; i<data.length; i++){
+								str += '<li>'
+								str += '<div class="replier">'+data[i].replier+" ("+data[i].replied_Time+")"+'</div>'
+								str += '<div class="comment">'+data[i].comments+'</div>'
+								str += '</li>'
+							}
+							$(".replyList").html(str);
+						})
+					})
+					
+					
 					$('.goToListButton').show();
 					$('.registButton').hide();
 					$('.btn-category').hide();

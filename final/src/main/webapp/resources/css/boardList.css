@@ -12,6 +12,14 @@ a{
     
 }
 
+.replyContainer{
+    padding: 0 0 0 0;
+    margin : 0 auto;
+    width: 900px;
+    padding: 20px;
+    
+}
+
 .nav-item{
 
     font-size: 15px;
@@ -88,6 +96,10 @@ fieldset{
 	margin: 20px;
 	float: right;
 }
+.writeReplyButton{
+	margin: 20px;
+	float: right;
+}
 .textarea{
 	resize: none;
 }
@@ -96,6 +108,14 @@ fieldset{
 }
 .content{
 	width: 80%;
+}
+.replier{
+	margin: 5px;
+	padding: 5px;
+}
+.comment{
+	padding: 5px;
+	margin: 10px;
 }
 .btn-category{
 	float: right;
