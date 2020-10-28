@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.gasan.domain.MemberVO;
+import org.gasan.util.PagingVO;
 import org.springframework.stereotype.Repository;
 
 import lombok.extern.log4j.Log4j;
@@ -115,6 +116,19 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public MemberVO viewMember(String userid) {
 		return sql.selectOne(namespace + ".viewMember", userid);
+	}
+	
+	//회원 정보 총 갯수
+	@Override
+	public int countMember() throws Exception{
+		return sql.selectOne(namespace + ".countMember");
+	}
+
+	//페이징 처리 회원리스트 조회
+	@Override
+	public List<MemberVO> selectMember(PagingVO po) throws Exception{
+		return sql.selectList(namespace + ".selectMember", po);
+
 	}
 	
 }

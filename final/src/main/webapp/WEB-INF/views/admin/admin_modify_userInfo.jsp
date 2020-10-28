@@ -20,6 +20,45 @@ h, initial-scale=1">
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<!-- jQuery -->
 	<script src="/resources/js/jquery-3.5.1.min.js"></script>
+<style>
+
+.dropbtn {
+    background-color: #00000;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown:hover .dropbtn {
+    background-color: #f1f1f1;
+    color:red;
+}
+</style>
 <title>회원정보</title>
 </head>
 <body>
@@ -36,6 +75,41 @@ h, initial-scale=1">
 				style="text-align: center; width: 300px;" data-toggle="tab"
 				href="/myInfo">회원정보수정</a></li>
 		</ul> -->
+		
+		<div class="dropdown">
+      <button class="dropbtn">영화 관리</button>
+      <div class="dropdown-content">
+        <a href="admin_mov">영화 정보 등록</a>
+        <a href="admin_movList">영화 정보 리스트</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">예매 관리</button>
+      <div class="dropdown-content">
+        <a href="admin_res">예매 정보 리스트</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">상영 관리</button>
+      <div class="dropdown-content">
+        <a href="admin_shw">상영 정보 등록</a>
+        <a href="admin_shwList">상영 정보 리스트</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">상영관 관리</button>
+      <div class="dropdown-content">
+        <a href="admin_scr">상영관 정보 등록</a>
+        <a href="admin_scrList">상영관 정보 리스트</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">회원 관리</button>
+      <div class="dropdown-content">
+        <a href="adminSignup">회원 등록</a>
+        <a href="admin_mem">회원 정보 리스트</a>
+      </div>
+    </div>
 		
 		<sec:authorize access="isAuthenticated()">
 
@@ -122,49 +196,49 @@ h, initial-scale=1">
 							style="display: block; margin-bottom: 10px; font-size: small; color: red;">※ 관심장르를 선택해주세요. <b>(최대 3개)</b> 선택하지 않으면 현재 설정 그대로 유지됩니다.
 						</span> <input style="margin: 15px 5px 0 0;" id="userGenre"
 							name="userGenre" type="checkbox" onclick="count_ck(this);"
-							value="sport"><span
+							value="스포츠"><span
 							style="font-size: medium; margin-right: 50px;">스포츠</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="crime"><span
+							type="checkbox" onclick="count_ck(this);" value="범죄"><span
 							style="font-size: medium; margin-right: 50px;">범죄</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="drama"><span
+							type="checkbox" onclick="count_ck(this);" value="드라마"><span
 							style="font-size: medium; margin-right: 50px;">드라마</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="comedy"><span
+							type="checkbox" onclick="count_ck(this);" value="코미디"><span
 							style="font-size: medium; margin-right: 50px;">코미디</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="romelo"><span
+							type="checkbox" onclick="count_ck(this);" value="로맨스/멜로"><span
 							style="font-size: medium;">로맨스/멜로</span> <br> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="thriller"><span
+							type="checkbox" onclick="count_ck(this);" value="스릴러"><span
 							style="font-size: medium; margin-right: 50px;">스릴러</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="family"><span
+							type="checkbox" onclick="count_ck(this);" value="가족"><span
 							style="font-size: medium; margin-right: 50px;">가족</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="fear"><span
+							type="checkbox" onclick="count_ck(this);" value="공포"><span
 							style="font-size: medium; margin-right: 65px;">공포</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="war"><span
+							type="checkbox" onclick="count_ck(this);" value="전쟁"><span
 							style="font-size: medium; margin-right: 67px;">전쟁</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="rocomedy"><span
+							type="checkbox" onclick="count_ck(this);" value="로맨스/코미디"><span
 							style="font-size: medium;">로맨스/코미디</span> <br> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="fantasy"><span
+							type="checkbox" onclick="count_ck(this);" value="판타지"><span
 							style="font-size: medium; margin-right: 50px;">판타지</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="action"><span
+							type="checkbox" onclick="count_ck(this);" value="액션"><span
 							style="font-size: medium; margin-right: 50px;">액션</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="sf"><span
+							type="checkbox" onclick="count_ck(this);" value="SF"><span
 							style="font-size: medium; margin-right: 80px;">SF</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="animation"><span
+							type="checkbox" onclick="count_ck(this);" value="애니메이션"><span
 							style="font-size: medium; margin-right: 19px;">애니메이션</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="documentary"><span
+							type="checkbox" onclick="count_ck(this);" value="다큐멘터리"><span
 							style="font-size: medium;">다큐멘터리</span>
 
 					</div>

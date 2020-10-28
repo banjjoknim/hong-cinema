@@ -157,5 +157,23 @@
 	WHERE userid = #{userid}
 	</select>
 	
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countMember" resultType="int">
+		SELECT COUNT(*) FROM tbl_member
+	</select>
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="selectMember" resultType="org.gasan.domain.MemberVO">
+		SELECT * FROM(
+						SELECT ROWNUM RN, A.*
+							FROM(
+								SELECT *
+								FROM tbl_member
+								ORDER BY no DESC
+								) A
+							)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
 	
 </mapper>

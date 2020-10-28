@@ -157,24 +157,27 @@
 
 
 		<div class="container">
-		<h4 style="font-weight: 600; margin-top: 100px;">영화 정보 등록</h4>
+		<h4 style="font-weight: 600; margin-top: 100px;">영화 정보 수정</h4>
 		<hr color="black">
-		<form role="form" method='POST' action="/createMov">
+		<form role="form" method='POST' action="/movieUpdate">
 				<fieldset>
+					<input type="hidden" name="movieCode"
+				value="${mo.movieCode}" />
 					<div class="form-group row">
 						<label for="movieName" class="col-sm-2 col-form-label">영화제목</label>
 						<div class="col-sm-10">
 							<input style="width: 400px; height: 40px; display: block;"
-								type='text' name='movieName' id="movieName" class="form-control" multiple>
+								type='text' name='movieName' class="form-control" value="${mo.movieName}" multiple>
 						</div>
 					</div>
+					
 					
 					<hr color="lightgray">
 					<div class="form-group row">
 						<label for="director" class="col-sm-2 col-form-label">감독</label>
 						<div class="col-sm-10">
 							<input style="width: 400px; height: 40px; display: block;"
-								type='text' name='director' id="director" class="form-control" multiple>
+								type='text' name='director' value="${mo.director}" class="form-control" multiple>
 						</div>
 					</div>
 					
@@ -183,7 +186,7 @@
 						<label for="openDate" class="col-sm-2 col-form-label">개봉일</label>
 						<div class="col-sm-10">
 							<input style="width: 400px; height: 40px; display: block;"
-								type='text' name='openDate' id="openDate" class="form-control" multiple>
+								type='text' name='openDate' value="${mo.openDate}" class="form-control" multiple>
 						</div>
 					</div>
 					
@@ -192,7 +195,7 @@
 						<label for="showtime" class="col-sm-2 col-form-label">상영시간</label>
 						<div class="col-sm-10">
 							<input style="width: 400px; height: 40px; display: block;"
-								type='text' name='showTime' id="showTime" class="form-control" multiple>
+								type='text' name='showTime' value="${mo.showTime}" class="form-control" multiple>
 						</div>
 					</div>
 					
@@ -201,7 +204,7 @@
 						<label for="nationName" class="col-sm-2 col-form-label">국가</label>
 						<div class="col-sm-10">
 							<input style="width: 400px; height: 40px; display: block;"
-								type='text' name='nationName' id="nationName" class="form-control" multiple>
+								type='text' name='nationName' value="${mo.nationName}" class="form-control" multiple>
 						</div>
 					</div>
 					
@@ -210,17 +213,33 @@
 						<label for="actors" class="col-sm-2 col-form-label">출연진</label>
 						<div class="col-sm-10">
 							<input style="width: 400px; height: 40px; display: block;"
-								type='text' name='actors' id="actors" class="form-control" multiple>
+								type='text' name='actors' value="${mo.actors}" class="form-control" multiple>
 						</div>
 					</div>
 					
 					
+					<!-- <hr color="lightgray">
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label" >상영등급</label>
+      					<input type="radio" style= "margin: 7px 5px 0 15px;" id="grade"
+							name="grade" value="전체관람가"><span
+							style="font-size: medium; margin-right: 15px;">전체 관람가</span> 
+							<input type="radio" style="margin: 7px 5px 0 0;" id="grade"
+							name="grade" value="12세 이상 관람가"><span
+							style="font-size: medium; margin-right: 15px;">12세 이상 관람가</span>
+							<input type="radio" style="margin: 7px 5px 0 0;" id="grade"
+							name="grade" value="15세 이상 관람가"><span
+							style="font-size: medium; margin-right: 15px;">15세 이상 관람가</span>
+							<input type="radio" style="margin: 7px 5px 0 0;" id="grade"
+							name="grade" value="청소년 관람 불가"><span
+							style="font-size: medium; margin-right: 15px;">청소년 관람 불가</span>
+						</div> -->
+						
 					<hr color="lightgray">
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label" >상영등급</label> 
 						 <div class="col-sm-10">
 						 <select class="form-control" style="width: 400px; height: 40px;" id="grade" name="grade">
-							<option value="">선택해주세요</option>
 							<option value="전체 관람가">전체 관람가</option>
 							<option value="12세 이상 관람가">12세 이상 관람가</option>
 							<option value="15세 이상 관람가">15세 이상 관람가</option>
@@ -230,41 +249,12 @@
 					</div>
 					
 					
-				
-					<hr color="lightgray">
-					<div class="form-group row">
-						<label for="poster" class="col-sm-2 col-form-label">포스터등록</label>
-						<div class="col-sm-10">
-							<div class='uploadDiv'>
-								<input type="file" name="poster" id="poster" multiple>
-							
-							<div class="select_img"><img src="" /></div>
-							<script>
-								$("#poster").change(function(){
-   								if(this.files && this.files[0]) {
-								var reader = new FileReader;
-    							reader.onload = function(data) {
-     							$(".select_img img").attr("src", data.target.result).width(250);        
-    							}
-								reader.readAsDataURL(this.files[0]);
-   								}
-  									});
- 							</script>
-						
-							</div>
-
-							<!-- <input style="width: 400px; height: 40px; display: block;"
-								type="file" class="form-control" name="mov_Picture"> -->
-							<!-- <input type="file" class="form-control-file" name="mov_Picture" id="exampleInputFile" aria-describedby="fileHelp">	 -->
-						</div>
-					</div>
-					
 					<hr color="lightgray">
 					<div class="form-group row">
 						<label for="intro" class="col-sm-2 col-form-label">줄거리</label>
 						<div class="col-sm-10">
-							<textarea class="form-control" name="intro" id="intro" 
-							rows="3" style="margin-top: 0px; margin-bottom: 0px; width: 500px; height: 100px;"></textarea>
+							<textarea class="form-control" name="intro" id="exampleTextarea" 
+							rows="3"  style="margin-top: 0px; margin-bottom: 0px; width: 400px; height: 91px;">${mo.intro}</textarea>
 						</div>
 					</div>
 					
@@ -273,7 +263,8 @@
 					<label for="genre" class="col-sm-2 col-form-label">영화장르</label>
 					<div class="col-sm-10">
 						 <input style="margin: 15px 5px 0 0;" id="genre"
-							name="genre" type="checkbox" value="스포츠"><span
+							name="genre" type="checkbox"  
+							value="스포츠"><span
 							style="font-size: medium; margin-right: 50px;">스포츠</span> <input
 							style="margin: 15px 5px 0 0;" id="genre" name="genre"
 							type="checkbox"   value="범죄"><span
@@ -317,15 +308,13 @@
 							style="margin: 15px 5px 0 0;" id="genre" name="genre"
 							type="checkbox"   value="다큐멘터리"><span
 							style="font-size: medium;">다큐멘터리</span>
-
 					</div>
 				</div>
-		
 					<hr color="lightgray">
 
 					<div align="center" class="buttonbox">
 						<button type="submit" style="margin: 0 150px 0 200px;"
-							class="btn btn-primary btn-lg" id="uploadBtn">영화등록</button>
+							class="btn btn-primary btn-lg" id="uploadBtn">영화수정</button>
 						<button type="button" style="width: 100px;"
 							class="btn btn-danger btn-lg" id="cancel">취소</button>
 					</div>
@@ -342,118 +331,14 @@
 
 		<!-- jQuery -->
 		<script src="/resources/js/jquery-3.5.1.min.js"></script>
-		<script>
-			var csrfHeaderName = "${_csrf.headerName}";
-			var csrfTokenValue = "${_csrf.token}";
-			var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-			var maxSize = 52428800; //50MB
-			var cloneObj = $(".uploadDiv").clone();
-			var uploadResult = $(".uploadResult ul");
-
-			$(document).ready(function() {
-
-					function showUploadedFile(uploadResultArr) {
-
-							var str = "";
-
-							$(uploadResultArr).each(function(i, obj) {
-
-										if (!obj.image) {
-											str += "<li><img src='/resources/images/attach.png'>"
-												+ obj.fileName
-												+ "</li>";
-											} else {
-												//str += "<li>" + obj.fileName + "</li>";
-												var fileCallPath = encodeURIComponent(obj.uploadPath
-												+ "/s_"
-												+ obj.uuid
-												+ "_"
-												+ obj.fileName);
-												str += "<li><img src='/display?fileName="
-												+ fileCallPath
-												+ "'><li>";
-
-											}
-								});
-
-									uploadResult.append(str);
-
-								}
-
-								function checkExtension(fileName, fileSize) {
-
-									if (fileSize >= maxSize) {
-										alert("파일 사이즈 초과");
-										return false;
-									}
-
-									if (regex.test(fileName)) {
-										alert("해당 종류의 파일은 업로드 할 수 없습니다.");
-										return false;
-									}
-									return true;
-								}
-
-								$("#uploadBtn")
-										.on(
-												"click",
-												function(e) {
-
-													var formData = new FormData();
-
-													var inputFile = $("input[name='poster']");
-
-													var files = inputFile[0].files;
-
-													console.log(files);
-
-													 //add filedate to formdata
-													for (var i = 0; i < files.length; i++) {
-
-														if (!checkExtension(
-																files[i].name,
-																files[i].size)) {
-															return false;
-														}
-
-														formData.append(
-																"poster",
-																files[i]);
-													} 
-
-													$.ajax({
-																url : '/uploadAjaxAction',
-																processData : false,
-																contentType : false,
-																beforeSend : function(xhr) {
-																	xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
-																},
-																data : formData,
-																type : 'POST',
-																dataType : 'json',
-																success : function(result) {
-																
-																	console.log(result);
-
-																	showUploadedFile(result); //업로드 결과 처리 함수 */
-
-																	$(".uploadDiv").html(cloneObj.html());
-																	
-																	
-																}
-															}); //$.ajax
-
-												});
-							});
-		</script>
-
+		
 	<script type="text/javascript">
 		$(document).ready(function() {
 							// 취소
 		$("#cancel").on("click", function() {
+			alert("영화 정보 수정이 취소 되었습니다.");
 			
-			alert("영화 정보 등록이 취소되었습니다.");
-			location.href = "/admin_mov";
+			location.href = "/admin_movList";
 				});
 							
 		$(".btn-primary").on("click",function() {
@@ -476,11 +361,6 @@
 				return false;
 			}
 			
-			if ($("#director").val() == "") {
-				alert("개봉일을 입력해주세요");
-				$("#director").focus();
-				return false;
-			}
 			
 			if ($("#showTime").val() == "") {
 				alert("상영시간을 입력해주세요");
@@ -488,11 +368,7 @@
 				return false;
 			}
 			
-			if ($("#nationName").val() == "") {
-				alert("국가를 입력해주세요");
-				$("#nationName").focus();
-				return false;
-			}
+		
 			
 			if ($("#nationName").val() == "") {
 				alert("국가를 입력해주세요");
@@ -512,11 +388,6 @@
 				return false;
 			}
 			
-			if ($("#actors").val() == "") {
-				alert("출연진을 입력해주세요");
-				$("#actors").focus();
-				return false;
-			}
 			
 			if ($("#intro").val() == "") {
 				alert("줄거리를 입력해주세요");
@@ -543,18 +414,36 @@
 				return false;
 			}
 			
-			alert("영화 정보가 등록되었습니다.");
+			alert("영화 정보가 수정되었습니다.");
 		
 				});
 		
 		});
-		
 				
 	</script>
+	
+	<!--체크된 상태로 값 넘기기 -->
+	 <script>
+	     var DATA = "${mo.genre}";
+         console.log(DATA);
+         
+         var splitDATA = DATA.split(",");
+         for (var i=0; i<splitDATA.length; i++) {
+            $('input:checkbox[name="genre"][value='+splitDATA[i]+']').attr("checked", true).parent().addClass('on');
+         }
+	</script>
+	
+	<!--select option 선택된 상태로 값 넘기기 -->
+	 <script>
+	 
+     var grade="${mo.grade}";
+
+     $("#grade").val(grade);
+
+     
+	</script>
+
 
 	</div>
-
-
 </body>
-
 </html>

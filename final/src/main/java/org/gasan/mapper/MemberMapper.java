@@ -3,6 +3,8 @@ package org.gasan.mapper;
 import java.util.List;
 
 import org.gasan.domain.MemberVO;
+import org.gasan.domain.MovieVO;
+import org.gasan.util.PagingVO;
 
 public interface MemberMapper {
 	
@@ -41,6 +43,10 @@ public interface MemberMapper {
 	
 	//휴대폰 번호 중복 체크
 	public int phoneChk(MemberVO vo);
+	
+	public int countMember();
+
+	public List<MovieVO> selectMemeber(PagingVO po);
 	
 	
 	

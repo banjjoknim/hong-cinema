@@ -11,14 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   	<link rel="stylesheet" href="resources/css/admin_page.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<style>
-
-  	#rectangle {
-      width: 530px;
-      height: 56px;
-      background: #FF0000;
-    }
-
+    <style>
 
 .dropbtn {
     background-color: #00000;
@@ -56,6 +49,16 @@
     background-color: #f1f1f1;
     color:red;
 }
+
+.txt_line{
+width:70px; 
+padding:0 5px; 
+overflow:hidden; 
+text-overflow:ellipsis; 
+white-space:nowrap;
+}
+
+
 </style>
     
     <title>관리자 페이지</title>
@@ -64,15 +67,6 @@
 <body>
 <%@ include file="../board/header.jsp" %>
 <sec:authorize access="isAuthenticated()">
-       	<sec:authentication property="principal.username" var="userid" />
-       	<sec:authentication property="principal.member.userName" var="userName"/>
-       	<sec:authentication property="principal.member.userEmail" var="userEmail"/>
-       	<sec:authentication property="principal.member.userPhone" var="userPhone"/>
-       	<sec:authentication property="principal.member.userGender" var="userGender"/>
-       	<sec:authentication property="principal.member.userBirth" var="userBirth"/>
-       	<sec:authentication property="principal.member.regDate" var="regDate"/>
-       	<sec:authentication property="principal.member.updateDate" var="updateDate"/> 
-		
 
     <div class="container">
         
@@ -84,10 +78,8 @@
             <li style="margin: 10px 0 -20px -88px; padding-bottom:-60px" class="breadcrumb-item"><a href="#">매출 관리</a></li>
             <li style="margin: 10px 0 -20px -108px; padding-bottom:-60px" class="breadcrumb-item active"><a href="admin_mem">회원 관리</a></li>
         </ol> -->
-    
         
-     <!-- <div id="rectangle" style="position:absolute; z-index:-1;"></div> -->
-     <div class="dropdown">
+        <div class="dropdown">
       <button class="dropbtn">영화 관리</button>
       <div class="dropdown-content">
         <a href="admin_mov">영화 정보 등록</a>
@@ -121,8 +113,8 @@
         <a href="admin_mem">회원 정보 리스트</a>
       </div>
     </div>
-    
-    <div class="form-group">
+      
+       <div class="form-group">
 		<select  style="width: 110px; float: right; margin-top:95px;" class="form-control" id="cntPerPage" name="sel" onchange="selChange()">
 			<option value="5"
 				<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5개 보기</option>
@@ -133,60 +125,66 @@
 			<option value="20"
 				<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20개 보기</option>
 		</select>
-		</div>
-      
-        <h4 style="font-weight: 600; margin-top: 100px;">회원 정보 리스트</h4>
+	</div> 
+        <h4 style="font-weight: 600; margin-top: 100px;">영화 정보 리스트</h4>
         <hr color="black">
-        <table class="table table-hover">
-        <thead>
-            <tr class="table-active">
-              <th scope="col">아이디</th>
-              <th scope="col">이름</th>
-              <th scope="col">이메일</th>
-              <th scope="col">성별</th>
-              <th scope="col">휴대폰번호</th>
-              <th scope="col">생년월일</th>
-              <th scope="col">가입일</th>
-              <th scope="col">업데이트</th>
-              <th scope="col">수정/탈퇴</th>
-            </tr>
-          </thead>
+       	<table class="table table-hover">
           <tbody>
-          <c:choose>
+         <c:choose>
           <c:when test="${empty viewAll}" >
           <tr><td colspan="5" align="center">데이터가 없습니다.</td></tr> 
           </c:when>
-		<c:when test="${!empty viewAll}"> 
+		<c:when test="${!empty viewAll}">  
 		<c:forEach var="list" items="${viewAll}">
-
-          <tr >
-              <td style="vertical-align: middle;"><c:out value="${list.userid}"/></td>
-              <td style="vertical-align: middle;"><c:out value="${list.userName}"/></td>
-              <td style="vertical-align: middle;"><c:out value="${list.userEmail}"/></td>
-              <td style="vertical-align: middle;"><c:out value="${list.userGender}"/></td>
-              <td style="vertical-align: middle;"><c:out value="${list.userPhone}"/></td>
-              <td style="vertical-align: middle;"><c:out value="${list.userBirth}"/></td>
-              <td style="vertical-align: middle;"><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd"/></td>
-              <td style="vertical-align: middle;"><fmt:formatDate value="${list.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-              <td>
-              <button type="button" class="btn btn-outline-primary" onclick="location.href='/admin_modify_userInfo?userid=${list.userid}'">수정</button>
-              <button type="button" class="btn btn-outline-primary" onclick="confirmDelete('/memberDelete?userid=${list.userid}&userpw=${list.userpw}')">탈퇴</button>
-              </td>
-            </tr> 
-            </c:forEach>
-           </c:when>
+       
+       <tr>
+         <td width="80" rowspan="6" ><b><c:out value="${list.movieCode}"/></b></td>
+         </tr> 
+          
+          <tr>
+              <td rowspan="5" width="130"><img width="130" src="/resources/upload/${list.poster}"></td>
+              <td style="text-align: left;"><b>제목</b> <font color="gray">|</font> <c:out value="${list.movieName}"/></td>
+              <td style="text-align: left;"><b>감독</b> <font color="gray">|</font> <c:out value="${list.director}"/></td>       
+              <td style="text-align: left;"><b>장르</b> <font color="gray">|</font> <c:out value="${list.genre}"/></td>
+              <td style="text-align: left;"><b>국가</b> <font color="gray">|</font> <c:out value="${list.nationName}"/></td>
+          </tr> 
+          <tr>
+            <td style="text-align: left;"><b>개봉일</b> <font color="gray">|</font> <c:out value="${list.openDate}"/></td>
+            <td style="text-align: left;"><b>상영시간</b> <font color="gray">|</font> <c:out value="${list.showTime}"/></td>
+            <td style="text-align: left;"><b>상영등급</b> <font color="gray">|</font> <c:out value="${list.grade}"/></td>       
+          	<td style="text-align: left;"><b>등록일</b> <font color="gray">|</font> <fmt:formatDate value="${list.regDate }" pattern="yyyy.MM.dd"/> </td>
+          </tr> 
+          <tr>
+            <td colspan="4" style="text-align: left;"><b>출연진</b> <font color="gray">|</font> <c:out value="${list.actors}"/></td>
+          </tr>
+          <tr>
+            <td colspan="4" style="text-align: left;"><b>줄거리</b> <font color="gray">|</font> <c:out value="${list.intro}"/></td>
+          </tr>
+          <tr>
+          <td colspan="3"></td>
+          <td>
+              <button type="button" class="btn btn-outline-primary" onclick="location.href='/admin_posterModify?movieCode=${list.movieCode}'">포스터수정</button>
+              <button type="button" class="btn btn-outline-primary" onclick="location.href='/admin_movModify?movieCode=${list.movieCode}'">영화정보수정</button>
+              <button type="button" class="btn btn-outline-primary" onclick="confirmDelete('/movieDelete?movieCode=${list.movieCode}')">삭제</button>
+          </td>
+          </tr>
+	      </c:forEach>
+         	</c:when>
            </c:choose> 
           </tbody>
       </table>
+       
+       
+        
       <hr color="lightgray">
       <input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 				
 	<div >
-		<ul style="width: 70px; margin: 0 auto;" class="pagination">
+		<ul style="width: 200px; margin: 0 auto;" class="pagination">
 		<c:if test="${paging.startPage != 1 }">
     	<li class="page-item">
-			<a class="page-link" href="/admin_mem?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&laquo;</a>
+			<a class="page-link" href="/admin_movList?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&laquo;</a>
 			</li>	
 		</c:if>
 		
@@ -194,12 +192,12 @@
 			<c:choose>
 				<c:when test="${p == paging.nowPage }">
 					<li class="page-item active">
-					<a class="page-link" href="/admin_mem?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+					<a class="page-link" href="/admin_movList?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
 					</li>
 				</c:when>
 				<c:when test="${p != paging.nowPage }">
 					<li class="page-item">
-					<a class="page-link" href="/admin_mem?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+					<a class="page-link" href="/admin_movList?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
 					</li>
 				</c:when>
 			</c:choose>
@@ -218,31 +216,24 @@
  </sec:authorize>     
    <!-- jQuery -->
 	<script src="/resources/js/jquery-3.5.1.min.js"></script>   
-    
-    <script>
+      <script>
 	function selChange() {
 		var sel = document.getElementById('cntPerPage').value;
-		location.href="admin_mem?nowPage=${paging.nowPage}&cntPerPage="+sel;
+		location.href="admin_movList?nowPage=${paging.nowPage}&cntPerPage="+sel;
 	}
-	</script>  
-    
-    
-    <script type="text/javascript">
-    
-    //탈퇴 버튼 이벤트
-    function confirmDelete(url) {
-        if (confirm("정말 탈퇴시키시겠습니까? 탈퇴하면 복구할 수 없습니다.")) {
-        	alert("탈퇴되었습니다.");
+	</script>
+      
+      <script>
+       //삭제 버튼 이벤트
+    	function confirmDelete(url) {
+        if (confirm("영화 정보를 삭제하시겠습니까? 삭제되면 복구할 수 없습니다.")) {
+        	alert("영화 정보가 삭제되었습니다.");
         	window.location.replace(url);
         } else {
             false;
         }       
     };
-    
-    
-  
-    	
-	</script>
+    </script> 
       <%@ include file="../board/footer.jsp" %>
       </body>
       

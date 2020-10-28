@@ -109,7 +109,7 @@
 					<label for="phone" class="col-sm-2 col-form-label">휴대폰 번호</label>
 					<div class="col-sm-10">
 						<input style="width: 400px; height: 40px; float: left;"
-							type="phone" class="form-control" id="userPhone" name="userPhone"
+							type="text" class="form-control" id="userPhone" name="userPhone"
 							value="${userPhone}">
 					</div>
 				</div>
@@ -130,49 +130,49 @@
 							style="display: block; margin-bottom: 10px; font-size: small; color: red;">※ 관심장르를 선택해주세요. <b>(최대 3개)</b> 선택하지 않으면 현재 설정 그대로 유지됩니다.
 						</span> <input style="margin: 15px 5px 0 0;" id="userGenre"
 							name="userGenre" type="checkbox" onclick="count_ck(this);"
-							value="sport"><span
+							value="스포츠"><span
 							style="font-size: medium; margin-right: 50px;">스포츠</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="crime"><span
+							type="checkbox" onclick="count_ck(this);" value="범죄"><span
 							style="font-size: medium; margin-right: 50px;">범죄</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="drama"><span
+							type="checkbox" onclick="count_ck(this);" value="드라마"><span
 							style="font-size: medium; margin-right: 50px;">드라마</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="comedy"><span
+							type="checkbox" onclick="count_ck(this);" value="코미디"><span
 							style="font-size: medium; margin-right: 50px;">코미디</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="romelo"><span
+							type="checkbox" onclick="count_ck(this);" value="로맨스/멜로"><span
 							style="font-size: medium;">로맨스/멜로</span> <br> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="thriller"><span
+							type="checkbox" onclick="count_ck(this);" value="스릴러"><span
 							style="font-size: medium; margin-right: 50px;">스릴러</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="family"><span
+							type="checkbox" onclick="count_ck(this);" value="가족"><span
 							style="font-size: medium; margin-right: 50px;">가족</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="fear"><span
+							type="checkbox" onclick="count_ck(this);" value="공포"><span
 							style="font-size: medium; margin-right: 65px;">공포</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="war"><span
+							type="checkbox" onclick="count_ck(this);" value="전쟁"><span
 							style="font-size: medium; margin-right: 67px;">전쟁</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="rocomedy"><span
+							type="checkbox" onclick="count_ck(this);" value="로맨스/코미디"><span
 							style="font-size: medium;">로맨스/코미디</span> <br> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="fantasy"><span
+							type="checkbox" onclick="count_ck(this);" value="판타지"><span
 							style="font-size: medium; margin-right: 50px;">판타지</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="action"><span
+							type="checkbox" onclick="count_ck(this);" value="액션"><span
 							style="font-size: medium; margin-right: 50px;">액션</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="sf"><span
+							type="checkbox" onclick="count_ck(this);" value="SF"><span
 							style="font-size: medium; margin-right: 80px;">SF</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="animation"><span
+							type="checkbox" onclick="count_ck(this);" value="애니메이션"><span
 							style="font-size: medium; margin-right: 19px;">애니메이션</span> <input
 							style="margin: 15px 5px 0 0;" id="userGenre" name="userGenre"
-							type="checkbox" onclick="count_ck(this);" value="documentary"><span
+							type="checkbox" onclick="count_ck(this);" value="다큐멘터리"><span
 							style="font-size: medium;">다큐멘터리</span>
 
 					</div>

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.gasan.dao.MemberDAO;
 import org.gasan.domain.MemberVO;
 import org.gasan.util.MailHandler;
+import org.gasan.util.PagingVO;
 import org.gasan.util.TempKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -46,7 +47,7 @@ public class CommonServiceImpl implements CommonService {
 		sendMail.setText( // 메일내용
 				"<h1>메일인증</h1>" +
 				"<h3>아래 이메일 인증 확인을 누르시면 인증이 완료됩니다.</h3>"+
-				"<a href='http://192.168.0.154:8080/emailConfirm?userEmail=" + vo.getUserEmail() +
+				"<a href='http://localhost:8080/emailConfirm?userEmail=" + vo.getUserEmail() +
 				"&key=" + key +
 				"' target='_blenk'>이메일 인증 확인</a>");
 		sendMail.setFrom("koittih@gmail.com", "관리자"); // 보낸이
@@ -132,6 +133,18 @@ public class CommonServiceImpl implements CommonService {
 	public MemberVO viewMember(String userid) throws Exception{
 		MemberVO result = dao.viewMember(userid);
 		return result;
+	}
+	
+	//회원 정보 총 갯수
+	@Override
+	public int countMember() throws Exception{
+		return dao.countMember();
+	}
+
+	//페이징 처리 회원리스트 조회
+	@Override
+	public List<MemberVO> selectMember(PagingVO po) throws Exception{
+		return dao.selectMember(po);
 	}
 
 }

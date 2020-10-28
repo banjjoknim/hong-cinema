@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.gasan.domain.MemberVO;
 import org.gasan.service.CommonService;
+import org.gasan.util.PagingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -70,7 +72,7 @@ public class CommonController {
 
 		log.info("custom logout");
 
-		return "/users/customLogout";
+		return "/";
 	}
 
 	
@@ -89,7 +91,7 @@ public class CommonController {
 
 		log.info("post custom logout");
 
-		return "/users/customLogout";
+		return "/";
 	}
 
 	// 회원가입 페이지 접근
@@ -130,6 +132,44 @@ public class CommonController {
 		return "redirect:/";
 	}
 
+	
+		// 관리자 회원등록 페이지 접근
+		@GetMapping("/adminSignup")
+		public String adminsignupGET() {
+
+			log.info("회원등록 폼");
+
+			return "/admin/adminSignup";
+		}
+
+		// 회원 등록 처리
+		@PostMapping("/adminSignup")
+		public String adminsignupPOST(MemberVO vo, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
+			log.info(vo);
+
+			// 아이디 체크
+			int result = commonService.idChk(vo);
+
+			// 아이디체크 후 회원가입 처리
+			try {
+
+				if (result == 1) {
+					return "/adminSignup";
+
+				} else if (result == 0) {
+
+					commonService.customSignup(vo);
+
+					rttr.addFlashAttribute("result", vo.getUserName());
+				}
+
+			} catch (Exception e) {
+
+				throw new RuntimeException();
+			}
+
+			return "redirect:/admin_mem";
+		}
 	// 아이디 체크
 	@ResponseBody
 	@RequestMapping(value = "/idChk", method = RequestMethod.GET)
@@ -265,24 +305,38 @@ public class CommonController {
 		return result;
 	}
 
+	
+	
 	// 회원 관리 페이지
 	@RequestMapping(value = "/admin_mem", method = RequestMethod.GET)
-	public String getUserList(Model model, HttpSession session) throws Exception {
+	public String getUserList(PagingVO po, Model model, HttpSession session
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
+		
 		log.info("getUserList()....");
 
-		model.addAttribute("userList", commonService.getUserList());
+		int total = commonService.countMember();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) {
+			cntPerPage = "5";
+		}
+		
+		po = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		model.addAttribute("paging", po);
+		model.addAttribute("viewAll", commonService.selectMember(po));
+		/* model.addAttribute("movieList", movieService.getMovieList()); */
+		/* model.addAttribute("userList", commonService.getUserList()); */
 		/* session.setAttribute("userListSession", commonService.getUserList()); */
 		return "/admin/admin_mem";
 
 	}
 
-	// 영화 관리 페이지 접근
-	@RequestMapping(value = "/admin_mov", method = RequestMethod.GET)
-	public String admin_mov() throws Exception {
-
-		return "/admin/admin_mov";
-	}
-
+	
 	// 회원 상세정보 조회
 	@RequestMapping("/memberView")
 	public String memberView(String userid, Model model) throws Exception {

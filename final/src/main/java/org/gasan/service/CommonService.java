@@ -3,6 +3,8 @@ package org.gasan.service;
 import java.util.List;
 
 import org.gasan.domain.MemberVO;
+import org.gasan.domain.MovieVO;
+import org.gasan.util.PagingVO;
 
 public interface CommonService {
 
@@ -39,4 +41,10 @@ public interface CommonService {
 	
 	//회원 상세보기 조회
 	public MemberVO viewMember(String userid) throws Exception;
+	
+	//회원 정보 총 갯수
+	public int countMember() throws Exception;
+
+	//페이징 처리 회원리스트 조회
+	public List<MemberVO> selectMember(PagingVO po) throws Exception;
 }

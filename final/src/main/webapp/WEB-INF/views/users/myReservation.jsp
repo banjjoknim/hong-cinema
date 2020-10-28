@@ -96,7 +96,7 @@ $(document).ready(function(){
 			if(list[i].cancelable === "Y"){
 				str += '<td><button type="button" class="btn btn-outline-primary cancelBtn">취소</button></td>'
 			} else {
-				str += '<td>취소처리</td>'
+				str += '<td>취소불가</td>'
 			}
 			str += '</tr>'
 		}

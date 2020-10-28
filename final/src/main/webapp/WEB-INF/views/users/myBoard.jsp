@@ -39,21 +39,21 @@
     </thead>
     <tbody>
     <tr>
-        <td>Column</th>
         <td>Column</td>
-        <td>Column</td>
-        <td>Column</td>
-        <td><button type="button" class="btn btn-outline-primary">삭제</button></td>
-      </tr>
-      <tr>
-        <td>Column</th>
         <td>Column</td>
         <td>Column</td>
         <td>Column</td>
         <td><button type="button" class="btn btn-outline-primary">삭제</button></td>
       </tr>
       <tr>
-        <td>Column</th>
+        <td>Column</td>
+        <td>Column</td>
+        <td>Column</td>
+        <td>Column</td>
+        <td><button type="button" class="btn btn-outline-primary">삭제</button></td>
+      </tr>
+      <tr>
+        <td>Column</td>
         <td>Column</td>
         <td>Column</td>
         <td>Column</td>

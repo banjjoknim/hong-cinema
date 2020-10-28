@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.gasan.mapper.MovieMapper">
+	
+	<resultMap type="org.gasan.domain.MovieVO" id="MovMap">
+		<id property="movieCode" column="movieCode" />
+		<result property="movieName" column="movieName" />
+		<result property="genre" column="genre" />
+		<result property="director" column="director" />
+		<result property="openDate" column="openDate" />
+		<result property="showTime" column="showTime" />
+		<result property="nationName" column="nationName" />
+		<result property="actors" column="actors" />
+		<result property="grade" column="grade" />
+		<result property="poster" column="poster" />
+		<result property="intro" column="intro" />
+		<result property="regDate" column="regDate" />
+	
+	</resultMap>
+	
+	
+
+	<!-- 영화등록 -->
+	<insert id="createMov">
+		insert into movie (
+		moviecode, moviename, genre, director, opendate, showtime, 
+		nationName, actors, grade, poster, intro, regdate)
+		VALUES(tbl_movie_seq.nextval, #{movieName}, #{genre},
+		#{director}, #{openDate}, #{showTime}, #{nationName}, #{actors}, #{grade},
+		#{poster}, #{intro}, SYSDATE)
+		
+	</insert>
+	
+	<!-- 회원 정보 상세조회 -->
+	<select id="viewMovie" resultType="org.gasan.domain.MovieVO">
+	SELECT
+	moviecode, moviename, genre, director, opendate, showtime, 
+	nationName, actors, grade, poster, intro, regdate
+	FROM movie
+	WHERE movieCode = #{moviCode}
+	</select>
+	
+	
+	<!-- 관리자 페이지 영화목록 리스트 -->
+	<select id="getMovieList" resultType="org.gasan.domain.MovieVO"> 
+	
+	SELECT * FROM movie
+	ORDER BY moviecode desc
+	
+	</select>
+	
+	<!--  회원정보 수정 -->
+	<update id="movieUpdate">
+		UPDATE movie SET
+		moviecode = #{movieCode},
+		moviename = #{movieName},
+		genre = #{genre},
+		director = #{director},
+		openDate = #{openDate},
+		showtime = #{showTime},
+		nationname = #{nationName},
+		actors = #{actors},
+		grade = #{grade},
+		intro = #{intro}
+		
+		WHERE moviecode = #{movieCode}
+	</update>
+	
+	
+	
+	<update id="posterUpdate">
+		UPDATE movie SET
+		
+		poster = #{poster}
+		
+		WHERE moviecode = #{movieCode}
+	</update>
+	
+	
+	
+	<!-- 회원탈퇴 -->
+	<delete id="movieDelete">
+	DELETE movie
+	WHERE moviecode = #{movieCode}
+	<!-- AND USERPW = #{userpw} -->
+	</delete>
+	
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countMovie" resultType="int">
+		SELECT COUNT(*) FROM MOVIE
+	</select>
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="selectMovie" resultType="org.gasan.domain.MovieVO">
+		SELECT * FROM(
+						SELECT ROWNUM RN, A.*
+							FROM(
+								SELECT *
+								FROM MOVIE
+								ORDER BY moviecode DESC
+								) A
+							)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+</mapper>

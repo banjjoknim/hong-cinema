@@ -41,7 +41,6 @@
               
              <sec:authorize access="hasRole('ROLE_ADMIN')">
             <li><a href="/admin_mem">관리자페이지</a></li>
-            <li><a href="/customSignup">회원등록</a></li>
             </sec:authorize>
             
 			<sec:authorize access="isAnonymous()">

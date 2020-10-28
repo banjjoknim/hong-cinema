@@ -15,20 +15,124 @@
 <meta name="author" content="">
 
 <link rel="stylesheet" href="/resources/css/simplex.css">
-<link rel="stylesheet" href="/resources/css/user_join.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<title>회원가입</title>
+	
+	<style>
+
+.dropbtn {
+    background-color: #00000;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown:hover .dropbtn {
+    background-color: #f1f1f1;
+    color:red;
+}
+
+.txt_line{
+width:70px; 
+padding:0 5px; 
+overflow:hidden; 
+text-overflow:ellipsis; 
+white-space:nowrap;
+}
+
+.buttonbox{
+	margin-top: 50px;
+}
 
 
+</style>
+<title>회원등록</title>
 </head>
 <body>
-<%@ include file="../board/header.jsp" %>
+<%@ include file="../board/header.jsp"%>
 	<div class="container">
+		<!--  <ol class="breadcrumb" style="vertical-align: middle;">
+			<li style="margin: 10px 0 -20px 10px; padding-bottom: -60px"
+				class="breadcrumb-item active"><a href="admin_mov">영화 관리</a></li>
+			<li style="margin: 10px 0 -20px -128px; padding-bottom: -60px"
+				class="breadcrumb-item"><a href="admin_res">예매 관리</a></li>
+			<li style="margin: 10px 0 -20px -108px; padding-bottom: -60px"
+				class="breadcrumb-item"><a href="admin_shw">상영 관리</a></li>
+			<li style="margin: 10px 0 -20px -108px; padding-bottom: -60px"
+				class="breadcrumb-item"><a href="admin_scr">상영관 관리</a></li>
+			<li style="margin: 10px 0 -20px -88px; padding-bottom: -60px"
+				class="breadcrumb-item"><a href="#">매출 관리</a></li>
+			<li style="margin: 10px 0 -20px -108px; padding-bottom: -60px"
+				class="breadcrumb-item"><a href="admin_mem">회원 관리</a></li>
+		</ol> --> 
+	
+	
+	
+	<div class="dropdown">
+      <button class="dropbtn">영화 관리</button>
+      <div class="dropdown-content">
+        <a href="admin_mov">영화 정보 등록</a>
+        <a href="admin_movList">영화 정보 리스트</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">예매 관리</button>
+      <div class="dropdown-content">
+        <a href="admin_res">예매 정보 리스트</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">상영 관리</button>
+      <div class="dropdown-content">
+        <a href="admin_shw">상영 정보 등록</a>
+        <a href="admin_shwList">상영 정보 리스트</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">상영관 관리</button>
+      <div class="dropdown-content">
+        <a href="admin_scr">상영관 정보 등록</a>
+        <a href="admin_scrList">상영관 정보 리스트</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">회원 관리</button>
+      <div class="dropdown-content">
+        <a href="adminSignup">회원 등록</a>
+        <a href="admin_mem">회원 정보 리스트</a>
+      </div>
+    </div>
+	
+		<div class="container">
+		<h4 style="font-weight: 600; margin-top: 100px;">회원 등록</h4>
 		<form role="form" method='post' action="/customSignup" id="regForm">
 			<fieldset>
-				<legend>회원가입</legend>
-				<h4 style="font-weight: 600;">회원정보입력</h4>
+				
 				<hr color="black">
 				<div class="form-group row">
 					<label for="userid" class="col-sm-2 col-form-label">아이디</label>
@@ -184,8 +288,8 @@
 				<hr color="lightgray">
 
 				<div align="center" class="buttonbox">
-					<button type="submit" style="margin: 0 150px 0 200px;;"
-						class="btn btn-primary btn-lg" id="submit">회원가입</button>
+					<button type="submit" style="margin: 0 150px 0 0px;"
+						class="btn btn-primary btn-lg" id="submit">회원등록</button>
 					<button type="button" style="width: 100px;" class="btn btn-danger btn-lg" id="cancel">취소</button>
 				</div>
 			</fieldset>
@@ -193,6 +297,7 @@
 				value="${_csrf.token}" />
 		</form>
 	</div>
+
 
 
 	<!-- jQuery -->
@@ -358,7 +463,7 @@
 													alert("휴대폰 번호 중복확인 버튼을 눌러주세요.");
 													return false;
 												} else if (phoneChkVal == "Y") {
-													alert("회원가입을 축하드립니다. 이메일을 확인해주세요.");
+													alert("회원등록이 완료되었습니다.");
 													$("#regForm").submit();
 
 												}
@@ -503,7 +608,7 @@
 
 		}
 	</script>
-
+</div>
 <%@ include file="../board/footer.jsp" %>
 
 </body>
