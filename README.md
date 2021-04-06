@@ -20,7 +20,10 @@
 
 ![](https://images.velog.io/images/banjjoknim/post/8aaf93f6-d268-4b30-9f2c-98e98359cc81/image.png)
 
-## 4. 화면
+## 4. ERD
+![](https://images.velog.io/images/banjjoknim/post/13c976e2-bbd6-443a-8595-9335997d98f0/image.png)
+
+## 5. 화면
 > 메인 화면
 > 
 >![](https://images.velog.io/images/banjjoknim/post/7fb9d631-151c-49aa-93fe-db30489de342/image.png)
