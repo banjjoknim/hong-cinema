@@ -2,7 +2,6 @@
 영화 예매 및 정보 제공 사이트
 
 ## 1. 기술스택
-- Tools : `ECLIPSE IDE, SQL DEVELOPER, Visual Studio Code`
 - Language : `Java, JavaScript, HTML5, CSS3`
 - Database : `Oracle`
 - Framework : `Spring, MyBatis`
