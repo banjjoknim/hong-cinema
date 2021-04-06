@@ -4,7 +4,7 @@
 ## 1. 사용 기술 및 라이브러리
 - `Java, JavaScript, HTML5, CSS3`
 - `Spring MVC, Mybatis`
-- `JQuery, I'mport;(JQuery 기반의 결제 연동 서비스 라이브러리)
+- `JQuery, I'mport;(JQuery 기반의 결제 연동 서비스 라이브러리)`
 - `JSP, Apache Tomcat`
 - `Oracle`
 
