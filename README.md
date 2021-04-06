@@ -1,10 +1,12 @@
 # Hong-Cinema
 영화 예매 및 정보 제공 사이트
 
-## 1. 기술스택
-- Language : `Java, JavaScript, HTML5, CSS3`
-- Database : `Oracle`
-- Framework : `Spring, MyBatis`
+## 1. 사용 기술 및 라이브러리
+- `Java, JavaScript, HTML5, CSS3`
+- `Spring MVC, Mybatis`
+- `JQuery, I'mport;(JQuery 기반의 결제 연동 서비스 라이브러리)
+- `JSP, Apache Tomcat`
+- `Oracle`
 
 ## 2. 기능
 - 회원 CRUD
