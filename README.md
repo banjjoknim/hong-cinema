@@ -17,10 +17,7 @@
 
 ## 3. 아키텍처
 `Spring MVC`
-![](https://images.velog.io/images/banjjoknim/post/b2a34a47-6ac3-4c27-8382-a677c360f3e0/image.png)
-이미지 출처 : https://www.beyondjava.net/model-view-whatever
-
-![](https://images.velog.io/images/banjjoknim/post/22278807-06ba-4aa5-a1c1-dc971c256638/image.png)
+![](https://images.velog.io/images/banjjoknim/post/f17bb2b9-e70b-461b-a754-92973910c760/image.png)
 
 ## 4. 화면
 > 메인 화면
