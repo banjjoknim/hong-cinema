@@ -1,6 +1,8 @@
 # Hong-Cinema
 영화 예매 및 정보 제공 사이트
 
+![](https://images.velog.io/images/banjjoknim/post/e527e627-68a0-48de-a335-b20cee29a2fb/Hong%20Cinema%20cover.PNG)
+
 ## 1. 사용 기술 및 라이브러리
 - `Java, JavaScript, HTML5, CSS3`
 - `Spring MVC, Mybatis`
