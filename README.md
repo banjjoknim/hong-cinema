@@ -3,6 +3,13 @@
 
 ![](https://images.velog.io/images/banjjoknim/post/e527e627-68a0-48de-a335-b20cee29a2fb/Hong%20Cinema%20cover.PNG)
 
+## 0. 팀 구성
+|포지션|팀원|
+|--|--|
+|풀스택|전일환|
+|풀스택|[배재홍](https://github.com/banjjoknim)|
+|풀스택|김대일|
+
 ## 1. 사용 기술 및 라이브러리
 - `Java, JavaScript, HTML5, CSS3`
 - `Spring MVC, Mybatis`
